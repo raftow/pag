@@ -1,0 +1,200 @@
+@font-face {
+	font-family: kufi;
+        src: url('../../lib/fonts/DroidKufi-Regular.ttf') format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
+body{
+    background-color: #0b0b0b;
+    font-family: kufi;
+    font-size:15px;
+}
+
+.topContent {
+    background-color: white;
+}
+
+.fleft.command_line_container {
+    width: 100%;
+    height: 100% !important;
+    background-color: #0b0b0b;
+    min-height: 920px;
+    color: #d5f77791;
+    font-family: courrier, arial;
+    font-size: 90%;
+}
+
+.form-cline>label {
+    color: #f6bd08c2;
+    font-family: courrier, arial;
+    font-size: 83%;
+}
+
+input.command_line_input {
+    display: block;
+    width: 100%;
+    height: 38px !important;
+    background-color: black;
+    font-family: kufi, courrier, arial;
+    font-size: 14px !important;
+    color: #cdf55f99;
+    font-weight: normal;
+    border-width: 0px 0px 1px 0px;
+    border-color: #f5deb354;
+}
+
+input.command_line_input:focus {
+    box-shadow: none;
+    border-color: #cdf55f99 !important;
+}
+
+span.cline-message {
+    width: 100%;
+    font-family: kufi;
+    font-size: 93%;
+}
+
+span.cline-message.cline-warning {
+    color: orange;
+}
+
+span.cline-message.cline-info {
+    color: #87b8ed;
+}
+
+span.cline-message.cline-success {
+    color: #61d021;
+}
+
+span.cline-message.cline-log {
+    color: #ffffffba;
+}
+
+span.cline-message.cline-log_odd {
+    color: #dfefff9a;
+}
+
+span.cline-message.cline-error {
+    color: #ff6f6f;
+}
+
+span.cline-message.cline-title {
+    color: #cf98fe;
+    font-weight: normal;
+    font-family: monospace;
+    font-size: 12px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #cf98fe4f;
+}
+
+span.cline-ar {
+    font-family: kufi;
+    font-size: 90%;
+}
+
+span.cline-en {
+    font-family: tahoma,arial;
+    font-size: 93% !important;
+}
+
+span.object_code{
+    font-family: tahoma,arial;
+    font-size: 93% !important;
+}
+
+
+td.cline_td
+{
+    padding-top: 10px;
+    width: 60px;
+    /* border-bottom: 1px solid #ccfa4f9c;*/
+}
+
+td.cline_td>span.cline-normal {
+    font-size: 90% !important;
+    color: #87b8ed;
+    font-family: arial, courrier !important;
+}
+
+.cline-att-val {
+    width: 66%;
+    float: right;
+}
+
+.cline-att-name {
+    width: 33%;
+    float: left;
+    border-right: 2px #000 solid;
+}
+
+.cline-att {
+    width: 100%;
+    direction:ltr;
+    border: none !important;
+}
+
+.cline-obj-id {
+    width: 15%;
+    float: right;
+}
+
+.cline-obj-title {
+    width: 35%;
+    float: left;
+}
+
+.cline-obj-errors {
+    width: 50%;
+    float: left;
+}
+
+.cline-obj {
+    width: 100%;
+    direction:ltr;
+}
+
+
+.bg-oven {
+    background-color: #262424;
+}
+
+.bg-header {
+    background-color: #043a71;
+}
+
+input:focus ~ .floating-label,
+input:not(:focus):valid ~ .floating-label{
+    top: -47px;
+    /* bottom: -26px; */
+    left: 3px;
+    font-size: 10px;
+    color: #87b8ed;
+    opacity: 1;
+}
+
+.inputText {
+  font-size: 14px;
+  width: 200px;
+  height: 35px;
+}
+
+.floating-label {
+    position: relative;
+    pointer-events: none;
+    left: 20px;
+    top: -23px;
+    font-size: 12px;
+    color: #a6a5a7a3;
+    transition: 0.2s ease all;
+}
+
+.tamakkan_rt {
+    width: 110px;
+    float: left;
+    color: #87b8ed;
+}
+
+.tamakkan_hiostory {
+    width: 100%;
+}
