@@ -30,13 +30,14 @@ AfwSession::startSession();
 require_once ("$file_dir_name/../external/db.php");
 // here old require of common.php
 
-$html_debugg_login = true;  // useful in prod
-$debugg_login = true;
-$debugg_login_die = true; 
-$debugg_after_login = true;
-$debugg_after_ldap = true;
-$debugg_after_golden_or_db = true;
-$debugg_after_session_created = true;
+$html_debugg_login = false;  // useful in prod
+$debugg_login = false;
+$debugg_login_die = false; 
+$debugg_after_login = false;
+$debugg_after_ldap = false;
+$debugg_after_golden_or_db = false;
+$debugg_after_session_created = false;
+
 $server_db_prefix = AfwSession::config("db_prefix","c0");
 $check_employee_from_external_system = AfwSession::config("check_employee_from_external_system",false);
 $all_users_are_internal = AfwSession::config("all_users_are_internal",false);
@@ -52,9 +53,12 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         $DEBUGG_SQL_DIR = AfwSession::config("DEBUGG_SQL_DIR","C:\\gen\\log\\");
         $dtm = date("YmdHis");
         $my_debug_file = "debugg_before_login_$logbl"."_$dtm.log";
-        //die("AFWDebugg::initialiser(".$DEBUGG_SQL_DIR.$my_debug_file.")");
-        AFWDebugg::initialiser($DEBUGG_SQL_DIR,$my_debug_file);
-        AFWDebugg::setEnabled(true);
+        if($debugg_login)
+        {
+                //die("AFWDebugg::initialiser(".$DEBUGG_SQL_DIR.$my_debug_file.")");
+                AFWDebugg::initialiser($DEBUGG_SQL_DIR,$my_debug_file);
+                AFWDebugg::setEnabled(true);
+        }
         AfwSession::resetSession();
 
         $email_initial = AfwSession::hardSecureCleanString(strtolower($_POST["mail"]));
