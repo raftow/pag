@@ -127,8 +127,8 @@ class Jobrole extends AFWObject
      public static function loadByMainIndex($id_domain, $jobrole_code, $create_obj_if_not_found = false)
      {
           $obj = new Jobrole();
-          if (!$id_domain) $obj->throwError("loadByMainIndex : id_domain is mandatory field");
-          if (!$jobrole_code) $obj->throwError("loadByMainIndex : jobrole_code is mandatory field");
+          if (!$id_domain) throw new RuntimeException("loadByMainIndex : id_domain is mandatory field");
+          if (!$jobrole_code) throw new RuntimeException("loadByMainIndex : jobrole_code is mandatory field");
 
 
           $obj->select("id_domain", $id_domain);
@@ -321,7 +321,7 @@ class Jobrole extends AFWObject
                               else $attachedAlready_arr[] = $jar->getDisplay($lang);
                               $createdUpdatedAroles[$jar->getId()] = $jar;
                          } else {
-                              $ar->throwError("the role $ar has no ancestor arole type = 10");
+                              throw new RuntimeException("the role $ar has no ancestor arole type = 10");
                          }
                     } else {
                          return array("الهدف الوظيفي : $jobGoal برقم تسلسلي $jobGoalId يحتوي على أخطاء", "");

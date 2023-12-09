@@ -409,7 +409,7 @@ class Atable extends AFWObject{
              if($code=="mm") return $this->getMonitoringManagerJobroles();
              
              
-             $this->throwError("not implemented jobrole code : $code");
+             throw new RuntimeException("not implemented jobrole code : $code");
              
         }
         
@@ -1117,7 +1117,7 @@ class Atable extends AFWObject{
                        else return [null,null,$fileName];
                }
                else {
-                     $this->throwError("getImportParams for virtual tables not implemented yet"); //@todo                  
+                     throw new RuntimeException("getImportParams for virtual tables not implemented yet"); //@todo                  
                }
         }
         
@@ -1125,7 +1125,7 @@ class Atable extends AFWObject{
         public function getFileAndClass()
         {
                 $table = $this->valAtable_name();
-                if(!$this->getVal("id_module")) $this->throwError("can not getFileAndClass, id_module is not defined for this table ");
+                if(!$this->getVal("id_module")) throw new RuntimeException("can not getFileAndClass, id_module is not defined for this table ");
                 $module = $this->myModuleCode();
                 return AfwStringHelper::getHisFactory($table, $module);        
         }
@@ -1681,7 +1681,7 @@ class Atable extends AFWObject{
                if(!$this->getAFieldByFieldName($display_field)) $display_field = "name_$lang"; else return $display_field;               
                if(!$this->getAFieldByFieldName($display_field)) 
                {
-                       //$this->throwError("fieldListOriginal not contain $display_field : ".var_export($this->fieldListOriginal,true));
+                       //throw new RuntimeException("fieldListOriginal not contain $display_field : ".var_export($this->fieldListOriginal,true));
                        // return "$display_field not found";
                        // require_once("afield.php");
                        $af = new Afield();
@@ -3261,7 +3261,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                                $afar->set("utf8",'N');
                                $afar->insert();
                        }
-                       else $this->throwError("$field_name_ar is not a text field"); 
+                       else throw new RuntimeException("$field_name_ar is not a text field"); 
                }
                return $afar;       
         
@@ -3426,7 +3426,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                     $destObj = new Atable();
                     if(!$destObj->load($dest))
                     {
-                          $this->throwError("can't load destination table $dest to copy fields into");
+                          throw new RuntimeException("can't load destination table $dest to copy fields into");
                     }
                 }
                 
@@ -3437,7 +3437,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         {
                 if(!$dest)
                 {
-                          $this->throwError("specify destination table to copy fields into !");
+                          throw new RuntimeException("specify destination table to copy fields into !");
                 }
                     
                 $destObj = $this->getTableObj($dest);
@@ -3448,7 +3448,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                     $destObj_id = $destObj->getId();
                     $source_name = $this->getVal("atable_name");
                     $source_id = $this->getId();
-                    $this->throwError("source table $source_name($source_id) say :destination table $destObj_name($destObj_id) already contain fields, how to copy new fields in it ??!!");
+                    throw new RuntimeException("source table $source_name($source_id) say :destination table $destObj_name($destObj_id) already contain fields, how to copy new fields in it ??!!");
                 }
                 
                 // require_once("afield.php");
@@ -3677,7 +3677,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                
                if((!$this_id) or (!$bf_code_starts_with))
                {
-                   $this->throwError("param [bf_code_starts_with] used to disable auto generated BFs for table [$this_id] not found in framework $framework_id specification file.");
+                   throw new RuntimeException("param [bf_code_starts_with] used to disable auto generated BFs for table [$this_id] not found in framework $framework_id specification file.");
                }
                
                
@@ -3738,7 +3738,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
               $this_id = $this->getId();
               $cat = $this->tableCategory();
               $system_id = $this->calc("system_id");
-              if(!$system_id) $this->throwError("failed $this -> createFrameWorkScreens($framework_id,$resetAll) system is not defined for this table (id=$this_id)");
+              if(!$system_id) throw new RuntimeException("failed $this -> createFrameWorkScreens($framework_id,$resetAll) system is not defined for this table (id=$this_id)");
               
               
               
@@ -3758,7 +3758,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                     else $bf_type = "";
                     if(!$bf_type) 
                     {
-                          $this->throwError("no bf type defined for category : $cat mode $framework_mode");
+                          throw new RuntimeException("no bf type defined for category : $cat mode $framework_mode");
                     }
                     
                     
@@ -3778,12 +3778,12 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                               $bf_arr[$bf->getId()] = array("mode"=>$framework_mode,"bf"=>$bf, "bf_new"=>$bf_new, "menu"=>$framework_mode_item["menu"][$cat]);
                               if($bf) $bf_arr_empty = false;
                           }
-                          else $this->throwError("failed Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code) : ".var_export($bf,true));
+                          else throw new RuntimeException("failed Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code) : ".var_export($bf,true));
                     }
                     else $bf_arr[-1]["$framework_mode.$cat"]++;
               }
-              if(($bf_arr_empty) and (!$no_screen[$cat])) $this->throwError("atable_id = $this, no frame work screen created, cat=$cat framework_id=$framework_id, system=$system_id : ".var_export($bf_arr,true));
-              //else $this->throwError("frame work screens created for cat=$cat framework_id=$framework_id: ".var_export($bf_arr,true));
+              if(($bf_arr_empty) and (!$no_screen[$cat])) throw new RuntimeException("atable_id = $this, no frame work screen created, cat=$cat framework_id=$framework_id, system=$system_id : ".var_export($bf_arr,true));
+              //else throw new RuntimeException("frame work screens created for cat=$cat framework_id=$framework_id: ".var_export($bf_arr,true));
               return $bf_arr; 
         
         }
@@ -4235,7 +4235,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 
                 if($boucle_getSpecificDataErrors > 500)
                 {
-                      $this->throwError("heavy page halted after $boucle_getSpecificDataErrors enter to getSpecificDataErrors method in one request, ".var_export($boucle_getSpecificDataErrors_arr,true));
+                      throw new RuntimeException("heavy page halted after $boucle_getSpecificDataErrors enter to getSpecificDataErrors method in one request, ".var_export($boucle_getSpecificDataErrors_arr,true));
                 }*/
               
               $sp_errors = array();
@@ -4363,7 +4363,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                   $type_id = $typeObj->getId();
                   
                   $code = $this->getVal("atable_name");
-                  if(!$code) $this->throwError("this table is without table name"); 
+                  if(!$code) throw new RuntimeException("this table is without table name"); 
                   $name_ar = $this->getVal("titre_short");
                   $name_en = $this->getVal("titre_short_en");
                   $specification = $this->getVal("titre");

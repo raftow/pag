@@ -429,7 +429,7 @@ class Eimport extends AFWObject{
                                      {   
                                             if($okImport or $skip_error)
                                             {
-                                                    if(!$myFileImport["table_id"]) $this->throwError("myFileImport[table_id] should be defined for class $myClassImport in $myClassName::getRelatedClassesForImport(), choof : myFileImport =".var_export($myFileImport,true));
+                                                    if(!$myFileImport["table_id"]) throw new RuntimeException("myFileImport[table_id] should be defined for class $myClassImport in $myClassName::getRelatedClassesForImport(), choof : myFileImport =".var_export($myFileImport,true));
                                                     require_once $myFileImport["file"];
                                                     unset($myObjImport);
                                                     $myObjImport = new $myClassImport();
