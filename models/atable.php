@@ -4005,7 +4005,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                       // here autoloader may not be loaded or 
                       // have the $my_module module
                       // so we need to manually load the class $my_class
-                      require_once("$file_dir_name/../$my_module/$my_atable_name.php"); 
+                      require_once("$file_dir_name/../../$my_module/models/$my_atable_name.php"); 
                       
                       $obj = new $my_class();
                       
