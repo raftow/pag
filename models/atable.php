@@ -4001,11 +4001,16 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                       $my_module = $this->myModuleCode();
                       $my_class = $this->getTableClass();
                 
-                      $file_dir_name = dirname(__FILE__); 
-                      // here autoloader may not be loaded or 
-                      // have the $my_module module
-                      // so we need to manually load the class $my_class
-                      require_once("$file_dir_name/../../$my_module/models/$my_atable_name.php"); 
+                      $file_dir_name = dirname(__FILE__);                       
+                      
+                      // if afw autoloader not loaded load it
+                      if(!class_exists('AfwAutoLoader'))
+                      {
+                            require_once("$file_dir_name/../../lib/afw/afw_autoloader.php");
+                            
+                      }
+                      // add the $my_module module
+                      if($my_module) AfwAutoLoader::addModule($my_module);
                       
                       $obj = new $my_class();
                       
