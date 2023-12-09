@@ -3994,48 +3994,52 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         
         public function getLookupValuesFromDB($lang="ar")
         {
-              $lookupValueList = $this->get("lookupValueList");
-              if(true) //(count($lookupValueList)==0)
-              {
-                      $my_atable_name = $this->getVal("atable_name");
-                      $my_module = $this->myModuleCode();
-                      $my_class = $this->getTableClass();
+            //$lookupValueList = $this->get("lookupValueList");
+            //if(count($lookupValueList)==0)
+            if(true) 
+            {
+                    $my_atable_name = $this->getVal("atable_name");
+                    $my_module = $this->myModuleCode();
+                    $my_class = $this->getTableClass();
                 
-                      $file_dir_name = dirname(__FILE__);                       
-                      
-                      // if afw autoloader not loaded load it
-                      if(!class_exists('AfwAutoLoader'))
-                      {
+                    $file_dir_name = dirname(__FILE__);                       
+                    
+                    // if afw autoloader not loaded load it
+                    if(!class_exists('AfwAutoLoader'))
+                    {
                             require_once("$file_dir_name/../../lib/afw/afw_autoloader.php");
                             
-                      }
-                      // add the $my_module module
-                      if($my_module) AfwAutoLoader::addModule($my_module);
-                      
-                      $obj = new $my_class();
-                      
-                      $obj->select($obj->fld_ACTIVE(),"Y");
-                      $obj_list = $obj->loadMany();
-                      $nbAdded = 0;
-                      $nbUpdated = 0;
-                      $countObjs = count($obj_list);
-                      foreach($obj_list as $obj_item)
-                      {
-                          $lkpVal = LookupValue::loadByMainIndex($this->getId(), $obj_item->getVal("lookup_code"),true);
-                          
-                          if($lkpVal)
-                          {
-                              if($lkpVal->is_new)  $nbAdded++;
-                              
-                              $lkpVal->set("pkey",$obj_item->getId());
-                              $lkpVal->set("value",$obj_item->getDisplay("ar"));
-                              if($lkpVal->update()) $nbUpdated++;
-                          }
-                      }
-                      
-                      return array("","تم استيراد $countObjs سجل تم إضافة  $nbAdded  سجل و تعديل $nbUpdated سجل من الكيان  $my_class : $file_dir_name/../$my_module/$my_atable_name ");
-              }
-              return array("","lookupValueList already filled");         
+                    }
+                    // add the $my_module module
+                    if($my_module) AfwAutoLoader::addModule($my_module);
+                    
+                    $obj = new $my_class();
+                    
+                    $obj->select($obj->fld_ACTIVE(),"Y");
+                    $obj_list = $obj->loadMany();
+                    $nbAdded = 0;
+                    $nbUpdated = 0;
+                    $countObjs = count($obj_list);
+                    foreach($obj_list as $obj_item)
+                    {
+                        if($obj_item->getVal("lookup_code"))
+                        {
+                            $lkpVal = LookupValue::loadByMainIndex($this->getId(), $obj_item->getVal("lookup_code"),true);
+                            
+                            if($lkpVal)
+                            {
+                                if($lkpVal->is_new)  $nbAdded++;
+                                
+                                $lkpVal->set("pkey",$obj_item->getId());
+                                $lkpVal->set("value",$obj_item->getDisplay("ar"));
+                                if($lkpVal->update()) $nbUpdated++;
+                            }
+                        }
+                    }
+                    
+                    return array("","تم استيراد $countObjs سجل تم إضافة  $nbAdded  سجل و تعديل $nbUpdated سجل من الكيان  $my_class : $file_dir_name/../$my_module/$my_atable_name ");
+            }
+            return array("","lookupValueList already filled");         
         }
         
         public function attributeIsApplicable($attribute)
