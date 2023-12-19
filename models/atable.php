@@ -4488,5 +4488,44 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         }            
         */
 
+        public function shouldBeCalculatedField($attribute){
+            if($attribute=="id_domain") return true;
+            return false;
+        }
+
+        protected function myShortNameToAttributeName($attribute){
+            if($attribute=="sys") return "system_id";
+            if($attribute=="domain") return "id_domain";
+            if($attribute=="module") return "id_module";
+            if($attribute=="original") return "real_table";
+            if($attribute=="name") return "atable_name";
+            if($attribute=="lookup") return "is_lookup";
+            if($attribute=="entity") return "is_entity";
+            if($attribute=="enum") return "is_enum";
+            if($attribute=="detail") return "is_detail";
+            if($attribute=="pluraltitle") return "titre_short";
+            if($attribute=="pluraltitleshort") return "titre_short_s";
+            if($attribute=="singletitle") return "titre_u";
+            if($attribute=="singletitleshort") return "titre_u_s";
+            if($attribute=="description") return "titre";
+            if($attribute=="submodule") return "id_sub_module";
+            if($attribute=="icon") return "vh";
+            if($attribute=="pluraltitle_en") return "titre_short_en";
+            if($attribute=="singletitle_en") return "titre_u_en";
+            if($attribute=="description_en") return "titre_en";
+            if($attribute=="original_fields") return "origFieldList";
+            if($attribute=="audit_fields") return "auditFieldList";
+            if($attribute=="index_fields") return "indexFieldList";
+            if($attribute=="name_fields") return "nameFieldList";
+            if($attribute=="virtual_fields") return "virtFieldList";
+            if($attribute=="additional_fields") return "addiFieldList";
+            if($attribute=="emjob") return "jobrole_id";
+            if($attribute=="maxper") return "max_period";
+            if($attribute=="expper") return "exp_period";
+            if($attribute=="minrows") return "min_u_records";
+            if($attribute=="exprows") return "exp_u_records";
+            return $attribute;
+        }
+
 }
 ?>

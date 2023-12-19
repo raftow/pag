@@ -3448,6 +3448,37 @@ class Afield extends AFWObject{
         {
                 return false;
         }
+
+        public function shouldBeCalculatedField($attribute){
+                if($attribute=="atable_name_ar") return true;
+                if($attribute=="atable_name_en") return true;
+                if($attribute=="atable_name") return true;
+                if($attribute=="sql_field_type") return true;
+                if($attribute=="mask") return true;
+                return false;
+        }
+
+        protected function myShortNameToAttributeName($attribute){
+                if($attribute=="name") return "field_name";
+                if($attribute=="table") return "atable_id";
+                if($attribute=="ftype") return "afield_type_id";
+                if($attribute=="title") return "titre_short_en";
+                if($attribute=="step") return "scenario_item_id";
+                if($attribute=="category") return "afield_category_id";
+                if($attribute=="anstable") return "answer_table_id";
+                if($attribute=="ertype") return "entity_relation_type_id";
+                if($attribute=="search") return "mode_search";
+                if($attribute=="qsearch") return "mode_qsearch";
+                if($attribute=="retrieve") return "mode_retrieve";
+                if($attribute=="audit") return "mode_audit";
+                if($attribute=="edit") return "mode_edit";
+                if($attribute=="qedit") return "mode_qedit";
+                if($attribute=="show") return "mode_show";
+                if($attribute=="myname") return "mode_name";
+                if($attribute=="char_group") return "char_group_men";
+                if($attribute=="php") return "php_att";
+                return $attribute;
+        }
         
 }
 ?>
