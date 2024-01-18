@@ -70,8 +70,8 @@ class AfieldOptionValue extends AFWObject{
         public static function loadByMainIndex($afield_id, $foption_id,$create_obj_if_not_found=false)
         {
            $obj = new AfieldOptionValue();
-           if(!$afield_id) throw new RuntimeException("loadByMainIndex : afield_id is mandatory field");
-           if(!$foption_id) throw new RuntimeException("loadByMainIndex : foption_id is mandatory field");
+           if(!$afield_id) throw new AfwRuntimeException("loadByMainIndex : afield_id is mandatory field");
+           if(!$foption_id) throw new AfwRuntimeException("loadByMainIndex : foption_id is mandatory field");
 
 
            $obj->select("afield_id",$afield_id);

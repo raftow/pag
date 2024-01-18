@@ -83,8 +83,8 @@ class AfieldRule extends AFWObject{
         public static function loadByMainIndex($afield_id, $afield_rule_type_id, $related_afield_id, $rule_params,$create_obj_if_not_found=false)
         {
            $obj = new AfieldRule();
-           if(!$afield_id) throw new RuntimeException("loadByMainIndex : afield_id is mandatory field");
-           if(!$afield_rule_type_id) throw new RuntimeException("loadByMainIndex : afield_rule_type_id is mandatory field");
+           if(!$afield_id) throw new AfwRuntimeException("loadByMainIndex : afield_id is mandatory field");
+           if(!$afield_rule_type_id) throw new AfwRuntimeException("loadByMainIndex : afield_rule_type_id is mandatory field");
 
 
            $obj->select("afield_id",$afield_id);

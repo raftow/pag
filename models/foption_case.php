@@ -81,8 +81,8 @@ class FoptionCase extends AFWObject{
         {
           if(strlen($foption_case)>24) return null;
            $obj = new FoptionCase();
-           if(!$foption_id) throw new RuntimeException("foption_case::loadByMainIndex : foption_id is mandatory field");
-           //if(!$foption_case) throw new RuntimeException("loadByMainIndex : foption_case is mandatory field");
+           if(!$foption_id) throw new AfwRuntimeException("foption_case::loadByMainIndex : foption_id is mandatory field");
+           //if(!$foption_case) throw new AfwRuntimeException("loadByMainIndex : foption_case is mandatory field");
 
 
            $obj->select("foption_id",$foption_id);

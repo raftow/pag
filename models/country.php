@@ -78,7 +78,7 @@ class Country extends AFWObject{
         public static function loadByMainIndex($lookup_code,$create_obj_if_not_found=false)
         {
            $obj = new Country();
-           if(!$lookup_code) throw new RuntimeException("loadByMainIndex : lookup_code is mandatory field");
+           if(!$lookup_code) throw new AfwRuntimeException("loadByMainIndex : lookup_code is mandatory field");
  
  
            $obj->select("lookup_code",$lookup_code);
@@ -164,7 +164,7 @@ class Country extends AFWObject{
         {
            $obj = new Country();
            $name = trim($name);
-           if(!$name) throw new RuntimeException("loadByNameOrNationality : name is mandatory attribute");
+           if(!$name) throw new AfwRuntimeException("loadByNameOrNationality : name is mandatory attribute");
  
            if($name == 'ابناء') $name = 'بدون'; 
            if($name == 'بلوشي') $name = 'بدون'; 

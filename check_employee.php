@@ -20,7 +20,7 @@
                         else
                         {
                                 $my_email = $objme->getVal("email");
-                                if(!$my_email) $objme->throwError("employee without email, how it can be ?"); //$objme->debuggObj($objme);
+                                if(!$my_email) throw new AfwRuntimeException("employee without email, how it can be ?"); //$objme->debuggObj($objme);
                                 $mySemplObj->select("email", $my_email);
                                 if($mySemplObj->load())
                                 {

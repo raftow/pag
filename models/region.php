@@ -72,8 +72,8 @@ class Region extends AFWObject{
         public static function findRegion($lookup_code, $region_name)
         {
            $obj = new Region();
-           if(!$lookup_code) throw new RuntimeException("loadByMainIndex : lookup_code is mandatory field");
-           if(!$region_name) throw new RuntimeException("loadByMainIndex : region_name is mandatory field");
+           if(!$lookup_code) throw new AfwRuntimeException("loadByMainIndex : lookup_code is mandatory field");
+           if(!$region_name) throw new AfwRuntimeException("loadByMainIndex : region_name is mandatory field");
            
  
            $obj->select("region_name",$region_name);     

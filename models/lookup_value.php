@@ -64,8 +64,8 @@ class LookupValue extends AFWObject{
         public static function loadByMainIndex($atable_id, $vcode,$create_obj_if_not_found=false)
         {
            $obj = new LookupValue();
-           if(!$atable_id) throw new RuntimeException("loadByMainIndex : atable_id is mandatory field");
-           if(!$vcode) throw new RuntimeException("loadByMainIndex : vcode is mandatory field");
+           if(!$atable_id) throw new AfwRuntimeException("loadByMainIndex : atable_id is mandatory field");
+           if(!$vcode) throw new AfwRuntimeException("loadByMainIndex : vcode is mandatory field");
  
  
            $obj->select("atable_id",$atable_id);

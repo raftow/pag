@@ -450,8 +450,8 @@ class Afield extends AFWObject{
         public static function loadByMainIndex($atable_id, $field_name,$create_obj_if_not_found=false, $activate_obj_if_disabled=false)
         {
            $obj = new Afield();
-           if(!$atable_id) throw new RuntimeException("loadByMainIndex : atable_id is mandatory field");
-           if(!$field_name) throw new RuntimeException("loadByMainIndex : field_name is mandatory field");
+           if(!$atable_id) throw new AfwRuntimeException("loadByMainIndex : atable_id is mandatory field");
+           if(!$field_name) throw new AfwRuntimeException("loadByMainIndex : field_name is mandatory field");
  
  
            $obj->select("atable_id",$atable_id);
@@ -832,7 +832,7 @@ class Afield extends AFWObject{
                     $this->my_update_error_code = "field_name_atable_id_are_mandatory";
                     $this->my_update_error_msg = $error_0;
                     
-                    throw new RuntimeException($error_0);
+                    throw new AfwRuntimeException($error_0);
                     return false;
                 }
                 
@@ -1005,7 +1005,7 @@ class Afield extends AFWObject{
                                       $anstab->select("atable_name",$atb);
                                       if($anstab->load())  
                                       {
-                                             // throw new RuntimeException("")
+                                             // throw new AfwRuntimeException("")
                                              $this->set("answer_table_id",$anstab->getId());
                                       }
                                       else
@@ -1021,7 +1021,7 @@ class Afield extends AFWObject{
                       {
                               $anstab_id = $this->getVal("answer_table_id");
                               $anstab = $this->het("answer_table_id");
-                              if(!$anstab) throw new RuntimeException("for field $field_name_orig this answer_table_id $anstab_id doesnt exist anymore ");  
+                              if(!$anstab) throw new AfwRuntimeException("for field $field_name_orig this answer_table_id $anstab_id doesnt exist anymore ");  
                       }
                       
                       if((!$this->getVal("entity_relation_type_id")) and ($this->getVal("afield_type_id")==AfwUmsPagHelper::$afield_type_list))  $this->set("entity_relation_type_id",3);
@@ -2991,7 +2991,7 @@ class Afield extends AFWObject{
                              /*
                              if($count_here>50)
                              {
-                                throw new RuntimeException("why I get here [afield::getLookupTables] $count_here time called  ??!!");
+                                throw new AfwRuntimeException("why I get here [afield::getLookupTables] $count_here time called  ??!!");
                              } */
                                                           
                              // require_once("atable.php");
@@ -3026,7 +3026,7 @@ class Afield extends AFWObject{
                              /*
                              if($count_here>50)
                              {
-                                throw new RuntimeException("why I get here [afield::getLookupTables] $count_here once  ??!!");
+                                throw new AfwRuntimeException("why I get here [afield::getLookupTables] $count_here once  ??!!");
                              }
                              */
                              // require_once("atable.php");
@@ -3207,7 +3207,7 @@ class Afield extends AFWObject{
                   $type_id = $typeObj->getId();
                   
                   $code = $this->getVal("field_name");
-                  if(!$code) throw new RuntimeException("this field is without field name"); 
+                  if(!$code) throw new AfwRuntimeException("this field is without field name"); 
                   $name_ar = $this->getVal("titre_short");
                   $name_en = $this->getVal("titre_short_en");
                   $specification = $this->getVal("titre");

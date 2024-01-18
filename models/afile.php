@@ -460,7 +460,7 @@ zoomWindowOffety:-200
                      $file_path = $this->getFilePath().$new_name;
                      if(!file_exists($file_path))
                      {
-                            throw new RuntimeException("File not found : $file_path");
+                            throw new AfwRuntimeException("File not found : $file_path");
                      }
                      
                      $excel = new HzmExcel($file_path);
@@ -471,7 +471,7 @@ zoomWindowOffety:-200
               }
               else
               {
-                     throw new RuntimeException("getExcelData method can not work on non excel or non importable files, your file extension : $afile_ext, doc type = ".$this->het("doc_type_id"));
+                     throw new AfwRuntimeException("getExcelData method can not work on non excel or non importable files, your file extension : $afile_ext, doc type = ".$this->het("doc_type_id"));
               }            
         }
   

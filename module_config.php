@@ -25,7 +25,7 @@
                 
                 if($nb_passages_ici>20000)
                 {
-                    $this->throwError(" too much passages ici : $nb_passages_ici");
+                    throw new AfwRuntimeException(" too much passages ici : $nb_passages_ici");
                 }*/
                 
                 

@@ -82,7 +82,7 @@ class IdnType extends AFWObject{
 	*/ public function __construct(){
 		parent::__construct("idn_type","id","pag");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
-                $this->DISPLAY_FIELD = "";
+                $this->DISPLAY_FIELD = "idn_type_name_ar";
                 $this->ORDER_BY_FIELDS = "lookup_code";
                 $this->IS_LOOKUP = true; 
                 $this->ignore_insert_doublon = true;
@@ -118,7 +118,7 @@ class IdnType extends AFWObject{
         public static function loadByMainIndex($lookup_code,$create_obj_if_not_found=false)
         {
            $obj = new IdnType();
-           if(!$lookup_code) throw new RuntimeException("loadByMainIndex : lookup_code is mandatory field");
+           if(!$lookup_code) throw new AfwRuntimeException("loadByMainIndex : lookup_code is mandatory field");
 
 
            $obj->select("lookup_code",$lookup_code);

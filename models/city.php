@@ -103,7 +103,7 @@ class City extends AFWObject{
         public static function findCity($lookup_code, $city_name, $region_id, $find_only_by_name=false)
         {
            $obj = new City();
-           if(!$city_name) throw new RuntimeException("loadByMainIndex : city_name is mandatory field");
+           if(!$city_name) throw new AfwRuntimeException("loadByMainIndex : city_name is mandatory field");
  
            $obj->select("city_name",$city_name);     
            if($obj->load())
@@ -116,8 +116,8 @@ class City extends AFWObject{
 
            if($find_only_by_name) return null;
 
-           if(!$lookup_code) throw new RuntimeException("loadByMainIndex : lookup_code is mandatory field [$lookup_code/$city_name/$region_id]");
-           if(!$region_id) throw new RuntimeException("loadByMainIndex : region_id is mandatory field");
+           if(!$lookup_code) throw new AfwRuntimeException("loadByMainIndex : lookup_code is mandatory field [$lookup_code/$city_name/$region_id]");
+           if(!$region_id) throw new AfwRuntimeException("loadByMainIndex : region_id is mandatory field");
 
            unset($obj);
            $obj = new City();

@@ -49,9 +49,9 @@ class ScenarioItem extends AFWObject{
         public static function loadByMainIndex($atable_id, $step_num, $step_name_ar, $create_obj_if_not_found=false)
         {
  
-                if(!$atable_id) throw new RuntimeException("loadByMainIndex : atable_id is mandatory field");
-                if(!$step_num) throw new RuntimeException("loadByMainIndex : step_num is mandatory field");
-                if(!$step_name_ar) throw new RuntimeException("loadByMainIndex : step_name_ar is mandatory field");
+                if(!$atable_id) throw new AfwRuntimeException("loadByMainIndex : atable_id is mandatory field");
+                if(!$step_num) throw new AfwRuntimeException("loadByMainIndex : step_num is mandatory field");
+                if(!$step_name_ar) throw new AfwRuntimeException("loadByMainIndex : step_name_ar is mandatory field");
 
                 $obj = new ScenarioItem();
                 $obj->select("atable_id",$atable_id);

@@ -225,7 +225,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
                                                 // die("trying to find company with hrm code - $uri_module");
                                                 $employeeOrg = Orgunit::loadByHRMCode($uri_module);
                                                 if($employeeOrg) $employeeOrgId = $employeeOrg->getId();
-                                                else throw new RuntimeException("unable to find company with hrm code [$uri_module] or it is not allowed to access the system");
+                                                else throw new AfwRuntimeException("unable to find company with hrm code [$uri_module] or it is not allowed to access the system");
                                                 $employee_org_id = $employeeOrgId;
                                                 // @todo disable temp : if((!$employee) or ($employee_org_id != $employeeOrgId)) $user_connected = false;
                                         }

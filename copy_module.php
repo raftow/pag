@@ -104,7 +104,7 @@ if($mod1 and $mod2)
                                     
                                     if(!$tbl_nb_fields_copied)
                                     {
-                                         $tbl_item->throwError("copyMyFieldsTo failed");
+                                         throw new AfwRuntimeException("copyMyFieldsTo failed");
                                     }
                                     $nb_fields_copied += $tbl_nb_fields_copied;
                             }
@@ -134,7 +134,7 @@ if($mod1 and $mod2)
                                
                                if(!$tbl_nb_fields_copied)
                                {
-                                   $tbl_item->throwError("copyMyFieldsTo failed");
+                                   throw new AfwRuntimeException("copyMyFieldsTo failed");
                                }
                                $nb_fields_copied += $tbl_nb_fields_copied;
                        }

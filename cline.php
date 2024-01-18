@@ -194,7 +194,7 @@
                   {
                       $objMain->applyFilter($filter_method);
                   }
-                  if($find_method=="like") $liste_obj = $objMain->qfind($words);
+                  if($find_method=="like") $liste_obj = AfwFrameworkHelper::qfind($objMain,$words);
                   $command_code = "retrieve";
           }
       }
