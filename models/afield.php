@@ -659,28 +659,7 @@ class Afield extends AFWObject{
                return $this->func("IF(ISNULL(max(field_order)), 0, max(field_order))+10");
         
         }
-        /*
-        protected function getHelpFor($attribute_original,$lang="ar")
-        {
-               if($attribute_original=="entity_relation_type_id")
-               {
-                      $ert = $this->get("entity_relation_type_id");
-                      if($ert->getId()==$ert::$OneToMany)
-                      {
-                            $help_text = $this->translate($attribute_original."_help_text",$lang);
-                            
-                            $help_text = $this->decodeTpl($slang_syntax[$special_lang][$special_lang_ext]["5.3.relation_field_after_totable_footer"]);
-                      
-                      }
-                      
-                      if($ert->getId()==$ert::$ManyToOne)
-                      {
-                      
-                      
-                      } 
-               
-               }
-        }*/
+        
         
         public function isFK() 
         {
@@ -818,7 +797,7 @@ class Afield extends AFWObject{
                 
                 if((!$this->getVal("titre_short_en")) and ($field_name)) 
                 {
-                           $field_titre = self::toEnglishText($field_name);
+                           $field_titre = AfwStringHelper::toEnglishText($field_name);
                            $this->set("titre_short_en",$field_titre);
                            $this->set("titre_en",$field_titre);
                 }
@@ -1708,7 +1687,7 @@ class Afield extends AFWObject{
                 else return 0;
         }
         
-        protected function afterInsert($id, $fields_updated) 
+        public function afterInsert($id, $fields_updated) 
         {
 	      $this->resetDefaultModes($commit=true);
         }
@@ -2425,11 +2404,11 @@ class Afield extends AFWObject{
                 
                 if(count($dependencyList)>0) {
                      
-                     $row["DEPENDENCIES"] = self::hzmArrayStringFormat(self::listToArr($dependencyList, "field_name"));
+                     $row["DEPENDENCIES"] = AfwStringHelper::hzmArrayStringFormat(AfwWizardHelper::listToArray($dependencyList, "field_name"));
                      
                      $afieldDependencyList = $this->get("afieldDependencyList");
                      
-                     $where_dependencies = implode(" and ",self::listToArr($afieldDependencyList, "rule_params"));
+                     $where_dependencies = implode(" and ",AfwWizardHelper::listToArray($afieldDependencyList, "rule_params"));
                      
                      if($where_dependencies)
                      {
@@ -2438,7 +2417,7 @@ class Afield extends AFWObject{
                      }
                      
                 } 
-                if(count($dependentList)>0) $row["DEPENDENT_OFME"] = self::hzmArrayStringFormat(self::listToArr($dependentList, "field_name"));
+                if(count($dependentList)>0) $row["DEPENDENT_OFME"] = AfwStringHelper::hzmArrayStringFormat(AfwWizardHelper::listToArray($dependentList, "field_name"));
                 
                 
                 if($row["WHERE"]) $row["WHERE"]="\"".$row["WHERE"]."\"";
@@ -2551,7 +2530,7 @@ class Afield extends AFWObject{
                      }
              }
              
-             return self::javaNaming($this_field_name); 
+             return AfwStringHelper::javaNaming($this_field_name); 
         
         } 
         
@@ -2758,7 +2737,7 @@ class Afield extends AFWObject{
                        array_push($tempRdesc, "\n\t\t\t\t'$prop' => $val, ");
                     elseif(($prop=="TYPE") or ($prop=="WHERE") or ($prop=="DEPENDENCIES") or ($prop=="DEPENDENT_OFME"))
                        array_push($tempRdesc, "\n\t\t\t\t'$prop' => $val, \n\t\t\t\t");
-                    elseif(self::is_valid_code($prop))
+                    elseif(AfwStringHelper::is_valid_code($prop))
                        array_push($tempRdesc, "'$prop' => $val, ");
                     else
                        array_push($tempRdesc, "'$prop' => $val, ");
@@ -2962,14 +2941,14 @@ class Afield extends AFWObject{
         {
             if(!$this->getVal("shortname_en")) 
             {
-                $short_name = self::hzmNaming($this->getRelationFromName($this->getVal("field_name")));
+                $short_name = AfwStringHelper::hzmNaming($this->getRelationFromName($this->getVal("field_name")));
             }
             else
             {
-                $short_name = self::hzmNaming($this->getVal("shortname_en"));
+                $short_name = AfwStringHelper::hzmNaming($this->getVal("shortname_en"));
             }
             
-            return self::inverseRelation($short_name);       
+            return AfwStringHelper::inverseRelation($short_name);       
         
         }
         
@@ -3218,7 +3197,7 @@ class Afield extends AFWObject{
         
         }
         
-        protected function beforeDelete($id,$id_replace) 
+        public function beforeDelete($id,$id_replace) 
         {
             
  

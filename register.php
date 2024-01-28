@@ -73,13 +73,13 @@ elseif($next_step==1)
    {
        if($auser_exists_obj->getVal("mobile")==$mobile)
        {
-            $auser_exists = Auser::traduireMessage("USER_EXISTS_SAME_IDN_SAME_MOBILE",$uri_module);;
+            $auser_exists = AfwLanguageHelper::tarjemMessage("USER_EXISTS_SAME_IDN_SAME_MOBILE",$uri_module);;
        }
        else
        {
             $auser_exists_mobile = $auser_exists_obj->getVal("mobile");
             $mobile_last_3char = substr($auser_exists_mobile,strlen($auser_exists_mobile)-3);
-            $auser_exists = Auser::traduireMessage("USER_EXISTS_SAME_IDN_WITH_MOBILE_ENDS_BY",$uri_module) . " ***$mobile_last_3char";
+            $auser_exists = AfwLanguageHelper::tarjemMessage("USER_EXISTS_SAME_IDN_WITH_MOBILE_ENDS_BY",$uri_module) . " ***$mobile_last_3char";
        }
        
    }
@@ -92,7 +92,7 @@ elseif($next_step==1)
        $auser_exists_obj->select("avail","Y");
        if($auser_exists_obj->load())
        {
-            $auser_error = Auser::traduireMessage("USER_MOBILE_EXISTS",$uri_module);
+            $auser_error = AfwLanguageHelper::tarjemMessage("USER_MOBILE_EXISTS",$uri_module);
        }
        else
        {
@@ -117,16 +117,16 @@ elseif($next_step==1)
             $sms_sending_success = false;
             if($sms_sending_success)
             {
-                AfwSession::pushSuccess(Auser::traduireMessage("SMS_SENT_TO_MOBILE",$uri_module)." $mobile");
+                AfwSession::pushSuccess(AfwLanguageHelper::tarjemMessage("SMS_SENT_TO_MOBILE",$uri_module)." $mobile");
             }
             else
             {
-                AfwSession::pushWarning(Auser::traduireMessage("SMS_COULDNT_BE_SENT_TO_MOBILE",$uri_module)." $mobile ");
+                AfwSession::pushWarning(AfwLanguageHelper::tarjemMessage("SMS_COULDNT_BE_SENT_TO_MOBILE",$uri_module)." $mobile ");
             }
             
             if($iam_super_admin) 
             {
-                AfwSession::pushWarning(Auser::traduireMessage("MOBILE_ACTIVATION_ID",$uri_module) . " : ". $mobile_activation_id);
+                AfwSession::pushWarning(AfwLanguageHelper::tarjemMessage("MOBILE_ACTIVATION_ID",$uri_module) . " : ". $mobile_activation_id);
             }       
        }
    
@@ -165,17 +165,17 @@ elseif($next_step==2)
             if(!$objme) $objme = AfwSession::getUserConnected();
             if(!$me) $me = AfwSession::getSessionVar("user_id");
             
-            AfwSession::pushSuccess(Auser::traduireMessage("ACCOUNT_ACTIVATED",$uri_module)." ($auser_id)");
+            AfwSession::pushSuccess(AfwLanguageHelper::tarjemMessage("ACCOUNT_ACTIVATED",$uri_module)." ($auser_id)");
         }
         else
         {
-            AfwSession::pushError(Auser::traduireMessage("MOBILE_ACTIVATION_ID_ERRONED",$uri_module));
+            AfwSession::pushError(AfwLanguageHelper::tarjemMessage("MOBILE_ACTIVATION_ID_ERRONED",$uri_module));
         }
     
     }
     else
     {
-        AfwSession::pushError(Auser::traduireMessage("ACCOUNT_ID_NOT_FOUND",$uri_module)." $auser_id");
+        AfwSession::pushError(AfwLanguageHelper::tarjemMessage("ACCOUNT_ID_NOT_FOUND",$uri_module)." $auser_id");
     }
     
     header("Location: index.php");

@@ -144,7 +144,7 @@ class AfieldRule extends AFWObject{
         }
         
         
-        protected function beforeDelete($id,$id_replace) 
+        public function beforeDelete($id,$id_replace) 
         {
             
             
@@ -195,7 +195,7 @@ class AfieldRule extends AFWObject{
                                $relatedFieldList = array();
                                $relatedFieldList[$related->getId()] = $related;
                                
-                               $intersectionFieldList = self::hzmListObjInstersection($relatedFieldList, $at_origFieldList, $compareMethod="myAnswerTableName", $keepEmpty=false);
+                               $intersectionFieldList = AfwWizardHelper::afwListObjInstersection($relatedFieldList, $at_origFieldList, $compareMethod="myAnswerTableName", $keepEmpty=false);
                                // die("intersectionFieldList = ".var_export($intersectionFieldList,true));
                                $rule_params_arr = array();
                                

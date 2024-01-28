@@ -1655,7 +1655,7 @@ class Atable extends AFWObject{
 	}
         
         public function getTableClass() {
-                return self::tableToClass($this->valAtable_name());
+                return AfwStringHelper::tableToClass($this->valAtable_name());
         }
         
         
@@ -1726,8 +1726,8 @@ class Atable extends AFWObject{
                 $display_field = $this->getDisplayField($lang);
                 $dbName = $moduleCode = $this->getModule()->getModuleCode();
                 $prefixed_db_name = $server_db_prefix.$moduleCode;
-                $fileName = self::tableToFile($tabName);
-		        $className = self::tableToClass($tabName);
+                $fileName = AfwStringHelper::tableToFile($tabName);
+		        $className = AfwStringHelper::tableToClass($tabName);
                 
                 if(!file_exists($fileName))
                 {
@@ -1906,7 +1906,7 @@ class Atable extends AFWObject{
                 $php_one_to_many_relations_links = "";
                 
                 $omr_field_arr = $this->getDetailTablesRelationFields();
-                //self::safeDie("omr_field_arr => ".var_export($omr_field_arr,true));
+                //AfwRunHelper::safeDie("omr_field_arr => ".var_export($omr_field_arr,true));
                 foreach($omr_field_arr as $omr_field_id => $omr_field_obj)
                 {
                        $omr_table_obj = $omr_field_obj->getTable();
@@ -1914,8 +1914,8 @@ class Atable extends AFWObject{
                        $omr_field_name = $omr_field_obj->getVal("field_name");
                        $omr_ans_tab_name = $omr_table_obj->getVal("atable_name");
                        $omr_ans_tab_abrev = $omr_table_obj->getVal("abrev");
-                       $omr_short_name = self::hzmNaming($omr_ans_tab_name);
-                       //if($omr_ans_tab_name=="participation") die("$omr_short_name = self::hzmNaming($omr_ans_tab_name)");
+                       $omr_short_name = AfwStringHelper::hzmNaming($omr_ans_tab_name);
+                       //if($omr_ans_tab_name=="participation") die("$omr_short_name = AfwStringHelper::hzmNaming($omr_ans_tab_name)");
                        if((strlen($omr_ans_tab_abrev)>7) and (strlen($omr_short_name)>20)) $omr_short_abrev = $omr_ans_tab_abrev;
                        else $omr_short_abrev = $omr_short_name;
                        
@@ -2188,7 +2188,7 @@ $displayAttribute_list
                        {
                              $lookupValueListPhpBefore = "/*";
                              $specs = $enumField->getVal("specification");
-                             $lookupData = self::afw_explode($specs);
+                             $lookupData = AfwStringHelper::afw_explode($specs);
                              foreach($lookupData as $lk_key => $lk_val)
                              {
                                   $lookupValueListPhp .= "            \$list_of_items[$lk_key] = \"$lk_val\";  //     code : ... not defined ... \n";
@@ -2508,7 +2508,7 @@ $enumAtable_functions
             \$color = \"green\";
             \$title_ar = \"xxxxxxxxxxxxxxxxxxxx\"; 
             \$methodName = \"mmmmmmmmmmmmmmmmmmmmmmm\";
-            //\$pbms[self::hzmEncode(\$methodName)] = array(\"METHOD\"=>\$methodName,\"COLOR\"=>\$color, \"LABEL_AR\"=>\$title_ar, \"ADMIN-ONLY\"=>true, \"BF-ID\"=>\"\", 'STEP' =>\$this->stepOfAttribute(\"xxyy\"));
+            //\$pbms[AfwStringHelper::hzmEncode(\$methodName)] = array(\"METHOD\"=>\$methodName,\"COLOR\"=>\$color, \"LABEL_AR\"=>\$title_ar, \"ADMIN-ONLY\"=>true, \"BF-ID\"=>\"\", 'STEP' =>\$this->stepOfAttribute(\"xxyy\"));
             
             
             
@@ -2560,7 +2560,7 @@ $enumAtable_functions
         }
         
         
-        protected function beforeDelete(\$id,\$id_replace) 
+        public function beforeDelete(\$id,\$id_replace) 
         {
             \$server_db_prefix = AfwSession::config(\"db_prefix\",\"c0\");
             
@@ -2957,7 +2957,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $this->where("(me.id_aut = '$me' or me.id_module in (select mu.id_module from ${server_db_prefix}ums.module_auser mu where mu.id_auser = '$me' and mu.avail='Y'))"); 
         }
         
-        protected function afterInsert($id, $fields_updated) 
+        public function afterInsert($id, $fields_updated) 
         {
                 return $this->createDefaultFields();
         }
@@ -3011,7 +3011,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 }
                 
                 if(!$this->getVal("titre_u_en")) {
-                           $this->set("titre_u_en",self::toEnglishText($this_table_name));
+                           $this->set("titre_u_en",AfwStringHelper::toEnglishText($this_table_name));
                 }
                 
                 if(!$this->getVal("titre_short_en")) {
@@ -3177,7 +3177,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                */
         }
         
-        protected function beforeDelete($id,$id_replace) {
+        public function beforeDelete($id,$id_replace) {
                if($id_replace==0)
                {
                    // require_once("afield.php");
@@ -3487,7 +3487,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                                $this_table_name = $this->getVal("atable_name");
                                $table_titre_u = $this->valTitre_u();
                                $table_titre_u_en = trim(trim(trim($this->valTitre_u_en(),"?"),"؟"));
-                               if(!$table_titre_u_en) $table_titre_u_en = self::toEnglishText($this_table_name);
+                               if(!$table_titre_u_en) $table_titre_u_en = AfwStringHelper::toEnglishText($this_table_name);
                                $atable_id = $this->getId(); 
                                
                                $field_name = "name_ar";  // ${this_table_name}_
@@ -3565,7 +3565,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         public function createUpdateMySteps($lang="ar")
         {
            $tabName = $this->getVal("atable_name");
-           $className = self::tableToClass($tabName);
+           $className = AfwStringHelper::tableToClass($tabName);
            $module = strtolower($this->getModule()->getModuleCode());
            
            $rows_updated = 0;

@@ -9,7 +9,7 @@ $log_pag_me = true;
 
 foreach($arr_all_files as $topag_table)
 {
-     $cl = AFWObject::tableToClass($topag_table);
+     $cl = AfwStringHelper::tableToClass($topag_table);
      include "pag_me.php";
 }
 

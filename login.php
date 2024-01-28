@@ -61,7 +61,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         }
         AfwSession::resetSession();
 
-        $email_initial = AfwSession::hardSecureCleanString(strtolower($_POST["mail"]));
+        $email_initial = AfwStringHelper::hardSecureCleanString(strtolower($_POST["mail"]));
 
   
         list($user_name_c, $user_domain_c) = explode("@", $email_initial);
@@ -144,7 +144,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         if($debugg_login and $debugg_after_golden_or_db and (!$user_connected))
         {        
                 $login_dbg[] = "login failed, user infos = ".var_export($user_infos,true);
-                AfwLoginUtilities::dd("ERROR : SQL/GOLDEN LOGIN FAILED :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
+                AfwStructureHelper::dd("ERROR : SQL/GOLDEN LOGIN FAILED :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
         }
         
         // 
@@ -261,7 +261,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
                 {
                         if($debugg_login and $debugg_login_die) 
                         {
-                                AfwLoginUtilities::dd("ERROR : <b>!!!!!!!!!!!!!!! USER NAME EMPTY AND CONNECTED : SHOULD BE IMPOSSIBLE logged out--------------- </b>\n".implode("<br>\n", $login_dbg), $debugg_login_die);   
+                                AfwStructureHelper::dd("ERROR : <b>!!!!!!!!!!!!!!! USER NAME EMPTY AND CONNECTED : SHOULD BE IMPOSSIBLE logged out--------------- </b>\n".implode("<br>\n", $login_dbg), $debugg_login_die);   
                         }
                         $user_connected = false;
                         $user_not_connected_reason = "user name not defined";

@@ -554,7 +554,7 @@ class Jobrole extends AFWObject
 
      public function getAllMyGoals()
      {
-          return self::hzm_array_merge($this->get("jobGoalList"), $this->get("otherGoalList"));
+          return AfwStringHelper::hzm_array_merge($this->get("jobGoalList"), $this->get("otherGoalList"));
      }
 
      public function findGoalWithCodeEndsWith($suffix, $atable_id = 0)
@@ -647,14 +647,14 @@ class Jobrole extends AFWObject
 
 
           if ((!$this->getVal("jobrole_code")) or ($this->getVal("jobrole_code") == "--")) {
-               $this->set("jobrole_code", self::codeNaming($this->getVal("titre_short_en")));
+               $this->set("jobrole_code", AfwStringHelper::codeNaming($this->getVal("titre_short_en")));
           } // require_once
 
 
           return true;
      }
 
-     protected function beforeDelete($id, $id_replace)
+     public function beforeDelete($id, $id_replace)
      {
           if ($id) {
                if ($id_replace == 0) {

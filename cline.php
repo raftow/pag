@@ -104,7 +104,7 @@
                   $objAtable = Atable::loadByMainIndex($idMod, $atable_name);
                   if($objAtable and (!$objAtable->isEmpty()))
                   {
-                        $atable_class = $objAtable::tableToClass($atable_name);
+                        $atable_class = AfwStringHelper::tableToClass($atable_name);
                         $idTab = $objAtable->getId();
                         $nbFields = $objAtable->getVal("fieldcount");
                         
@@ -148,7 +148,7 @@
                   $objAtable = Atable::loadByMainIndex($idMod, $atable_name);
                   if($objAtable and (!$objAtable->isEmpty()))
                   {
-                        $atable_class = $objAtable::tableToClass($atable_name);
+                        $atable_class = AfwStringHelper::tableToClass($atable_name);
                         $idTab = $objAtable->getId();
                         $nbFields = $objAtable->getVal("fieldcount");
                         
@@ -177,7 +177,7 @@
           if(file_exists("$file_dir_name/../$object_module/$object_class_file.php"))
           {
                   require_once("$file_dir_name/../$object_module/$object_class_file.php");
-                  $object_class = AFWObject::tableToClass($object_class_file);
+                  $object_class = AfwStringHelper::tableToClass($object_class_file);
                   
                   $objMain = new $object_class();
           }
@@ -223,7 +223,7 @@
           if(file_exists("$file_dir_name/../$object_module/$object_class_file.php"))
           {
                   require_once("$file_dir_name/../$object_module/$object_class_file.php");
-                  $object_class = AFWObject::tableToClass($object_class_file);
+                  $object_class = AfwStringHelper::tableToClass($object_class_file);
                   
                   if($object_code and (!$object_id)) 
                   {
@@ -278,7 +278,7 @@
           if(file_exists("$file_dir_name/../$object_module/$object_class_file.php"))
           {
                   require_once("$file_dir_name/../$object_module/$object_class_file.php");
-                  $object_class = AFWObject::tableToClass($object_class_file);
+                  $object_class = AfwStringHelper::tableToClass($object_class_file);
                   
                   if($object_code) 
                   {
@@ -340,7 +340,7 @@
           if(file_exists("$file_dir_name/../$object_module/$object_class_file.php"))
           {
                   require_once("$file_dir_name/../$object_module/$object_class_file.php");
-                  $object_class = AFWObject::tableToClass($object_class_file);
+                  $object_class = AfwStringHelper::tableToClass($object_class_file);
                   
                   if($object_code and (!$object_id)) 
                   {

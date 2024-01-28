@@ -3,10 +3,10 @@
                         <?
                          // @todo should be dynamic 
                           //
-                         $register_title = Auser::traduireMessage("REGISTER_ACCOUNT_ACTIVATION",$uri_module); 
-                         $activate_sentence = Auser::traduireMessage("ACTIVATE_SENTENCE",$uri_module);
-                         $register_data_type = Auser::traduireMessage("REGISTER_DATA_TYPE",$uri_module);
-                         // $register_conditions = Auser::traduireMessage("REGISTER_CONDITIONS",$uri_module);        
+                         $register_title = AfwLanguageHelper::tarjemMessage("REGISTER_ACCOUNT_ACTIVATION",$uri_module); 
+                         $activate_sentence = AfwLanguageHelper::tarjemMessage("ACTIVATE_SENTENCE",$uri_module);
+                         $register_data_type = AfwLanguageHelper::tarjemMessage("REGISTER_DATA_TYPE",$uri_module);
+                         // $register_conditions = AfwLanguageHelper::tarjemMessage("REGISTER_CONDITIONS",$uri_module);        
                         ?>
        
                 

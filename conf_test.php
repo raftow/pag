@@ -91,7 +91,7 @@ else
                 }
                 //AfwSession::resetSession();
         
-                $user_name_c = AfwSession::hardSecureCleanString(strtolower($_POST["mail"]));
+                $user_name_c = AfwStringHelper::hardSecureCleanString(strtolower($_POST["mail"]));
                 $pwd_c = $_POST["pwd"];
                 $login_dbg = array();
 
@@ -132,7 +132,7 @@ else
                 if($debugg_login and $debugg_after_golden_or_db and (!$user_connected))
                 {        
                         $login_dbg[] = "info = ".var_export($user_infos,true);
-                        AfwLoginUtilities::dd("ERROR : SQL/GOLDEN LOGIN FAILED :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
+                        AfwStructureHelper::dd("ERROR : SQL/GOLDEN LOGIN FAILED :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
                 }
                 
                 if($user_connected and (!$user_found))
@@ -249,7 +249,7 @@ else
                         {
                                 if($debugg_login and $debugg_login_die) 
                                 {
-                                       AfwLoginUtilities::dd("ERROR : <b>!!!!!!!!!!!!!!! USER NAME EMPTY AND CONNECTED : SHOULD BE IMPOSSIBLE logged out--------------- </b>\n".implode("<br>\n", $login_dbg), $debugg_login_die);                                   
+                                       AfwStructureHelper::dd("ERROR : <b>!!!!!!!!!!!!!!! USER NAME EMPTY AND CONNECTED : SHOULD BE IMPOSSIBLE logged out--------------- </b>\n".implode("<br>\n", $login_dbg), $debugg_login_die);                                   
                                 }
                                 $user_connected = false;
                                 $user_not_connected_reason = "user name not defined";
@@ -287,7 +287,7 @@ else
                                         }
                                 }
                                 
-                                AfwLoginUtilities::dd("******************* success to $last_page ****************** :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
+                                AfwStructureHelper::dd("******************* success to $last_page ****************** :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
                                 }
                                 else
                                 { 
@@ -300,17 +300,17 @@ else
                                         }
                                 }
                                 
-                                AfwLoginUtilities::dd("******************* success to index ****************** :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
+                                AfwStructureHelper::dd("******************* success to index ****************** :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
                                 }
                                 */
-                                AfwLoginUtilities::dd("!!!!!!!   ldap login succeeded !!!!!!!!", $debugg_login_die);    
+                                AfwStructureHelper::dd("!!!!!!!   ldap login succeeded !!!!!!!!", $debugg_login_die);    
                         }
                         else
                         {
                                 if($debugg_login) 
                                 {
                                                 AFWDebugg::log("!!!!!!!   login failed  !!!!!!!!");
-                                                AfwLoginUtilities::dd("!!!!!!!   login failed  !!!!!!!!", $debugg_login_die);
+                                                AfwStructureHelper::dd("!!!!!!!   login failed  !!!!!!!!", $debugg_login_die);
                                 }
                         }
                         

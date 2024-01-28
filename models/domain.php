@@ -262,7 +262,7 @@ class Domain extends AFWObject{
                 
                 if((!$this->getVal("domain_code")) or ($this->getVal("domain_code")=="--")) 
                 {
-                           $this->set("domain_code",strtoupper(self::javaNaming($this->getVal("domain_name_en"))));
+                           $this->set("domain_code",strtoupper(AfwStringHelper::javaNaming($this->getVal("domain_name_en"))));
                 }
                 
                 if((!$this->getVal("short_name_ar")) or ($this->getVal("short_name_ar")=="--")) 
