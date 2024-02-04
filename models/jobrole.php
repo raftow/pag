@@ -372,7 +372,7 @@ class Jobrole extends AFWObject
 
                     if ($mainApplication->isEmpty()) {
                          $mainApplication->clearSelect();
-                         $mainApplication->where("id in (select distinct jar.module_id from ${server_db_prefix}ums.job_arole jar 
+                         $mainApplication->where("id in (select distinct jar.module_id from ".$server_db_prefix."ums.job_arole jar 
                                                     where jar.avail='Y'
                                                       and jar.jobrole_id = $this_id) and avail='Y' and id_module_type = 5");
 
@@ -448,7 +448,7 @@ class Jobrole extends AFWObject
                     // 
                     $ar = new Arole();
                     $this_id = $this->getId();
-                    $ar->where("id in (select distinct jar.arole_id from ${server_db_prefix}ums.job_arole jar 
+                    $ar->where("id in (select distinct jar.arole_id from ".$server_db_prefix."ums.job_arole jar 
                                             where jar.avail='Y'
                                               and jar.jobrole_id = $this_id
                                               and jar.module_id = $mainApplication_id) and arole_type_id = 10");
@@ -660,7 +660,7 @@ class Jobrole extends AFWObject
                if ($id_replace == 0) {
                     $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - not deletable 
                     // bau.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("delete from ${server_db_prefix}bau.goal where jobrole_id = '$id' and avail='N'");
+                    $this->execQuery("delete from ".$server_db_prefix."bau.goal where jobrole_id = '$id' and avail='N'");
                     // require_once "../bau/goal.php";
                     $obj = new Goal();
                     $obj->where("jobrole_id = '$id'");
@@ -673,68 +673,68 @@ class Jobrole extends AFWObject
 
                     $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - deletable 
                     // ums.job_arole-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("delete from ${server_db_prefix}ums.job_arole where jobrole_id = '$id' ");
+                    $this->execQuery("delete from ".$server_db_prefix."ums.job_arole where jobrole_id = '$id' ");
                     // sdd.job_permission-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
-                    // $this->execQuery("delete from ${server_db_prefix}sdd.job_permission where jobrole_id = '$id' ");
+                    // $this->execQuery("delete from ".$server_db_prefix."sdd.job_permission where jobrole_id = '$id' ");
                     // bau.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("delete from ${server_db_prefix}bau.user_story where jobrole_id = '$id' ");
+                    $this->execQuery("delete from ".$server_db_prefix."bau.user_story where jobrole_id = '$id' ");
                     // bau.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("delete from ${server_db_prefix}bau.goal_concern where jobrole_id = '$id' ");
+                    $this->execQuery("delete from ".$server_db_prefix."bau.goal_concern where jobrole_id = '$id' ");
 
 
                     // FK not part of me - replaceable 
                     // pag.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}pag.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."pag.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // ums.module-وظيفة مسؤول الأعمال	id_analyst  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}ums.module set id_analyst='$id_replace' where id_analyst='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set id_analyst='$id_replace' where id_analyst='$id' ");
                     // ums.module-وظيفة مسؤول المراقبة	id_hd  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}ums.module set id_hd='$id_replace' where id_hd='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set id_hd='$id_replace' where id_hd='$id' ");
                     // ums.module-وظيفة مسؤول النظام	id_br  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}ums.module set id_br='$id_replace' where id_br='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set id_br='$id_replace' where id_br='$id' ");
 
 
 
                     // MFK
                     // pag.atable-وظائف صلاحية العرض	jobrole_mfk  
-                    $this->execQuery("update ${server_db_prefix}pag.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
+                    $this->execQuery("update ".$server_db_prefix."pag.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
                     // ums.module-وظائف صلاحية العرض	jobrole_mfk  
-                    $this->execQuery("update ${server_db_prefix}ums.module set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
                     // hrm.employee-وظائف الصلاحيات	jobrole_mfk  
-                    $this->execQuery("update ${server_db_prefix}hrm.employee set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
+                    $this->execQuery("update ".$server_db_prefix."hrm.employee set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',') where jobrole_mfk like '%,$id,%' ");
                     // crm.request_type-وظائف الموظفين المسموح لهم بهذا النوع من	authorized_jobrole_mfk  
-                    // $this->execQuery("update ${server_db_prefix}crm.request_type set authorized_jobrole_mfk=REPLACE(authorized_jobrole_mfk, ',$id,', ',') where authorized_jobrole_mfk like '%,$id,%' ");
+                    // $this->execQuery("update ".$server_db_prefix."crm.request_type set authorized_jobrole_mfk=REPLACE(authorized_jobrole_mfk, ',$id,', ',') where authorized_jobrole_mfk like '%,$id,%' ");
 
                } else {
                     $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK on me 
                     // bau.goal-المسؤولية الوظيفية الرئيسية في تحقيق اله	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("update ${server_db_prefix}bau.goal set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."bau.goal set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // ums.job_arole-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("update ${server_db_prefix}ums.job_arole set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.job_arole set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // sdd.job_permission-الوظيفة	jobrole_id  أنا تفاصيل لها-OneToMany
-                    // $this->execQuery("update ${server_db_prefix}sdd.job_permission set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    // $this->execQuery("update ".$server_db_prefix."sdd.job_permission set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // bau.user_story-الدور الوظيفي	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("update ${server_db_prefix}bau.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."bau.user_story set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // bau.goal_concern-المسؤولية الساعية	jobrole_id  أنا تفاصيل لها-OneToMany
-                    $this->execQuery("update ${server_db_prefix}bau.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."bau.goal_concern set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // pag.atable-وظيفة صلاحية التعديل	jobrole_id  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}pag.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."pag.atable set jobrole_id='$id_replace' where jobrole_id='$id' ");
                     // ums.module-وظيفة مسؤول الأعمال	id_analyst  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}ums.module set id_analyst='$id_replace' where id_analyst='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set id_analyst='$id_replace' where id_analyst='$id' ");
                     // ums.module-وظيفة مسؤول المراقبة	id_hd  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}ums.module set id_hd='$id_replace' where id_hd='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set id_hd='$id_replace' where id_hd='$id' ");
                     // ums.module-وظيفة مسؤول النظام	id_br  حقل يفلتر به-ManyToOne
-                    $this->execQuery("update ${server_db_prefix}ums.module set id_br='$id_replace' where id_br='$id' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set id_br='$id_replace' where id_br='$id' ");
 
 
                     // MFK
                     // pag.atable-وظائف صلاحية العرض	jobrole_mfk  
-                    $this->execQuery("update ${server_db_prefix}pag.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
+                    $this->execQuery("update ".$server_db_prefix."pag.atable set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
                     // ums.module-وظائف صلاحية العرض	jobrole_mfk  
-                    $this->execQuery("update ${server_db_prefix}ums.module set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
+                    $this->execQuery("update ".$server_db_prefix."ums.module set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
                     // hrm.employee-وظائف الصلاحيات	jobrole_mfk  
-                    $this->execQuery("update ${server_db_prefix}hrm.employee set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
+                    $this->execQuery("update ".$server_db_prefix."hrm.employee set jobrole_mfk=REPLACE(jobrole_mfk, ',$id,', ',$id_replace,') where jobrole_mfk like '%,$id,%' ");
                     // crm.request_type-وظائف الموظفين المسموح لهم بهذا النوع من	authorized_jobrole_mfk  
-                    // $this->execQuery("update ${server_db_prefix}crm.request_type set authorized_jobrole_mfk=REPLACE(authorized_jobrole_mfk, ',$id,', ',$id_replace,') where authorized_jobrole_mfk like '%,$id,%' ");
+                    // $this->execQuery("update ".$server_db_prefix."crm.request_type set authorized_jobrole_mfk=REPLACE(authorized_jobrole_mfk, ',$id,', ',$id_replace,') where authorized_jobrole_mfk like '%,$id,%' ");
 
 
                }
@@ -752,5 +752,17 @@ class Jobrole extends AFWObject
      public function stepsAreOrdered()
      {
           return false;
+     }
+
+
+     public function myShortNameToAttributeName($attribute){
+          if($attribute=="domain") return "id_domain";
+          if($attribute=="description") return "titre";
+          if($attribute=="description_en") return "titre_en";
+          if($attribute=="roles") return "jobAroleList";
+          if($attribute=="goals") return "jobGoalList";
+          if($attribute=="org") return "id_sh_org";
+          if($attribute=="div") return "id_sh_div";
+          return $attribute;
      }
 }

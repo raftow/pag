@@ -733,7 +733,7 @@ class Afield extends AFWObject{
         }
 
         
-        protected function repareBeforeUpdate()
+        protected function repareMeBeforeUpdate()
         {
             // to be overridden if needed
             global $me, $default_date_system, $server_db_prefix, $mode_pag_me;
@@ -1696,7 +1696,7 @@ class Afield extends AFWObject{
         
         public function beforeMAJ($id, $fields_updated) 
         {
-		return $this->repareBeforeUpdate();
+		return $this->repareMeBeforeUpdate();
 	}
         /*
         public function isText() {
@@ -3437,7 +3437,7 @@ class Afield extends AFWObject{
                 return false;
         }
 
-        protected function myShortNameToAttributeName($attribute){
+        public function myShortNameToAttributeName($attribute){
                 if($attribute=="name") return "field_name";
                 if($attribute=="table") return "atable_id";
                 if($attribute=="ftype") return "afield_type_id";

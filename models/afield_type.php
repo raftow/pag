@@ -133,7 +133,9 @@ class AfieldType extends AFWObject{
                 $this->DISPLAY_FIELD = "titre_short";
                 $this->ORDER_BY_FIELDS = "titre_short";
                 
-                $this->IS_LOOKUP = true; 
+                // contain many business rules and could be loaded one by one so not lookup
+                $this->IS_LOOKUP = false;  // @KEEP-PLEASE
+                
                 $this->ignore_insert_doublon = true;
                 $this->UNIQUE_KEY = array('afield_type_code');
                 

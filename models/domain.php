@@ -68,7 +68,7 @@ class Domain extends AFWObject{
 	*/ public function __construct(){
 		parent::__construct("domain","id","pag");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
-                $this->DISPLAY_FIELD = "";
+                $this->DISPLAY_FIELD = "domain_name_ar";
                 $this->ORDER_BY_FIELDS = "domain_name_ar";
                 $this->editByStep = true;
                 $this->editNbSteps = 3;

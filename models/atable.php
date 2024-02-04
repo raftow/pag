@@ -4493,7 +4493,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             return false;
         }
 
-        protected function myShortNameToAttributeName($attribute){
+        public function myShortNameToAttributeName($attribute){
             if($attribute=="sys") return "system_id";
             if($attribute=="domain") return "id_domain";
             if($attribute=="module") return "id_module";
