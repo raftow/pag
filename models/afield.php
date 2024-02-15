@@ -1941,6 +1941,7 @@ class Afield extends AFWObject{
                     if(!$tbl_id) die("MODULE=".$row["ANSMODULE"]."TABLE=".$row["ANSWER"]." doesnt have table id");
                     $afield_att["answer_module_id"] = $mdl_id;
                     $afield_att["answer_table_id"] = $tbl_id;
+                    if(!$afield_att["entity_relation_type_id"]) $afield_att["entity_relation_type_id"] = self::$ENTITY_RELATION_TYPE_MANYTOONE;
             }
             
             if(($afield_att["afield_type_id"] == AfwUmsPagHelper::$afield_type_enum) or ($afield_att["afield_type_id"]==AfwUmsPagHelper::$afield_type_menum))
@@ -2224,7 +2225,7 @@ class Afield extends AFWObject{
                               $row["ANSWER"] = '"????"';  
                         }
                         
-                        $ertype = $this->snh("ertype");
+                        $ertype = $this->het("ertype");
                         if($ertype)
                         {
                              $ertype_code = $ertype->getVal("lookup_code");

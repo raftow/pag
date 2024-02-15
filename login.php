@@ -30,13 +30,24 @@ AfwSession::startSession();
 require_once ("$file_dir_name/../external/db.php");
 // here old require of common.php
 
-$html_debugg_login = false;  // useful in prod
+// enable this in prod
+/*
+$html_debugg_login = false;  
 $debugg_login = false;
 $debugg_login_die = false; 
 $debugg_after_login = false;
 $debugg_after_ldap = false;
 $debugg_after_golden_or_db = false;
-$debugg_after_session_created = false;
+$debugg_after_session_created = false;*/
+
+// enable this in dev
+$html_debugg_login = true;  
+$debugg_login = true;
+$debugg_login_die = true; 
+$debugg_after_login = true;
+$debugg_after_ldap = true;
+$debugg_after_golden_or_db = true;
+$debugg_after_session_created = true;
 
 $server_db_prefix = AfwSession::config("db_prefix","c0");
 $check_employee_from_external_system = AfwSession::config("check_employee_from_external_system",false);
@@ -124,7 +135,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
                 {
                         $user_connected = false;
                         $user_found = false;
-                        $user_not_connected_reason = $user_not_found_reason = AfwLoginUtilities::tt("result of LDAP query doesn't contain the username");
+                        $user_not_connected_reason = $user_not_found_reason = AfwLanguageHelper::tt("result of LDAP query doesn't contain the username");
                         //$
                         $login_dbg[] = $user_not_connected_reason;
                 }

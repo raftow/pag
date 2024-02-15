@@ -70,7 +70,7 @@ class Foption extends AFWObject{
 	*/ public function __construct(){
 		parent::__construct("foption","id","pag");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
-                $this->DISPLAY_FIELD = "";
+                $this->DISPLAY_FIELD = "foption_name_ar";
                 $this->ORDER_BY_FIELDS = "foption_name_ar desc";
                 $this->UNIQUE_KEY = array("lookup_code");
                 /*

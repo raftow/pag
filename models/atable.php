@@ -1915,7 +1915,8 @@ class Atable extends AFWObject{
                        $omr_ans_tab_name = $omr_table_obj->getVal("atable_name");
                        $omr_ans_tab_abrev = $omr_table_obj->getVal("abrev");
                        $omr_short_name = AfwStringHelper::hzmNaming($omr_ans_tab_name);
-                       //if($omr_ans_tab_name=="participation") die("$omr_short_name = AfwStringHelper::hzmNaming($omr_ans_tab_name)");
+                       // if($omr_ans_tab_name=="training_unit") 
+                       // AfwRunHelper::safeDie("$omr_short_name = AfwStringHelper::hzmNaming($omr_ans_tab_name)");
                        if((strlen($omr_ans_tab_abrev)>7) and (strlen($omr_short_name)>20)) $omr_short_abrev = $omr_ans_tab_abrev;
                        else $omr_short_abrev = $omr_short_name;
                        

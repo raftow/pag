@@ -135,7 +135,7 @@
 
 			'answer_table_id' => array('SHOW' => true,  'RETRIEVE' => false,  'QEDIT' => false,  'EDIT' => true,  'RETRIEVE_FGROUP' => true,  'FGROUP' => 'answer_props',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'MANDATORY' => true,  
 				'TYPE' => 'FK',  'ANSWER' => 'atable',  'ANSMODULE' => 'pag',  'SIZE' => 40,  'DEFAUT' => 0,  'SHORTNAME' => 'anstable',  'STEP' => 2,  
-				'WHERE-SEARCH' => "avail='Y'", 
+				'WHERE' => "id_module=§answer_module_id§ and avail='Y'", 'WHERE-SEARCH' => "id_module=§answer_module_id§ and avail='Y'", 
 				 'AT_METHOD' => 'getAnswerTables',  'SEARCH-BY-ONE' => true,  'AUTOCOMPLETE-SEARCH' => true,  'QSEARCH' => false,  
 				'RELATION' => 'OneToMany',  'ANSWER_PROPS-RETRIEVE' => true,  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 

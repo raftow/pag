@@ -211,7 +211,9 @@
 
 		'fieldcount' => array(
 				'TYPE' => 'INT',  
-				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'RETRIEVE' => true,  'LINK-URL' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Afield&currmod=pag&newo=7&limit=100&ids=all&fixmtit=حقول الجدول §titre_short§ - §atable_name§ &fixmdisable=1&fixm=atable_id=§id§&sel_atable_id=§id§&comfld=1',  'LINK-CSS' => 'nice_link',  'FGROUP' => 'stats',  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'RETRIEVE' => true,  
+				'LINK-URL' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Afield&currmod=pag&newo=7&limit=100&ids=all&fixmtit=حقول الجدول §titre_short§ - §atable_name§ &fixmdisable=1&fixm=atable_id=§id§&sel_atable_id=§id§&comfld=1',  
+				'LINK-CSS' => 'nice_link',  'FGROUP' => 'stats',  'STEP' => 4,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
@@ -228,8 +230,10 @@
   4 => 'answer_props',
   5 => 'other_props',
   6 => 'general_props',
-),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'origFieldList',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  
+				'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'origFieldList',  
+				'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'FGROUP_BEHAVIOR' => 'collapsed',
 				),
 
 		'auditFieldList' => array(
@@ -245,7 +249,9 @@
   4 => 'answer_props',
   5 => 'other_props',
   6 => 'general_props',
-),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'auditFieldList',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  'DELETE-ICON' => true,  
+				'BUTTONS' => true,  'FGROUP' => 'auditFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',  
+				'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
@@ -262,7 +268,9 @@
   4 => 'answer_props',
   5 => 'other_props',
   6 => 'general_props',
-),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'indexFieldList',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+			'FGROUP' => 'indexFieldList', 'FGROUP_BEHAVIOR' => 'collapsed', 
+			 'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
@@ -279,7 +287,11 @@
   4 => 'answer_props',
   5 => 'other_props',
   6 => 'general_props',
-),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'REQUIRED' => true,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'nameFieldList',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+),  
+	'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  
+	'REQUIRED' => true,  'ICONS' => true,  'DELETE-ICON' => true,  
+				'BUTTONS' => true,  'FGROUP' => 'nameFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',  
+				'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'MANDATORY' => true,  'ERROR-CHECK' => true, 
 				),
 
@@ -296,7 +308,9 @@
   4 => 'answer_props',
   5 => 'other_props',
   6 => 'general_props',
-),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'virtFieldList',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  
+		'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+			'FGROUP' => 'virtFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
@@ -313,7 +327,9 @@
   4 => 'answer_props',
   5 => 'other_props',
   6 => 'general_props',
-),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'addiFieldList',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,  
+			'DELETE-ICON' => true,  'BUTTONS' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'FGROUP' => 'addiFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',  'NO-LABEL' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
