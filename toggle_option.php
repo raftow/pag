@@ -13,7 +13,7 @@ include "$file_dir_name/../$MODULE/special_module_options.php";
       }
       else
       {
-          $lang = AFWObject::getGlobalLanguage(); 
+          $lang = AfwLanguageHelper::getGlobalLanguage(); 
           if($option)
           {
                 $option_word = $objme->tr("the control option");

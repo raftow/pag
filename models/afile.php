@@ -409,7 +409,7 @@ zoomWindowOffety:-200
         
         }
         
-        protected function getSpecificDataErrors($lang="ar",$show_val=true,$step="all")
+        protected function getSpecificDataErrors($lang="ar",$show_val=true,$step="all",$erroned_attribute=null,$stop_on_first_error=false, $start_step=null, $end_step=null)
         {
               $objme = AfwSession::getUserConnected();
                 
@@ -612,6 +612,16 @@ zoomWindowOffety:-200
             if($extension=="webm") return true;
             if($extension=="ogg") return true;
             return false;
+        }
+
+
+        public function myShortNameToAttributeName($attribute){
+                if($attribute=="original") return "original_name";
+                if($attribute=="name") return "afile_name";
+                if($attribute=="ext") return "afile_ext";
+                if($attribute=="type") return "afile_type";
+                if($attribute=="size") return "afile_size";
+                return $attribute;
         }
         
         

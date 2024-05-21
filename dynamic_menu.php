@@ -1,5 +1,5 @@
 <?php
-    common_die("rafik-3 I think it is obsolete now : 10 nov 2021");
+    throw new AfwRuntimeException("rafik-3 I think it is obsolete now : 10 nov 2021");
     $menu_arr = $objme->getMenuFor(AfwSession::config("application_id",0),$lang);  
     //throw new AfwRuntimeException("objme->getMenuFor($THIS_MODULE_ID,$lang) = ".var_export($menu_arr,true));
     foreach($menu_arr as $menu_item)

@@ -61,283 +61,31 @@ class Atable extends AFWObject{
         public static $MODULE		    = "pag"; 
         public static $TABLE			= "atable"; 
         public static $DB_STRUCTURE = null; 
-    /* = array(
-		"id" => array("TYPE" => "PK", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => false, "FGROUP"=>"step1"),
-                
-                
-                "system_id" => array("SHOW" => true, "SEARCH"=>true, "TYPE" => "FK", "ANSWER" => "module", "ANSMODULE" => "ums", 
-                                       WHERE=>"id_module_type in (4,7)", "CATEGORY" => "FORMULA", 
-                                       FORMULA_MODULE=>"pag", 
-                                       SHORTNAME=>sys, "SEARCH-BY-ONE"=>true,
-                                       "CAN-BE-SETTED"=>true, "DIRECT_ACCESS" =>true, 
-                                       DEPENDENT_OFME=>array("id_module","id_sub_module"), "FGROUP"=>"step1"),
-                
-                "id_domain"     => array('STEP' =>99,"TYPE" => "FK", "ANSWER" => "domain",  'SHOW' => true, "CATEGORY"=>"SHORTCUT", SHORTCUT=>"id_module.id_pm", "SHORTNAME"=>"domain", "ANSMODULE" => "pag", "FGROUP"=>"step1"),
-                
-                "id_module" => array("SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "TYPE" => "FK", "ANSWER" => "module", "ANSMODULE" => "ums", 
-                                       WHERE => "id_module_type=5", 
-                                       "WHERE-SEARCH" => "id_module_type=5", 
-                                       // to be reviewed as no context concept in new version v3.0 of afw
-                                       // and ('§CONTEXT_ID§'='' or id_system in (§system_id§, '§CONTEXT_ID§'))
-                                       "QEDIT" => true, "SHORTNAME"=>"module", "SEARCH-BY-ONE"=>true,
-                                       
-                                       DEPENDENT_OFME=>array("id_sub_module"), DEPENDENCY=>system_id, "FGROUP"=>"step1", RELATION => OneToMany,),
-                
-                "real_table" => array("TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, 
-                      "QEDIT" => true, "SEARCH"=> true, "DEFAULT" => "Y", "SHORTNAME"=>"original", "FGROUP"=>"step1"),
-		atable_name => array("TYPE" => "TEXT", SHORTNAME=>name, "SEARCH"=>true, "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "SIZE" => 32, 
-                                       'QEDIT' => true, EDIT_FGROUP=>true, QEDIT_FGROUP=>true, QEDIT_ALL_FGROUP=>true, "FGROUP"=>"step1"),
-                is_lookup => array("TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => true, "SEARCH"=> true, "DEFAULT" => "N", "SHORTNAME"=>"lookup", "FGROUP"=>"step1"),
-                is_entity => array(SHORTNAME=>entity,"TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => true, "SEARCH"=> false, "DEFAULT" => "Y", "FGROUP"=>"step1"),
-
-		avail => array("TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "QEDIT" => true, "DEFAULT"=>"Y", "FGROUP"=>"step1"),
-                
-                                class_name  => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>false, "RETRIEVE"=>false, ),  // just for tokens
-
-                                is_enum => array(SHORTNAME=>enum, "TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => false, "QEDIT" => false, "SEARCH"=> true, "CATEGORY" => "FORMULA", "FIELD-FORMULA"=>"fnIsEnum(is_entity,is_lookup)", "FORMULA_MODULE"=>"pag", "FGROUP"=>"step1"),
-                                
-                                is_detail => array("TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => false, "QEDIT" => false, "SEARCH"=> false, "CATEGORY" => "FORMULA", "SHORTNAME"=>"detail", "FGROUP"=>"step1"),
-                
-                                categ  => array('TYPE' => 'TEXT', CATEGORY => 'FORMULA', SHOW=>true, EDIT=>true, 'READONLY' =>true, RETRIEVE=>true, FGROUP=>step1, ),  
-                
-        titre_short => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "QEDIT" => true, "SEARCH"=> true, 
-                                        "UTF8" => true, "SIZE" => 48, "SHORTNAME"=>"pluraltitle", "FGROUP"=>"step1"),
-
-        titre_short_s => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "QEDIT" => true, "SEARCH"=> true, 
-                                        "UTF8" => true, "SIZE" => 48, "SHORTNAME"=>"pluraltitleshort", "FGROUP"=>"step1"),
-                                        
-		titre_u => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, 
-                                       'QEDIT' => true, QEDIT_ALL_FGROUP=>true, EDIT_FGROUP=>true, QEDIT_FGROUP=>true, 
-                                       SEARCH=> true, "UTF8" => true, "SIZE" => 48, "SHORTNAME"=>"singletitle", "FGROUP"=>"step1"),
-
-        titre_u_s => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, 
-                                       'QEDIT' => true, QEDIT_ALL_FGROUP=>true, EDIT_FGROUP=>true, QEDIT_FGROUP=>true, 
-                                       SEARCH=> true, "UTF8" => true, "SIZE" => 48, "SHORTNAME"=>"singletitleshort", "FGROUP"=>"step1"),
-                                       
-		"titre" => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, "UTF8" => true, "SIZE" => "AREA", "SHORTNAME"=>"description", "FGROUP"=>"step1"),
 
 
-                tboption_mfk => array(STEP=>1, SEARCH => true, 'SHOW' => true, 'RETRIEVE' => false, 'EDIT' => true, 'QEDIT' => true, SIZE => 255, 
-                                      MANDATORY => true, "UTF8" => false, 
-                                      "TYPE" => "MFK", "ANSWER" => tboption, "ANSMODULE" => 'pag'),
-
-
-		auditable => array("TYPE" => "YN", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, "DEFAULT" => "Y", 'STEP' =>2),
-                id_sub_module => array("SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "TYPE" => "FK", "ANSWER" => "module", "ANSMODULE" => "ums", "SHORTNAME"=>"submodule",
-                                         "WHERE"=>"((id_module_parent = §id_module§) and (id_module_type in (6))) and id_system in (select id_system from c0ums.module where id = §id_module§)  ", "QEDIT" => true, "SEARCH-BY-ONE"=>true,
-                                          DEPENDENCY=>id_module, RELATION => OneToMany, 'STEP' =>2),
-		abrev => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>false, "QEDIT" => false, "EDIT" => true, "SEARCH"=> false, "SIZE" => 10, 'STEP' =>2),
-                vh => array(SHORTNAME=>icon,'TYPE' => 'TEXT', 'SHOW' => true, RETRIEVE=>false, 'EDIT' => true, 'QEDIT' => true, "SEARCH"=> false, 'STEP' =>2),
-
-                
-		"titre_short_en" => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE-EN"=>true, "EDIT" => true, "QEDIT" => false, "SEARCH"=> true, "SIZE" => 40, "SHORTNAME"=>"pluraltitle_en", 'STEP' =>2),
-		"titre_u_en" => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE-EN"=>false, "EDIT" => true, "QEDIT" => false, "SEARCH"=> true, "SIZE" => 64, "SHORTNAME"=>"singletitle_en", 'STEP' =>2),  
-		"titre_en" => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE-EN"=>false, "EDIT" => true, "QEDIT" => false, "SEARCH"=> false, "SIZE" => "AREA", "SHORTNAME"=>"description_en", 'STEP' =>2),
-
-
-
-
-                                "look_from_field_id" => array("TYPE"  => "FK", "ANSWER" => "afield", "SHOW" => false, "FORMAT"=>"", "RETRIEVE"=>false, "EDIT" => false, "QEDIT" => false, "SEARCH"=> false, 
-                                      "WHERE"=>"atable_id = §id§ and afield_type_id = 5 and avail = 'Y'", "FGROUP"=>"index"),
-                                                      
-                                //"qfim_fields_mfk" => array("TYPE"  => "MFK", "ANSWER" => "afield", "SEARCH"=> false, "SHOW" => false, "FORMAT"=>"", "RETRIEVE"=>false, "EDIT" => false, "QEDIT" => false, "WHERE"=>"atable_id = §id§ and afield_type_id = 5 and avail = 'Y' and id != §look_from_field_id§"),
-
-                                                                                                                          
-                "key_field" => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, "SEARCH"=> false, "DEFAULT" => "id", 'STEP' =>3),
-		"display_field" => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, "MANDATORY"=> false, "DEFAULT" => "", 'STEP' =>3),
-		              // "details_tables_mfk" => array("TYPE" => "TEXT"),
-                
-                
-        	"sql_gen" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "YN", "QEDIT" => false, "DEFAULT" => "N", "SEARCH"=> false, 'STEP' =>3),
-        	"id_auto_increment" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "YN", "QEDIT" => false, "DEFAULT" => "Y", 'STEP' =>3),
-        	"utf8" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "YN", "QEDIT" => false, "DEFAULT" => "Y", 'STEP' =>3),
-        	"partition_function" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "TEXT", "QEDIT" => false, "SEARCH"=> false, 'STEP' =>3),
-                "dbengine_id" => array("SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "TYPE" => "FK", "QEDIT" => false, "ANSWER" => "dbengine", "ANSMODULE"=>"pag","WHERE"=>"", "DEFAULT" => 2, 'STEP' =>3),
-                                "entity_name" => array("TYPE" => "TEXT", "SHOW" => false, "RETRIEVE"=>false, "EDIT" => false, "SIZE" => 64, "QEDIT" => false, "SEARCH"=> false, 'STEP' =>3),
-                                "entity_name2" => array("TYPE" => "TEXT", "SHOW" => false, "RETRIEVE"=>false, "EDIT" => false, "SIZE" => 64, "QEDIT" => false, "SEARCH"=> false, 'STEP' =>3),
-
-                "fieldcount" 	=> array("TYPE" => "INT", "CATEGORY" => "FORMULA", "SHOW"=>true, "RETRIEVE"=>true, 
-                                         "LINK-URL"=>"main.php?Main_Page=afw_mode_qedit.php&cl=Afield&currmod=pag&newo=7&limit=100&ids=all&fixmtit=حقول الجدول §titre_short§ - §atable_name§ &fixmdisable=1&fixm=atable_id=§id§&sel_atable_id=§id§&comfld=1",
-                                         "LINK-CSS"=>"nice_link", 
-                                         "FGROUP"=>"stats", 'STEP' =>4, ),
-                
-                origFieldList => array('TYPE' => 'FK', SHORTNAME => original_fields, 'ANSWER' => afield, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                     WHERE=>"additional='N' and reel='Y' and avail='Y'",  
-                                     RETRIEVE_GROUPS =>array("display","modes_list","field_rules","step_group", "answer_props", "other_props", "general_props"),
-                                     'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, 'STEP' =>4, 
-                                     ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, FGROUP=>origFieldList, "NO-LABEL"=>true),
-                
-                auditFieldList => array('TYPE' => 'FK', SHORTNAME => audit_fields, 'ANSWER' => afield, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                     WHERE=>"additional='N' and reel='Y' and avail='Y' and mode_audit='Y'",        
-                                     RETRIEVE_GROUPS =>array("display","modes_list","field_rules","step_group", "answer_props", "other_props", "general_props"),
-                                     'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, 'STEP' =>4, 
-                                     ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, FGROUP=>auditFieldList, "NO-LABEL"=>true),                                     
-
-                indexFieldList => array('TYPE' => 'FK', SHORTNAME => index_fields, 'ANSWER' => afield, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                     WHERE=>"additional='N' and reel='Y' and avail='Y' and distinct_for_list='Y'", 
-                                     RETRIEVE_GROUPS =>array("display","modes_list","field_rules","step_group", "answer_props", "other_props", "general_props"),
-                                     'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, 'STEP' =>4, 
-                                     ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, FGROUP=>indexFieldList, "NO-LABEL"=>true),                                     
-
-                nameFieldList => array('TYPE' => 'FK', SHORTNAME => name_fields, 'ANSWER' => afield, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                     WHERE=>"mode_name='Y' and avail='Y'", 
-                                     RETRIEVE_GROUPS =>array("display","modes_list","field_rules","step_group", "answer_props", "other_props", "general_props"),
-                                     'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, 'STEP' =>4, REQUIRED=>true,
-                                     ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, FGROUP=>nameFieldList, "NO-LABEL"=>true),                                     
-
-                virtFieldList => array('TYPE' => 'FK', SHORTNAME => virtual_fields, 'ANSWER' => afield, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                     WHERE=>"additional='N' and reel='N' and avail='Y'", 
-                                     RETRIEVE_GROUPS =>array("display","modes_list","field_rules","step_group", "answer_props", "other_props", "general_props"), 
-                                     'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, 'STEP' =>4, 
-                                     ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, FGROUP=>virtFieldList, "NO-LABEL"=>true),
-                
-                addiFieldList => array('TYPE' => 'FK', SHORTNAME => additional_fields, 'ANSWER' => afield, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                     WHERE=>"additional='Y' and avail='Y'", 
-                                     RETRIEVE_GROUPS =>array("display","modes_list","field_rules","step_group", "answer_props", "other_props", "general_props"), 
-                                     'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, 'STEP' =>4, 
-                                     ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, FGROUP=>addiFieldList, "NO-LABEL"=>true),
-                
-                jobrole_id => array("IMPORTANT" => "IN", "SEARCH" => false, "SHOW" => true, "RETRIEVE" => "temporaire", "EDIT" => true, "QEDIT" => false, "SIZE" => 40, "UTF8" => false, 
-                                          'TYPE' => 'FK', 'ANSWER' => jobrole, 'ANSMODULE' => 'pag', SHORTNAME => emjob, MANDATORY=>false, POLE=>true,
-                                          WHERE=>"(id = 53 or id_domain in (1,§id_domain§))",
-                                          "DEFAULT" => 0, EDIT_FGROUP=>true, QEDIT_FGROUP=>true, FGROUP=>"roles_def", 'STEP' =>5),
-                
-                // jobrole_mfk => array("IMPORTANT" => "IN", "SEARCH" => false, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => false, "SIZE" => 32, "UTF8" => false, 
-                //                          "TYPE" => "MFK", "ANSWER" => jobrole, "ANSMODULE" => 'pag', "SHORTNAME" => dispjobs,  "MFK-SHOW-SEPARATOR"=>"<br>",
-                //                          WHERE=>"(id = 53 or id_domain in (1,§id_domain§))",
-                //                          EDIT_FGROUP=>true, QEDIT_FGROUP=>true, FGROUP=>"roles_def", 'STEP' =>5),
-                
-                
-                goalConcernList1 => array('TYPE' => 'FK', 'ANSWER' => goal_concern, 'ANSMODULE' => bau, CATEGORY => ITEMS, ITEM => '', FORMAT=>retrieve, 
-                                           WHERE=>"application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,1,%'", 
-                                           'SHOW' => true, 'EDIT' => false, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, "NO-LABEL"=>false, 
-                                           MANDATORY => true, FGROUP=>"roles_def", 'STEP' =>5),
-
-                goalConcernList2 => array('TYPE' => 'FK', 'ANSWER' => goal_concern, 'ANSMODULE' => bau, CATEGORY => ITEMS, ITEM => '', FORMAT=>retrieve, 
-                                           WHERE=>"application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,2,%'", 
-                                           'SHOW' => true, 'EDIT' => false, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, "NO-LABEL"=>false, 
-                                           MANDATORY => true, FGROUP=>"roles_def", 'STEP' =>5),
-
-                goalConcernList3 => array('TYPE' => 'FK', 'ANSWER' => goal_concern, 'ANSMODULE' => bau, CATEGORY => ITEMS, ITEM => '', FORMAT=>retrieve, 
-                                           WHERE=>"application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,3,%'", 
-                                           'SHOW' => true, 'EDIT' => false, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, "NO-LABEL"=>false, 
-                                           MANDATORY => true, FGROUP=>"roles_def", 'STEP' =>5),
-
-                goalConcernList4 => array('TYPE' => 'FK', 'ANSWER' => goal_concern, 'ANSMODULE' => bau, CATEGORY => ITEMS, ITEM => '', FORMAT=>retrieve, 
-                                           WHERE=>"application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,4,%'", 
-                                           'SHOW' => true, 'EDIT' => false, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, "NO-LABEL"=>false, 
-                                           MANDATORY => false, FGROUP=>"roles_def", 'STEP' =>5),
-                
-                goalConcernList5 => array('TYPE' => 'FK', 'ANSWER' => goal_concern, 'ANSMODULE' => bau, CATEGORY => ITEMS, ITEM => '', FORMAT=>retrieve, 
-                                           WHERE=>"application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,5,%'", 
-                                           'SHOW' => true, 'EDIT' => false, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, "NO-LABEL"=>false, 
-                                           MANDATORY => false, FGROUP=>"roles_def", 'STEP' =>5),
-                                          
-                master => array('TYPE' => 'FK', 'ANSWER' => atable, 'ANSMODULE' => 'pag', "CATEGORY" => "FORMULA", "SHOW"=>true, "RETRIEVE"=>false, 'STEP' =>5, ),                             
-                                          
-                lookupValueList => array('TYPE' => 'FK', 'ANSWER' => lookup_value, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                         WHERE=>'', 'SHOW' => true, FORMAT=>retrieve, ICONS=>true, 'DELETE-ICON'=>true, 'QEDIT' =>false,
-                                         BUTTONS=>true, "NO-LABEL"=>false, 'STEP' =>5, "FGROUP"=>"lookupValueList", 'EDIT' => true, READONLY => true ),
-
-                "data_auser_mfk" => array("TYPE"  => "MFK", "ANSWER" => "auser", "ANSMODULE" => "ums", 
-                                          "SHOW" => true, "FORMAT"=>"", "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, 
-                                          "FORMAT"=>"retrieve", "WHERE"=>"", 'STEP' =>5),
-
-
-  
-
-                "max_period" => array("TYPE" => "INT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, "SEARCH"=> false, "DEFAULT" => 80, "SHORTNAME"=>"maxper", 'STEP' =>5),
-                "exp_period" => array("TYPE" => "INT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, "SEARCH"=> false, "DEFAULT" => 60, "SHORTNAME"=>"expper", 'STEP' =>5),
-
-                "min_u_records" => array("TYPE" => "INT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => false, "SEARCH"=> false, 
-                                          "DEFAULT" => 0, "SHORTNAME"=>"minrows", 'STEP' =>5),
-                "exp_u_records" => array("TYPE" => "INT", "SHOW" => true, "RETRIEVE"=>false, "EDIT" => true, "QEDIT" => true, "SEARCH"=> false, 
-                                          "DEFAULT" => 0, "SHORTNAME"=>"exprows", MANDATORY => true, 'STEP' =>5),
-
-                                     
-                bfunctionList => array('TYPE' => 'FK', 'ANSWER' => bfunction, 'ANSMODULE' => 'ums', CATEGORY => ITEMS, ITEM => 'curr_class_atable_id', WHERE=>'', 'SHOW' => true, 
-                                       FORMAT=>retrieve, 'EDIT' => false, ICONS=>true, 'DELETE-ICON'=>false, BUTTONS=>true, "NO-LABEL"=>true,
-                                       STEP=>6, "FGROUP"=>"bfunctionList"),
-
-                scis 	=> array("TYPE" => "FK", "ANSWER" => "scenario_item", "CATEGORY" => "ITEMS", "ITEM" => "atable_id", "WHERE"=>"", "SHOW" => true, "ROLES"=>"", "FORMAT"=>"retrieve", "EDIT" => false, "NO-LABEL"=>true, 
-                                 STEP=>6, BUTTONS=>true, "FGROUP"=>"scis"),
-                
-                afieldGroupList => array('TYPE' => 'FK', 'ANSWER' => afield_group, 'ANSMODULE' => 'pag', CATEGORY => ITEMS, ITEM => 'atable_id', 
-                                             WHERE=>'', 
-                                             'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, ICONS=>true, 'DELETE-ICON'=>false, BUTTONS=>true, "NO-LABEL"=>true,
-                                             STEP=>6, "FGROUP"=>"afieldGroupList",),                                 
-                
-                
-                rowcount 	=> array("TYPE" => "INT", "CATEGORY" => "FORMULA", "SHOW"=>true, "RETRIEVE"=>false, 'STEP' =>7, ),
-
-
-                anst 	=> array("TYPE" => "MFK", "ANSWER" => "atable", "ANSMODULE" => "pag", "CATEGORY" => "FORMULA", "FORMAT"=>"RETRIEVE", 
-                        INPUT_WIDE=>true, 'SHOW' => true, ROLES=>"", 'EDIT' => true, 'QEDIT' => false, 
-                        READONLY => true, "RETRIEVE"=>false, 'STEP' =>7),
-                
-                ext_anst => array("TYPE" => "MFK", "ANSWER" => "atable", "ANSMODULE" => "pag", "CATEGORY" => "FORMULA", "FORMAT"=>"RETRIEVE", 
-                        INPUT_WIDE=>true, 'SHOW' => true, ROLES=>"", 'EDIT' => true, 'QEDIT' => false, 
-                        READONLY => true, "RETRIEVE"=>false, 'STEP' =>7),
-
-                tome 	=> array("TYPE" => "MFK", "ANSWER" => "atable", "ANSMODULE" => "pag", "CATEGORY" => "FORMULA", "FORMAT"=>"RETRIEVE", 
-                        INPUT_WIDE=>true, 'SHOW' => true, ROLES=>"", 'EDIT' => true, 'QEDIT' => false, 
-                        READONLY => true, "RETRIEVE"=>false, 'STEP' =>7),
-                
-                ext_tome => array("TYPE" => "MFK", "ANSWER" => "atable", "ANSMODULE" => "pag", "CATEGORY" => "FORMULA", "FORMAT"=>"RETRIEVE", 
-                        INPUT_WIDE=>true, 'SHOW' => true, ROLES=>"", 'EDIT' => true, 'QEDIT' => false, 
-                        READONLY => true, "RETRIEVE"=>false, 'STEP' =>7),
-                
-                advise  => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>true, "RETRIEVE"=>false, "EDIT" => true, 'QEDIT' => false, READONLY => true, "SEARCH-RETRIEVE"=>false, 'STEP' =>7, ),
-                
-                concernedGoalList => array('TYPE' => 'MFK', 'ANSWER' => goal, 'ANSMODULE' => bau, CATEGORY => "FORMULA", "COLSPAN" => 4, 
-                                            "SHOW" => true, "RETRIEVE"=>false, "EDIT" => false, "QEDIT" => false, MANDATORY => true, 
-                                             STEP=>8),
-                
-                mainGoal => array("SHOW" => true, "SIZE" => 40,  
-                                      "TYPE" => "FK", "ANSWER" => goal, "ANSMODULE" => bau, "NO-ERROR-CHECK"=>true, 
-                                      CATEGORY => "FORMULA",
-                                      "DEFAULT" => 0, 'STEP' =>8),  
-                
-
-
-                	
-                "id_aut" => array("TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"date_aut" => array("TYPE" => "DATETIME", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"id_mod" => array("TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"date_mod" => array("TYPE" => "DATETIME", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		// "TIMESTAMP" => array("TYPE" => "TEXT", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-                "id_valid" => array("TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"date_valid" => array("TYPE" => "DATETIME", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"version" => array("TYPE" => "INT", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"update_groups_mfk" => array("TYPE"  => "MFK", "ANSWER" => "ugroup", "ANSMODULE" => "ums", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"delete_groups_mfk" => array("TYPE"  => "MFK", "ANSWER" => "ugroup", "ANSMODULE" => "ums", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-		"display_groups_mfk" => array("TYPE" => "MFK", "ANSWER" => "ugroup", "ANSMODULE" => "ums", "SHOW-ADMIN" => true, "RETRIEVE"=>false, "EDIT" => false),
-                "sci_id" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "scenario_item", "ANSMODULE" => "pag", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-	);
-	
-	*/ public function __construct()
+        public function __construct()
         {
-		parent::__construct("atable","id","pag");
-                $this->CACHE_SCOPE = "server";
-                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
-                $this->ORDER_BY_FIELDS = "id_module, atable_name";
-                $this->UNIQUE_KEY = array("id_module","atable_name");
-                $this->DISPLAY_FIELD = "atable_name";
-                $this->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(atable_name), '', atable_name) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre_u), '', titre_u))"; 
-                $this->copypast = false;
-                $this->editByStep = true;
-                $this->editNbSteps = 8;
-                $this->showRetrieveErrors = true;
-                $this->showQeditErrors = true;
-                //$this->general_check_errors = true;
-                //deprecated
-                //$this->hzm_vtab_body_height = "1030px";
-                $this->qedit_minibox = false;
-                $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
-                
-                $this->styleStep[6] = array("width"=>"88%");
-                /*$this->after_save_edit = array("class"=>'Module',"attribute"=>'id_module', "currmod"=>'ums',"currstep"=>8);*/
-	}
+            parent::__construct("atable","id","pag");
+                    $this->CACHE_SCOPE = "server";
+                    $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
+                    $this->ORDER_BY_FIELDS = "id_module, atable_name";
+                    $this->UNIQUE_KEY = array("id_module","atable_name");
+                    $this->DISPLAY_FIELD = "atable_name";
+                    $this->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(atable_name), '', atable_name) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre_u), '', titre_u))"; 
+                    $this->copypast = false;
+                    $this->editByStep = true;
+                    $this->editNbSteps = 8;
+                    $this->showRetrieveErrors = true;
+                    $this->showQeditErrors = true;
+                    //$this->general_check_errors = true;
+                    //deprecated
+                    //$this->hzm_vtab_body_height = "1030px";
+                    $this->qedit_minibox = false;
+                    $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
+                    
+                    $this->styleStep[6] = array("width"=>"88%");
+                    /*$this->after_save_edit = array("class"=>'Module',"attribute"=>'id_module', "currmod"=>'ums',"currstep"=>8);*/
+        }
         
         public static function loadById($id)
         {
@@ -1959,9 +1707,11 @@ class Atable extends AFWObject{
                        if($virtual_field->is_new)
                        {
                                if($php_one_to_many_relations) $php_one_to_many_relations .= "                ";
-                               $php_one_to_many_relations .= "$virtual_field_name => array('TYPE' => 'FK', 'ANSWER' => $omr_ans_tab_name, 'ANSMODULE' => $omr_ans_tab_module, CATEGORY => ITEMS, ITEM => '$omr_field_name', 
-                                                                                                // WHERE=>'xxx = §xxx§', HIDE_COLS => array(),
-                                                                                                'SHOW' => true, FORMAT=>retrieve, 'EDIT' => false, 'READONLY' => true, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, \"NO-LABEL\"=>false),\n";
+                               $php_one_to_many_relations .= "'$virtual_field_name' => array('TYPE' => 'FK', 'ANSWER' => '$omr_ans_tab_name', 'ANSMODULE' => '$omr_ans_tab_module', 
+                                                                                                'CATEGORY' => 'ITEMS', 'ITEM' => '$omr_field_name', 
+                                                                                                // 'WHERE'=>'xxx = §xxx§', 'HIDE_COLS' => array(),
+                                                                                                'SHOW' => true, 'FORMAT'=>'retrieve', 'EDIT' => false, 'READONLY' => true, 
+                                                                                                'ICONS'=>true, 'DELETE-ICON'=>true, 'BUTTONS'=>true, 'NO-LABEL'=>false),\n";
                                //echo "<br>omr $omr_field_id => ".$php_one_to_many_relations;
                        }
                        
@@ -3667,9 +3417,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
        {
                $this_id = $this->getId();
                
-               
-               
-               $framework_id=1;
+               $framework_id=AfwSession::config("framework_id", 1);
                $file_dir_name = dirname(__FILE__);
                include("$file_dir_name/../framework_$framework_id"."_specification.php");
                
@@ -3711,23 +3459,24 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         
         public function genereUserBFs($lang="ar")
         {
-            $this->disableMyAutoGeneratedBFs($lang);
-            $bf_arr = $this->createFrameWorkScreens();
+            $framework_id=AfwSession::config("framework_id", 1);
+            list($err0,$inf0) = $this->disableMyAutoGeneratedBFs($lang);
+            $bf_arr = $this->createFrameWorkScreens($framework_id);
             $bf_arr_count = count($bf_arr);
             $error = "";
             $info = "";
             if(($bf_arr_count==1) and ($bf_arr[-1])) $error = "Error happened : some categories/modes are not defined in framework specification file ".var_export($bf_arr,true);
-            else $info = "treated : $bf_arr_count bf(s)";
+            else $info = "$inf0<br>treated : $bf_arr_count bf(s)";
             
             return array($error,$info);
         }
         
         
         
-        public function createFrameWorkScreens($framework_id=1,$resetAll=true)
+        public function createFrameWorkScreens($framework_id=0,$resetAll=true)
         {
            global $lang, $_sql_analysis_seuil_calls;
-           
+              if(!$framework_id) $framework_id=AfwSession::config("framework_id", 1);
               // for heavy processes allow bigger seuil
               $_sql_analysis_seuil_calls = 250;
            
@@ -3739,7 +3488,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
               $this_id = $this->getId();
               $cat = $this->tableCategory();
               $system_id = $this->calc("system_id");
-              if(!$system_id) throw new AfwRuntimeException("failed $this -> createFrameWorkScreens($framework_id,$resetAll) system is not defined for this table (id=$this_id)");
+              if(!$system_id) throw new AfwRuntimeException("failed $this --> createFrameWorkScreens($framework_id,$resetAll) system is not defined for this table (id=$this_id)");
               
               
               
@@ -4225,7 +3974,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         }
         
  
-        protected function getSpecificDataErrors($lang="ar",$show_val=true,$step="all")
+        protected function getSpecificDataErrors($lang="ar",$show_val=true,$step="all",$erroned_attribute=null,$stop_on_first_error=false, $start_step=null, $end_step=null)
         {
             /*
               global $boucle_getSpecificDataErrors, $boucle_getSpecificDataErrors_arr;

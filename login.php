@@ -61,10 +61,10 @@ if(AfwSession::userIsConnected())
 } 
 elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
 {
-        $DEBUGG_SQL_DIR = AfwSession::config("DEBUGG_SQL_DIR","C:\\gen\\log\\");
+        $DEBUGG_SQL_DIR = AfwSession::config("DEBUGG_SQL_DIR",$START_TREE);
         $dtm = date("YmdHis");
         $my_debug_file = "debugg_before_login_$logbl"."_$dtm.log";
-        if($debugg_login)
+        if($debugg_login_in_file)
         {
                 //die("AFWDebugg::initialiser(".$DEBUGG_SQL_DIR.$my_debug_file.")");
                 AFWDebugg::initialiser($DEBUGG_SQL_DIR,$my_debug_file);
@@ -176,7 +176,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
                                 
                                 list($employee, $log_ehr) = Employee::loadAndUpdateFromExternalHRSystem($username, $hasseb_num);
 
-                                if($debugg_login) 
+                                if($debugg_login and false) 
                                 {
                                         echo("returned : ".$log_ehr);
                                         echo("employee = ".var_export($employee,true));
