@@ -74,7 +74,7 @@ class Atable extends AFWObject{
                     $this->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(atable_name), '', atable_name) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre_u), '', titre_u))"; 
                     $this->copypast = false;
                     $this->editByStep = true;
-                    $this->editNbSteps = 8;
+                    $this->editNbSteps = 9;
                     $this->showRetrieveErrors = true;
                     $this->showQeditErrors = true;
                     //$this->general_check_errors = true;

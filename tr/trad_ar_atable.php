@@ -9,12 +9,14 @@ $trad["atable"]["step6"] = "الوظائف والتبويبات";
 $trad["atable"]["step6_help"] = "الاعدادات";
 $trad["atable"]["step5"] = "بيانات الجدول";
 $trad["atable"]["step5_help"] = "المفردات وصلاحيات تحديث البيانات";
-$trad["atable"]["step4"] = "الحقول";
+$trad["atable"]["step4"] = "الحقول الحقيقية";
 $trad["atable"]["step4_help"] = "الحقول الحقيقية والالكترونية";
 $trad["atable"]["step7"] = "مجال الاستخدام";
 $trad["atable"]["step7_help"] = "مجال استخدام الجدول وبعض التوجيهات";
 $trad["atable"]["step8"] = "الأهداف";
 $trad["atable"]["step8_help"] = "الأهداف المنتظرة من الجدول";
+$trad["atable"]["step9"] = "قاعدة البيانات";
+$trad["atable"]["step9_help"] = "الحقول الافتراضية والفهارس وحقول المسمى وغير ذلك";
 
 
 $trad["atable"]["step_group"] = "التبويب والمجموعة";

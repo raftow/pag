@@ -81,10 +81,10 @@ class IdnType extends AFWObject{
 	
 	*/ public function __construct(){
 		parent::__construct("idn_type","id","pag");
-                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
+                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 1;
                 $this->DISPLAY_FIELD = "idn_type_name_ar";
                 $this->ORDER_BY_FIELDS = "lookup_code";
-                $this->IS_LOOKUP = true; 
+                //$this->IS_LOOKUP = true; 
                 $this->ignore_insert_doublon = true;
                 $this->UNIQUE_KEY = array('lookup_code');
                 
@@ -224,17 +224,17 @@ class IdnType extends AFWObject{
                        // ums.auser-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}ums.auser set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // bmu.b_m_employee-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}bmu.b_m_employee set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}bmu.b_m_employee set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // bmu.customer_account-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}bmu.customer_account set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}bmu.customer_account set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // trn.pregistration-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}trn.pregistration set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}trn.pregistration set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // crm.crm_customer-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}crm.crm_customer set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}crm.crm_customer set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // ria.student-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}ria.student set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}ria.student set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // ria.parent_user-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}ria.parent_user set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}ria.parent_user set idn_type_id='$id_replace' where idn_type_id='$id' ");
 
                         
                    
@@ -249,22 +249,22 @@ class IdnType extends AFWObject{
                        // ums.auser-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}ums.auser set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // bmu.b_m_employee-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}bmu.b_m_employee set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}bmu.b_m_employee set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // bmu.customer_account-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}bmu.customer_account set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}bmu.customer_account set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // trn.pregistration-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}trn.pregistration set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}trn.pregistration set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // crm.crm_customer-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}crm.crm_customer set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}crm.crm_customer set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // ria.student-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}ria.student set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}ria.student set idn_type_id='$id_replace' where idn_type_id='$id' ");
                        // ria.parent_user-نوع الهوية	idn_type_id  حقل يفلتر به-ManyToOne
-                        $this->execQuery("update ${server_db_prefix}ria.parent_user set idn_type_id='$id_replace' where idn_type_id='$id' ");
+                       // $this->execQuery("update ${server_db_prefix}ria.parent_user set idn_type_id='$id_replace' where idn_type_id='$id' ");
 
                         
-                        // MFK
+                       // MFK
                        // pag.country-أنواع الهويات في السعودية	sa_idn_type_mfk  
-                        $this->execQuery("update ${server_db_prefix}pag.country set sa_idn_type_mfk=REPLACE(sa_idn_type_mfk, ',$id,', ',$id_replace,') where sa_idn_type_mfk like '%,$id,%' ");
+                         $this->execQuery("update ${server_db_prefix}pag.country set sa_idn_type_mfk=REPLACE(sa_idn_type_mfk, ',$id,', ',$id_replace,') where sa_idn_type_mfk like '%,$id,%' ");
 
                    
                } 

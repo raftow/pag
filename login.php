@@ -43,7 +43,7 @@ $debugg_after_session_created = false;*/
 // enable this in dev
 $html_debugg_login = true;  
 $debugg_login = true;
-$debugg_login_die = true; 
+$debugg_login_die = ""; 
 $debugg_after_login = true;
 $debugg_after_ldap = true;
 $debugg_after_golden_or_db = true;
@@ -152,7 +152,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
         
         
         
-        if($debugg_login and $debugg_after_golden_or_db and (!$user_connected))
+        if($debugg_login and $debugg_after_golden_or_db and (!$user_connected) and ($debugg_login==$username))
         {        
                 $login_dbg[] = "login failed, user infos = ".var_export($user_infos,true);
                 AfwStructureHelper::dd("ERROR : SQL/GOLDEN LOGIN FAILED :<br>\n".implode("<br>\n", $login_dbg), $debugg_login_die);
@@ -175,6 +175,11 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
                                 
                                 
                                 list($employee, $log_ehr) = Employee::loadAndUpdateFromExternalHRSystem($username, $hasseb_num);
+
+                                if($email and (!$employee))
+                                {
+                                        $employee = Employee::loadByEmail(1, $email);
+                                }
 
                                 if($debugg_login and false) 
                                 {
@@ -316,7 +321,7 @@ elseif(($_POST["mail"]) and ($_POST["pwd"]) and ($_POST["loginGo"]))
                        if($debugg_login) 
                        {
                                 AFWDebugg::log("!!!!!!!   login failed  !!!!!!!!");
-                                if($debugg_login_die) die("!!!!!!!   login failed  !!!!!!!!");
+                                if($debugg_login_die and ($debugg_login==$username)) die("!!!!!!!   login failed  !!!!!!!! </b>\n".implode("<br>\n", $login_dbg));
                        }
                 }
 		
