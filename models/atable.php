@@ -2162,13 +2162,46 @@ class $className extends AFWObject{
 
         $static_constants  ";
 
+if(!$dbstruct_outside)
+{
+    $dbstruct_open = "/*";
+    $dbstruct_close = "*/";
+}
+else
+{
+    $structClass = $moduleCodeFU.$className."AfwStructure";
+    $translateClass = $className."Translator";
+    $dbstruct_open = "
+        class $structClass
+        {
+        
+                public static function initInstance(&\$obj)
+                {
+                        if (\$obj instanceof AppModelApi) 
+                        {
+                                \$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
+                                \$obj->DISPLAY_FIELD = \"$display_field\";
+                                // \$title = $translateClass::translateAttribute(\"$tabName.single\",\"ar\");
+                                // \$obj->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
+                                \$obj->ORDER_BY_FIELDS = \"$order_by_fields\";
+                                $IS_LOOKUP 
+                                $AUDIT_DATA
+                                $clause_ignore_insert_doublon
+                                $UNIQUE_KEY
+                                $edit_by_step_php
+                                // \$obj->after_save_edit = array(\"class\"=>'Road',\"attribute\"=>'road_id', \"currmod\"=>'btb',\"currstep\"=>9);
+                        }
+                }
+                
+                
+                public static \$DB_STRUCTURE = ";
+    $dbstruct_close = "     }";
+}
+
         
 $dbstruct_code = "
-    public static \$DATABASE		= \"$prefixed_db_name\";
-    public static \$MODULE		        = \"$moduleCode\";        
-    public static \$TABLE			= \"$tabName\";
-
-	public static \$DB_STRUCTURE = null; /* array(
+     $dbstruct_open 
+     array(
                 'id' => array('SHOW' => true, 'RETRIEVE' => true, 'EDIT' => false, 'TYPE' => 'PK'),
 
 		".$TDesc."
@@ -2187,7 +2220,12 @@ $dbstruct_code = "
                 'display_groups_mfk' => array('STEP' =>99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'QEDIT' => false, 'ANSWER' => 'ugroup', 'ANSMODULE' => 'ums', 'TYPE' => 'MFK', 'FGROUP' => 'tech_fields'),
                 'sci_id'            => array('STEP' =>99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'QEDIT' => false, 'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'pag', 'FGROUP' => 'tech_fields'),
                 'tech_notes' 	      => array('STEP' =>99, 'HIDE_IF_NEW' => true, 'TYPE' => 'TEXT', 'CATEGORY' => 'FORMULA', \"SHOW-ADMIN\" => true, 'TOKEN_SEP'=>\"§\", 'READONLY' =>true, \"NO-ERROR-CHECK\"=>true, 'FGROUP' => 'tech_fields'),
-	);  ";
+	);  
+    
+    $dbstruct_close
+    ";
+
+
 
 if(!$dbstruct_outside)
 {        
@@ -2198,22 +2236,16 @@ if($dbstruct_only) return array($dbstruct_code, $phpErrors, "");
 
         
                 $php_class_code .= "
+        public static \$DATABASE		= \"$prefixed_db_name\";
+        public static \$MODULE		        = \"$moduleCode\";        
+        public static \$TABLE			= \"$tabName\";
+
+	    public static \$DB_STRUCTURE = null;
 	
-	*/ public function __construct(){
+	    public function __construct(){
 		parent::__construct(\"$tabName\",\"id\",\"$dbName\");
-                \$this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
-                \$this->DISPLAY_FIELD = \"$display_field\";
-                // self::\$DB_STRUCTURE = ${moduleCodeFU}${className}AfwStructure::\$DB_STRUCTURE;
-                // \$title = ${className}Translator::translateAttribute(\"$tabName.single\",\"ar\");
-                // \$this->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
-                \$this->ORDER_BY_FIELDS = \"$order_by_fields\";
-                $IS_LOOKUP 
-                $AUDIT_DATA
-                $clause_ignore_insert_doublon
-                $UNIQUE_KEY
-                $edit_by_step_php
-                // \$this->after_save_edit = array(\"class\"=>'Road',\"attribute\"=>'road_id', \"currmod\"=>'btb',\"currstep\"=>9);
-	}
+            *****    
+	    }
         
         public static function loadById(\$id)
         {
@@ -4276,6 +4308,30 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             if($attribute=="exprows") return "exp_u_records";
             return $attribute;
         }
+
+        public static function reverseByCodes($object_code_arr)
+        {
+            if (count($object_code_arr) != 2) throw new AfwRuntimeException("reverseByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));
+            $module_code = $object_code_arr[0];
+            $table_name = $object_code_arr[1];
+            if (!$module_code or !$table_name) throw new AfwRuntimeException("reverseByCodes : module and table are needed, given : module=$module_code and table=$table_name");
+            $objModule = Module::loadByMainIndex($module_code);
+            if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("reverseByCodes : module $module_code not found");
+
+
+            $tableClass = AfwStringHelper::tableToClass($table_name);
+            AfwAutoLoader::addModule($module_code);
+            $objToPag = new $tableClass();
+
+            list($fld_i, $fld_u) = $objToPag->pagMe($sh=3, $update_if_exists=true);
+            $message = "$fld_i fields inserted, $fld_u fields updated";
+
+            $objTable = Atable::loadByMainIndex($objModule->id, $table_name);
+
+            return [$objTable, $message];
+        }
+
+        
 
 }
 ?>

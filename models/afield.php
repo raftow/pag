@@ -3142,6 +3142,31 @@ class Afield extends AFWObject{
                 if($attribute=="php") return "php_att";
                 return $attribute;
         }
+
+        public static function reverseByCodes($object_code_arr)
+        {
+            if (count($object_code_arr) != 3) throw new AfwRuntimeException("reverseByCodes : 3 params are needed module and table and field name, given : " . var_export($object_code_arr, true));
+            $module_code = $object_code_arr[2];
+            $table_name = $object_code_arr[1];
+            $field_name = $object_code_arr[0];
+            
+            if (!$module_code or !$table_name or !$field_name) throw new AfwRuntimeException("reverseByCodes : module and table field_name are needed, given : module=$module_code and table=$table_name and field=$field_name");
+            $objModule = Module::loadByMainIndex($module_code);
+            if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("reverseByCodes : module $module_code not found");
+
+            $objTable = Atable::loadByMainIndex($objModule->id, $table_name);
+
+            $tableClass = AfwStringHelper::tableToClass($table_name);
+            AfwAutoLoader::addModule($module_code);
+            $objToPag = new $tableClass();
+
+            list($fld_i, $fld_u) = $objToPag->pagMe($sh=3, $update_if_exists=true, $field_name);
+            $message = "$fld_i fields inserted, $fld_u fields updated";
+
+            $objField = Afield::loadByMainIndex($objTable->id, $field_name);
+
+            return [$objField, $message];
+        }
         
 }
 ?>

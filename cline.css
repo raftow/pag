@@ -38,7 +38,7 @@ input.command_line_input {
     background-color: black;
     font-family: kufi, courrier, arial;
     font-size: 14px !important;
-    color: #cdf55f99;
+    color: #fefefdd1;
     font-weight: normal;
     border-width: 0px 0px 1px 0px;
     border-color: #f5deb354;
@@ -106,13 +106,13 @@ span.object_code{
 
 td.cline_td
 {
-    padding-top: 10px;
-    width: 60px;
+    padding-top: 0px;
+    width: 200px;
     /* border-bottom: 1px solid #ccfa4f9c;*/
 }
 
 td.cline_td>span.cline-normal {
-    font-size: 90% !important;
+    font-size: 70% !important;
     color: #87b8ed;
     font-family: arial, courrier !important;
 }
@@ -197,4 +197,71 @@ input:not(:focus):valid ~ .floating-label{
 
 .tamakkan_hiostory {
     width: 100%;
+}
+
+span.cline.title {
+    background-color: #306060;
+    color: white;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 12px;
+    width: 10%;
+    float: right;
+    text-align: right;
+}
+
+span.cline.module {
+    background-color: green;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    margin-right: 10px;
+    float: right;
+    color: white;
+    width: 10%;
+    font-size: 12px;
+}
+
+span.cline.table {
+    background-color: #3060db;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    margin-right: 10px;
+    float: right;
+    color: white;
+    width: 10%;
+    font-size: 12px;
+}
+
+span.cline.field {
+    background-color: #9939ed;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    margin-right: 10px;
+    float: right;
+    color: white;
+    width: 10%;
+    font-size: 12px;
+}
+
+pre.cline.sql {
+    background-color: black;
+    border-color: #85852e;
+    color: wheat;
+}
+
+pre.cline.php {
+    background-color: black;
+    border-color: #6eb193;
+    color: #7aefbb;
+}
+
+pre.cline.struct.php {
+    background-color: black;
+    border-color: #6ea0b1;
+    color: #a5c8fc;
 }

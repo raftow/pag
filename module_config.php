@@ -61,6 +61,6 @@
                 $header_style = "header_thin";
                 $banner = true;
                 
-                $out_index_page = "tamakan_command_line.php";  
+                $out_index_page = "Momken_command_line.php";  
                 
 ?>
