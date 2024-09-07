@@ -59,7 +59,7 @@ $object_code_arr = explode(".", $object_code);
 
 $module_path = "$file_dir_name/../$object_module/models";
 if (file_exists("$module_path/$object_table.php")) {
-    require_once("$module_path/$object_table.php");
+    AfwAutoLoader::addModule($object_module);
 
     $object_class = AfwStringHelper::tableToClass($object_table);
 

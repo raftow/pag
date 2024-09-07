@@ -45,14 +45,6 @@
    
    if($command_line)
    {
-      $loadByCodeArr = array();
-      $loadByCodeArr["module"] = true;
-      $loadByCodeArr["atable"] = true;
-      $loadByCodeArr["afield"] = true;
-
-
-
-      
       
       $command_line_words = explode(" ", $command_line);
       $command_code = $command_line_words[0];
@@ -69,7 +61,22 @@
         $cmd_file_path = "$file_dir_name/cline_$command_code.php";
         $loopArr[] = $cmd_file_path;
         // die($cmd_file_path);
-        include $cmd_file_path;
+        try
+        {
+          include $cmd_file_path;
+        }
+        catch(Exception $e)
+        {
+            throw $e;
+            $command_line_result_arr[] = hzm_format_command_line("error", $e->getMessage()); $nb_errors++;
+            $command_finished = true;
+        }
+        catch(Error $e)
+        {
+            $command_line_result_arr[] = hzm_format_command_line("error", $e->__toString()); $nb_errors++;
+            $command_finished = true;
+        } 
+        
         //die("command_code=$command_code");
         //echo $cmd_file_path;
         $loopCount++;
@@ -126,23 +133,13 @@
    }
    $hist = implode("\n", $hist_arr);
    $data_tokens = array();
-   
+
+   $file_dir_name = dirname(__FILE__);
    $html_template_file = "$file_dir_name/tpl/cline_tpl.php";
    $data_tokens["command_line_result"] = implode("<br>\n",$command_line_result_arr);
    $data_tokens["newsug_command_line"] = $data_token_new_suggested_command_line;
    $data_tokens["currmod"] = $currmod;
-   /*
-   if($objAtable) 
-   {
-        $currtbl = $objAtable->id;
-        $currtbl_code = $objAtable->getVal("atable_name");
-   }
-   else
-   {
-        $currtbl = 0;
-        $currtbl_code = "";
-   }
-  */ 
+    
    $data_tokens["currtbl"] = $currtbl;
    $data_tokens["currtbl_code"] = $currtbl_code;
    $data_tokens["currobj"] = $currobj;
@@ -159,7 +156,7 @@
    $data_tokens["context"] = $context;
 
    $data_tokens["hist"] = $hist;
-   // die("data_tokens=".var_export($data_tokens,true));             
+   
    echo showUsingHzmTemplate($html_template_file, $data_tokens);
    
    

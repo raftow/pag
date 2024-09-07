@@ -4,12 +4,23 @@
     $objModule = Module::getModuleByCode(0, $currmod_code);
     if($objModule and (!$objModule->isEmpty()))
     {
-        $currmod = $objModule->getVal("module_code");
+        $new_currmod = $objModule->getVal("module_code");
+        if($new_currmod != $currmod)
+        {
+            $command_line_result_arr[] = hzm_format_command_line("info", "current module changed from $currmod to $new_currmod");
+            $currtbl_code = "";
+            $currtbl = "";
+            $currfld = "";
+            $currobj = "";
+            $currmod = $new_currmod;
+        }
+        
+        
         $idMod = $objModule->getId();
         $nbTables = $objModule->getVal("tablecount");
         
         $module_translated = $objModule->translate("module.single",$lang);
-        $command_line_result_arr[] = hzm_format_command_line("info", "current module changed to $currmod, id of module is $idMod , it contain $nbTables table(s)");
+        $command_line_result_arr[] = hzm_format_command_line("info", "current module $currmod : id of module is $idMod , it contain $nbTables table(s)");
         $command_line_result_arr[] = hzm_format_command_line("success", $module_translated." : ".$objModule->getDisplay($lang), $lang);
     }
     else

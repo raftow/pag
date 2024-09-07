@@ -2,7 +2,7 @@
     $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code with params ".var_export($command_line_words, true));
     if(count($command_line_words)>3) 
     {
-        $command_line_result_arr[] = hzm_format_command_line("error", "command line $command_code does'nt need all these params, see help.");$nb_errors++;
+        $command_line_result_arr[] = hzm_format_command_line("error", "command line $command_code does'nt need all these params, see help."); $nb_errors++;$command_finished = true;return;
         $command_mode = "";
     }    
     else $command_mode = $command_code;
@@ -13,10 +13,10 @@
     
     if(!$command_mode)
     {
-        $command_line_result_arr[] = hzm_format_command_line("error", "can't complete display command, template not found");$nb_errors++;
+        $command_line_result_arr[] = hzm_format_command_line("error", "can't complete display command, template not found"); $nb_errors++;$command_finished = true;return;
     }
     
-    list($object_class_file, $object_module) = parse_table_and_module($command_line_words[1]);
+    list($object_table, $object_module) = parse_table_and_module($command_line_words[1]);
     
     
     if(!$object_module) $object_module = $currmod;
@@ -26,21 +26,21 @@
     $object_id   = is_numeric($object_codeOrId) ? intval($object_codeOrId) : "";
     
     $objToShow = null;
-    if(file_exists("$file_dir_name/../$object_module/$object_class_file.php"))
+    if(file_exists("$file_dir_name/../$object_module/$object_table.php"))
     {
-            require_once("$file_dir_name/../$object_module/$object_class_file.php");
-            $object_class = AfwStringHelper::tableToClass($object_class_file);
+            require_once("$file_dir_name/../$object_module/$object_table.php");
+            $object_class = AfwStringHelper::tableToClass($object_table);
             
             if($object_code and (!$object_id)) 
             {
-                if($loadByCodeArr[$object_class_file])
+                if(method_exists($object_class, "loadByCodes"))
                 {
                         $object_code_arr = explode("-",$object_code);
                         $objToShow = $object_class::loadByCodes($object_code_arr);
                 }
                 else
                 {
-                        $command_line_result_arr[] = hzm_format_command_line("error", "load $object_class by code still not implemented in Momken framework comand line");$nb_errors++;
+                        $command_line_result_arr[] = hzm_format_command_line("error", "load $object_class by code still not implemented in Momken framework comand line"); $nb_errors++;$command_finished = true;return;
                 }
                 
             }
@@ -51,7 +51,7 @@
     }
     else
     {
-            $command_line_result_arr[] = hzm_format_command_line("error", "3.please check that class $object_class_file file exists in module '$object_module'");$nb_errors++;
+            $command_line_result_arr[] = hzm_format_command_line("error", "3.please check that class $object_table file exists in module '$object_module'"); $nb_errors++;$command_finished = true;return;
     }
     
     if($objToShow and (!$objToShow->isEmpty()))
@@ -73,7 +73,7 @@
     }
     else
     {
-        $command_line_result_arr[] = hzm_format_command_line("error", "object $object_class [$object_codeOrId] not found");$nb_errors++;
+        $command_line_result_arr[] = hzm_format_command_line("error", "object $object_class [$object_codeOrId] not found"); $nb_errors++;$command_finished = true;return;
     }
     $command_done = true;
     $command_finished = true;

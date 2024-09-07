@@ -248,20 +248,24 @@ span.cline.field {
     font-size: 12px;
 }
 
-pre.cline.sql {
+textarea.cline {
     background-color: black;
+    width: 100%;
+}
+
+
+textarea.cline.sql {
     border-color: #85852e;
     color: wheat;
 }
 
-pre.cline.php {
-    background-color: black;
+textarea.cline.php {
     border-color: #6eb193;
     color: #7aefbb;
 }
 
-pre.cline.struct.php {
-    background-color: black;
+textarea.cline.struct.php {
     border-color: #6ea0b1;
     color: #a5c8fc;
 }
+

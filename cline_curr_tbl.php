@@ -31,6 +31,7 @@
                         $idTab = $objAtable->getId();
                         $nbFields = $objAtable->getVal("fieldcount");
                         $currtbl_code = $atable_name;
+                        $currtbl = $idTab;
                         
                         $atable_translated = $objAtable->translate("atable.single",$lang);
                         $command_line_result_arr[] = hzm_format_command_line("info", "current object class changed to $atable_class, id of module is $idMod , it contain $nbFields field(s)");
@@ -38,7 +39,7 @@
                 }
                 else
                 {
-                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $currmod");
+                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $module_code");
                         $nb_errors++;$command_finished = true;return;
                 }
         }

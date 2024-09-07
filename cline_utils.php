@@ -1,12 +1,12 @@
 <?php
    class ClineUtils
    {
-    
+
        public static function similarCommand($command_to_help, $command_similar)
        {
            return (!$command_to_help) or ($command_to_help==$command_similar);
        }
-       
+
        public static function formatCommand($command_code)
        {
             if($command_code=="help")
@@ -48,6 +48,11 @@
             if(($command_code=="show") or ($command_code=="view") or ($command_code=="more"))
             {
                 $command_code="show";
+            }
+
+            if(($command_code=="gen") or ($command_code=="genere") or ($command_code=="g"))
+            {
+                $command_code="generate";
             }
             
             if($command_code=="retrieve")

@@ -4312,8 +4312,8 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         public static function reverseByCodes($object_code_arr)
         {
             if (count($object_code_arr) != 2) throw new AfwRuntimeException("reverseByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));
-            $module_code = $object_code_arr[0];
-            $table_name = $object_code_arr[1];
+            $table_name = $object_code_arr[0];
+            $module_code = $object_code_arr[1];
             if (!$module_code or !$table_name) throw new AfwRuntimeException("reverseByCodes : module and table are needed, given : module=$module_code and table=$table_name");
             $objModule = Module::loadByMainIndex($module_code);
             if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("reverseByCodes : module $module_code not found");

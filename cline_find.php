@@ -16,7 +16,8 @@
     }
     else
     {
-            $command_line_result_arr[] = hzm_format_command_line("error", "please check that the $object_class_file.php file exists in $object_module module path '$module_path'");$nb_errors++;
+            $command_line_result_arr[] = hzm_format_command_line("error", "please check that the $object_class_file.php file exists in $object_module module path '$module_path'");
+            $nb_errors++;$command_finished = true;return;
     }
 
 
