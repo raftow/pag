@@ -1,6 +1,6 @@
 <?php
 $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code with params ".var_export($command_line_words, true));
-// ex goal 180 +t api_endpoint : to add table api_endpoint to the goal 180 (ie. settings management for example)
+// ex goal 180 +t app_model_api : to add table api_endpoint to the goal 180 (ie. settings management for example)
 //           -> the impact is to find business functions such as quick search on api_endpoint in the menu role of this goal 180
 // ex goal 180 -t api_endpoint : to remove table api_endpoint from the goal 180 
 

@@ -98,19 +98,7 @@ class Afield extends AFWObject{
         
         public function __construct(){
 		parent::__construct("afield","id","pag");
-                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
-                $this->CORRECT_IF_ERRORS = true;
-                $this->DISPLAY_FIELD = "titre_short";
-                $this->ORDER_BY_FIELDS = "atable_id, scenario_item_id, field_order, id";
-                $this->UNIQUE_KEY = array("atable_id","field_name");
-                $this->editByStep = true;
-                $this->editNbSteps = 8;
-                $this->showQeditErrors = true;
-                $this->showRetrieveErrors = true;
-                $this->nbQeditLinksByRow = 5;
-                $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
-                $this->OBJECT_CODE = "field_name";
-                //$this->qedit_minibox = true;
+                PagAfieldAfwStructure::initInstance($this);
 	}
         
         public static function loadById($id)

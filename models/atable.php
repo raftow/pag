@@ -2161,6 +2161,7 @@ ${dollar}file_dir_name = dirname(__FILE__);
 class $className extends AFWObject{
 
         $static_constants  ";
+$structClass = $moduleCodeFU.$className."AfwStructure";
 
 if(!$dbstruct_outside)
 {
@@ -2169,7 +2170,7 @@ if(!$dbstruct_outside)
 }
 else
 {
-    $structClass = $moduleCodeFU.$className."AfwStructure";
+    
     $translateClass = $className."Translator";
     $dbstruct_open = "
         class $structClass
@@ -2177,7 +2178,7 @@ else
         
                 public static function initInstance(&\$obj)
                 {
-                        if (\$obj instanceof AppModelApi) 
+                        if (\$obj instanceof $className ) 
                         {
                                 \$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
                                 \$obj->DISPLAY_FIELD = \"$display_field\";
@@ -2244,7 +2245,7 @@ if($dbstruct_only) return array($dbstruct_code, $phpErrors, "");
 	
 	    public function __construct(){
 		parent::__construct(\"$tabName\",\"id\",\"$dbName\");
-            *****    
+            $structClass::initInstance(\$this);    
 	    }
         
         public static function loadById(\$id)
@@ -3169,19 +3170,22 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 return array("لا يمكن انشاء حقول الترجمة على جدول فيه حقول سابقة بنفس اللغة. قم بذلك يدويا","");         
         }
         
-        public function cloneMe($new_module_id=0,$new_sub_module_id=0)
+        public function cloneMe($new_module_id=0,$new_sub_module_id=0,$new_atable_name="")
         {
                 $orig_atable_name = $this->getVal("atable_name");
                 $orig_module_id = $this->getVal("id_module");
                 if((!$new_module_id) or ($orig_module_id==$new_module_id))
                 {
-                     $new_module_id = $orig_module_id;
-                     if(!$new_module_id) $new_sub_module_id = $this->getVal("id_sub_module");
-                     $new_atable_name = "clone_of_$orig_atable_name";
+                    $new_module_id = $orig_module_id;
+                    if(!$new_module_id) 
+                    {
+                        $new_sub_module_id = $this->getVal("id_sub_module");
+                    }
+                    if(!$new_atable_name) $new_atable_name = "clone_of_$orig_atable_name";
                 }
                 else
                 {
-                     $new_atable_name = $orig_atable_name;
+                    if(!$new_atable_name) $new_atable_name = $orig_atable_name;
                 }
                 
                 $tab = $this;  

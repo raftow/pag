@@ -1,6 +1,27 @@
 <?php 
         class PagAfieldAfwStructure
         {
+
+			public static function initInstance(&$obj)
+                {
+                        if ($obj instanceof Afield) 
+                        {
+                            $obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
+							$obj->CORRECT_IF_ERRORS = true;
+							$obj->DISPLAY_FIELD = "titre_short";
+							$obj->ORDER_BY_FIELDS = "atable_id, scenario_item_id, field_order, id";
+							$obj->UNIQUE_KEY = array("atable_id","field_name");
+							$obj->editByStep = true;
+							$obj->editNbSteps = 8;
+							$obj->showQeditErrors = true;
+							$obj->showRetrieveErrors = true;
+							$obj->nbQeditLinksByRow = 5;
+							$obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
+							$obj->OBJECT_CODE = "field_name";
+							//$obj->qedit_minibox = true;    
+                            // $obj->after_save_edit = array("class"=>'Road',"attribute"=>'road_id', "currmod"=>'btb',"currstep"=>9);
+                        }
+                }
                 public static $DB_STRUCTURE = array(
 
                         

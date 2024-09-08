@@ -6,9 +6,9 @@
     
     
         $command_line_result_arr[] = hzm_format_command_line("info", "generating ini.php file : ");
-        list($sqlTable, $sqlFKs) = $objModule->genereIniPhp();
-        $sql = $sqlTable . "\n\n\n -- FKs\n\n" . $sqlFKs;
-        $command_line_result_arr[] = hzm_format_command_line("sql", $sql, "en", "cline sql");
+        $phpIni = $objModule->genereIniPhp();
+        
+        $command_line_result_arr[] = hzm_format_command_line("php", $phpIni, "en", "cline php struct");
         
         
         $command_line_result_arr[] = hzm_format_command_line("info", "generating [your project]/external/chsys/module_$module_code.php file : ");

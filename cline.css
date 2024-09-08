@@ -120,12 +120,14 @@ td.cline_td>span.cline-normal {
 .cline-att-val {
     width: 66%;
     float: right;
+    font-size: 16px;
 }
 
 .cline-att-name {
     width: 33%;
     float: left;
     border-right: 2px #000 solid;
+    font-size: 16px;
 }
 
 .cline-att {

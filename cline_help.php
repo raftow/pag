@@ -8,10 +8,18 @@
     
     if(ClineUtils::similarCommand($command_to_help, "find")) 
     {
-        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "find @table[.@module] filter find-method find-param", "to find an object into a specific module", "en", "log");
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "find @table[.@module] @filter @find-method @find-param", "to find an object into a specific module", "en", "log");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example : find module all like app");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        The command line kernal try to be intelligent to find the object into the correct module if it fail it looks for into the current module");
-    }    
+    }  
+
+    if(ClineUtils::similarCommand($command_to_help, "goal")) 
+    {
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "goal @goal_id @action @param1 @param2 ... ", "to manage the current module goals", "log");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example : goal 180 +t app_model_api : to add table api_endpoint to the goal 180 (ie. settings management for example)");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        -> the impact is to find business functions such as quick search on api_endpoint in the menu role of this goal 180");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        ex goal 180 -t api_endpoint : to remove table api_endpoint from the goal 180");
+    }
 
     if(ClineUtils::similarCommand($command_to_help, "reverse"))  
     {
@@ -19,11 +27,19 @@
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example 1 : reverse pag");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example 2 : reverse cmn.city");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example 3 : reverse cmn.city.country_id");
-        $command_line_result_arr[] = hzm_format_command_line("warning", "        this command make the @module @table @field provided as current work objects");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        this command will make the @module @table @field provided as current work objects");
 
         $command_line_result_arr[] = hzm_format_command_line("warning", "        for a module The reverse engineering is based on content of files @module/module_config.php and @module_code/ini.php");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        for a table The reverse engineering is based on content of files @module/models/@table.php and @module/struct/@table_afw_structure.php and @module/tr/trad_@lang_@table.php");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        for a field The reverse engineering is based on structure definition of this field in structure file : @module/struct/@table_afw_structure.php and translate file : @module/tr/trad_@lang_@table.php");
+    }
+
+    if(ClineUtils::similarCommand($command_to_help, "clone"))  
+    {
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "clone @what @table[.@field] to @new-module[.@new-or-existing-table]", "to do a clone from current module a specific table or field into new module.table", "en", "log");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 1 : clone table city to geo.the_city will clone city from current module table to geo and rename it as the_city");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 2 : clone field city.country_id to hrm.employer will clone country_id field to table hrm.employer at the end of columns (order = 9999)");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        this command will make the @new-module @new-or-existing-table provided as current work objects");
     }
 
     $command_done = true;

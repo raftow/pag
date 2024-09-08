@@ -136,7 +136,7 @@
             $command_line_result_arr[] = hzm_format_command_line("error", "generate command need the module code !! object_code=$object_code");
             $nb_errors++;$command_finished = true;return;
         }
-        elseif(!$table_code)
+        else
         {
             $command_line_result_arr[] = hzm_format_command_line("error", "generate command need the table code !! object_code=$object_code");
             $nb_errors++;$command_finished = true;return;
