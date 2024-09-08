@@ -1,6 +1,34 @@
 <?php
 class PagAtableAfwStructure
 {
+
+	public static function initInstance(&$obj)
+	{
+		if ($obj instanceof Atable) 
+		{
+			$obj->CACHE_SCOPE = "server";
+			$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
+			$obj->ORDER_BY_FIELDS = "id_module, atable_name";
+			$obj->UNIQUE_KEY = array("id_module","atable_name");
+			$obj->DISPLAY_FIELD = "atable_name";
+			$obj->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(atable_name), '', atable_name) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre_u), '', titre_u))"; 
+			$obj->copypast = false;
+			$obj->editByStep = true;
+			$obj->editNbSteps = 9;
+			$obj->showRetrieveErrors = true;
+			$obj->showQeditErrors = true;
+			//$obj->general_check_errors = true;
+			//deprecated
+			//$obj->hzm_vtab_body_height = "1030px";
+			$obj->qedit_minibox = false;
+			$obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
+			
+			$obj->styleStep[6] = array("width"=>"88%");
+			/*$obj->after_save_edit = array("class"=>'Module',"attribute"=>'id_module', "currmod"=>'ums',"currstep"=>8);*/
+		}
+	}
+		
+	
 	public static $DB_STRUCTURE = array(
 
 
@@ -245,7 +273,7 @@ class PagAtableAfwStructure
 				6 => 'general_props',
 			),  
 			
-			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 4,  'ICONS' => true,
+			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true, 'READONLY'=>true,  'STEP' => 4,  'ICONS' => true,
 			'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'origFieldList',
 			'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'FGROUP_BEHAVIOR' => 'collapsed',
@@ -264,7 +292,8 @@ class PagAtableAfwStructure
 				4 => 'answer_props',
 				5 => 'other_props',
 				6 => 'general_props',
-			),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 9,  'ICONS' => true,  'DELETE-ICON' => true,
+			),  
+			'SHOW' => true,  'FORMAT' => 'retrieve', 'EDIT' => true, 'READONLY'=>true,  'STEP' => 9,  'ICONS' => true,  'DELETE-ICON' => true,
 			'BUTTONS' => true,  'FGROUP' => 'auditFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',
 			'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
@@ -283,7 +312,9 @@ class PagAtableAfwStructure
 				4 => 'answer_props',
 				5 => 'other_props',
 				6 => 'general_props',
-			),  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 9,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,
+			),  
+			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true, 'READONLY'=>true,  'STEP' => 9,  
+			'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,
 			'FGROUP' => 'indexFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',
 			'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
@@ -303,7 +334,7 @@ class PagAtableAfwStructure
 				5 => 'other_props',
 				6 => 'general_props',
 			),
-			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'STEP' => 9,
+			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true, 'READONLY'=>true,  'STEP' => 9,
 			'REQUIRED' => true,  'ICONS' => true,  'DELETE-ICON' => true,
 			'BUTTONS' => true,  'FGROUP' => 'nameFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',
 			'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
