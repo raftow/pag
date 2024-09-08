@@ -83,7 +83,7 @@
         if($loopCount>$LOOP_MAX)
         {
           $command_finished = true;
-          AfwRunHelper::safeDie("loopArr= ".var_export($loopArr,true)."command_line_result_arr= ".var_export($command_line_result_arr,true));
+          throw new RuntimeException("loopArr= ".var_export($loopArr,true)."command_line_result_arr= ".var_export($command_line_result_arr,true));
         }
       }
       
@@ -159,6 +159,3 @@
    
    echo showUsingHzmTemplate($html_template_file, $data_tokens);
    
-   
-   
-?>

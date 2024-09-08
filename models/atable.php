@@ -66,25 +66,7 @@ class Atable extends AFWObject{
         public function __construct()
         {
             parent::__construct("atable","id","pag");
-                    $this->CACHE_SCOPE = "server";
-                    $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 5;
-                    $this->ORDER_BY_FIELDS = "id_module, atable_name";
-                    $this->UNIQUE_KEY = array("id_module","atable_name");
-                    $this->DISPLAY_FIELD = "atable_name";
-                    $this->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(atable_name), '', atable_name) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre_u), '', titre_u))"; 
-                    $this->copypast = false;
-                    $this->editByStep = true;
-                    $this->editNbSteps = 9;
-                    $this->showRetrieveErrors = true;
-                    $this->showQeditErrors = true;
-                    //$this->general_check_errors = true;
-                    //deprecated
-                    //$this->hzm_vtab_body_height = "1030px";
-                    $this->qedit_minibox = false;
-                    $this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
-                    
-                    $this->styleStep[6] = array("width"=>"88%");
-                    /*$this->after_save_edit = array("class"=>'Module',"attribute"=>'id_module', "currmod"=>'ums',"currstep"=>8);*/
+            PagAtableAfwStructure::initInstance($this);       
         }
         
         public static function loadById($id)
@@ -2654,7 +2636,7 @@ $replace_val_in_list_of_mfk
                $sql_foreign_key_sentence_items = implode("\n",$foreign_key_sentence_arr);
                
                $sql_foreign_key_sentence_items .= implode("\n",$alter_table_add_field_arr);
-               
+               /*
                if($this->isLookup() and ((!$this->hasManyData()) or ($this->hasOption(self::$TBOPTION_LOOKUPCODE)))) 
                {
                     $indx_cols = array("lookup_code");
@@ -2662,7 +2644,10 @@ $replace_val_in_list_of_mfk
                else
                {
                     list($indx_cols, $indx_afield_list) = $this->getMainIndexFieldList();
-               }
+               }*/
+
+
+               list($indx_cols, $indx_afield_list) = $this->getMainIndexFieldList();
                
                $unique_index_sentence = "";
                if(count($indx_cols)>0)
@@ -3849,10 +3834,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 
                 if(($attribute=="indexFieldList"))
                 {
-                    // die("categ = $categ");
+                    // die(" attribute = $attribute the categ = $categ");
                     return ($this->_isEntity() and 
                             $this->isOriginal() and
-                            ($categ != "lookup") and
+                            // ($categ != "lookup") and
                             ($categ != "view") and 
                             ($categ != "vobj")); 
                 }
@@ -4308,6 +4293,11 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             if($attribute=="exprows") return "exp_u_records";
             return $attribute;
         }
+
+        /**
+         * function reverseByCodes do a reverse engineering on this table
+         * 
+         */
 
         public static function reverseByCodes($object_code_arr)
         {

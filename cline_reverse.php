@@ -115,4 +115,4 @@ else
     unset($command_line_words[5]);
 }
 
-
+if(!$command_code) $command_finished = true;
