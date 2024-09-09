@@ -1,50 +1,74 @@
 <?php
+  $LOOP_MAX = 5;
+  if(!$lang) $lang = "ar";
+  $file_dir_name = dirname(__FILE__);
+  $command_line_result_arr = array();
+
+  require_once("$file_dir_name/../lib/afw/afw_utils.php");
+  echo "<link href=\"../pag/cline.css\" rel=\"stylesheet\" type=\"text/css\">";
+
+
+  if($clinego and (!$command_line))
+  {
+    $command_line_result_arr[] = hzm_format_command_line("error", "No command line written"); $nb_errors++;$command_finished = true;
+  }
+
+  $objme = AfwSession::getUserConnected();
+  if(!$objme)
+  {
+    $command_line_result_arr[] = hzm_format_command_line("error", "Your are not logged in !!"); $nb_errors++;$command_finished = true;
+    $command_line = "";
+  }
+  else
+  {
+    // die(var_export($objme, true));
+  }
+
+  
+  /*
   if($loopCount>1)
   {
     $command_finished = true;
-    AfwRunHelper::safeDie("loopArr= ".var_export($loopArr,true)."command_line_result_arr= ".var_export($command_line_result_arr,true));
-  }
-   $LOOP_MAX = 5;
-   if(!$lang) $lang = "ar";
-   $file_dir_name = dirname(__FILE__);
-   require_once("$file_dir_name/../lib/afw/afw_utils.php");
-   echo "<link href=\"../pag/cline.css\" rel=\"stylesheet\" type=\"text/css\">";
-   $command_line_result_arr = array();
-   $hist = trim($hist);
-   if($hist) $hist_arr = explode("\n", $hist);
-   else $hist_arr = array();
-   
-   $last_hist = "";
-   if(count($hist_arr)>0)
-   {
-       $last_hist = $hist_arr[count($hist_arr)-1];
-   }
+    AfwRunHelper::safeDie("loopArr= ".var_export($loopArr,true)." command_line_result_arr= ".var_export($command_line_result_arr,true));
+  }*/
 
-   $nb_errors = 0;
-   $nb_warnings = 0;
-   
-   if($command_line=="recall")
-   {
-      if($last_hist) 
+  if($command_line)
+  {
+      
+      $hist = trim($hist);
+      if($hist) $hist_arr = explode("\n", $hist);
+      else $hist_arr = array();
+      
+      $last_hist = "";
+      if(count($hist_arr)>0)
       {
-              $command_line = $last_hist;
-              $command_line_result_arr[] = hzm_format_command_line("warning", "last history command recalled"); $nb_warnings++;
+          $last_hist = $hist_arr[count($hist_arr)-1];
       }
-      else
-      {
-              $command_line_result_arr[] = hzm_format_command_line("error", "no history command to recall"); $nb_errors++;
-              $command_line = "";
-      }
-   }
-   
-   
-   $data_token_new_suggested_command_line = "";
 
-   $loopCount = 0;
-   $loopArr = [];
+      $nb_errors = 0;
+      $nb_warnings = 0;
+      
+      if($command_line=="recall")
+      {
+          if($last_hist) 
+          {
+                  $command_line = $last_hist;
+                  $command_line_result_arr[] = hzm_format_command_line("warning", "last history command recalled"); $nb_warnings++;
+          }
+          else
+          {
+                  $command_line_result_arr[] = hzm_format_command_line("error", "no history command to recall"); $nb_errors++;
+                  $command_line = "";
+          }
+      }
+      
+      
+      $data_token_new_suggested_command_line = "";
+
+      $loopCount = 0;
+      $loopArr = [];
    
-   if($command_line)
-   {
+   
       
       $command_line_words = explode(" ", $command_line);
       $command_code = $command_line_words[0];
@@ -67,7 +91,7 @@
         }
         catch(Exception $e)
         {
-            throw $e;
+            // throw $e;
             $command_line_result_arr[] = hzm_format_command_line("error", $e->getMessage()); $nb_errors++;
             $command_finished = true;
         }
@@ -130,8 +154,10 @@
           $kord = count($hist_arr) - $hord;
           $command_line_result_arr[] = "<div class='tamakkan_hiostory'><div class='tamakkan_rt'>$kord. Momken> </div> " .hzm_format_command_line($log_hist_class, $hist_item)."</div>";
       }
+
+      $hist = implode("\n", $hist_arr);
    }
-   $hist = implode("\n", $hist_arr);
+   
    $data_tokens = array();
 
    $file_dir_name = dirname(__FILE__);

@@ -6,7 +6,7 @@
     
     
         $command_line_result_arr[] = hzm_format_command_line("info", "generating ini.php file : ");
-        $phpIni = $objModule->genereIniPhp();
+        $phpIni = $objModule->genereIniPhpFile();
         
         $command_line_result_arr[] = hzm_format_command_line("php", $phpIni, "en", "cline php struct");
         

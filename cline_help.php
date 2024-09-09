@@ -23,7 +23,7 @@
 
     if(ClineUtils::similarCommand($command_to_help, "reverse"))  
     {
-        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "reverse [@field][.@table][.@module]", "to do a reverse engineering on a specific module or table or field", "en", "log");
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "reverse @what [@field][.@table][.@module]", "to do a reverse engineering on a specific module or table or field", "en", "log");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example 1 : reverse pag");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example 2 : reverse cmn.city");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example 3 : reverse cmn.city.country_id");

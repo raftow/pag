@@ -28,14 +28,19 @@
             $what_module = "pag";
             $what_table = "afield";
         }        
+        $command_line_result_arr[] = hzm_format_command_line("warning", "the object-type to clone was empty and set = $what_module.$what_table");
     }
-    $command_line_result_arr[] = hzm_format_command_line("warning", "what table is set to $what_module.$what_table");
+    else
+    {
+        $command_line_result_arr[] = hzm_format_command_line("info", "the object-type to clone is parsed as $what_module.$what_table");
+    }
+    
 
 
     $object_code = $command_line_words[2];
     
 
-    $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code of ".$command_line_words[1]." for ".$object_code);
+    $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code of the ".$command_line_words[1]." : ".$object_code);
 
     if(!$object_code)
     {
@@ -45,9 +50,11 @@
 
     $object_code_arr = explode(".", $object_code);
 
-    $new_object_code = $command_line_words[3];
+    $action_clone_type = $command_line_words[3]; // = to or = simul-to for only simulating
+
+    $new_object_code = $command_line_words[4];
     
-    $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code of ".$command_line_words[1]." into ".$new_object_code);
+    $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code into ".$new_object_code);
 
     if(!$new_object_code)
     {
@@ -128,11 +135,30 @@
             if((!$objNewTable) and ($what_table == "atable"))
             {
                 $command_line_result_arr[] = hzm_format_command_line("info", "cloning from (m=$objModuleId t=$objTableId) to (m=$objNewModuleId t=$table_new_code to create)");
+                list($objNewTable, $nb_fields_copied, $reason_fail) = $objTable->cloneMe($objNewModuleId,0,$table_new_code);
+                if($objNewTable) $command_line_result_arr[] = hzm_format_command_line("success", "new table $table_new_code has been successfully created");
+                else 
+                {
+                    $command_line_result_arr[] = hzm_format_command_line("error", "failed to create the new table $table_new_code reason : $reason_fail");
+                    $nb_errors++;$command_finished = true;return;
+                }
+                $notification_of_fields_copied = "";
+                if(!$nb_fields_copied)
+                {
+                    $command_line_result_arr[] = hzm_format_command_line("error", "No fields copied (nb_fields_copied=$nb_fields_copied)");
+                    $nb_errors++;$command_finished = true;return;
+                }
+                else
+                {
+                    $command_line_result_arr[] = hzm_format_command_line("warning", "$nb_fields_copied fields copied");
+                }
+                
+                
             }
 
             if(!$objNewTable)
             {
-                $command_line_result_arr[] = hzm_format_command_line("error", "clone command need a valid new table name to clone into, $table_new_code not found in module $module_new_code");
+                $command_line_result_arr[] = hzm_format_command_line("error", "clone command need a valid new table object to clone into, $table_new_code not found in module $module_new_code");
                 $nb_errors++;$command_finished = true;return;
             }
             else $objNewTableId = $objNewTable->id;

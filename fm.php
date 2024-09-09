@@ -33,7 +33,7 @@
                                       </a>
                                   </div>";
           }                   
-          $out_scr .= "<div id='menu-item-files-upload' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
+          $out_scr .= "<div id='menu-item-myaccount' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
                                 <a class='action_lourde hzm3-button hzm3-light-grey hzm3-block' href='afw_my_account.php' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
                                     <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
                                       <div class=\"hzm-vertical-align hzm-container-center hzm-custom hzm-custom-icon-container only-border border-primary\">
@@ -45,6 +45,19 @@
                              </div>        
                              
                              ";
+
+          $out_scr .= "<div id='menu-item-cline' class='bf hzm-menu-item hzm3-col l3 m3 $s12'>
+                             <a class='action_lourde hzm3-button hzm3-light-grey hzm3-block' href='cline_go.php' style='white-space:nowrap;text-decoration:none;margin-top:1px;margin-bottom:1px'>
+                                 <div class=\"hzm-width-100 hzm-text-center hzm_margin_bottom \">
+                                   <div class=\"hzm-vertical-align hzm-container-center hzm-custom hzm-custom-icon-container only-border border-primary\">
+                                     <i class=\"hzm-container-center hzm-vertical-align-middle hzm-icon-std fa-solid fa-bolt\"></i>
+                                   </div>
+                                 </div>
+                                 <div class='hzm4-title'>سطر الأوامر</div>
+                             </a>
+                          </div>        
+                          
+                          ";
                              
                              
     }

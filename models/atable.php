@@ -1494,17 +1494,17 @@ class Atable extends AFWObject{
                      */
                 
                 
-                     $edit_by_step_php = "\$this->editByStep = true;
-                \$this->editNbSteps = $scis_count;";
+                     $edit_by_step_php = "\$obj->editByStep = true;
+                \$obj->editNbSteps = $scis_count;";
                 
                 }
                 else $edit_by_step_php = "";
                 
                 
                 $edit_by_step_php .= "
-                \$this->showQeditErrors = true;
-                \$this->showRetrieveErrors = true;
-                \$this->general_check_errors = true;";
+                \$obj->showQeditErrors = true;
+                \$obj->showRetrieveErrors = true;
+                \$obj->general_check_errors = true;";
                 
                 
                 // require_once("afield.php");
@@ -1545,7 +1545,7 @@ class Atable extends AFWObject{
                 if($this->isLookup() and ((!$this->hasManyData()) or ($this->hasOption(self::$TBOPTION_LOOKUPCODE))))
                 {
                     $TDesc .= "\n\t\t".'\'lookup_code\' => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "SIZE" => 64, "QEDIT" => true, "SHORTNAME"=>"code"),'."\n";
-                    $UNIQUE_KEY = "\$this->UNIQUE_KEY = array(\"lookup_code\");";
+                    $UNIQUE_KEY = "\$obj->UNIQUE_KEY = array(\"lookup_code\");";
                     $indx_cols = array("lookup_code");
                     $mandatory_indx_cols["lookup_code"] = true;
                     
@@ -1585,14 +1585,14 @@ class Atable extends AFWObject{
                 $UNIQUE_KEY = "";
                 if((count($indx_cols)>0) and (!$UNIQUE_KEY))
                 {
-                      $UNIQUE_KEY = "\$this->UNIQUE_KEY = array('".implode("','",$indx_cols)."');";
+                      $UNIQUE_KEY = "\$obj->UNIQUE_KEY = array('".implode("','",$indx_cols)."');";
                 }
                 //else  $UNIQUE_KEY = "no unique key(UNIQUE_KEY=$UNIQUE_KEY) and indx_cols=".var_export($indx_cols,true);
                 
                 if($this->isLookup())
                 {
-                        $clause_ignore_insert_doublon = "\$this->ignore_insert_doublon = true;";
-                        $IS_LOOKUP = "\$this->IS_LOOKUP = true;\$this->public_display = true;\$this->ENABLE_DISPLAY_MODE_IN_QEDIT = true;\$this->showQeditErrors = true;";
+                        $clause_ignore_insert_doublon = "\$obj->ignore_insert_doublon = true;";
+                        $IS_LOOKUP = "\$obj->IS_LOOKUP = true;\$obj->public_display = true;\$obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;\$obj->showQeditErrors = true;";
                         $fld_active_qedit = "true";
                         $fld_active_edit = "true";
                 }
@@ -1606,7 +1606,7 @@ class Atable extends AFWObject{
                 
                 if($this->estAuditable())
                 {
-                        $AUDIT_DATA = "\$this->AUDIT_DATA = true;";
+                        $AUDIT_DATA = "\$obj->AUDIT_DATA = true;";
                 }
                 else 
                 {
@@ -3173,7 +3173,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                     if(!$new_atable_name) $new_atable_name = $orig_atable_name;
                 }
                 
-                $tab = $this;  
+                $tab = clone $this;  
                 
                 $tab->resetAsCopy();
                 $tab->set("atable_name", $new_atable_name);

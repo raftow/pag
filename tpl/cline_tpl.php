@@ -28,6 +28,7 @@
                                 <input type="hidden" name="currfld" id="currfld" value="[currfld]">
                                 <input type="hidden" name="recid" id="currid" value="[recid]">
                                 <input type="hidden" name="hist" id="hist" value="[hist]">
+                                <input type="hidden" name="clinego" id="hist" value="1">
                                 <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
         		   </div>				
                 </div>

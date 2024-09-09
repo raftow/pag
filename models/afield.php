@@ -2964,48 +2964,48 @@ class Afield extends AFWObject{
         public function createShortcutFieldsForOneToOneObject($lang="ar")
         {
               
-              $shortname = $this->getVal("shortname");
-              
-              if(!$shortname) $err_arr[] = "Error : please define shortname for this field";
-              
-              $anstable = $this->het("anstable");
+                $shortname = $this->getVal("shortname");
+                
+                if(!$shortname) $err_arr[] = "Error : please define shortname for this field";
+                
+                $anstable = $this->het("anstable");
 
-              $info_arr = array();
-              $err_arr = array();
-              
-              if(!$anstable) $err_arr[] = "Error : No Answer table for this field";
-              
-              
-              $my_tab = $this->het("atable_id");
-              
-              if(!$my_tab) $err_arr[] = "Error : No owner table for this field";
-              
-              if($anstable and $shortname)
-              {
-                   $shortcut_path = $shortname.".";
-                   $shortcut_prefix = $shortname."_";
-                   
-                   $scStep = $this->hetStep();
-                   if($scStep) $fromStep = $scStep->getVal("step_num");
-                   
-                   if(!$fromStep) $fromStep = 1;
-                   
-                   list($nbAddedSteps, $nbUpdatedSteps, $nbMovedSteps, $nbKeepedSteps) = $anstable->copyStepsToTable($my_tab,$fromStep);
-                   
-                   //$nbUpdatedSteps = $nbAllSteps - $nbAddedSteps;
-                   
-                   $info_arr[] = "Added $nbAddedSteps step(s), Updated $nbUpdatedSteps step(s), Moved $nbMovedSteps step(s), Keeped $nbKeepedSteps step(s)";
-                   
-                   
-                   $anstable->copyFieldsToTableAsShortcuts($my_tab,$shortcut_path,$shortcut_prefix);
-              
-              
-              } 
+                $info_arr = array();
+                $err_arr = array();
+                
+                if(!$anstable) $err_arr[] = "Error : No Answer table for this field";
                 
                 
+                $my_tab = $this->het("atable_id");
+                
+                if(!$my_tab) $err_arr[] = "Error : No owner table for this field";
+                
+                if($anstable and $shortname)
+                {
+                        $shortcut_path = $shortname.".";
+                        $shortcut_prefix = $shortname."_";
+                        
+                        $scStep = $this->hetStep();
+                        if($scStep) $fromStep = $scStep->getVal("step_num");
+                        
+                        if(!$fromStep) $fromStep = 1;
+                        
+                        list($nbAddedSteps, $nbUpdatedSteps, $nbMovedSteps, $nbKeepedSteps) = $anstable->copyStepsToTable($my_tab,$fromStep);
+                        
+                        //$nbUpdatedSteps = $nbAllSteps - $nbAddedSteps;
+                        
+                        $info_arr[] = "Added $nbAddedSteps step(s), Updated $nbUpdatedSteps step(s), Moved $nbMovedSteps step(s), Keeped $nbKeepedSteps step(s)";
+                        
+                        
+                        $anstable->copyFieldsToTableAsShortcuts($my_tab,$shortcut_path,$shortcut_prefix);
                 
                 
-              return array(implode("<br>\n",$err_arr),implode("<br>\n",$info_arr));
+                } 
+                        
+                        
+                        
+                        
+                return array(implode("<br>\n",$err_arr),implode("<br>\n",$info_arr));
               
               
               
