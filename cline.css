@@ -64,7 +64,8 @@ span.cline-message.cline-info {
 }
 
 span.cline-message.cline-success {
-    color: #61d021;
+    color: #81c728;
+    font-size: 16px;
 }
 
 span.cline-message.cline-log {
@@ -234,7 +235,7 @@ span.cline.table {
     margin-right: 10px;
     float: right;
     color: white;
-    width: 10%;
+    width: 18%;
     font-size: 12px;
 }
 
@@ -246,7 +247,7 @@ span.cline.field {
     margin-right: 10px;
     float: right;
     color: white;
-    width: 10%;
+    width: 18%;
     font-size: 12px;
 }
 

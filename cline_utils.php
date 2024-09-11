@@ -28,6 +28,11 @@
             {
                 $command_code = "curr_fld";
             }
+
+            if($command_code=="get")
+            {
+                $command_code="list";
+            }
             
             
             if($command_code=="find")

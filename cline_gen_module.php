@@ -4,16 +4,20 @@
     {
         $objModule = Module::loadByMainIndex($module_code);
     
-    
-        $command_line_result_arr[] = hzm_format_command_line("info", "generating ini.php file : ");
-        $phpIni = $objModule->genereIniPhpFile();
+        if((!$restriction) or $restriction=="ini")
+        {
+            $command_line_result_arr[] = hzm_format_command_line("info", "generating ini.php file : ");
+            $phpIni = $objModule->genereIniPhpFile();
+            
+            $command_line_result_arr[] = hzm_format_command_line("php", $phpIni, "en", "cline php struct");
+        }
         
-        $command_line_result_arr[] = hzm_format_command_line("php", $phpIni, "en", "cline php struct");
-        
-        
-        $command_line_result_arr[] = hzm_format_command_line("info", "generating [your project]/external/chsys/module_$module_code.php file : ");
-        $php_code = $objModule->calcPhp_module(false);        
-        $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline php");
+        if((!$restriction) or $restriction=="chsys")
+        {
+            $command_line_result_arr[] = hzm_format_command_line("info", "generating [your project]/external/chsys/module_$module_code.php file : ");
+            $php_code = $objModule->calcPhp_module(false);        
+            $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline php");
+        }
 
     }
     elseif(!$module_code)

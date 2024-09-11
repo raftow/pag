@@ -71,12 +71,15 @@
    
       
       $command_line_words = explode(" ", $command_line);
-      $command_code = $command_line_words[0];
+      
+      list($command_code, $restriction) = explode("-", $command_line_words[0]);
       
       $command_done = false;
       $command_finished = false;
       
       $command_code = ClineUtils::formatCommand($command_code);
+
+
       //die("command_code=$command_code");
       
       while(!$command_finished)
@@ -87,6 +90,10 @@
         // die($cmd_file_path);
         try
         {
+          if(!file_exists($cmd_file_path))
+          {
+            throw new AfwRuntimeException("the command line $command_code still not defined");
+          }
           include $cmd_file_path;
         }
         catch(Exception $e)

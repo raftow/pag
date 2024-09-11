@@ -34,7 +34,7 @@
                         $currtbl = $idTab;
                         
                         $atable_translated = $objAtable->translate("atable.single",$lang);
-                        $command_line_result_arr[] = hzm_format_command_line("info", "current object class changed to $atable_class, id of module is $idMod , it contain $nbFields field(s)");
+                        $command_line_result_arr[] = hzm_format_command_line("info", "current table changed to $atable_class id of table is $idTab, id of module is $idMod, it contain $nbFields field(s)");
                         $command_line_result_arr[] = hzm_format_command_line("success", $atable_translated." : ".$objAtable->getDisplay($lang), $lang);
                 }
                 else

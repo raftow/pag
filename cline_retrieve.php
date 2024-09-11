@@ -12,14 +12,16 @@
             {
                 list($is_ok, $dataErr) = $oneObj->isOk($force=true, $returnErrors=true);                             
                 $dataErrors = truncateArabicJomla(implode(", ", $dataErr), $maxlen=56);
+                //$dataErrors = var_export($dataErr,true);
                 
                 if($dataErrors) $errorClass = "error";
                 else $errorClass = "success";
+                if(!$dataErrors) $dataErrors = "no errors";
+                $dataErrors = "<span class='object_code'>".$dataErrors."</span> "; // $oneObj->getMyCode("")
                 
-                $dataErrors = "<span class='object_code'>".$oneObj->getMyCode("")."</span> ".$dataErrors;
                 
                 $oneObjIdLinked = $oneObj->showAttributeAsLinkMode("id","EDIT");
-                $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $oneObj->getDisplay($lang), $dataErrors, $errorClass, $lang);
+                $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $oneObj->getNodeDisplay($lang), $dataErrors, $errorClass, $lang);
                 if($odd_oven != "odd") $odd_oven = "odd";
                 else $odd_oven = "oven";
                 unset($oneObj);

@@ -82,7 +82,7 @@ class Atable extends AFWObject{
 
         public static function loadByCodes($object_code_arr, $create_if_not_exists_with_name="", $lang="ar", $rename_if_exists=false)
         {
-            if(count($object_code_arr) != 2) die("Atable::loadByCodes : 2 params needed (module_code, table_name) : object_code_arr=".var_export($object_code_arr,true));
+            if(count($object_code_arr) != 2) throw new AfwRuntimeException("Atable::loadByCodes : 2 params needed (module_code, table_name) : object_code_arr=".var_export($object_code_arr,true));
 
             $file_dir_name = dirname(__FILE__); 
             
@@ -694,6 +694,12 @@ class Atable extends AFWObject{
                return $af->count();
                
         }
+
+        public function getAllTablesRelatedWithMeFields()
+        {
+            return $this->getDetailTablesRelationFields(0);
+        }
+
         
         public function getDetailTablesRelationFields($entity_relation_type_id = 1, $atable_id_list_arr = null)
         {
@@ -2157,7 +2163,7 @@ else
     $dbstruct_open = "
         class $structClass
         {
-        
+                // token separator = §
                 public static function initInstance(&\$obj)
                 {
                         if (\$obj instanceof $className ) 

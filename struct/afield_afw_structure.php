@@ -1,7 +1,7 @@
 <?php 
         class PagAfieldAfwStructure
         {
-
+			// token separator = §
 			public static function initInstance(&$obj)
                 {
                         if ($obj instanceof Afield) 

@@ -17,25 +17,26 @@
     $object_list_source_type = $command_line_words[3];
     $object_entity = $command_line_words[4];
     if(!$object_entity and ($object_list_attribute_origin=="fields")) $object_entity = "table";
+    if(!$object_entity and ($object_list_attribute_origin=="relations")) $object_entity = "table";
+    
     
     if($object_list_attribute_origin=="goals")
     {
         if(!$object_entity) 
         {
             $object_entity = "domain";
+            $object_list_attribute="goalList";
             $setted_phrase .= "object_entity setted to $object_entity, ";
+            
         }
-        $object_list_attribute="goalList"; 
-        $setted_phrase .= "object_list_attribute setted to $object_list_attribute, ";
-
-        // the below word Number 5 should be domain code but generally it is same as module code 
-        // otherwise command words should all be explicit (6 words including command name), ex : 
-        // list all goals of domain hr (module code is hrm)
-        if(!$command_line_words[5]) 
+        elseif($object_entity=="table")
         {
-            $command_line_words[5] = $currmod;  
-            $setted_phrase .= "object_codeOrId setted to $currmod, ";
+            $object_list_attribute="concernedGoalList";
         }
+        $setted_phrase .= "object_list_attribute setted to $object_list_attribute, "; 
+        
+
+        
         if($setted_phrase) $command_line_result_arr[] = hzm_format_command_line("warning", $setted_phrase);
     }
     if(!$object_entity)                
@@ -54,9 +55,22 @@
     if(!$object_module) $object_module = $currmod;
     
     $object_codeOrId = $command_line_words[5];
-    if((!$object_codeOrId) and ($object_entity == "table") and $currtbl) $object_codeOrId = $currtbl;
-
+    if((!$object_codeOrId) and ($object_entity == "table") and $currtbl) 
+    {
+        $object_codeOrId = $currtbl;
+        
+    }
+    // the below word Number 5 should be domain code but generally it is same as module code 
+    // otherwise command words should all be explicit (6 words including command name), ex : 
+    // list all goals of domain hr (module code is hrm)
+    if(!$object_codeOrId) 
+    {
+        $object_codeOrId = $currmod;  
+        $setted_phrase .= "object_codeOrId setted to $currmod, ";
+    }
+    
     $object_code = is_numeric($object_codeOrId) ? "" : $object_codeOrId;
+
     $object_id   = is_numeric($object_codeOrId) ? intval($object_codeOrId) : "";
     $objToShow = null;
     $module_path = "$file_dir_name/../$object_module/models";
@@ -95,11 +109,18 @@
         $module_translated = $objToShow->translate("$object_table.single",$lang);
         if($lang!="ar") $arrow = "&rarr;";
         else $arrow = "&larr;";
-        
-        $liste_obj = $objToShow->get($object_list_attribute);
+        if($object_list_attribute=="relations") 
+        {
+            $liste_obj = $objToShow->getAllTablesRelatedWithMeFields();
+        }
+        else 
+        {
+            $liste_obj = $objToShow->get($object_list_attribute);
+        }
+
         if(!$liste_obj) 
         {
-            $command_line_result_arr[] = hzm_format_command_line("error", "object $object_class => get ($object_list_attribute) returned null"); $nb_errors++;$command_finished = true;return;
+            $command_line_result_arr[] = hzm_format_command_line("error", $module_translated." : ".$objToShow->getDisplay($lang)." => get ($object_list_attribute) returned null"); $nb_errors++;$command_finished = true;return;
         }
         else
         {
