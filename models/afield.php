@@ -2097,7 +2097,14 @@ class Afield extends AFWObject{
         public function getNodeDisplay($lang="ar")
         {
 	    //return $this->translateOperator("FIELD",$lang)." ".$this->getShortDisplay($lang);
-            return $this->showAttribute("atable_id",null,true,$lang)." ".$this->getShortDisplay($lang);
+            $return = $this->getVal("field_name")." ".$this->getShortDisplay($lang);
+            if($this->getVal("answer_table_id")>0)
+            {
+                $return .= " ".$this->showAttribute("answer_table_id",null,true,$lang);
+            }
+
+            return $return;
+
         }
         
         public function getShortDisplay($lang="ar")

@@ -19,7 +19,10 @@
     if(!$object_entity and ($object_list_attribute_origin=="fields")) $object_entity = "table";
     if(!$object_entity and ($object_list_attribute_origin=="relations")) $object_entity = "table";
     
-    
+    if($object_list_attribute_origin=="fields")
+    {
+        $object_list_attribute="origFieldList";
+    }
     if($object_list_attribute_origin=="goals")
     {
         if(!$object_entity) 
@@ -120,11 +123,11 @@
 
         if(!$liste_obj) 
         {
-            $command_line_result_arr[] = hzm_format_command_line("error", $module_translated." : ".$objToShow->getDisplay($lang)." => get ($object_list_attribute) returned null"); $nb_errors++;$command_finished = true;return;
+            $command_line_result_arr[] = hzm_format_command_line("error", $module_translated." : ".$objToShow->getDisplay($lang)." ($object_class) => get ($object_list_attribute) returned null"); $nb_errors++;$command_finished = true;return;
         }
         else
         {
-            $command_line_result_arr[] = hzm_format_command_line("success", $module_translated." : ".$objToShow->getDisplay($lang)." $arrow ". $objToShow->translate($object_list_attribute,$lang), $lang);
+            $command_line_result_arr[] = hzm_format_command_line("success", $module_translated." : ".$objToShow->getDisplay($lang)." ($object_class) $arrow ". $objToShow->translate($object_list_attribute,$lang), $lang);
             $command_code = "retrieve";
         }
         

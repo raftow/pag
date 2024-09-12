@@ -90,7 +90,7 @@ class Atable extends AFWObject{
             $module_code = $object_code_arr[0];
             $table_name = $object_code_arr[1];
             $objModule = Module::loadByMainIndex($module_code);
-            if((!$objModule) or $objModule->isEmpty()) die("Atable::loadByCodes : can't find module by module_code = $module_code");
+            if((!$objModule) or $objModule->isEmpty()) throw new AfwRuntimeException("Atable::loadByCodes : can't find module by module_code = $module_code");
             
             
             $obj = self::loadByMainIndex($objModule->getId(), $table_name, $create_if_not_exists_with_name);
