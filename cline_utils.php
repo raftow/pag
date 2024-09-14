@@ -33,6 +33,8 @@
             {
                 $command_code="list";
             }
+
+            
             
             
             if($command_code=="find")
@@ -48,6 +50,11 @@
             if($command_code=="reverse")
             {
                 // nothing to do
+            }
+
+            if(($command_code=="rev") or ($command_code=="r"))
+            {
+                $command_code="reverse";
             }
             
             if(($command_code=="show") or ($command_code=="view") or ($command_code=="more"))
