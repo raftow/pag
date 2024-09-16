@@ -701,7 +701,8 @@ class Atable extends AFWObject
         $af->select("avail", 'Y');
         $af->select("reel", 'Y');
         $af->select("afield_type_id", 5);
-        $af->where("entity_relation_type_id in (1,4) ");
+        // if field is mandatory it is like if it is part of Me
+        $af->where("entity_relation_type_id in (1,4) or mandatory='Y'");
         if ($option) {
             if ($option_doesnt_exist) $af->where("foption_mfk is null or foption_mfk not like '%,$option,%'");
             else $af->where("foption_mfk like '%,$option,%'");
