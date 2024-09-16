@@ -177,6 +177,7 @@
    $data_tokens["currtbl_code"] = $currtbl_code;
    $data_tokens["currobj"] = $currobj;
    $data_tokens["currfld"] = $currfld;
+   $data_tokens["currfld_id"] = $currfld_id;
    if($currmod) 
    {
         $context = $currmod;

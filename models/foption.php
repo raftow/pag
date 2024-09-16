@@ -21,53 +21,13 @@ class Foption extends AFWObject{
         // HZM - خيارات الكود لإطار العمل  
         public static $FOPTION_TYPE_HZM = 1; 
         
-	public static $DATABASE		= ""; public static $MODULE		    = "pag"; public static $TABLE			= ""; public static $DB_STRUCTURE = null; /* = array(
-                "id" => array("SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "TYPE" => "PK"),
-
-                data_type_id => array(SHORTNAME => type, SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => true, EDIT => true, QEDIT => true, 
-                                       SIZE => 40, MANDATORY => true, UTF8 => false, 
-                                       TYPE => FK, ANSWER => afield_type, ANSMODULE => pag, RELATION => ManyToOne, READONLY => false),
-                
-                lookup_code => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "SIZE" => 64, "QEDIT" => true),
-
-                foption_type => array(SHORTNAME => type, SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => true, EDIT => true, QEDIT => true, 
-                                         SIZE => 32, MANDATORY => true, UTF8 => false, TYPE => ENUM, ANSWER => "FUNCTION", ANSMODULE => pag),
-                                         
-
-		"foption_name_ar" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "QEDIT" => true, "SIZE" => 128, "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => true, "TYPE" => "TEXT"),
-		"foption_name_en" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "QEDIT" => false, "SIZE" => 128, "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => true, "TYPE" => "TEXT"),
-                
-
-                afield_type_mfk => array("SEARCH" => true, "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "QEDIT" => true, 
-                                              "SIZE" => 32, "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "MANDATORY" => true, 
-                                              "UTF8" => false, "TYPE" => "MFK", "ANSWER" => afield_type, "ANSMODULE" => pag),
-
-                afield_category_mfk => array(SHORTNAME => categorys, SEARCH => true, QSEARCH => false, SHOW => true, RETRIEVE => false, EDIT => true, QEDIT => false, SIZE => 32, UTF8 => false, TYPE => MFK, ANSWER => afield_category, ANSMODULE => pag, READONLY => false),
-
-                foption_desc_ar => array(SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => false, EDIT => true, QEDIT => false, SIZE => "AREA", UTF8 => true, TYPE => "TEXT", READONLY => false),
- 
-		foption_desc_en => array(SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => false, EDIT => true, QEDIT => false, SIZE => "AREA", MANDATORY => true, UTF8 => false, TYPE => "TEXT", READONLY => false),
-                
-                         foptionCaseList => array(SHORTNAME => foptionCases, WHERE => "", SHOW => true, FORMAT => retrieve, ICONS => true, "DELETE-ICON" => true, BUTTONS => true, 
-                                                        SEARCH => false, QSEARCH => false, RETRIEVE => false, EDIT => true, QEDIT => false, 
-                                                        SIZE => 32, MANDATORY => false, UTF8 => false, READONLY => false, "CAN-BE-SETTED" => true, 
-                                                        TYPE => FK, CATEGORY => ITEMS, ANSWER => foption_case, ANSMODULE => pag, ITEM => "foption_id", ),
-                                         
-                "id_aut" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums"),
-                "date_aut" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATETIME"),
-                "id_mod" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums"),
-                "date_mod" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATETIME"),
-                "id_valid" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "FK", "ANSWER" => "auser", "ANSMODULE" => "ums"),
-                "date_valid" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATETIME"),
-                "avail" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, EDIT => true, QEDIT => true, "DEFAULT" => "Y", "TYPE" => "YN"),
-                "version" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "INT"),
-                "update_groups_mfk" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-                "delete_groups_mfk" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-                "display_groups_mfk" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-                "sci_id" => array("SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "FK", "ANSWER" => "scenario_item", "ANSMODULE" => "pag"),
-	);
-	
-	*/ public function __construct(){
+	public static $DATABASE		= ""; 
+        public static $MODULE		    = "pag"; 
+        public static $TABLE			= "foption"; 
+        public static $DB_STRUCTURE = null; 
+        
+        
+        public function __construct(){
 		parent::__construct("foption","id","pag");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
                 $this->DISPLAY_FIELD = "foption_name_ar";
@@ -120,17 +80,18 @@ class Foption extends AFWObject{
         
         public function getDisplay($lang="ar")
         {
-               if($this->getVal("foption_name_$lang")) return $this->getVal("foption_name_$lang");
+               //if(trim($this->getVal("foption_name_$lang"))) return trim($this->getVal("foption_name_$lang"));
                $data = array();
-               $link = array();
+
+               $data[] = "foc";
                $data[] = $this->getVal("lookup_code");
-               list($data[], $link[]) = $this->displayAttribute("data_type_id");
+               $data[] = $this->showAttribute("data_type_id");
                
  
  
  
  
-               return implode(" - ",$data);
+               return implode("-",$data);
         }
  
  

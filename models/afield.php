@@ -139,6 +139,35 @@ class Afield extends AFWObject{
            else return null;
  
         }
+
+        public static function loadByCodes($object_code_arr, $create_if_not_exists_with_name = "", $lang = "ar", $rename_if_exists = false)
+        {
+                if (count($object_code_arr) != 3) throw new AfwRuntimeException("Afield::loadByCodes : 3 params needed (module_code, table_name, field_name) : object_code_arr=" . var_export($object_code_arr, true));
+
+                $file_dir_name = dirname(__FILE__);
+
+
+                $module_code = $object_code_arr[0];
+                $table_name = $object_code_arr[1];
+                $field_name = $object_code_arr[2];
+
+                $objModule = Module::loadByMainIndex($module_code);
+                if ((!$objModule) or $objModule->isEmpty()) throw new AfwRuntimeException("Afield::loadByCodes : can't find module by module_code = $module_code");
+                
+                $objTable = Atable::loadByMainIndex($objModule->getId(), $table_name);
+                if ((!$objTable) or $objTable->isEmpty()) throw new AfwRuntimeException("Afield::loadByCodes : can't find table by table_name = $table_name in module $module_code");
+
+
+                $obj = self::loadByMainIndex($objTable->getId(), $field_name, $create_if_not_exists_with_name);
+                if (($obj->is_new) or $rename_if_exists) 
+                {
+                        if ($lang == "ar") $obj->set("titre_short", $create_if_not_exists_with_name);
+                        if ($lang == "en") $obj->set("titre_short_en", $create_if_not_exists_with_name);
+                        $obj->commit();
+                }
+
+                return $obj;
+        }
         
         
         protected function dynamicHelpCondition($attribute)
@@ -2098,9 +2127,9 @@ class Afield extends AFWObject{
         {
 	    //return $this->translateOperator("FIELD",$lang)." ".$this->getShortDisplay($lang);
             $return = $this->getVal("field_name")." ".$this->getShortDisplay($lang);
-            if($this->getVal("answer_table_id")>0)
+            if($this->getVal("atable_id")>0)
             {
-                $return .= " ".$this->showAttribute("answer_table_id",null,true,$lang);
+                $return .= " ".$this->showAttribute("atable_id",null,true,$lang);
             }
 
             return $return;

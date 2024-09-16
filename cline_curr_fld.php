@@ -38,6 +38,7 @@
                     if($objAfield and (!$objAfield->isEmpty()))
                     {
                         $currfld = $field_name;
+                        $currfld_id = $objAfield->id;
                         $command_line_result_arr[] = hzm_format_command_line("info", "current field changed to $field_name");
                         $command_line_result_arr[] = hzm_format_command_line("success", "to genere sql use genere command see {help genere}", $lang);
                     }

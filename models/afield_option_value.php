@@ -13,35 +13,12 @@ class AfieldOptionValue extends AFWObject{
         public static $MY_ATABLE_ID=3589; 
 
         
-	public static $DATABASE		= ""; public static $MODULE		    = "pag"; public static $TABLE			= ""; public static $DB_STRUCTURE = null; /* = array(
-                id => array(SHOW => true, RETRIEVE => true, EDIT => true, TYPE => PK),
-
-		
-		afield_id => array(SHORTNAME => afield, SEARCH => true, QSEARCH => false, SHOW => true, RETRIEVE => false, EDIT => true, QEDIT => true, SIZE => 40, MANDATORY => true, UTF8 => false, TYPE => FK, ANSWER => afield, ANSMODULE => pag, RELATION => OneToMany, READONLY => false),
-
-		foption_id => array(SHORTNAME => foption, SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => true, EDIT => true, QEDIT => true, SIZE => 32, MANDATORY => true, UTF8 => false, TYPE => FK, ANSWER => foption, ANSMODULE => pag, RELATION => ManyToOne, READONLY => false),
-
-		option_value => array(SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => true, EDIT => true, QEDIT => true, SIZE => 128, "MIN-SIZE" => 5, CHAR_TEMPLATE => "ARABIC-CHARS,SPACE", MANDATORY => true, UTF8 => true, TYPE => "TEXT", READONLY => false),
-
-		option_value_comments => array(SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => true, EDIT => true, QEDIT => true, SIZE => "AREA", "MIN-SIZE" => 10, CHAR_TEMPLATE => "ALL", MANDATORY => false, UTF8 => true, TYPE => "TEXT", READONLY => false),
-
-                
-                id_aut => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                date_aut => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                id_mod => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                date_mod => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                id_valid => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                date_valid => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                avail => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, "DEFAULT" => 'Y', TYPE => YN),
-                version => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => INT),
-                update_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                delete_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                display_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                sci_id => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => scenario_item, ANSMODULE => pag),
-                tech_notes 	    => array(TYPE => TEXT, CATEGORY => FORMULA, "SHOW-ADMIN" => true, 'STEP' =>"all", TOKEN_SEP=>"§", READONLY=>true, "NO-ERROR-CHECK"=>true),
-	);
-	
-	*/ public function __construct(){
+	public static $DATABASE		= ""; 
+        public static $MODULE		    = "pag"; 
+        public static $TABLE			= "afield_option_value"; 
+        public static $DB_STRUCTURE = null; 
+        
+        public function __construct(){
 		parent::__construct("afield_option_value","id","pag");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
                 $this->DISPLAY_FIELD = "";
@@ -101,10 +78,13 @@ class AfieldOptionValue extends AFWObject{
                
                $data = array();
                $link = array();
-               
+               $fo = $this->het("foption_id");
+               if($fo) $dis = $fo->getDisplay($lang);
+               else $dis = "fo-".$this->getVal("foption_id");
 
-               list($data[0],$link[0]) = $this->displayAttribute("afield_id",false, $lang);
-               list($data[1],$link[1]) = $this->displayAttribute("foption_id",false, $lang);
+               $data[0] = $this->showAttribute("afield_id",false, $lang);
+               $data[1] = $dis;
+               $data[2] = $this->showAttribute("option_value",false, $lang);
 
                
                return implode(" - ",$data);

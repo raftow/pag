@@ -16,9 +16,15 @@
     }
     $object_list_source_type = $command_line_words[3];
     $object_entity = $command_line_words[4];
+    if(!$object_entity and ($object_list_attribute_origin=="options")) $object_entity = "field";
     if(!$object_entity and ($object_list_attribute_origin=="fields")) $object_entity = "table";
     if(!$object_entity and ($object_list_attribute_origin=="relations")) $object_entity = "table";
     
+    if($object_list_attribute_origin=="options")
+    {
+        $object_list_attribute="afieldOptionValueList";
+    }
+
     if($object_list_attribute_origin=="fields")
     {
         $object_list_attribute="origFieldList";
@@ -61,6 +67,12 @@
     if((!$object_codeOrId) and ($object_entity == "table") and $currtbl) 
     {
         $object_codeOrId = $currtbl;
+        
+    }
+
+    if((!$object_codeOrId) and ($object_entity == "field") and $currfld_id) 
+    {
+        $object_codeOrId = $currfld_id;
         
     }
     // the below word Number 5 should be domain code but generally it is same as module code 
@@ -121,7 +133,11 @@
             $liste_obj = $objToShow->get($object_list_attribute);
         }
 
-        if(!$liste_obj) 
+        if(is_array($liste_obj) and (count($liste_obj)==0)) 
+        {
+            $command_line_result_arr[] = hzm_format_command_line("warning", $module_translated." : ".$objToShow->getDisplay($lang)." ($object_class) => get ($object_list_attribute) returned empty"); $command_finished = true;return;
+        }
+        elseif(!$liste_obj) 
         {
             $command_line_result_arr[] = hzm_format_command_line("error", $module_translated." : ".$objToShow->getDisplay($lang)." ($object_class) => get ($object_list_attribute) returned null"); $nb_errors++;$command_finished = true;return;
         }

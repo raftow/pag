@@ -11,6 +11,7 @@
             $currtbl_code = "";
             $currtbl = "";
             $currfld = "";
+            $currfld_id = "";
             $currobj = "";
             $currmod = $new_currmod;
         }

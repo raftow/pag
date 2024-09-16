@@ -26,6 +26,7 @@
                                 <input type="hidden" name="currtbl_code" id="currtbl_code" value="[currtbl_code]">
                                 <input type="hidden" name="currobj" id="currobj" value="[currobj]">
                                 <input type="hidden" name="currfld" id="currfld" value="[currfld]">
+                                <input type="hidden" name="currfld_id" id="currfld_id" value="[currfld_id]">
                                 <input type="hidden" name="recid" id="currid" value="[recid]">
                                 <input type="hidden" name="hist" id="hist" value="[hist]">
                                 <input type="hidden" name="clinego" id="hist" value="1">
