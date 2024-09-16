@@ -6,8 +6,10 @@ $reverseByCodeArr["module"] = true;
 $reverseByCodeArr["atable"] = true;
 $reverseByCodeArr["afield"] = true;
 
-list($object_table, $object_module) = parse_table_and_module($command_line_words[1]);
+$what_to_reverse = $command_line_words[1];
 
+list($object_table, $object_module) = parse_table_and_module($what_to_reverse);
+// die("log rafik : ($object_table, $object_module) = parse_table_and_module($what_to_reverse);");
 if(!$object_table)
 {
     if ($currmod) 
