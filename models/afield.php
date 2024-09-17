@@ -1588,9 +1588,14 @@ class Afield extends AFWObject{
                  $afield_att["applicable"] = "N";
             }
             
-            if($row["MANDATORY"]=="true")  $afield_att["mandatory"] = "Y";
-            if($row["MANDATORY"]=="false") $afield_att["mandatory"] = "N";
-            
+            if($row["MANDATORY"])  $afield_att["mandatory"] = "Y";
+            else $afield_att["mandatory"] = "N";
+            /*
+            if($row["ANSWER"]=="aparameter")
+            {
+                die("row[MANDATORY] = ".$row["MANDATORY"]." afield_att = ".var_export($afield_att,true));
+            }
+            */
             if($row["READONLY"]=="true")  $afield_att["readonly"] = "Y";
             if($row["READONLY"]=="false") $afield_att["readonly"] = "N";
             

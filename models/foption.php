@@ -83,7 +83,7 @@ class Foption extends AFWObject{
                //if(trim($this->getVal("foption_name_$lang"))) return trim($this->getVal("foption_name_$lang"));
                $data = array();
 
-               $data[] = "foc";
+               $data[] = trim($this->getVal("foption_name_$lang"));
                $data[] = $this->getVal("lookup_code");
                $data[] = $this->showAttribute("data_type_id");
                
