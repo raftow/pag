@@ -98,7 +98,7 @@
         }
         catch(Exception $e)
         {
-            // throw $e;
+            throw $e;
             $command_line_result_arr[] = hzm_format_command_line("error", $e->getMessage()); $nb_errors++;
             $command_finished = true;
         }

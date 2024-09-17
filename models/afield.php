@@ -1564,7 +1564,9 @@ class Afield extends AFWObject{
             $afield_att["mode_edit"] = ($row["EDIT"]=="true") ? "Y" : "N";
             $afield_att["mode_qedit"] = ($row["QEDIT"]=="true") ? "Y" : "N";
             $afield_att["field_size"] = ($row["MAXLENGTH"]>0) ? $row["MAXLENGTH"] : 0;
-            $afield_att["field_width"] = ($row["SIZE"]>0) ? $row["SIZE"] : 0;
+            if(!is_numeric($row["SIZE"])) $afield_att["field_width"] = 9999;
+            else $afield_att["field_width"] = ($row["SIZE"]>0) ? $row["SIZE"] : 0;
+            
             $afield_att["field_min_size"] = ($row["MIN-SIZE"]) ? $row["MIN-SIZE"] : 0;
             
             if($row["RELATION"]=="ManyToOne") $afield_att["entity_relation_type_id"] = self::$ENTITY_RELATION_TYPE_MANYTOONE;
