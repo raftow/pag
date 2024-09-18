@@ -20,6 +20,11 @@ global $enum_tables, $lookup_tables, $count_here;
 
 class Afield extends AFWObject{
 
+        public function __construct(){
+		parent::__construct("afield","id","pag");
+                PagAfieldAfwStructure::initInstance($this);
+	}
+
         public static $AFIELD_TYPE_AMNT = 3; 
 
         // BIGINT - قيمة عددية كبيرة  
@@ -96,10 +101,7 @@ class Afield extends AFWObject{
         public static $DB_STRUCTURE = null; 
         
         
-        public function __construct(){
-		parent::__construct("afield","id","pag");
-                PagAfieldAfwStructure::initInstance($this);
-	}
+        
         
         public static function loadById($id)
         {

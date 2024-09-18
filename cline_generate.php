@@ -1,29 +1,34 @@
 <?php
 
-    $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code on ".$command_line_words[1]." with restriction = [$restriction]");
+    $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code with restriction = [$restriction]");
 
-    list($object_table, $object_module) = parse_table_and_module($command_line_words[1]);
+    $command_on_what = $command_line_words[1];
+
+    list($object_table, $object_module) = parse_table_and_module($command_on_what);
 
     if(!$object_table)
     {
-        $command_line_result_arr[] = hzm_format_command_line("warning", "object table to generate is empty");
+        // $command_line_result_arr[] = hzm_format_command_line("warning", "object table to generate is empty");
         if ($currmod) 
         {
             $object_module = "ums";
             $object_table = "module";
+            $command_on_what = "module";
         }
         if ($currtbl_code) 
         {
             $object_module = "pag";
             $object_table = "atable";
+            $command_on_what = "table";
         }
         if ($currfld) 
         {
             $object_module = "pag";
             $object_table = "afield";
+            $command_on_what = "field";
         }        
     }
-    $command_line_result_arr[] = hzm_format_command_line("warning", "object table is set to $object_module.$object_table");
+    $command_line_result_arr[] = hzm_format_command_line("warning", "doing on $command_on_what");
 
 
     $object_code = $command_line_words[2];
