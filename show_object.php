@@ -1,20 +1,4 @@
-<div class='home_panel'>
-        <!--<div class='home_menu'>
-              
-        </div>-->
-        <div class='home_body'>
-              <div class='home_path_browser'>
-              <?php if($objToShow) echo $objToShow->id.".".$objToShow->getDisplay($lang) ?>
-              </div>
-              <div class='home_body_view'>
-                  <?php 
-                  
-                  if($objToShow) 
-                  {
-                        $structure["MINIBOX-TEMPLATE"] = "AUTO";
-                        echo $objToShow->showMinibox($structure, $lang);
-                  }
-                  ?>
-              </div>
-        </div>
-</div>
+<?php
+
+$file_dir_name = dirname(__FILE__);
+include("$file_dir_name/../ums/show_object.php");

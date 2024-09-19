@@ -600,7 +600,7 @@ class PagAtableAfwStructure
 
 		'sci_id'                        => array(
 			'STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'QEDIT' => false,
-			'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'pag', 'FGROUP' => 'tech_fields'
+			'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'ums', 'FGROUP' => 'tech_fields'
 		),
 
 		'tech_notes' 	                => array(
