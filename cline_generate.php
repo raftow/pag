@@ -4,7 +4,7 @@
 
     $command_on_what = $command_line_words[1];
 
-    list($object_table, $object_module) = parse_table_and_module($command_on_what);
+    list($object_table, $object_module) = ClineUtils::parse_table_and_module($command_on_what);
 
     if(!$object_table)
     {

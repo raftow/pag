@@ -54,10 +54,10 @@
         $nb_errors++;$command_finished = true;return;
     }
 
-    list($object_table, $object_module) = parse_table_and_module($object_entity);
+    list($object_table, $object_module) = ClineUtils::parse_table_and_module($object_entity);
     if(!$object_table and !$object_module)                
     {
-        $command_line_result_arr[] = hzm_format_command_line("error", "Error 0004 : parse_table_and_module($object_entity) returned nothing see why with framework expert");
+        $command_line_result_arr[] = hzm_format_command_line("error", "Error 0004 : ClineUtils::parse_table_and_module($object_entity) returned nothing see why with framework expert");
         $nb_errors++;$command_finished = true;return;
     }
     

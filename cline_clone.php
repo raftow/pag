@@ -8,7 +8,7 @@
     }
 
     $command_what = $command_line_words[1];
-    list($what_table, $what_module) = parse_table_and_module($command_what);
+    list($what_table, $what_module) = ClineUtils::parse_table_and_module($command_what);
 
     if(!$what_table)
     {

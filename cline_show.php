@@ -16,7 +16,7 @@
         $command_line_result_arr[] = hzm_format_command_line("error", "can't complete display command, template not found"); $nb_errors++;$command_finished = true;return;
     }
     
-    list($object_table, $object_module) = parse_table_and_module($command_line_words[1]);
+    list($object_table, $object_module) = ClineUtils::parse_table_and_module($command_line_words[1]);
     
     
     if(!$object_module) $object_module = $currmod;

@@ -1,7 +1,7 @@
 <?php
     $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code with params ".var_export($command_line_words, true));
     // ex find module all like app
-    list($object_class_file, $object_module) = parse_table_and_module($command_line_words[1]);
+    list($object_class_file, $object_module) = ClineUtils::parse_table_and_module($command_line_words[1]);
     $filter_method = $command_line_words[2];
     $find_method = $command_line_words[3];
     $find_param = $command_line_words[4];
