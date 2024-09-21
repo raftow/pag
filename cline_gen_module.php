@@ -18,6 +18,14 @@
             $php_code = $objModule->calcPhp_module(false);        
             $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline php");
         }
+        
+        if((!$restriction) or $restriction=="scis")
+        {
+            $command_line_result_arr[] = hzm_format_command_line("info", "generating SCIS methods : ");
+            $php_code = Atable::generateAllMethodStepToSCI($objModule->id);        
+            $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline php scis");
+        }
+        
 
     }
     elseif(!$module_code)

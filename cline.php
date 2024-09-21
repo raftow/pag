@@ -1,4 +1,5 @@
 <?php
+
   $LOOP_MAX = 5;
   if(!$lang) $lang = "ar";
   $file_dir_name = dirname(__FILE__);
@@ -12,6 +13,9 @@
   {
     $command_line_result_arr[] = hzm_format_command_line("error", "No command line written"); $nb_errors++;$command_finished = true;
   }
+
+  AfwAutoloader::addMainModule('pag');
+  AfwAutoloader::addMainModule('bau');
 
   $objme = AfwSession::getUserConnected();
   if(!$objme)

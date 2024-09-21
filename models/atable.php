@@ -1350,6 +1350,50 @@ class Atable extends AFWObject
         return $display_field;
     }
 
+    public static function generateAllMethodStepToSCI($module_id, $textArea=true)
+    {
+        $php_code = "";
+        //if($textArea) $php_code .= "<textarea cols='120' rows='30' style='width:100% !important;direction:ltr;text-align:left'>";
+        $obj = new Atable;
+        $obj->select("id_module", $module_id);
+        $tabList = $obj->loadMany();
+        foreach($tabList as $tabItem)
+        {
+            $table_name = $tabItem->getVal("atable_name");
+            $php_code .= "// $table_name \n";
+            $php_code .= $tabItem->generateMethodStepToSCI()."\n\n";
+        }
+        //if($textArea) $php_code .= "</textarea>"; // 
+        return $php_code;
+    }
+
+    public function generateMethodStepToSCI()
+    {
+        $myAtable_id = $this->id;
+
+        $php_code_sci = "";
+        
+        if ($myAtable_id) {
+            $sci = new ScenarioItem();
+            $sci->select('atable_id', $myAtable_id);
+            
+            $sciList = $sci->loadMany();
+            foreach($sciList as $sciItem)
+            {
+                $step_num = $sciItem->getVal("step_num");
+                $sci_id = $sciItem->id;
+                $php_code_sci .= "  if(\$currstep == $step_num) return $sci_id;\n";
+            }
+        } else {
+            AfwSession::pushWarning("Can't find atable id for this class, check to be sure that is pagged");
+        }
+
+        return "public function getScenarioItemId(\$currstep)
+                {
+                    $php_code_sci
+                    return 0;
+                }";
+    }
     public function generatePhpStrcture()
     {
         return $this->generatePhpClass($dbstruct_only = true);
@@ -1474,6 +1518,8 @@ class Atable extends AFWObject
                 if ($indx_afield_obj->_isMandatory()) $mandatory_indx_cols[$indx_afield_obj->getVal("field_name")] = true;
             }
         }
+
+        $stepToSCI_method = $this->generateMethodStepToSCI();
 
         $TDesc .= "\n\t\t" . implode("\n\t\t", $tempTdesc);
 
@@ -2088,6 +2134,8 @@ class $className extends AFWObject{
         }
         
         $loadAll_method
+
+        $stepToSCI_method
         
         $php_loadByMainIndex_method
         $php_display_method
