@@ -2368,14 +2368,23 @@ class Afield extends AFWObject{
                        $fn = $this->myAnswerClass();
                        break; 
                     case "sql" :
-                       if($mytable) $module = $mytable->hetModule();
-                       else $module = null;
+                        if($mytable) $module = $mytable->hetModule();
+                        else $module = null;
+
+                        if ($module) 
+                        {
+                                $dbsystem_id = $module->getVal("dbsystem_id");
+                                $dbengine_id = $module->getVal("dbengine_id");
+                                $dbsystem = Dbsystem::loadById($dbsystem_id);
+                                $dbengine = Dbengine::loadById($dbengine_id);
+                        }        
+                        else
+                        {
+                                $dbsystem = null;
+                                $dbengine = null;
+                        }
                        
-                       if($module) $dbsystem = $module->hetSystem();
-                       else $dbsystem = null;
                        
-                       if($module) $dbengine = $module->hetEngine();
-                       else $dbengine = null;
                        
                        $dbms = "";
                         

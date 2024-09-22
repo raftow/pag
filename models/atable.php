@@ -2290,11 +2290,18 @@ $replace_val_in_list_of_mfk
         $prefixed_db_name = $server_db_prefix . $dbName;
 
         $module = $this->getModule();
-        if ($module) $dbsystem = $module->getSystem();
-        else $dbsystem = null;
-
-        if ($module) $dbengine = $module->getEngine();
-        else $dbengine = null;
+        if ($module) 
+        {
+            $dbsystem_id = $module->getVal("dbsystem_id");
+            $dbengine_id = $module->getVal("dbengine_id");
+            $dbsystem = Dbsystem::loadById($dbsystem_id);
+            $dbengine = Dbengine::loadById($dbengine_id);
+        }        
+        else
+        {
+            $dbsystem = null;
+            $dbengine = null;
+        } 
 
         $dbms = "";
 
@@ -2351,28 +2358,7 @@ $replace_val_in_list_of_mfk
 
         $module_config_file = "$file_dir_name/../../$module/module_config.php";
         if (!file_exists($module_config_file)) {
-            throw new AfwRuntimeException("file $module_config_file not found");
-            /*
-                    $TECH_FIELDS = array();
-        
-                	$TECH_FIELDS[$module]["CREATION_USER_ID_FIELD"]="creation_user_id";
-                	$TECH_FIELDS[$module]["CREATION_DATE_FIELD"]="creation_date";
-                	$TECH_FIELDS[$module]["UPDATE_USER_ID_FIELD"]="update_user_id";
-                	$TECH_FIELDS[$module]["UPDATE_DATE_FIELD"]="update_date";
-                	$TECH_FIELDS[$module]["VALIDATION_USER_ID_FIELD"]="validation_user_id";
-                	$TECH_FIELDS[$module]["VALIDATION_DATE_FIELD"]="validation_date";
-                	$TECH_FIELDS[$module]["VERSION_FIELD"]="version";
-                	$TECH_FIELDS[$module]["ACTIVE_FIELD"]="active";                
-                
-                
-                        $fld_creation_user_id   = $TECH_FIELDS[$module]["CREATION_USER_ID_FIELD"]  ;
-                        $fld_creation_date      = $TECH_FIELDS[$module]["CREATION_DATE_FIELD"]     ;
-                        $fld_update_user_id     = $TECH_FIELDS[$module]["UPDATE_USER_ID_FIELD"]    ;
-                        $fld_update_date        = $TECH_FIELDS[$module]["UPDATE_DATE_FIELD"]       ;
-                        $fld_validation_user_id = $TECH_FIELDS[$module]["VALIDATION_USER_ID_FIELD"];
-                        $fld_validation_date    = $TECH_FIELDS[$module]["VALIDATION_DATE_FIELD"]   ;
-                        $fld_active             = $TECH_FIELDS[$module]["ACTIVE_FIELD"]           ;
-                        $fld_version            = $TECH_FIELDS[$module]["VERSION_FIELD"]            ;                */
+            throw new AfwRuntimeException("file $module_config_file not found");            
         } else {
             include($module_config_file);
             $fld_creation_user_id   = $TECH_FIELDS[$module]["CREATION_USER_ID_FIELD"];
@@ -3260,7 +3246,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
         $framework_id = AfwSession::config("framework_id", 1);
         $file_dir_name = dirname(__FILE__);
-        include("$file_dir_name/../framework_$framework_id" . "_specification.php");
+        include("$file_dir_name/../../lib/framework_$framework_id" . "_specification.php");
 
         if ($framework_screens_bfcode_starts_with) $bf_code_starts_with = $framework_screens_bfcode_starts_with . "-";
         else $bf_code_starts_with = "";
@@ -3321,7 +3307,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
         $file_dir_name = dirname(__FILE__);
 
-        require("$file_dir_name/../framework_$framework_id" . "_specification.php");
+        require("$file_dir_name/../../lib/framework_$framework_id" . "_specification.php");
         // include_once("$file_dir_name/../ums/bfunction.php");
 
         $this_id = $this->getId();

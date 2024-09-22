@@ -31,9 +31,10 @@
     }
     if($object_list_attribute_origin=="goals")
     {
-        if(!$object_entity) 
+        if(!$object_entity) $object_entity = "domain";
+        
+        if($object_entity=="domain") 
         {
-            $object_entity = "domain";
             $object_list_attribute="goalList";
             $setted_phrase .= "object_entity setted to $object_entity, ";
             

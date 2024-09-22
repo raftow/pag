@@ -1,30 +1,35 @@
 <?php
 // main.php?Main_Page=afw_mode_edit.php&cl=Domain&currmod=pag&id=25
 
+$module = "adm";
+$direct_dir_name = $file_dir_name = dirname(__FILE__);
+include("$file_dir_name/../$module/$module"."_start.php");
 
-$struc = "application_model_engagement
-ID	1					N	INTEGER	معرف المسار	Track Id		
-TRACK_CODE	2					N	VARCHAR2 (50 Byte)	رمز المسار	Track Code	UK	
-TRACK_NAME_AR	3					N	VARCHAR2 (50 Byte)	اسم المسار-العربي	Track Name -Arabic	UK	
-TRACK_NAME_EN	4					N	VARCHAR2 (50 Byte)	اسم المسار -الإنجليزي	Track Name-English	UK	
-Sorting_instructions	5					Y	VARCHAR2 (200 Byte)	تعليمات معايير المفاضلة	Sorting Criteria Instructions		
-Application_model_id	6					N	INTEGER	نموذج القبول	Application Model		OneToMany
-Sorting_Formula	7					Y	VARCHAR2 (200 Byte)	صيغة المفاضلة	Sorting Criteria Formula		";
+
+$moduleFUC = AfwStringHelper::firstCharUpper($module);
+
+$struc = "screen_model
+Id	1					N	integer	المعرف الفريد	Id		
+screen_Code	2					N	VARCHAR2 (32 Byte)	الرمز	screen Code	UK	
+screen_Title	3					N	VARCHAR2 (32 Byte)	العنوان	screen Title		
+screen_Name_ar	4					N	VARCHAR2 (64 Byte)	الاسم العربي	screen name arabic		
+screen_Name_en	5					N	VARCHAR2 (64 Byte)	الاسم الإنجليزي	screen name english		
+application_field_mfk	6					N	VARCHAR2 (255 Byte)	الحقول المتوفرة في الشاشة	available fields		";
 
 
 
 $phpTemplate = "<?php
-        class [CLASS_NAME] extends AdmObject{
+        class [CLASS_NAME] extends $moduleFUC"."Object{
 
                 public static \$DATABASE		= \"\"; 
-                public static \$MODULE		    = \"adm\"; 
+                public static \$MODULE		    = \"$module\"; 
                 public static \$TABLE			= \"[TABLE_NAME]\"; 
                 public static \$DB_STRUCTURE = null;
                 // public static \$copypast = true;
 
                 public function __construct(){
-                        parent::__construct(\"[TABLE_NAME]\",\"id\",\"adm\");
-                        Adm[CLASS_NAME]AfwStructure::initInstance(\$this);
+                        parent::__construct(\"[TABLE_NAME]\",\"id\",\"$module\");
+                        $moduleFUC"."[CLASS_NAME]AfwStructure::initInstance(\$this);
                         
                 }
 
@@ -56,7 +61,7 @@ $phpTemplate = "<?php
 ";
 
 $structTemplate = "<?php 
-        class Adm[CLASS_NAME]AfwStructure
+        class $moduleFUC"."[CLASS_NAME]AfwStructure
         {
         
                 public static function initInstance(&\$obj)
@@ -72,7 +77,7 @@ $structTemplate = "<?php
 
                                 \$obj->editByStep = true;
                                 \$obj->editNbSteps = [STEPS]; 
-                                // \$obj->after_save_edit = array(\"class\"=>'aconditionOriginType',\"attribute\"=>'acondition_origin_type_id', \"currmod\"=>'adm',\"currstep\"=>1);
+                                // \$obj->after_save_edit = array(\"class\"=>'aconditionOriginType',\"attribute\"=>'acondition_origin_type_id', \"currmod\"=>'$module',\"currstep\"=>1);
                         }
                 }
                 
@@ -152,7 +157,7 @@ $F_TEMPLATE = [];
 
 $F_TEMPLATE["FK"] = "'[ANSWER_TABLE_NAME]_id' => array([FGROUP]'IMPORTANT' => 'IN',  'SEARCH' => true, 'QSEARCH' => true, 'SHOW' => true,  'RETRIEVE' => true,  
         'EDIT' => true,  'QEDIT' => true, 'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-        'TYPE' => 'FK',  'ANSWER' => '[ANSWER_TABLE_NAME]',  'ANSMODULE' => 'adm',  'SIZE' => 40,  'DEFAUT' => 0,    
+        'TYPE' => 'FK',  'ANSWER' => '[ANSWER_TABLE_NAME]',  'ANSMODULE' => '$module',  'SIZE' => 40,  'DEFAUT' => 0,    
         'DISPLAY' => true,  'STEP' => [STEP],  'RELATION' => '[RELATION]', 'MANDATORY' => [MAND], 'READONLY'=>false, 'AUTOCOMPLETE' => false,
         'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
         'CSS' => 'width_pct_[PCT]', ),	
@@ -160,7 +165,7 @@ $F_TEMPLATE["FK"] = "'[ANSWER_TABLE_NAME]_id' => array([FGROUP]'IMPORTANT' => 'I
 
 $F_TEMPLATE["MFK"] = "'[ANSWER_TABLE_NAME]_mfk' => array([FGROUP]'IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  
         'EDIT' => true,  'QEDIT' => true,  'UTF8' => false, 'MANDATORY' => [MAND],  
-        'TYPE' => 'MFK',  'ANSWER' => '[ANSWER_TABLE_NAME]',  'ANSMODULE' => 'adm',    'DISPLAY' => true,  'STEP' => [STEP],  
+        'TYPE' => 'MFK',  'ANSWER' => '[ANSWER_TABLE_NAME]',  'ANSMODULE' => '$module',    'DISPLAY' => true,  'STEP' => [STEP],  
         'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
         'CSS' => 'width_pct_[PCT]',),
 
@@ -288,8 +293,6 @@ $F_TEMPLATE["::additional"] = "'[FIELD_NAME]' => array([FGROUP]'IMPORTANT' => 'I
                                 'CSS' => 'width_pct_50',),
 ";
 
-$direct_dir_name = $file_dir_name = dirname(__FILE__);
-include("$file_dir_name/adm_start.php");
 $objme = AfwSession::getUserConnected();
 //if(!$objme) $studentMe = AfwSession::getStudentConnected();
 $studentMe = null;
@@ -590,7 +593,10 @@ $php_code .= "// ------------------------ \n\n";
 $php_code .= "trad_en_".$TABLE_NAME.".php \n<?php\n";
 $php_code .= $phpTrad_en;
 $php_code .= "// ------------------------ \n\n";
-$php_code .= "http://localhost/pag/m.php?mp=pag_me.php&cl=$CLASS_NAME&cm=adm&uie=1 \n\n";
+$php_code .= "// Reverse engineering with PAG web plateform \n\n";
+$php_code .= "http://localhost/pag/m.php?mp=pag_me.php&cl=$CLASS_NAME&cm=$module&uie=1 \n\n";
+$php_code .= "// Reverse engineering with command line \n\n";
+$php_code .= "<b>reverse $TABLE_NAME.$module</b>";
 
 
 $php_code = str_replace("[FIELDS_STRUCT]", $FIELDS_STRUCT, $php_code);

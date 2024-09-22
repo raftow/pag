@@ -42,5 +42,17 @@
         $command_line_result_arr[] = hzm_format_command_line("warning", "        this command will make the @new-module @new-or-existing-table provided as current work objects");
     }
 
+    if(ClineUtils::similarCommand($command_to_help, "list"))  
+    {
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "list @filter @what [from @entity @code]", "to do a retrieve of list (load many) if @entity and @code are omitted it take the current work object", "en", "log");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 1 : list all goals");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 2 : list original fields");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 3 : list index fields from table screen_model.adm");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 4 : list all goals from domain hr");
+        
+    }
+
+    // ex  (explicit if not same code) 
+
     $command_done = true;
     $command_finished = true;
