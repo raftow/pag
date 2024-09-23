@@ -1560,11 +1560,11 @@ class Afield extends AFWObject{
             $afield_att = array();
             //$afield_att["mode_name"] = "N";
             $afield_att["mandatory"] = "N";
-            $afield_att["mode_search"] = ($row["SEARCH"]=="true") ? "Y" : "N";
-            $afield_att["mode_show"] = ($row["SHOW"]=="true") ? "Y" : "N";
-            $afield_att["mode_retrieve"] = ($row["RETRIEVE"]=="true") ? "Y" : "N";
-            $afield_att["mode_edit"] = ($row["EDIT"]=="true") ? "Y" : "N";
-            $afield_att["mode_qedit"] = ($row["QEDIT"]=="true") ? "Y" : "N";
+            $afield_att["mode_search"] = ($row["SEARCH"]) ? "Y" : "N";
+            $afield_att["mode_show"] = ($row["SHOW"]) ? "Y" : "N";
+            $afield_att["mode_retrieve"] = ($row["RETRIEVE"]) ? "Y" : "N";
+            $afield_att["mode_edit"] = ($row["EDIT"]) ? "Y" : "N";
+            $afield_att["mode_qedit"] = ($row["QEDIT"]) ? "Y" : "N";
             $afield_att["field_size"] = ($row["MAXLENGTH"]>0) ? $row["MAXLENGTH"] : 0;
             if(!is_numeric($row["SIZE"])) $afield_att["field_width"] = 9999;
             else $afield_att["field_width"] = ($row["SIZE"]>0) ? $row["SIZE"] : 0;
@@ -1579,10 +1579,10 @@ class Afield extends AFWObject{
             
             if($row["CHAR_TEMPLATE"])  $afield_att["char_group_men"] = self::char_template_to_mfk($row["CHAR_TEMPLATE"]);
             
-            $afield_att["mode_qsearch"] = ($row["QSEARCH"]=="true") ? "Y" : "N";
-            if($row["REQUIRED"]=="true")
+            $afield_att["mode_qsearch"] = ($row["QSEARCH"]) ? "Y" : "N";
+            if($row["REQUIRED"])
             { 
-                 $row["MANDATORY"] = "true";
+                 $row["MANDATORY"] = true;
                  $afield_att["applicable"] = "Y";
             }
             else
@@ -1598,8 +1598,8 @@ class Afield extends AFWObject{
                 die("row[MANDATORY] = ".$row["MANDATORY"]." afield_att = ".var_export($afield_att,true));
             }
             */
-            if($row["READONLY"]=="true")  $afield_att["readonly"] = "Y";
-            if($row["READONLY"]=="false") $afield_att["readonly"] = "N";
+            if($row["READONLY"])  $afield_att["readonly"] = "Y";
+            else $afield_att["readonly"] = "N";
             
             
             if($row["DEFAULT"] and $row["UTF8"])
@@ -1619,9 +1619,9 @@ class Afield extends AFWObject{
                     if($afcObj) $afield_att["afield_category_id"] = $afcObj->getId();
             }
             
-            // $afield_att["mode_retrieve_admin"] = ($row["SEARCH-ADMIN"]=="true") ? "Y" : "N";
-            // $afield_att["mode_edit_admin"] = ($row["SEARCH-ADMIN"]=="true") ? "Y" : "N";
-            // $afield_att["mode_qedit_admin"] = ($row["SEARCH-ADMIN"]=="true") ? "Y" : "N";
+            // $afield_att["mode_retrieve_admin"] = ($row["SEARCH-ADMIN"]) ? "Y" : "N";
+            // $afield_att["mode_edit_admin"] = ($row["SEARCH-ADMIN"]) ? "Y" : "N";
+            // $afield_att["mode_qedit_admin"] = ($row["SEARCH-ADMIN"]) ? "Y" : "N";
             $afield_att["field_format"] = $row["FORMAT"];
             $afield_att["title_after"] = $row["TITLE_AFTER"];
             $afield_att["unit"] = $row["UNIT"];
@@ -1631,7 +1631,7 @@ class Afield extends AFWObject{
             
             
             
-            $afield_att["utf8"] = ($row["UTF8"]=="true") ? "Y" : "N";
+            $afield_att["utf8"] = ($row["UTF8"]) ? "Y" : "N";
             if(!$afield_att["afield_type_id"]) $afield_att["afield_type_id"] = ($row["TYPE"]=="FK") ? 5 : 0 ;
             if(!$afield_att["afield_type_id"]) $afield_att["afield_type_id"] = ($row["TYPE"]=="MFK") ? 6 : 0 ;
             

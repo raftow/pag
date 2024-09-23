@@ -355,3 +355,18 @@ a.hzm3-button.hzm3-light-grey.hzm3-block {
     text-align: left;
 }
 
+.container.pag.cline-php {
+    min-height: 4250px;
+}
+
+.hzm_body.cline.go {
+    background-color: black;
+    background-image: url(../pic/cline-bg.png);
+    background-size: 100%;
+    min-height: inherit;
+}
+
+nav#front_main_menu {
+    background-color: white !important;
+}
+
