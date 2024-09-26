@@ -1,20 +1,18 @@
 <?php
 // main.php?Main_Page=afw_mode_edit.php&cl=Domain&currmod=pag&id=25
 
-$module = "adm";
+$module = "pag";
 $direct_dir_name = $file_dir_name = dirname(__FILE__);
 include("$file_dir_name/../$module/$module"."_start.php");
 
 
 $moduleFUC = AfwStringHelper::firstCharUpper($module);
 
-$struc = "screen_model
-Id	1					N	integer	المعرف الفريد	Id		
-screen_Code	2					N	VARCHAR2 (32 Byte)	الرمز	screen Code	UK	
-screen_Title	3					N	VARCHAR2 (32 Byte)	العنوان	screen Title		
-screen_Name_ar	4					N	VARCHAR2 (64 Byte)	الاسم العربي	screen name arabic		
-screen_Name_en	5					N	VARCHAR2 (64 Byte)	الاسم الإنجليزي	screen name english		
-application_field_mfk	6					N	VARCHAR2 (255 Byte)	الحقول المتوفرة في الشاشة	available fields		";
+$struc = "migration
+migration_code	1					N	VARCHAR2 (10)	رمز الترقية	upgrade code
+auser_id	2					N	INTEGER	المطور صاحب الترقية	upgrade user
+title	3					N	VARCHAR2 (128 Byte)	عنوان الترقية	upgrade title
+done_ind	4					N	CHAR(1)	تمت الترقية ؟	upgrade done ?";
 
 
 
@@ -60,6 +58,8 @@ $phpTemplate = "<?php
 
 ";
 
+
+
 $structTemplate = "<?php 
         class $moduleFUC"."[CLASS_NAME]AfwStructure
         {
@@ -91,37 +91,37 @@ $structTemplate = "<?php
                                         [FIELDS_STRUCT]
 
 
-                                        'active' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true, 'QEDIT' => true, 'DEFAUT' => 'Y',  
+                                        '$actv_fld' => array('SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true, 'QEDIT' => true, 'DEFAUT' => 'Y',  
                                                 'TYPE' => 'YN',    'FORMAT' => 'icon',  'STEP' => 99,  
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_25',),
         
-                                        'created_by' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
+                                        '$cre_u_id' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
                                                 'TYPE' => 'FK',  'ANSWER' => 'auser',  'ANSMODULE' => 'ums',    'DISPLAY' => '',  'STEP' => 99,  
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_100',),
 
-                                        'created_at' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
+                                        '$cre_date' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
                                                 'TYPE' => 'GDAT',    'DISPLAY' => '',  'STEP' => 99,  
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_100',),
 
-                                        'updated_by' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
+                                        '$mod_u_id' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
                                                 'TYPE' => 'FK',  'ANSWER' => 'auser',  'ANSMODULE' => 'ums',    'DISPLAY' => '',  'STEP' => 99,  
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_100',),
 
-                                        'updated_at' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
+                                        '$mod_date' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
                                                 'TYPE' => 'GDAT',    'DISPLAY' => '',  'STEP' => 99,  
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_100',),
 
-                                        'validated_by' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
+                                        '$val_u_id' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
                                                 'TYPE' => 'FK',  'ANSWER' => 'auser',  'ANSMODULE' => 'ums',    'DISPLAY' => '',  'STEP' => 99,  
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_100',),
 
-                                        'validated_at' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
+                                        '$val_date' => array('SHOW-ADMIN' => true,  'RETRIEVE' => false,  'EDIT' => false, 'QEDIT' => false,  
                                                 'TYPE' => 'GDAT',    'DISPLAY' => '',  'STEP' => 99,  
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_100',),
@@ -129,7 +129,7 @@ $structTemplate = "<?php
                                         
 
 
-                                        'version'                  => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 
+                                        '$ver_fld'                  => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 
                                                                         'QEDIT' => false, 'TYPE' => 'INT', 'FGROUP' => 'tech_fields'),
 
                                         'update_groups_mfk'             => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 
@@ -596,7 +596,7 @@ $php_code .= "// ------------------------ \n\n";
 $php_code .= "// Reverse engineering with PAG web plateform \n\n";
 $php_code .= "http://localhost/pag/m.php?mp=pag_me.php&cl=$CLASS_NAME&cm=$module&uie=1 \n\n";
 $php_code .= "// Reverse engineering with command line \n\n";
-$php_code .= "<b>reverse $TABLE_NAME.$module</b>";
+$php_code .= "<b>reverse table $TABLE_NAME.$module</b>";
 
 
 $php_code = str_replace("[FIELDS_STRUCT]", $FIELDS_STRUCT, $php_code);

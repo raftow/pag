@@ -53,7 +53,7 @@
 				),
 
 		'jobroleList' => array('STEP' => 2,  
-				'TYPE' => 'FK',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'FK',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  
 				'CATEGORY' => 'ITEMS',  'ITEM' => 'id_domain',  
 				'WHERE' => "", 
 				 'MANDATORY' => true,  'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true,  'QEDIT' => false,  'READONLY' => true,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  

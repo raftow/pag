@@ -1225,7 +1225,7 @@ class Atable extends AFWObject
                 break;
 
             case "concernedGoalList":
-                // require_once("$file_dir_name/../bau/goal_concern.php");
+                AfwAutoLoader::addModule('bau');
                 if ($this->getId() > 0) $goalList = GoalConcern::getJobRoleGoalListUsingTable(0, $this->getId());
                 else $goalList = array();
                 return $goalList;

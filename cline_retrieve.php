@@ -21,7 +21,7 @@
                 
                 
                 $oneObjIdLinked = $oneObj->showAttributeAsLinkMode("id","EDIT");
-                $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $oneObj->getNodeDisplay($lang), $dataErrors, $errorClass, $lang);
+                $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $oneObj->getNodeDisplay($lang), $dataErrors, $lang, $errorClass);
                 if($odd_oven != "odd") $odd_oven = "odd";
                 else $odd_oven = "oven";
                 unset($oneObj);

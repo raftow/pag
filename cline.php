@@ -73,7 +73,7 @@
       $loopArr = [];
    
    
-      
+      $command_line = trim($command_line);
       $command_line_words = explode(" ", $command_line);
       
       list($command_code, $restriction) = explode("-", $command_line_words[0]);
@@ -96,13 +96,15 @@
         {
           if(!file_exists($cmd_file_path))
           {
-            throw new AfwRuntimeException("the command line $command_code still not defined");
+            // throw new AfwRuntimeException("the command line $command_code not found");
+            $command_line_result_arr[] = hzm_format_command_line("error", "the command $command_code not found"); $nb_errors++;
+            $command_finished = true;
           }
-          include $cmd_file_path;
+          else include $cmd_file_path;
         }
         catch(Exception $e)
         {
-            throw $e;
+            // throw $e;
             $command_line_result_arr[] = hzm_format_command_line("error", $e->getMessage()); $nb_errors++;
             $command_finished = true;
         }

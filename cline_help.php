@@ -52,6 +52,18 @@
         
     }
 
+    if(ClineUtils::similarCommand($command_to_help, "upgrade"))  
+    {
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "upgrade [@action] [@what]", "@action-default is `show` @what-default is `all`", "en");
+        $command_line_result_arr[] = hzm_format_command_line("success", " -> manage the migrations to upgrade the database of current module, see examples below", "en"); 
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 1 : upgrade show [all] : show all migrations");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 1.1 : upgrade show done : show done migrations");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 1.2 : upgrade show todo : show todo migrations");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 2 : upgrade run [all] : upgrade by running all the todo migrations");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 3 : upgrade run 00005 : run the migration 00005 if not already done");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        example 4 : upgrade ignore 00005 : ignore the migration 00005 and make as it is already done manually");
+    }
+
     // ex  (explicit if not same code) 
 
     $command_done = true;

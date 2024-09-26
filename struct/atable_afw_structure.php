@@ -380,18 +380,23 @@ class PagAtableAfwStructure
 		),
 
 		'jobrole_id' => array(
-			'IMPORTANT' => 'IN',  'SEARCH' => false,  'SHOW' => true,  'RETRIEVE' => 'temporaire',  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  'UTF8' => false,
-			'TYPE' => 'FK',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'pag',  'SHORTNAME' => 'emjob',  'MANDATORY' => false,  'POLE' => true,
+			'IMPORTANT' => 'IN',  'SEARCH' => false,  'SHOW' => true,  'RETRIEVE' => 'temporaire',  
+			'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  'UTF8' => false,
+			'TYPE' => 'FK',  'ANSWER' => 'jobrole',  'ANSMODULE' => 'ums',  'SHORTNAME' => 'emjob',  
+			'MANDATORY' => false,  'POLE' => true,
 			'WHERE' => "(id = 53 or id_domain in (1,§id_domain§))",
-			'DEFAUT' => 0,  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'FGROUP' => 'roles_def',  'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'DEFAUT' => 0,  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'FGROUP' => 'roles_def',  
+			'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true,
 		),
-
+		
 		'goalConcernList1' => array(
 			'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',
 			'CATEGORY' => 'ITEMS',  'ITEM' => '',  'FORMAT' => 'retrieve',
 			'WHERE' => "application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,1,%'",
-			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'MANDATORY' => true,  'FGROUP' => 'roles_def',  'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+			'NO-LABEL' => false,  'MANDATORY' => true,  'FGROUP' => 'roles_def',  'STEP' => 5,  
+			'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true,
 		),
 
@@ -399,7 +404,9 @@ class PagAtableAfwStructure
 			'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',
 			'CATEGORY' => 'ITEMS',  'ITEM' => '',  'FORMAT' => 'retrieve',
 			'WHERE' => "application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,2,%'",
-			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'MANDATORY' => true,  'FGROUP' => 'roles_def',  'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+			'NO-LABEL' => false,  'MANDATORY' => true,  'FGROUP' => 'roles_def',  'STEP' => 5,  
+			'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true,
 		),
 
@@ -407,7 +414,9 @@ class PagAtableAfwStructure
 			'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',
 			'CATEGORY' => 'ITEMS',  'ITEM' => '',  'FORMAT' => 'retrieve',
 			'WHERE' => "application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,3,%'",
-			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'MANDATORY' => true,  'FGROUP' => 'roles_def',  'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+			'NO-LABEL' => false,  'MANDATORY' => true,  'FGROUP' => 'roles_def',  'STEP' => 5,  
+			'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true,
 		),
 
@@ -415,7 +424,9 @@ class PagAtableAfwStructure
 			'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',
 			'CATEGORY' => 'ITEMS',  'ITEM' => '',  'FORMAT' => 'retrieve',
 			'WHERE' => "application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,4,%'",
-			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'MANDATORY' => false,  'FGROUP' => 'roles_def',  'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+			'NO-LABEL' => false,  'MANDATORY' => false,  'FGROUP' => 'roles_def',  'STEP' => 5,  
+			'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
 
@@ -423,7 +434,9 @@ class PagAtableAfwStructure
 			'TYPE' => 'FK',  'ANSWER' => 'goal_concern',  'ANSMODULE' => 'bau',
 			'CATEGORY' => 'ITEMS',  'ITEM' => '',  'FORMAT' => 'retrieve',
 			'WHERE' => "application_id=§id_module§ and atable_mfk like '%,§id§,%' and operation_men like '%,5,%'",
-			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'MANDATORY' => false,  'FGROUP' => 'roles_def',  'STEP' => 5,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'SHOW' => true,  'EDIT' => false,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+			'NO-LABEL' => false,  'MANDATORY' => false,  'FGROUP' => 'roles_def',  'STEP' => 5,  
+			'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
 

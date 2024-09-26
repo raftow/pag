@@ -159,7 +159,7 @@ td.cline_td>span.cline-normal {
 
 
 .bg-oven {
-    background-color: #2e5264;
+    background-color: #000;
 }
 
 .bg-header {
@@ -274,4 +274,8 @@ textarea.cline.struct.php {
 
 .home_banner {
     background-image: url(../pic/cline-bg.png) !important;
+}
+
+.cline-obj.obj-error.bg-oven {
+    background-color: black;
 }
