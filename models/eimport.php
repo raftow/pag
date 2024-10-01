@@ -6,85 +6,12 @@ $file_dir_name = dirname(__FILE__);
 
 class Eimport extends AFWObject{
 
-	public static $DATABASE		= ""; public static $MODULE		    = "pag"; public static $TABLE			= ""; public static $DB_STRUCTURE = null; /* = array(
-		"id" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "TYPE" => "PK"),
-
-		"orgunit_id" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "QEDIT" => false, "EDIT" => true, "SIZE" => 40, "SEARCH-ADMIN" => true, 
-                                          "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "FK", "ANSWER" => orgunit, "ANSMODULE" => "hrm", "DEFAULT" => 0),  //, "READONLY"=>true
-                                          
-                "atable_id" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => false, "SIZE" => 40, 
-                                     TYPE => FK, ANSWER => atable, ANSMODULE => pag, WHERE => "avail='Y' and tboption_mfk like '%,1,%'",
-                                                "DEFAULT" => 0, AUTOCOMPLETE=>false, "SEARCH-BY-ONE"=>true, SHORTNAME => table,),
-
-                "overwrite_data" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => true, "SIZE" => 32, 
-                                  "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "YN", "DEFAULT" => "Y"),
-                                  
-                "skip_error" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => true, "SIZE" => 32, 
-                                  "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "YN", "DEFAULT" => "N"),
-
-                "always_commit" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => true, "SIZE" => 32, 
-                                  "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "YN", "DEFAULT" => "N"),
-
-		"afile_id" => array("IMPORTANT" => "IN", "SEARCH" => false, "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "QEDIT" => true, "SIZE" => 40, "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, 
-                                    "TYPE" => "FK", "ANSWER" => afile, "WHERE"=>"(stakeholder_id=§orgunit_id§ or owner_id=§ME§) and doc_type_id in (14)", "DEFAULT" => 0, "ANSMODULE" => "pag",
-                                    "SHOW-AS-ROW" => true, "MANDATORY"=>true, SHORTNAME => file,
-                                    "DISPLAY"=>"SHOW", "STYLE"=>"width: 197px !important;   height: 240px !important;", "PILLAR-PART" =>true,    
-                                    ),
-
-                curr_page => array(SEARCH => false,  QSEARCH => false,  SHOW => true,  RETRIEVE => false,  
-				EDIT => true,  QEDIT => true,  
-				SIZE => 32,  UTF8 => false,  
-				TYPE => "INT",  READONLY => false, "DEFAULT"=>1),
-
-                
-                preview 	    => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>true, "EDIT" => true, 'STEP' =>2, READONLY=>true, FORM_HEIGHT=>"600px", SIZE => 255,  ),
-                
-                option_mfk => array("SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, SHORTNAME => options, 
-                                      "TYPE" => "MFK", "ANSWER" => several_option, "ANSMODULE" => pag, 
-                                      WHERE=>"(atable_id=§atable_id§ or atable_id=0 or atable_id is null) and option_table_id = 3604", 'STEP' =>3,),
-
-                analysis 	    => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>true, "EDIT" => true, 'STEP' =>3, READONLY=>true, FORM_HEIGHT=>"200px"),
-		
-                "date_format" 	    => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>true, "EDIT" => true, 'STEP' =>3, READONLY=>true),
-                "hdate_format" 	    => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>true, "EDIT" => true, 'STEP' =>3, READONLY=>true),
-                "lang" 	    => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>true, "EDIT" => true, 'STEP' =>3, READONLY=>true),
-
-		"titre" => array("IMPORTANT" => "IN", "SHOW" => true, "RETRIEVE" => true, "EDIT" => true, "UTF8" => true, "SIZE" => 255, "TYPE" => "TEXT", 
-                                 TITLE_AFTER=>"", HELP=>"next step will be the import execution", 'STEP' =>3,),
-                
-                "executed" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => true, "SIZE" => 32, 
-                                  "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "YN", "DEFAULT" => "N", 'STEP' =>4, READONLY=>true),
-                "succeeded" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => false, "EDIT" => true, "QEDIT" => true, "SIZE" => 32, 
-                                  "SEARCH-ADMIN" => true, "SHOW-ADMIN" => true, "EDIT-ADMIN" => true, "UTF8" => false, "TYPE" => "YN", "DEFAULT" => "N", 'STEP' =>4, READONLY=>true),
-                "exec_date" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, "RETRIEVE" => true,  STEP=>4, READONLY=>true, TYPE => DATE),
-		"exec_start_time" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, RETRIEVE => true, TYPE => TIME, 'STEP' =>4, READONLY=>true),
-		"exec_end_time" => array("IMPORTANT" => "IN", "SEARCH" => true, "SHOW" => true, RETRIEVE => true, TYPE => TIME, 'STEP' =>4, READONLY=>true),
-                "result" 	    => array("TYPE" => "TEXT", "CATEGORY" => "FORMULA", "SHOW"=>true, "EDIT" => true, 'STEP' =>4, READONLY=>true, FORM_HEIGHT=>"500px"),
-
-                "records_processed" => array("CATEGORY" => "FORMULA", "EDIT" => true, "SHOW" => true, "RETRIEVE" => true, "READONLY" => true, "TYPE" => "INT", 'STEP' =>5, READONLY=>true),
-                "records_updated" => array("CATEGORY" => "FORMULA", "EDIT" => true, "SHOW" => true, "RETRIEVE" => true, "READONLY" => true, "TYPE" => "INT", 'STEP' =>5, READONLY=>true),
-                "records_new" => array("CATEGORY" => "FORMULA", "EDIT" => true, "SHOW" => true, "RETRIEVE" => true, "READONLY" => true, "TYPE" => "INT", 'STEP' =>5, READONLY=>true),
-                "records_erroned" => array("CATEGORY" => "FORMULA", "EDIT" => true, "SHOW" => true, "RETRIEVE" => true, "READONLY" => true, "TYPE" => "INT", 'STEP' =>5, READONLY=>true),
-                
-                records => array(TYPE => FK, ANSWER => eimport_record, ANSMODULE => pag, CATEGORY => ITEMS, ITEM => 'eimport_id', WHERE=>'', 
-                                       SHOW => true, FORMAT=>retrieve, EDIT => true, READONLY => true, DATA_TABLE=>"eimport_records", FORM_HEIGHT=>"900px", 
-                                       ICONS=>true, 'DELETE-ICON'=>false, BUTTONS=>true, "NO-LABEL"=>true, 'STEP' =>6),
-                
-		"id_aut" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_aut" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"id_mod" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_mod" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"id_valid" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "auser", "ANSMODULE" => "ums", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-		"date_valid" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "DATE"),
-		"avail" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "DEFAULT" => "Y", "EDIT-ADMIN" => true, "TYPE" => "YN"),
-		"version" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "TYPE" => "INT"),
-		"update_groups_mfk" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"delete_groups_mfk" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"display_groups_mfk" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "ugroup", "ANSMODULE" => "ums", "TYPE" => "MFK"),
-		"sci_id" => array("IMPORTANT" => "IN", "SHOW-ADMIN" => true, "RETRIEVE" => false, "EDIT" => false, "ANSWER" => "scenario_item", "TYPE" => "FK", "SIZE" => 40, "DEFAULT" => 0),
-	);
-	        
-	*/ public function __construct(){
+	public static $DATABASE		= ""; 
+        public static $MODULE		    = "pag"; 
+        public static $TABLE			= "eimport"; 
+        public static $DB_STRUCTURE = null; 
+        
+        public function __construct(){
 		parent::__construct("eimport","id","pag");
                 $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
                 $this->DISPLAY_FIELD = "titre";

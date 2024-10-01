@@ -509,7 +509,7 @@ class Atable extends AFWObject
 
 
 
-    public function getNbFieldsInMode($mode_name)
+    public function getNbFieldsInMode($mode_name="all")
     {
         $file_dir_name = dirname(__FILE__);
         // // require_once("$file_dir_name/afield.php");
@@ -518,9 +518,26 @@ class Atable extends AFWObject
 
         $af->select("atable_id", $this->getId());
         $af->select("avail", 'Y');
-        $af->select($mode_name, 'Y');
+        if($mode_name != "all") $af->select($mode_name, 'Y');
+        if($mode_name == "all-except-auto-generated") 
+        {
+            $af->where("field_name not in ('name_ar','name_en','desc_ar','desc_en')");
+        }
 
         return $af->count();
+    }
+
+    public function forceDelete()
+    {
+        
+        $this_id = $this->id;
+        
+        AfwDatabase::db_query("delete from c0ums.bfunction where curr_class_atable_id = $this_id");
+        AfwDatabase::db_query("delete from c0pag.afield where atable_id = $this_id");
+        AfwDatabase::db_query("delete from c0ums.scenario_item where atable_id = $this_id");
+        AfwDatabase::db_query("delete from c0pag.atable where id = $this_id");
+        return true;
+        //return $this->delete();
     }
 
     public function getAFieldCount($only_reel = true)
@@ -2805,7 +2822,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                }
                */
     }
-
+    /*
     public function beforeDelete($id, $id_replace)
     {
         if ($id_replace == 0) {
@@ -2820,7 +2837,447 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $af->update(false);
         }
         return true;
-    }
+    }*/
+
+    public function beforeDelete($id,$id_replace) 
+        {
+            $server_db_prefix = AfwSession::config("db_prefix","c0");
+            
+            if(!$id)
+            {
+                $id = $this->getId();
+                $simul = true;
+            }
+            else
+            {
+                $simul = false;
+            }
+            
+            if($id)
+            {   
+               if($id_replace==0)
+               {
+                   // FK part of me - not deletable 
+                       // ums.bfunction-الجدول	curr_class_atable_id  OneToMany (required field)
+                        // require_once "../ums/bfunction.php";
+                        $obj = new Bfunction();
+                        $obj->where("curr_class_atable_id = '$id' and avail='Y' ");
+                        $nbRecords = $obj->count();
+                        // check if there's no record that block the delete operation
+                        if($nbRecords>0)
+                        {
+                            $this->deleteNotAllowedReason = "Used in some business functions(s) as Curr class atable";
+                            return false;
+                        }
+                        // if there's no record that block the delete operation perform the delete of the other records linked with me and deletable
+                        if(!$simul) $obj->deleteWhere("curr_class_atable_id = '$id' and avail='N'");
+
+                       // pag.afield-الجدول	atable_id  OneToMany (required field)
+                        // require_once "../pag/afield.php";
+                        $obj = new Afield();
+                        $obj->where("atable_id = '$id' and avail='Y' ");
+                        $nbRecords = $obj->count();
+                        // check if there's no record that block the delete operation
+                        if($nbRecords>0)
+                        {
+                            $this->deleteNotAllowedReason = "Used in some Afields(s) as Atable";
+                            return false;
+                        }
+                        // if there's no record that block the delete operation perform the delete of the other records linked with me and deletable
+                        if(!$simul) $obj->deleteWhere("atable_id = '$id' and avail='N'");
+
+
+                        
+                   // FK part of me - deletable 
+                       // bau.ptext-متعلق بـــالكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/ptext.php";
+                            Ptext::removeWhere("id_atable='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}bau.ptext where id_atable = '$id' ");
+                            
+                        } 
+                        
+                        
+                       // pag.scenario_item-الجدول	atable_id  OneToMany
+                        if(!$simul)
+                        {
+                            // require_once "../pag/scenario_item.php";
+                            ScenarioItem::removeWhere("atable_id='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}pag.scenario_item where atable_id = '$id' ");
+                            
+                        } 
+                        
+                        
+                       // pag.db_link-الجدول المنادي	tab1_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::removeWhere("tab1_id='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}pag.db_link where tab1_id = '$id' ");
+                            
+                        } 
+                        
+                        
+                       // pag.db_link-الجدول المنادى عليه	tab2_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::removeWhere("tab2_id='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}pag.db_link where tab2_id = '$id' ");
+                            
+                        } 
+                        
+                        
+                       // pag.pmessage-متعلق بالكيان	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/pmessage.php";
+                            Pmessage::removeWhere("atable_id='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}pag.pmessage where atable_id = '$id' ");
+                            
+                        } 
+                        
+                        
+                       // bau.theme-الكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/theme.php";
+                            Theme::removeWhere("id_atable='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}bau.theme where id_atable = '$id' ");
+                            
+                        } 
+                        
+                        
+                        
+                        
+                        
+                       // pag.lookup_value-الجدول/الكيان	atable_id  OneToMany
+                        if(!$simul)
+                        {
+                            // require_once "../pag/lookup_value.php";
+                            LookupValue::removeWhere("atable_id='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}pag.lookup_value where atable_id = '$id' ");
+                            
+                        } 
+                        
+                        
+                       // pag.afield_group-الجدول	atable_id  OneToMany
+                        if(!$simul)
+                        {
+                            // require_once "../pag/afield_group.php";
+                            AfieldGroup::removeWhere("atable_id='$id'");
+                            // $this->execQuery("delete from ${server_db_prefix}pag.afield_group where atable_id = '$id' ");
+                            
+                        } 
+                        
+                        
+
+                   
+                   // FK not part of me - replaceable 
+                       // pag.afield-جدول قائمة الإختيارات	answer_table_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/afield.php";
+                            Afield::updateWhere(array('answer_table_id'=>$id_replace), "answer_table_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.afield set answer_table_id='$id_replace' where answer_table_id='$id' ");
+                        }
+                       // bau.ptext-متعلق بـــالكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/ptext.php";
+                            Ptext::updateWhere(array('id_atable'=>$id_replace), "id_atable='$id'");
+                            // $this->execQuery("update ${server_db_prefix}bau.ptext set id_atable='$id_replace' where id_atable='$id' ");
+                        }
+                       // pag.db_link-الجدول المنادي	tab1_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::updateWhere(array('tab1_id'=>$id_replace), "tab1_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.db_link set tab1_id='$id_replace' where tab1_id='$id' ");
+                        }
+                       // pag.db_link-الجدول المنادى عليه	tab2_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::updateWhere(array('tab2_id'=>$id_replace), "tab2_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.db_link set tab2_id='$id_replace' where tab2_id='$id' ");
+                        }
+                       // pag.pmessage-متعلق بالكيان	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/pmessage.php";
+                            Pmessage::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.pmessage set atable_id='$id_replace' where atable_id='$id' ");
+                        }
+                       // bau.theme-الكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/theme.php";
+                            Theme::updateWhere(array('id_atable'=>$id_replace), "id_atable='$id'");
+                            // $this->execQuery("update ${server_db_prefix}bau.theme set id_atable='$id_replace' where id_atable='$id' ");
+                        }
+                       // pag.eimport-الكيان المتعلق	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/eimport.php";
+                            Eimport::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.eimport set atable_id='$id_replace' where atable_id='$id' ");
+                        }
+                       // pag.several_option-الكيان الذي يقع عليه الإجراء	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/several_option.php";
+                            SeveralOption::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.several_option set atable_id='$id_replace' where atable_id='$id' ");
+                        }
+                       // pag.several_option-كيان الإجراء نفسه	option_table_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/several_option.php";
+                            SeveralOption::updateWhere(array('option_table_id'=>$id_replace), "option_table_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.several_option set option_table_id='$id_replace' where option_table_id='$id' ");
+                        }
+                       // pag.eimport_record-الجدول الذي احتوى السجل المستورد	record_atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/eimport_record.php";
+                            EimportRecord::updateWhere(array('record_atable_id'=>$id_replace), "record_atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.eimport_record set record_atable_id='$id_replace' where record_atable_id='$id' ");
+                        }
+                       
+
+                        
+                   
+                   // MFK
+                       // bau.gfield-البيانات الاضافية المتعلقة بالمعلومة	atable_mfk  
+                        if(!$simul)
+                        {
+                            // require_once "../bau/gfield.php";
+                            Gfield::updateWhere(array('atable_mfk'=>"REPLACE(atable_mfk, ',$id,', ',')"), "atable_mfk like '%,$id,%'");
+                            // $this->execQuery("update ${server_db_prefix}bau.gfield set atable_mfk=REPLACE(atable_mfk, ',$id,', ',') where atable_mfk like '%,$id,%' ");
+                        }
+                        
+                       // bau.goal-الكيانات المستعملة	atable_mfk  
+                        if(!$simul)
+                        {
+                            // require_once "../bau/goal.php";
+                            Goal::updateWhere(array('atable_mfk'=>"REPLACE(atable_mfk, ',$id,', ',')"), "atable_mfk like '%,$id,%'");
+                            // $this->execQuery("update ${server_db_prefix}bau.goal set atable_mfk=REPLACE(atable_mfk, ',$id,', ',') where atable_mfk like '%,$id,%' ");
+                        }
+                        
+                       // bau.goal_concern-الكيانات المستعملة	atable_mfk  
+                        if(!$simul)
+                        {
+                            // require_once "../bau/goal_concern.php";
+                            GoalConcern::updateWhere(array('atable_mfk'=>"REPLACE(atable_mfk, ',$id,', ',')"), "atable_mfk like '%,$id,%'");
+                            // $this->execQuery("update ${server_db_prefix}bau.goal_concern set atable_mfk=REPLACE(atable_mfk, ',$id,', ',') where atable_mfk like '%,$id,%' ");
+                        }
+                        
+
+               }
+               else
+               {
+                        // FK on me 
+ 
+
+                        // ums.bfunction-الجدول	curr_class_atable_id  OneToMany (required field)
+                        if(!$simul)
+                        {
+                            // require_once "../ums/bfunction.php";
+                            Bfunction::updateWhere(array('curr_class_atable_id'=>$id_replace), "curr_class_atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}ums.bfunction set curr_class_atable_id='$id_replace' where curr_class_atable_id='$id' ");
+                            
+                        } 
+                        
+
+ 
+
+                        // pag.afield-الجدول	atable_id  OneToMany (required field)
+                        if(!$simul)
+                        {
+                            // require_once "../pag/afield.php";
+                            Afield::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.afield set atable_id='$id_replace' where atable_id='$id' ");
+                            
+                        } 
+                        
+
+                       // bau.ptext-متعلق بـــالكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/ptext.php";
+                            Ptext::updateWhere(array('id_atable'=>$id_replace), "id_atable='$id'");
+                            // $this->execQuery("update ${server_db_prefix}bau.ptext set id_atable='$id_replace' where id_atable='$id' ");
+                            
+                        }
+                        
+                       // pag.scenario_item-الجدول	atable_id  OneToMany
+                        if(!$simul)
+                        {
+                            // require_once "../pag/scenario_item.php";
+                            ScenarioItem::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.scenario_item set atable_id='$id_replace' where atable_id='$id' ");
+                            
+                        }
+                        
+                       // pag.db_link-الجدول المنادي	tab1_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::updateWhere(array('tab1_id'=>$id_replace), "tab1_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.db_link set tab1_id='$id_replace' where tab1_id='$id' ");
+                            
+                        }
+                        
+                       // pag.db_link-الجدول المنادى عليه	tab2_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::updateWhere(array('tab2_id'=>$id_replace), "tab2_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.db_link set tab2_id='$id_replace' where tab2_id='$id' ");
+                            
+                        }
+                        
+                       // pag.pmessage-متعلق بالكيان	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/pmessage.php";
+                            Pmessage::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.pmessage set atable_id='$id_replace' where atable_id='$id' ");
+                            
+                        }
+                        
+                       // bau.theme-الكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/theme.php";
+                            Theme::updateWhere(array('id_atable'=>$id_replace), "id_atable='$id'");
+                            // $this->execQuery("update ${server_db_prefix}bau.theme set id_atable='$id_replace' where id_atable='$id' ");
+                            
+                        }
+                        
+                       
+                        
+                       // pag.lookup_value-الجدول/الكيان	atable_id  OneToMany
+                        if(!$simul)
+                        {
+                            // require_once "../pag/lookup_value.php";
+                            LookupValue::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.lookup_value set atable_id='$id_replace' where atable_id='$id' ");
+                            
+                        }
+                        
+                       // pag.afield_group-الجدول	atable_id  OneToMany
+                        if(!$simul)
+                        {
+                            // require_once "../pag/afield_group.php";
+                            AfieldGroup::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.afield_group set atable_id='$id_replace' where atable_id='$id' ");
+                            
+                        }
+                        
+                       // pag.afield-جدول قائمة الإختيارات	answer_table_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/afield.php";
+                            Afield::updateWhere(array('answer_table_id'=>$id_replace), "answer_table_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.afield set answer_table_id='$id_replace' where answer_table_id='$id' ");
+                        }
+                       // bau.ptext-متعلق بـــالكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/ptext.php";
+                            Ptext::updateWhere(array('id_atable'=>$id_replace), "id_atable='$id'");
+                            // $this->execQuery("update ${server_db_prefix}bau.ptext set id_atable='$id_replace' where id_atable='$id' ");
+                        }
+                       // pag.db_link-الجدول المنادي	tab1_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::updateWhere(array('tab1_id'=>$id_replace), "tab1_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.db_link set tab1_id='$id_replace' where tab1_id='$id' ");
+                        }
+                       // pag.db_link-الجدول المنادى عليه	tab2_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/db_link.php";
+                            DbLink::updateWhere(array('tab2_id'=>$id_replace), "tab2_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.db_link set tab2_id='$id_replace' where tab2_id='$id' ");
+                        }
+                       // pag.pmessage-متعلق بالكيان	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/pmessage.php";
+                            Pmessage::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.pmessage set atable_id='$id_replace' where atable_id='$id' ");
+                        }
+                       // bau.theme-الكيان	id_atable  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../bau/theme.php";
+                            Theme::updateWhere(array('id_atable'=>$id_replace), "id_atable='$id'");
+                            // $this->execQuery("update ${server_db_prefix}bau.theme set id_atable='$id_replace' where id_atable='$id' ");
+                        }
+                       // pag.eimport-الكيان المتعلق	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/eimport.php";
+                            Eimport::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.eimport set atable_id='$id_replace' where atable_id='$id' ");
+                        }
+                       // pag.several_option-الكيان الذي يقع عليه الإجراء	atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/several_option.php";
+                            SeveralOption::updateWhere(array('atable_id'=>$id_replace), "atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.several_option set atable_id='$id_replace' where atable_id='$id' ");
+                        }
+                       // pag.several_option-كيان الإجراء نفسه	option_table_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/several_option.php";
+                            SeveralOption::updateWhere(array('option_table_id'=>$id_replace), "option_table_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.several_option set option_table_id='$id_replace' where option_table_id='$id' ");
+                        }
+                       // pag.eimport_record-الجدول الذي احتوى السجل المستورد	record_atable_id  ManyToOne
+                        if(!$simul)
+                        {
+                            // require_once "../pag/eimport_record.php";
+                            EimportRecord::updateWhere(array('record_atable_id'=>$id_replace), "record_atable_id='$id'");
+                            // $this->execQuery("update ${server_db_prefix}pag.eimport_record set record_atable_id='$id_replace' where record_atable_id='$id' ");
+                        }
+                       
+
+                        
+                        // MFK
+                       // bau.gfield-البيانات الاضافية المتعلقة بالمعلومة	atable_mfk  
+                        if(!$simul)
+                        {
+                            // require_once "../bau/gfield.php";
+                            Gfield::updateWhere(array('atable_mfk'=>"REPLACE(atable_mfk, ',$id,', ',$id_replace,')"), "atable_mfk like '%,$id,%'");
+                            // $this->execQuery("update ${server_db_prefix}bau.gfield set atable_mfk=REPLACE(atable_mfk, ',$id,', ',$id_replace,') where atable_mfk like '%,$id,%' ");
+                        }
+                       // bau.goal-الكيانات المستعملة	atable_mfk  
+                        if(!$simul)
+                        {
+                            // require_once "../bau/goal.php";
+                            Goal::updateWhere(array('atable_mfk'=>"REPLACE(atable_mfk, ',$id,', ',$id_replace,')"), "atable_mfk like '%,$id,%'");
+                            // $this->execQuery("update ${server_db_prefix}bau.goal set atable_mfk=REPLACE(atable_mfk, ',$id,', ',$id_replace,') where atable_mfk like '%,$id,%' ");
+                        }
+                       // bau.goal_concern-الكيانات المستعملة	atable_mfk  
+                        if(!$simul)
+                        {
+                            // require_once "../bau/goal_concern.php";
+                            GoalConcern::updateWhere(array('atable_mfk'=>"REPLACE(atable_mfk, ',$id,', ',$id_replace,')"), "atable_mfk like '%,$id,%'");
+                            // $this->execQuery("update ${server_db_prefix}bau.goal_concern set atable_mfk=REPLACE(atable_mfk, ',$id,', ',$id_replace,') where atable_mfk like '%,$id,%' ");
+                        }
+
+                   
+               } 
+               return true;
+            }    
+	}
 
     public function isLookup()
     {
@@ -4078,18 +4535,38 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("reverseByCodes : module $module_code not found");
 
 
-        $tableClass = AfwStringHelper::tableToClass($table_name);
-        AfwAutoLoader::addModule($module_code);
-        $objToPag = new $tableClass();
-
-        list($fld_i, $fld_u) = $objToPag->pagMe($sh = 3, $update_if_exists = true);
-        $message = "$fld_i fields inserted, $fld_u fields updated";
+        
+        $message = self::reverseTable($module_code, $table_name);
 
         $objTable = Atable::loadByMainIndex($objModule->id, $table_name);
 
         return [$objTable, $message];
     }
 
+    public static function reverseTable($module_code, $table_name)
+    {
+        $tableClass = AfwStringHelper::tableToClass($table_name);
+        AfwAutoLoader::addModule($module_code);
+        $objToPag = new $tableClass();
+
+        list($fld_i, $fld_u) = $objToPag->pagMe($sh = 3, $update_if_exists = true);
+        return "$fld_i fields inserted, $fld_u fields updated";
+    }
+
+    public function reverseMe($module_code="")
+    {
+        if(!$module_code)
+        {
+            $objModule = $this->het("id_module");
+            if(!$objModule) return ["no valid module", ""];
+            $module_code = $objModule->getVal("module_code");
+        }
+        $table_name = $this->getVal("atable_name");
+
+        $message = self::reverseTable($module_code, $table_name);
+
+        return ["", $message];
+    }
 
     public function getTableRightsMatrice($objectRole, $framework,$subModId=0)
         {

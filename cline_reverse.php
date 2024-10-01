@@ -1,10 +1,12 @@
 <?php
 
+// hzm_start_immediate_output();
 $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code on ".$command_line_words[1]);
 $reverseByCodeArr = array();
 $reverseByCodeArr["module"] = true;
 $reverseByCodeArr["atable"] = true;
 $reverseByCodeArr["afield"] = true;
+
 
 $what_to_reverse = $command_line_words[1];
 
@@ -78,11 +80,13 @@ if (file_exists("$module_path/$object_table.php")) {
           {
                   $objToShow = $object_class::loadById($object_id); 
           }*/
-} else {
+} 
+else 
+{
     $command_line_result_arr[] = hzm_format_command_line("error", "Error 0005 when reversing. Please check that the file '$object_table.php' file exists in module path '$module_path'");
     $nb_errors++;$command_finished = true;return;
 }
-
+// hzm_stop_immediate_output();
 if(!$objToShow)
 {
     $command_line_result_arr[] = hzm_format_command_line("error", "Error 0001 reverse $object_class by code failed with message $message");
@@ -90,8 +94,15 @@ if(!$objToShow)
 }
 else
 {
+    $messages_arr = explode("<br>\n",$message);
+    foreach($messages_arr as $message_item)
+    {
+        $typeMess = "success";
+        if(AfwStringHelper::stringStartsWith($message_item, "Warning")) $typeMess = "warning";
+        if(AfwStringHelper::stringStartsWith($message_item, "Error")) $typeMess = "error";
+        $command_line_result_arr[] = hzm_format_command_line($typeMess, $message_item);
+    }
     
-    $command_line_result_arr[] = hzm_format_command_line("success", $message);
     if(count($object_code_arr)==3) 
     {
         $command_code = "curr_fld";

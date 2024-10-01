@@ -172,7 +172,7 @@ class Afield extends AFWObject{
         }
         
         
-        protected function dynamicHelpCondition($attribute)
+        public function dynamicHelpCondition($attribute)
         {
              if($attribute=="titre_short") return ($this->getVal("titre_short") != $this->getVal("titre"));
              
