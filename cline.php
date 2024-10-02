@@ -80,7 +80,7 @@
       
       $command_done = false;
       $command_finished = false;
-      
+      $original_command_code = $command_code;
       $command_code = ClineUtils::formatCommand($command_code);
 
 

@@ -99,7 +99,7 @@
             {
                         if(method_exists($object_class, "loadByCodes"))
                         {
-                                $object_code_arr = explode("-",$object_code);
+                                $object_code_arr = explode(".",$object_code);
                                 $objToShow = $object_class::loadByCodes($object_code_arr);
                         }
                         else

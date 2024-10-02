@@ -5,11 +5,11 @@
         $command_line_result_arr[] = hzm_format_command_line("error", "command line $command_code does'nt need all these params, see help."); $nb_errors++;$command_finished = true;return;
         $command_mode = "";
     }    
-    else $command_mode = $command_code;
+    else $command_mode = $original_command_code;
     
-    if($command_code=="show") $command_mode="SHOW";
-    if($command_code=="view") $command_mode="RETRIEVE";
-    if($command_code=="more") $command_mode="MINIBOX";
+    if($original_command_code=="show") $command_mode="SHOW";
+    if($original_command_code=="view") $command_mode="RETRIEVE";
+    if($original_command_code=="more") $command_mode="MINIBOX";
     
     if(!$command_mode)
     {
@@ -17,25 +17,47 @@
     }
     
     list($object_table, $object_module) = ClineUtils::parse_table_and_module($command_line_words[1]);
-    
+    $object_codeOrId = $command_line_words[2];
+    if(!$object_table)
+    {
+        // $command_line_result_arr[] = hzm_format_command_line("warning", "object table to generate is empty");
+        if ($currmod) 
+        {
+            $object_module = "ums";
+            $object_table = "module";
+            $object_codeOrId = $currmod;
+        }
+        if ($currtbl_code) 
+        {
+            $object_module = "pag";
+            $object_table = "atable";
+            $object_codeOrId = "$currmod.$currtbl_code";
+        }
+        if ($currfld) 
+        {
+            $object_module = "pag";
+            $object_table = "afield";
+            $object_codeOrId = "$currmod.$currtbl_code.$currfld";
+        }        
+    }
     
     if(!$object_module) $object_module = $currmod;
     
-    $object_codeOrId = $command_line_words[2];
+    
     $object_code = is_numeric($object_codeOrId) ? "" : $object_codeOrId;
     $object_id   = is_numeric($object_codeOrId) ? intval($object_codeOrId) : "";
     
     $objToShow = null;
-    if(file_exists("$file_dir_name/../$object_module/$object_table.php"))
+    if(file_exists("$file_dir_name/../$object_module/models/$object_table.php"))
     {
-            require_once("$file_dir_name/../$object_module/$object_table.php");
+            require_once("$file_dir_name/../$object_module/models/$object_table.php");
             $object_class = AfwStringHelper::tableToClass($object_table);
             
             if($object_code and (!$object_id)) 
             {
                 if(method_exists($object_class, "loadByCodes"))
                 {
-                        $object_code_arr = explode("-",$object_code);
+                        $object_code_arr = explode(".",$object_code);
                         $objToShow = $object_class::loadByCodes($object_code_arr);
                 }
                 else

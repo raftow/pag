@@ -12,9 +12,9 @@
             $command_line_result_arr[] = hzm_format_command_line("php", $phpIni, "en", "cline php struct");
         }
         
-        if((!$restriction) or $restriction=="chsys")
+        if((!$restriction) or $restriction=="chsys" or $restriction=="prev")
         {
-            $command_line_result_arr[] = hzm_format_command_line("info", "generating [your project]/external/chsys/module_$module_code.php file : ");
+            $command_line_result_arr[] = hzm_format_command_line("info", "generating [your server]/$module_code/previleges.php file : ");
             $php_code = $objModule->calcPhp_module(false);        
             $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline php");
         }

@@ -741,7 +741,7 @@ class Atable extends AFWObject
         $af->select("avail", 'Y');
         $af->select("reel", 'Y');
         $af->select("afield_type_id", 5);
-        $af->where("entity_relation_type_id not in (1,4) ");
+        $af->where("entity_relation_type_id not in (1,4) and mandatory != 'Y'");
         if ($option) {
             if ($option_doesnt_exist) $af->where("foption_mfk not like '%,$option,%'");
             else $af->where("foption_mfk like '%,$option,%'");
@@ -3753,9 +3753,78 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return array($error, $info);
     }
 
+    public function createModeScreen($framework_mode, $framework_id = 0, $resetUS = false)
+    {
+        global $lang;
+        if (!$framework_id) $framework_id = AfwSession::config("framework_id", 1);
+        // for heavy processes allow bigger seuil
+        // $_sql_analysis_seuil_calls = 250;
+
+        $file_dir_name = dirname(__FILE__);
+
+        require("$file_dir_name/../../lib/framework_$framework_id" . "_specification.php");
+
+        $this_id = $this->getId();
+        $cat = $this->tableCategory();
+        $system_id = $this->calc("system_id");
+        if (!$system_id) throw new AfwRuntimeException("failed $this --> createFrameWorkScreens($framework_id,$resetAll) system is not defined for this table (id=$this_id)");
+
+        $direct_access = "N";
+        $public = "N";
+
+        $bf_row = array();
+
+        $bf_row_empty = true;
+        $framework_mode_item = $framework_mode_list[$framework_mode];
+
+        $atable_name = $this->getVal("atable_name");
+        if($framework_mode_item) 
+        {
+            $bf_type_code = $framework_mode_item["bf_type"][$cat];
+            if (!$bf_type_code) $bf_type_code = $framework_mode_item["bf_type"]["all"];
+            if ($bf_type_code) $bf_type = Bfunction::${"BFUNCTION_TYPE_$bf_type_code"};
+            else $bf_type = "";
+            if (!$bf_type) {
+                throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no bf type defined for category : $cat mode $framework_mode");
+            }
 
 
-    public function createFrameWorkScreens($framework_id = 0, $resetAll = true)
+            if ($framework_mode_item["categories"][$cat]) {
+                $titre = $this->decodeTpl($framework_mode_item["titre"]);
+                $titre_en = $this->decodeTpl($framework_mode_item["titre_en"]);
+                $file_name = $framework_mode;
+                $bf_spec = $this->decodeTpl($framework_mode_item["bf_spec"]);
+                $bf_code = $this->decodeTpl($framework_mode_item["bf_code"]);
+                $id_module = $this->getVal("id_module");
+
+                list($bf, $bf_new) = Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code, 0, 0, $resetUS);
+                if (is_object($bf) and ($bf->getId() > 0)) {
+                    $bf_row = array("id"=>$bf->getId(), "mode" => $framework_mode, "bf" => $bf, "bf_new" => $bf_new, "menu" => $framework_mode_item["menu"][$cat]);
+                    $bf_row_empty = false;
+                } 
+                else 
+                {
+                    throw new AfwRuntimeException("failed Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code) : " . var_export($bf, true));
+                }
+            } 
+            else 
+            {
+                throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no category : $cat in mode $framework_mode");
+            };
+        }
+        else
+        {
+            throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no mode $framework_mode");
+        }
+        
+        if (($bf_row_empty) and (!$no_screen[$cat]))
+        {
+            throw new AfwRuntimeException("atable_id = $this, no screen created for mode $framework_mode, cat=$cat framework_id=$framework_id, system=$system_id : " . var_export($bf_row, true));
+        } 
+        return $bf_row;
+    }
+
+    public function createFrameWorkScreens($framework_id = 0, $resetAll = true, $resetUS = true)
     {
         global $lang, $_sql_analysis_seuil_calls;
         if (!$framework_id) $framework_id = AfwSession::config("framework_id", 1);
@@ -3800,7 +3869,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 $bf_code = $this->decodeTpl($framework_mode_item["bf_code"]);
                 $id_module = $this->getVal("id_module");
 
-                list($bf, $bf_new) = Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code, 0, 0, $resetUS = true);
+                list($bf, $bf_new) = Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code, 0, 0, $resetUS);
                 if (is_object($bf) and ($bf->getId() > 0)) {
                     $bf->generateUserStory($lang, $framework_id);
                     $bf_arr[$bf->getId()] = array("mode" => $framework_mode, "bf" => $bf, "bf_new" => $bf_new, "menu" => $framework_mode_item["menu"][$cat]);
