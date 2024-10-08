@@ -21,7 +21,7 @@ if(!$currmod)
 
 $objModule = Module::loadByMainIndex($currmod);
 
-$command_line_result_arr[] = hzm_format_command_line("info", "doing $command_action of $action_on_what upgrades");
+$command_line_result_arr[] = hzm_format_command_line("info", "doing $command_action of $action_on_what migration(s)");
 
 if($command_action == "show")
 {
@@ -29,8 +29,9 @@ if($command_action == "show")
     $odd_oven = "oven";
     foreach($migrArr as $migrCode => $migrRow)
     {
+        $migration_code = $migrRow['code'];
         //@todo compile migration and get errors
-        $dataErrors = "";
+        $dataErrors = $migrRow['error'];
 
         if($dataErrors) $errorClass = "error";
         else $errorClass = "success";
@@ -38,11 +39,18 @@ if($command_action == "show")
         
         $title = $migrRow['title'] . " by " . $migrRow['by'];
 
-        $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $migrCode, $title, $dataErrors, $errorClass, $lang);
+        $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $migration_code, $title, $dataErrors, $errorClass, $lang);
         if($odd_oven != "odd") $odd_oven = "odd";
         else $odd_oven = "oven";
         unset($oneObj);
     }
+}
+
+$stop_if_error = true;
+if($command_action == "force")
+{
+    $command_action = "run";
+    $stop_if_error = false;
 }
 
 if(($command_action == "run") or ($command_action == "ignore"))
@@ -68,14 +76,27 @@ if(($command_action == "run") or ($command_action == "ignore"))
             // die("Migration::runMigration($objModule->id, $currmod, $migrCode, $title, $auser_id)");
             list($error, $info, $warning, $tech) = Migration::ignoreMigration($objModule->id, $currmod, $migrCode, $title, $auser_id);
         }
-
-        if($error) $errorClass = "error";
-        elseif($warning) $errorClass = "warning";
-        else $errorClass = "info";
-        
         $title = $migrRow['title'] . " by " . $migrRow['by'];
+        if($error) 
+        {
+            $resultIcon = $errorIcon; 
+            $errorClass = "error";
+            $title .= " failed !!";
+            $dataErrors = "see error below";
+        } 
+        elseif($warning) 
+        {
+            $resultIcon = $warningIcon; 
+            $errorClass = "warning";
+        }
+        else
+        {
+            $resultIcon = $doneIcon; 
+            $errorClass = "info";
+        } 
         
-        $command_line_result_arr[] = hzm_object_command_line("success", $odd_oven, $doneIcon, $title, "", $errorClass, $lang);
+
+        $command_line_result_arr[] = hzm_object_command_line($errorClass, $odd_oven, $resultIcon, $title, $dataErrors, $errorClass, $lang);
         if($info) $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $doneIcon, $info, "", $errorClass, $lang);
         if($error) $command_line_result_arr[] = hzm_object_command_line("error", $odd_oven, $errorIcon, $error, "", $errorClass, $lang);
         if($warning) $command_line_result_arr[] = hzm_object_command_line("warning", $odd_oven, $warningIcon, $warning, "", $errorClass, $lang);
@@ -84,6 +105,8 @@ if(($command_action == "run") or ($command_action == "ignore"))
         if($odd_oven != "odd") $odd_oven = "odd";
         else $odd_oven = "oven";
         unset($oneObj);
+
+        if($error and $stop_if_error) break;
     }
 }
 

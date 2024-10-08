@@ -26,6 +26,7 @@ class Migration extends AFWObject
         {
             $migObj = self::migrating($moduleId, $migration_code, $title, $auser_id);
             $migObj->ignored();
+            $info = "migration $migration_code ignored sucessfully";
         }
         catch(Exception $e)
         {
@@ -51,29 +52,43 @@ class Migration extends AFWObject
         $warning = "";
         $tech = "";
         $info = "";
-        try
+        $file_dir_name = dirname(__FILE__);
+        $file_migration_name = "$file_dir_name/../../$moduleCode/migrations/migration_$migration_code.php";
+        if(file_exists($file_migration_name))
         {
-            $migObj = self::migrating($moduleId, $migration_code, $title, $auser_id);
-            $file_dir_name = dirname(__FILE__);
-            include("$file_dir_name/../../$moduleCode/migrations/migration_$migration_code.php");
-            $migObj->migrated();
+            try
+            {
+                $migObj = self::migrating($moduleId, $migration_code, $title, $auser_id);
+                include($file_migration_name);
+                $migObj->migrated();
+                $info = "migration $migration_code done sucessfully";
+            }
+            catch(Exception $e)
+            {
+                $error .= $e->getMessage();
+                $tech .= "The stack trace is : ";
+                $tech .= $e->getTraceAsString();
+            }
+            catch(Error $e)
+            {
+                $error .= $e->__toString();
+            }
         }
-        catch(Exception $e)
-        {
-            $error .= $e->getMessage();
-            $tech .= "The stack trace is : ";
-            $tech .= $e->getTraceAsString();
-        }
-        catch(Error $e)
-        {
-            $error .= $e->__toString();
-        }
+        else $error = "migration $migration_code has been ignored file not found";
+        
         
 
         return [$error,
                 $info,
                 $warning,
                 $tech];
+    }
+
+    public static function migrationReady($moduleCode, $migration_code)
+    {
+        $file_dir_name = dirname(__FILE__);
+        $file_migration_name = "$file_dir_name/../../$moduleCode/migrations/migration_$migration_code.php";
+        return (file_exists($file_migration_name));
     }
 
     public static function getMigrations($moduleId, $moduleCode, $migrationStatus="all")
@@ -99,7 +114,10 @@ class Migration extends AFWObject
             {
                 $selected = $allDoneMigrations[$migration_code];
             }
-            else $selected = true;
+            elseif($migrationStatus=="all") $selected = true;
+            elseif($migrationStatus==$migration_code) $selected = true;
+            else $selected = false;
+
 
             if($selected)
             {
@@ -107,6 +125,11 @@ class Migration extends AFWObject
                 $return[$count]['code'] = $migration_code;
                 $return[$count]['obj'] = $allDoneMigrations[$migration_code];
                 $return[$count]['by_id'] = $developers[$one_migration['by']];
+                $return[$count]['error'] = '';
+                if(!self::migrationReady($moduleCode, $migration_code))
+                {
+                    $return[$count]['error'] = 'not found';
+                }
                 $count++;
             }
         }
@@ -162,7 +185,12 @@ class Migration extends AFWObject
 
     public function getDisplay($lang = 'ar')
     {
-        return $this->getDefaultDisplay($lang);
+        return $this->getNodeDisplay($lang);
+    }
+
+    public function getNodeDisplay($lang = 'ar')
+    {
+        return $this->getVal("migration_code") . "-" . $this->getDefaultDisplay($lang);
     }
 
     public function stepsAreOrdered()

@@ -48,7 +48,7 @@ class ClineUtils
             $command_code = "reverse";
         }
 
-        if (($command_code == "upg") or ($command_code == "up")or ($command_code == "u")) {
+        if (($command_code == "upgr") or ($command_code == "upg") or ($command_code == "up")or ($command_code == "u")) {
             $command_code = "upgrade";
         }
 

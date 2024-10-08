@@ -1,18 +1,36 @@
 <?php
+$struc = "application_model_field
+Id	1					N	integer	المعرف الفريد	Id		
+application_model_id	2					N	integer	نموذج القبول	The application model	UK	OneToMany
+acondition_id	3					N	integer	الشرط	The condition		
+application_field_id	4					N	integer	الحقل	The field	UK	OneToMany
+screen_model_id	5					N	integer	الشاشة	The screen		
+step_num	6					N	integer	رقم الخطوة	The step number		";
+
+
 // main.php?Main_Page=afw_mode_edit.php&cl=Domain&currmod=pag&id=25
-
-$module = "pag";
+$module = null;
+if(isset($_GET["m"])) $module = $_GET["m"];
+if(!$module) die("please set module ex icode.php?m=adm");
 $direct_dir_name = $file_dir_name = dirname(__FILE__);
-include("$file_dir_name/../$module/$module"."_start.php");
+$start_file = "$file_dir_name/../$module/$module"."_start.php";
+if(!file_exists($start_file))
+{
+      die("please define your start file $start_file");
+}
 
+include($start_file);
+
+$actv_fld = $TECH_FIELDS[$MODULE]["ACTIVE_FIELD"];
+$cre_u_id = $TECH_FIELDS[$MODULE]["CREATION_USER_ID_FIELD"]; 
+$cre_date = $TECH_FIELDS[$MODULE]["CREATION_DATE_FIELD"]; 
+$mod_u_id = $TECH_FIELDS[$MODULE]["UPDATE_USER_ID_FIELD"]; 
+$mod_date = $TECH_FIELDS[$MODULE]["UPDATE_DATE_FIELD"]; 
+$val_u_id = $TECH_FIELDS[$MODULE]["VALIDATION_USER_ID_FIELD"]; 
+$val_date = $TECH_FIELDS[$MODULE]["VALIDATION_DATE_FIELD"]; 
+$ver_fld = $TECH_FIELDS[$MODULE]["VERSION_FIELD"];
 
 $moduleFUC = AfwStringHelper::firstCharUpper($module);
-
-$struc = "migration
-migration_code	1					N	VARCHAR2 (10)	رمز الترقية	upgrade code
-auser_id	2					N	INTEGER	المطور صاحب الترقية	upgrade user
-title	3					N	VARCHAR2 (128 Byte)	عنوان الترقية	upgrade title
-done_ind	4					N	CHAR(1)	تمت الترقية ؟	upgrade done ?";
 
 
 
@@ -58,7 +76,8 @@ $phpTemplate = "<?php
 
 ";
 
-
+$uk_disable = "// ";
+$df_disable = "";
 
 $structTemplate = "<?php 
         class $moduleFUC"."[CLASS_NAME]AfwStructure
@@ -69,9 +88,9 @@ $structTemplate = "<?php
                         if (\$obj instanceof [CLASS_NAME]) 
                         {
                                 \$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 3;
-                                \$obj->DISPLAY_FIELD = \"[TABLE_NAME]_name_ar\";
+                                $df_disable \$obj->DISPLAY_FIELD = \"[TABLE_NAME]_name_ar\";
                                 // \$obj->ORDER_BY_FIELDS = \"xxxx, yyyy\";
-                                // \$obj->UNIQUE_KEY = array([UK_ARR]);
+                                $uk_disable \$obj->UNIQUE_KEY = array([UK_ARR]);
                                 // \$obj->public_display = true;
                                 // \$obj->IS_LOOKUP = true;
 

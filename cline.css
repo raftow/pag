@@ -70,14 +70,18 @@ span.cline-message.cline-success {
 
 span.cline-message.cline-log {
     color: #ffffffba;
+    font-size: 16px;
 }
 
 span.cline-message.cline-log_odd {
     color: #dfefff9a;
+    font-size: 16px;
 }
 
 span.cline-message.cline-error {
-    color: #ff6f6f;
+    color: #ed0d0d;
+    font-size: 16px;
+    background-color: transparent;
 }
 
 span.cline-message.cline-title {
@@ -155,6 +159,14 @@ td.cline_td>span.cline-normal {
 .cline-obj {
     width: 100%;
     direction:ltr;
+}
+
+.cline-obj.obj-error {
+    background-color: #f1ca82e3;
+}
+
+.cline-obj.obj-error.bg-oven {
+    background-color: #f7af8c;
 }
 
 
@@ -276,6 +288,3 @@ textarea.cline.struct.php {
     background-image: url(../pic/cline-bg.png) !important;
 }
 
-.cline-obj.obj-error.bg-oven {
-    background-color: black;
-}

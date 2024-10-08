@@ -1955,8 +1955,8 @@ class Afield extends AFWObject{
 	        	$row["TYPE"] = "'ENUM'";
                         if($this->getVal("answer_table_id"))
                         {
-	        	   $row["ANSWER"] = "'".$this->get("answer_table_id")->getVal("atable_name")."'";
-	        	   $row["ANSMODULE"] = "'".$this->get("answer_module_id")->getVal("module_code")."'";
+	        	   $row["ANSWER"] = "'FUNCTION'";  // ".$this->get("answer_table_id")->getVal("atable_name")."
+	        	   // $row["ANSMODULE"] = "'".$this->get("answer_module_id")->getVal("module_code")."'";
                         }
 	        	if(!$row["ANSWER"]) 
                         {

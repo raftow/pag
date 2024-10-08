@@ -8,7 +8,7 @@
                         {
                                 $obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 3;
                                 $obj->DISPLAY_FIELD = "migration_name_ar";
-                                // $obj->ORDER_BY_FIELDS = "xxxx, yyyy";
+                                $obj->ORDER_BY_FIELDS = "migration_code";
                                 $obj->UNIQUE_KEY = array('module_id', 'migration_code');
                                 // $obj->public_display = true;
                                 // $obj->IS_LOOKUP = true;
@@ -43,7 +43,7 @@
 
                                         'auser_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true, 'QSEARCH' => true, 'SHOW' => true,  'RETRIEVE' => true,  
                                                 'EDIT' => true,  'QEDIT' => true, 'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  'UTF8' => false,  
-                                                'TYPE' => 'FK',  'ANSWER' => 'auser',  'ANSMODULE' => 'pag',  'SIZE' => 40,  'DEFAUT' => 0,    
+                                                'TYPE' => 'FK',  'ANSWER' => 'auser',  'ANSMODULE' => 'ums',  'SIZE' => 40,  'DEFAUT' => 0,    
                                                 'DISPLAY' => true,  'STEP' => 1,  'RELATION' => 'ManyToOne-OneToMany', 'MANDATORY' => true, 'READONLY'=>false, 'AUTOCOMPLETE' => false,
                                                 'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
                                                 'CSS' => 'width_pct_25', ),	
