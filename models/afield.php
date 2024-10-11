@@ -2282,7 +2282,7 @@ class Afield extends AFWObject{
             
             $table_name = $my_tab->getVal("atable_name");
             $mcode = $server_db_prefix.$my_tab->getModule()->getVal("module_code");
-            if($alter_table) $alter_table_sql = "alter table $mcode.$table_name add";
+            if($alter_table) $alter_table_sql = "ALTER TABLE $mcode.$table_name add";
             else $alter_table_sql = "";
             
             if($alter_table)
@@ -2293,9 +2293,9 @@ class Afield extends AFWObject{
                          if($prev_af) 
                          {
                                  $prev_col = $prev_af->getVal("field_name");
-                                 $end_sql = " after $prev_col;";
+                                 $end_sql = " AFTER $prev_col;";
                          }
-                         else $end_sql = "after id;";
+                         else $end_sql = " AFTER id;";
                  }
                  else $end_sql = ";";                 
             }
