@@ -1,11 +1,9 @@
 <?php
-$struc = "application_model_field
-Id	1					N	integer	المعرف الفريد	Id		
-application_model_id	2					N	integer	نموذج القبول	The application model	UK	OneToMany
-acondition_id	3					N	integer	الشرط	The condition		
-application_field_id	4					N	integer	الحقل	The field	UK	OneToMany
-screen_model_id	5					N	integer	الشاشة	The screen		
-step_num	6					N	integer	رقم الخطوة	The step number		";
+$struc = "applicant_api_request
+applicant_id	1					N	integer	المتقدم	The applicant	UK	OneToMany
+api_endpoint_id	2					N	integer	الخدمة الالكترونية	Api	UK	
+run_date	3					N	date	تاريخ  التنفيذ	Run Date		
+need_refresh	4					N	CHAR(1)	يحتاج تحديث	need refresh		";
 
 
 // main.php?Main_Page=afw_mode_edit.php&cl=Domain&currmod=pag&id=25
@@ -97,6 +95,11 @@ $structTemplate = "<?php
                                 \$obj->editByStep = true;
                                 \$obj->editNbSteps = [STEPS]; 
                                 // \$obj->after_save_edit = array(\"class\"=>'aconditionOriginType',\"attribute\"=>'acondition_origin_type_id', \"currmod\"=>'$module',\"currstep\"=>1);
+                        }
+                        else 
+                        {
+                                [CLASS_NAME]ArTranslator::initData();
+                                [CLASS_NAME]EnTranslator::initData();
                         }
                 }
                 
@@ -543,8 +546,18 @@ foreach($struc_lines_arr as $struc_line)
 
 $nb_steps = round($pct_total / 500);
 
-$phpTrad_ar = "";
-$phpTrad_en = "";
+$phpTrad_ar = "class ".$CLASS_NAME."ArTranslator{
+
+    public static function initData()
+    {
+        \$trad = [];
+";
+$phpTrad_en = "class ".$CLASS_NAME."EnTranslator{
+
+    public static function initData()
+    {
+        \$trad = [];
+";
 
 $ar_title_step = [];
 $en_title_step = [];
@@ -581,8 +594,7 @@ $phpTrad_en .= "	\$trad[\"$TABLE_NAME\"][\"$TABLE_NAME_SHORTED.new\"] = \"new\";
 $phpTrad_en .= "	\$trad[\"$TABLE_NAME\"][\"$TABLE_NAME\"] = \"$plural_en\";\n";
 
 
-$phpTrad_ar .= "\n";
-$phpTrad_en .= "\n";
+
 
 
 
@@ -596,6 +608,27 @@ foreach($FIELDS_TRAD_ARR as $field_name => $trad)
         $phpTrad_en .= "	\$trad[\"$TABLE_NAME\"][\"$field_name\"] = \"$trad_en\";\n";
 }
 
+$phpTrad_ar .= "        return \$trad;
+        }
+
+        public static function getInstance()
+	{
+		return new $CLASS_NAME();
+	}
+}
+
+";
+
+$phpTrad_en .= "        return \$trad;
+        }
+
+        public static function getInstance()
+	{
+		return new $CLASS_NAME();
+	}
+}
+
+";
 
 $FIELDS_STRUCT = implode("\n\n",$FIELDS_STRUCT_ARR);
 
@@ -607,6 +640,7 @@ $php_code .= $TABLE_NAME."_afw_structure.php \n";
 $php_code .= $structTemplate;
 $php_code .= "// ------------------------ \n\n";
 $php_code .= "trad_ar_".$TABLE_NAME.".php \n<?php\n";
+
 $php_code .= $phpTrad_ar;
 $php_code .= "// ------------------------ \n\n";
 $php_code .= "trad_en_".$TABLE_NAME.".php \n<?php\n";

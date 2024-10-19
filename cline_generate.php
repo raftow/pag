@@ -114,6 +114,9 @@
         if($module_code and $table_code)
         {
             $objModule = Module::loadByMainIndex($module_code);
+            /**
+             * @var Atable $objTable
+             */
             $objTable = Atable::loadByMainIndex($objModule->id, $table_code);
         
             if((!$restriction) or $restriction=="sql")
@@ -140,6 +143,16 @@
                 $php_code .= "\n\n\n// errors \n\n" . implode("\n",$phpErrors_arr);
                 $php_code = "<"."?"."php \n".$php_code;
                 $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline struct php");
+            }
+
+            if((!$restriction) or $restriction=="tr")
+            {
+                $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION AR : ");
+                $php_code_ar = $objTable->genereTranslation("ar");
+                $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION EN : ");
+                $php_code_en = $objTable->genereTranslation("en");
+                $command_line_result_arr[] = hzm_format_command_line("php", $php_code_ar, "ar", "cline tr ar php");
+                $command_line_result_arr[] = hzm_format_command_line("php", $php_code_en, "en", "cline tr en php");
             }
         }
         elseif(!$module_code)
