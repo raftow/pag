@@ -28,7 +28,14 @@
     if($object_list_attribute_origin=="fields")
     {
         $object_list_attribute="origFieldList";
+            
+        if($object_filter == "name") $object_list_attribute="nameFieldList";
+        if($object_filter == "audit") $object_list_attribute="auditFieldList";
+        if($object_filter == "index") $object_list_attribute="indexFieldList";
+        if($object_filter == "virtual") $object_list_attribute="virtFieldList";
+        if($object_filter == "additional") $object_list_attribute="addiFieldList";
     }
+    
     if($object_list_attribute_origin=="goals")
     {
         if(!$object_entity) $object_entity = "domain";

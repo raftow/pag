@@ -299,6 +299,8 @@ class PagAtableAfwStructure
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
 
+		
+
 		'indexFieldList' => array(
 			'TYPE' => 'FK',  'SHORTNAME' => 'index_fields',  'ANSWER' => 'afield',  'ANSMODULE' => 'pag',
 			'CATEGORY' => 'ITEMS',  'ITEM' => 'atable_id',
@@ -319,6 +321,8 @@ class PagAtableAfwStructure
 			'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
+
+		
 
 		'nameFieldList' => array(
 			'TYPE' => 'FK',  'SHORTNAME' => 'name_fields',  'ANSWER' => 'afield',  'ANSMODULE' => 'pag',
@@ -341,6 +345,8 @@ class PagAtableAfwStructure
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'MANDATORY' => true,  'ERROR-CHECK' => true,
 		),
 
+		
+
 		'virtFieldList' => array(
 			'TYPE' => 'FK',  'SHORTNAME' => 'virtual_fields',  'ANSWER' => 'afield',  'ANSMODULE' => 'pag',
 			'CATEGORY' => 'ITEMS',  'ITEM' => 'atable_id',
@@ -359,6 +365,8 @@ class PagAtableAfwStructure
 			'FGROUP' => 'virtFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',  'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
+
+		
 
 		'addiFieldList' => array(
 			'TYPE' => 'FK',  'SHORTNAME' => 'additional_fields',  'ANSWER' => 'afield',  'ANSMODULE' => 'pag',

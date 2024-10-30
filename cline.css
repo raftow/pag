@@ -272,21 +272,21 @@ textarea.cline {
 textarea.cline.sql {
     border-color: #85852e;
     color: wheat;
-    height: 150px;
+    height: 450px;
     font-family: revert-layer;
 }
 
 textarea.cline.php {
     border-color: #6eb193;
     color: #7aefbb;
-    height: 150px;
+    height: 450px;
     font-family: revert-layer;
 }
 
 textarea.cline.struct.php {
     border-color: #6ea0b1;
     color: #a5c8fc;
-    height: 150px;
+    height: 450px;
     font-family: revert-layer;
 }
 
