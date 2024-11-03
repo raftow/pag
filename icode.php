@@ -602,7 +602,10 @@ foreach($FIELDS_TRAD_ARR as $field_name => $trad)
 {
         $trad_ar = trim($trad["ar"]);
         $trad_en = trim($trad["en"]);
-        if(!$trad_en) $trad_en = AfwStringHelper::toEnglishText($field_name);
+        if((!$trad_en) or ($trad_en==$trad_ar) or AfwStringHelper::stringStartsWith($trad_en, "??")) 
+        {
+                $trad_en = AfwStringHelper::toEnglishText($field_name);
+        }
 
         $phpTrad_ar .= "	\$trad[\"$TABLE_NAME\"][\"$field_name\"] = \"$trad_ar\";\n";
         $phpTrad_en .= "	\$trad[\"$TABLE_NAME\"][\"$field_name\"] = \"$trad_en\";\n";

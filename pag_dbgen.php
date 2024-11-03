@@ -1,5 +1,7 @@
 <?php
 
+use Complex\Autoloader;
+
 $popup = $_GET["popup"];        
 $tbl_id = $_GET["tbl"];
 $tblsubm = ($_GET["tblsubm"]==1);
@@ -38,8 +40,10 @@ if((!$genere_sql) and (!$genere_php) and (!$genere_trad) and (!$genere_lookup) a
         $genere_dbstruct_only = false;*/
 }        
 
-
+AfwAutoloader::addModule("pag");
 $nb = 0;
+require_once (dirname(__FILE__)."/pag_generator.php");
+
 $gen = new PagGenerator();
 // die(" new PagGenerator = " . var_export($gen,true));
 $allErrors = "";
@@ -51,7 +55,7 @@ if((!$tbl_name) and $tbl_id)
       $tab->load($tbl_id);
       $tbl_name =  $tab->getVal("atable_name");
 }
-require_once (dirname(__FILE__)."/../../external/config.php");
+require_once (dirname(__FILE__)."/../external/config.php");
 if($genere_sql)
 {
         $sqldir = $START_GEN_TREE."sql";

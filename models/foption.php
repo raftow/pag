@@ -144,10 +144,10 @@ class Foption extends AFWObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
  
  
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - deletable 
                        // pag.foption_case-خيار الحقل	foption_id  أنا تفاصيل لها-OneToMany
                         $this->execQuery("delete from ${server_db_prefix}pag.foption_case where foption_id = '$id' ");
  
@@ -163,7 +163,7 @@ class Foption extends AFWObject{
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK on me 
+                        $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK on me 
                        // pag.foption_case-خيار الحقل	foption_id  أنا تفاصيل لها-OneToMany
                         $this->execQuery("update ${server_db_prefix}pag.foption_case set foption_id='$id_replace' where foption_id='$id' ");
  

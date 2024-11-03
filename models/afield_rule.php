@@ -27,7 +27,7 @@ class AfieldRule extends AFWObject{
 
 		related_afield_id => array(SHORTNAME => related, SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => true, EDIT => true, QEDIT => true, SIZE => 40, UTF8 => false, 
                                            TYPE => FK, ANSWER => afield, ANSMODULE => pag, 
-                                           WHERE=>"atable_id = (select atable_id from c0pag.afield where id = §afield_id§) and id != §afield_id§",
+                                           WHERE=>"atable_id = (select atable_id from ".$server_db_prefix."pag.afield where id = §afield_id§) and id != §afield_id§",
                                            RELATION => ManyToOne, READONLY => false),
 
 		rule_params => array(SEARCH => true, QSEARCH => true, SHOW => true, RETRIEVE => true, EDIT => true, QEDIT => true, SHORT_SIZE => 64, SIZE => 255, "MIN-SIZE" => 2, CHAR_TEMPLATE => "", UTF8 => true, TYPE => "TEXT", READONLY => false),
@@ -152,10 +152,10 @@ class AfieldRule extends AFWObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
 
                         
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - deletable 
 
                    
                    // FK not part of me - replaceable 
@@ -167,7 +167,7 @@ class AfieldRule extends AFWObject{
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK on me 
+                        $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK on me 
 
                         
                         // MFK

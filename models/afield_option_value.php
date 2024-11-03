@@ -1,7 +1,7 @@
 <?php
 // ------------------------------------------------------------------------------------
 // 6/6/2022 rafik :
-//  alter table c0pag.afield_option_value change option_value_comments option_value_comments text NULL;
+//  alter table ".$server_db_prefix."pag.afield_option_value change option_value_comments option_value_comments text NULL;
 // 
                 
 $file_dir_name = dirname(__FILE__); 
@@ -114,10 +114,10 @@ class AfieldOptionValue extends AFWObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
 
                         
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - deletable 
 
                    
                    // FK not part of me - replaceable 
@@ -129,7 +129,7 @@ class AfieldOptionValue extends AFWObject{
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK on me 
+                        $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK on me 
 
                         
                         // MFK

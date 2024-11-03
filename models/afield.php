@@ -5,7 +5,7 @@
 // alter table afield add parent_module_id int(11) not null default 0 after atable_id;
 // alter table afield add system_id int(11) not null default 0 after atable_id;
 // update afield set parent_module_id = (select max(id_module) from atable tb where tb.id = atable_id);
-// update afield set system_id = (select max(id_system) from c0ums.module md where md.id = parent_module_id);
+// update afield set system_id = (select max(id_system) from ".$server_db_prefix."ums.module md where md.id = parent_module_id);
 // 13-Nov-2022 :
 // alter table afield add key afield_atable_id(atable_id);
 // alter table afield add key afield_field_name(field_name);
@@ -181,7 +181,7 @@ class Afield extends AFWObject{
         
         public function select_visibilite_horizontale($dropdown = false)
         {
-                $server_db_prefix = AfwSession::config("db_prefix","c0");
+                $server_db_prefix = AfwSession::config("db_prefix","default_db_");
                 $objme = AfwSession::getUserConnected();
                 $me = ($objme) ? $objme->id : 0;
                 $this->select_visibilite_horizontale_default();
@@ -653,7 +653,7 @@ class Afield extends AFWObject{
                               {     
                                       // die("anstab not found");
                                       $anstab = new Atable();
-                                      $anstab->where("id_module in (select id from c0ums.module where id_module_type=5 and id_module_parent=1)") ;   // chercher dans pag
+                                      $anstab->where("id_module in (select id from ".$server_db_prefix."ums.module where id_module_type=5 and id_module_parent=1)") ;   // chercher dans pag
                                       $anstab->select("atable_name",$atb);
                                       if($anstab->load())  {
                                              $this->set("answer_table_id",$anstab->getId());
@@ -2249,7 +2249,7 @@ class Afield extends AFWObject{
         
         public function getGeneraltedSQL($dbms, $syntax_values,$fields_naming_uc,$alter_table=false)
         {
-            $server_db_prefix = AfwSession::config("db_prefix","c0");
+            $server_db_prefix = AfwSession::config("db_prefix","default_db_");
             
             $null_syntax = $syntax_values["NULL_SYNTAX"];
             $notnull_syntax = $syntax_values["NOTNULL_SYNTAX"]; 
@@ -2932,10 +2932,10 @@ class Afield extends AFWObject{
             {   
                if($id_replace==0)
                {
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - not deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - not deletable 
  
  
-                   $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK part of me - deletable 
+                   $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK part of me - deletable 
  
  
                    // FK not part of me - replaceable 
@@ -2957,7 +2957,7 @@ class Afield extends AFWObject{
                }
                else
                {
-                        $server_db_prefix = AfwSession::config("db_prefix","c0"); // FK on me 
+                        $server_db_prefix = AfwSession::config("db_prefix","default_db_"); // FK on me 
                         // pag.atable-ادارة السجلات عبر احتمالات الحقل	look_from_field_id  حقل يفلتر به-ManyToOne
                         $this->execQuery("update ${server_db_prefix}pag.atable set look_from_field_id='$id_replace' where look_from_field_id='$id' ");
                         // pag.db_link-الحقل سبب العلاقة	field_id  حقل يفلتر به-ManyToOne

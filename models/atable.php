@@ -1,7 +1,7 @@
 <?php
 /*
- alter table c0pag.atable add titre_u_s varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL after titre_u;
- alter table c0pag.atable add titre_short_s varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL after titre_short;
+ alter table ".$server_db_prefix."pag.atable add titre_u_s varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL after titre_u;
+ alter table ".$server_db_prefix."pag.atable add titre_short_s varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL after titre_short;
 
  7/7/21
 ALTER TABLE `atable` CHANGE `entity_name` `entity_name` VARCHAR(64) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL; 
@@ -44,7 +44,7 @@ class Atable extends AFWObject
     // فرض وجود حقل الرمز المرجعي (lookup_code)-- force lookup_code field  creation  
     public static $TBOPTION_LOOKUPCODE = 9;
 
-    //  INSERT INTO c0pag.tboption SET id_aut = '1', id_mod = '1', id_valid = '0', avail = 'Y', sci_id = '0', foption_name_ar = _utf8'بيانات هذا الجدول بعد انشائها غير قابلة للتعديل السريع', foption_name_en = _utf8'data is readonly', lookup_code = 'DATA_IS_READONLY', date_aut = now(), date_mod = now()
+    //  INSERT INTO ".$server_db_prefix."pag.tboption SET id_aut = '1', id_mod = '1', id_valid = '0', avail = 'Y', sci_id = '0', foption_name_ar = _utf8'بيانات هذا الجدول بعد انشائها غير قابلة للتعديل السريع', foption_name_en = _utf8'data is readonly', lookup_code = 'DATA_IS_READONLY', date_aut = now(), date_mod = now()
     // DATA_IS_READONLY - بيانات هذا الجدول بعد انشائها غير قابلة للتعديل السريع  
     public static $TBOPTION_DATA_IS_READONLY = 11;
 
@@ -58,7 +58,7 @@ class Atable extends AFWObject
 
     private $table_category;
 
-    public static $DATABASE        = "c0pag";
+    public static $DATABASE        = "".$server_db_prefix."pag";
     public static $MODULE            = "pag";
     public static $TABLE            = "atable";
     public static $DB_STRUCTURE = null;
@@ -538,10 +538,10 @@ class Atable extends AFWObject
 
         $this_id = $this->id;
 
-        AfwDatabase::db_query("delete from c0ums.bfunction where curr_class_atable_id = $this_id");
-        AfwDatabase::db_query("delete from c0pag.afield where atable_id = $this_id");
-        AfwDatabase::db_query("delete from c0ums.scenario_item where atable_id = $this_id");
-        AfwDatabase::db_query("delete from c0pag.atable where id = $this_id");
+        AfwDatabase::db_query("delete from ".$server_db_prefix."ums.bfunction where curr_class_atable_id = $this_id");
+        AfwDatabase::db_query("delete from ".$server_db_prefix."pag.afield where atable_id = $this_id");
+        AfwDatabase::db_query("delete from ".$server_db_prefix."ums.scenario_item where atable_id = $this_id");
+        AfwDatabase::db_query("delete from ".$server_db_prefix."pag.atable where id = $this_id");
         return true;
         //return $this->delete();
     }
@@ -625,7 +625,7 @@ class Atable extends AFWObject
 
         if ($this->dataIsFullOwnedByMaster()) {
             $this_id = $this->getId();
-            $master->where("id in (select answer_table_id from c0pag.afield 
+            $master->where("id in (select answer_table_id from ".$server_db_prefix."pag.afield 
                                           where atable_id = $this_id 
                                             and avail='Y' 
                                             and reel='Y' 
@@ -1076,7 +1076,7 @@ class Atable extends AFWObject
         $af->select("avail", 'Y');
         $af->select("reel", 'Y');
         $af->select("afield_type_id", 5);
-        $server_db_prefix = AfwSession::config("db_prefix", "c0");
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
         $af->where("answer_table_id in (select id from ${server_db_prefix}pag.atable where avail='Y' and id_module=$this_id_module)");
 
         $af_list = $af->loadMany();
@@ -1094,7 +1094,7 @@ class Atable extends AFWObject
         global $images;
         $objme = AfwSession::getUserConnected();
         $file_dir_name = dirname(__FILE__);
-        $server_db_prefix = AfwSession::config("db_prefix", "c0");
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
         switch ($attribute) {
 
             case "system_id":
@@ -1332,7 +1332,7 @@ class Atable extends AFWObject
         /*
                rafik 15/9/2019 : cause problem to generate SQL of lookup and dont understand what is the interest of
                example 
-               INSERT INTO c0frz.participant_category (id, lookup_code, , , active, version) VALUES ....
+               INSERT INTO ".$server_db_prefix."frz.participant_category (id, lookup_code, , , active, version) VALUES ....
                list($name_cols, $name_afield_list) = $this->getMyNameFieldList();
                
                if(count($name_cols)>0) return "";
@@ -1423,7 +1423,7 @@ class Atable extends AFWObject
     public function generatePhpClass($dbstruct_only = false, $dbstruct_outside = false)
     {
         global $lang;
-        $server_db_prefix = AfwSession::config("db_prefix", "c0");
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
 
         $this_id = $this->getId();
 
@@ -1884,13 +1884,13 @@ $displayAttribute_list
         // FK part of me - not deletable 
         $check_list_fk_part_of_me_not_deletable = "";
 
-        $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK part of me - deletable 
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - deletable 
         $delete_list_fk_part_of_me_deletable = "";
 
         // FK not part of me - replaceable 
         $replace_list_fk_not_part_of_me_replaceable = "";
 
-        $server_db_prefix = AfwSession::config("db_prefix", "c0"); // FK on me 
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK on me 
         $replace_val_in_list_of_fk = "";
 
 
@@ -2249,7 +2249,7 @@ $enumAtable_functions
         
         public function beforeDelete(\$id,\$id_replace) 
         {
-            \$server_db_prefix = AfwSession::config(\"db_prefix\",\"c0\");
+            \$server_db_prefix = AfwSession::config(\"db_prefix\",\"".$server_db_prefix."\");
             
             if(!\$id)
             {
@@ -2312,7 +2312,7 @@ $replace_val_in_list_of_mfk
     public function generateSQLStructure()
     {
 
-        $server_db_prefix = AfwSession::config("db_prefix", "c0");
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
         $dbName = $this->getModule()->getModuleCode();
         $prefixed_db_name = $server_db_prefix . $dbName;
 
@@ -2605,7 +2605,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     public function select_visibilite_horizontale($dropdown = false)
     {
         $me = AfwSession::getUserIdActing();
-        $server_db_prefix = AfwSession::config("db_prefix", "c0");
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
         $this->select_visibilite_horizontale_default();
 
         $this->where("(me.id_aut = '$me' or me.id_module in (select mu.id_module from ${server_db_prefix}ums.module_auser mu where mu.id_auser = '$me' and mu.avail='Y'))");
@@ -2848,7 +2848,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
     public function beforeDelete($id, $id_replace)
     {
-        $server_db_prefix = AfwSession::config("db_prefix", "c0");
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
 
         if (!$id) {
             $id = $this->getId();
@@ -3670,7 +3670,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
         $rbf = new AroleBf();
 
-        $rbf->where("bfunction_id in (select id from c0ums.bfunction 
+        $rbf->where("bfunction_id in (select id from ".$server_db_prefix."ums.bfunction 
                                                 where curr_class_atable_id='$this_id' 
                                                   and bfunction_code like '$bf_code_starts_with%') 
                             and (source='auto-generated' or source='' or source is null)");

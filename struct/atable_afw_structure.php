@@ -158,7 +158,7 @@ class PagAtableAfwStructure
 		'id_sub_module' => array(
 			'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,
 			'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',  'SHORTNAME' => 'submodule',
-			'WHERE' => "((id_module_parent = §id_module§) and (id_module_type in (6))) and id_system in (select id_system from c0ums.module where id = §id_module§)  ",
+			'WHERE' => "((id_module_parent = §id_module§) and (id_module_type in (6))) and id_system in (select id_system from §DBPREFIX§ums.module where id = §id_module§)  ",
 			'QEDIT' => true,  'SEARCH-BY-ONE' => true,  'DEPENDENCY' => 'id_module',
 			'RELATION' => 'OneToMany',  'STEP' => 2,  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',

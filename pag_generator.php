@@ -55,7 +55,7 @@ class PagGenerator extends AFWRoot {
                global $nb, $show_sql;
                
                $file_dir_name = dirname(__FILE__); 
-               $server_db_prefix = AfwSession::config('db_prefix', 'c0');
+               $server_db_prefix = AfwSession::config('db_prefix', "default_db_");
                // $server_db_prefix"."
                $log_errors = "";
                // die("here 8 : sqldir=$sqldir , show_sql=$show_sql");
@@ -622,7 +622,7 @@ $php  \n"; //
                     */
                     
                 } 
-		require_once "afw.php";
+		// require_once "afw.php";
                 if(($dir=="no-gen") or AfwFileSystem::isDir($dir))
                 {
 			$tbl_list_txt = "";
@@ -652,19 +652,31 @@ $php  \n"; //
                                 unset($trad_arr);
                                 $trad_arr = array();
                                 
-                                
-                                
+                                $single_ar = $atbl->getVal("titre_u");
+                                $single_en = $atbl->getVal("titre_u_en");
+                                $plural_ar = $atbl->valTitre_short();
+                                $plural_en = $atbl->valTitre_short_en();                                
+                                if((!$single_en) or ($single_en==$single_ar) or AfwStringHelper::stringStartsWith($single_en, "??")) 
+                                {
+                                        $single_en = AfwStringHelper::toEnglishText(strtolower($tabName));
+                                }
+
+                                if((!$plural_en) or ($plural_en==$plural_ar) or AfwStringHelper::stringStartsWith($plural_en, "??")) 
+                                {
+                                        $plural_en = AfwStringHelper::toEnglishText(strtolower($tabName))."s";
+                                }
+
                                 if($lang=="ar")
                                 {
-                                        $trad_arr["$classNameLower.single"] = $atbl->getVal("titre_u");
+                                        $trad_arr["$classNameLower.single"] = $single_ar;
                                         $trad_arr["$classNameLower.new"] = "جديد(ة)";
-                                        $trad_arr[$tabName] = $atbl->valTitre_short();
+                                        $trad_arr[$tabName] = $plural_ar;
                                 }
                                 else
                                 {
-                                        $trad_arr["$classNameLower.single"] = $atbl->getVal("titre_u_en");
+                                        $trad_arr["$classNameLower.single"] = $single_en;
                                         $trad_arr["$classNameLower.new"] = "new";
-                                        $trad_arr[$tabName] = $atbl->valTitre_short_en();
+                                        $trad_arr[$tabName] = $plural_en;
                                 }
                                 
                                 
@@ -696,6 +708,17 @@ $php  \n"; //
                                                     if($afld->load())
                                                     {
                                                             $try_trad = $afld->getShortDisplay($lang);
+                                                            if($lang=="en")
+                                                            {
+                                                                $try_trad_ar = $afld->getShortDisplay("ar");
+                                                                if((!$try_trad) or ($try_trad==$try_trad_ar) 
+                                                                    or AfwStringHelper::stringStartsWith($try_trad, "??")
+                                                                    or AfwStringHelper::stringStartsWith($try_trad, "List of ??")
+                                                                ) 
+                                                                {
+                                                                        $try_trad = AfwStringHelper::toEnglishText($nom_col);
+                                                                }
+                                                            }
                                                             if($lang=="ar") $help_text_field = "help_text";
                                                             else $help_text_field = "help_text_en";
                                                             $help_trad = $afld->getVal($help_text_field);
@@ -1195,7 +1218,7 @@ $YDesc
 	public function generateModuleSpecialLanguage($file_path, $module_id, $special_lang, $atable_id=0,$atable_name="")
         {
                global $nb, $show_res, $show_ignored;
-               $server_db_prefix = AfwSession::config('db_prefix', 'c0');
+               $server_db_prefix = AfwSession::config('db_prefix', "default_db_");
                $log_errors = "";
 
                $file_dir_name = dirname(__FILE__); 

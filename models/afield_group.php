@@ -1,8 +1,8 @@
 <?php
 // ------------------------------------------------------------------------------------
 // 6/6/2022 rafik :
-// mysql> alter table  c0pag.afield_group change fgroup_name_ar fgroup_name_ar varchar(64);
-// mysql> alter table  c0pag.afield_group change fgroup_name_en fgroup_name_en varchar(64);
+// mysql> alter table  ".$server_db_prefix."pag.afield_group change fgroup_name_ar fgroup_name_ar varchar(64);
+// mysql> alter table  ".$server_db_prefix."pag.afield_group change fgroup_name_en fgroup_name_en varchar(64);
 
                 
 $file_dir_name = dirname(__FILE__); 
