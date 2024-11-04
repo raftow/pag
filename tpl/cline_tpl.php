@@ -8,7 +8,7 @@
                                        <span class='cline field'>[currfld]</span>
                                        <span class='cline table'>[currtbl_code]</span>
                                        <span class='cline module'>[currmod]</span>
-                                       <span class='cline title'>current work objects</span>
+                                       <span class='cline title'>[db_prefix] work objects</span>
                                 </label>
                                 <!--  -->
                                 <table style='width:100%'>

@@ -58,7 +58,7 @@ class Atable extends AFWObject
 
     private $table_category;
 
-    public static $DATABASE        = "".$server_db_prefix."pag";
+    public static $DATABASE        = "";
     public static $MODULE            = "pag";
     public static $TABLE            = "atable";
     public static $DB_STRUCTURE = null;
@@ -535,7 +535,7 @@ class Atable extends AFWObject
 
     public function forceDelete()
     {
-
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
         $this_id = $this->id;
 
         AfwDatabase::db_query("delete from ".$server_db_prefix."ums.bfunction where curr_class_atable_id = $this_id");
@@ -621,6 +621,7 @@ class Atable extends AFWObject
 
     public function getMaster()
     {
+        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
         $master = new Atable();
 
         if ($this->dataIsFullOwnedByMaster()) {

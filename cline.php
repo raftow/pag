@@ -184,6 +184,7 @@
    $data_tokens["currobj"] = $currobj;
    $data_tokens["currfld"] = $currfld;
    $data_tokens["currfld_id"] = $currfld_id;
+   $data_tokens["db_prefix"] = AfwSession::config("db_prefix", "default_db_");
    if($currmod) 
    {
         $context = $currmod;
