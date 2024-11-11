@@ -4546,8 +4546,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
 
         $message = self::reverseTable($module_code, $table_name);
+        $objModule_id = $objModule->id;
+        $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
 
-        $objTable = Atable::loadByMainIndex($objModule->id, $table_name);
+        if(!$objTable) $message.= " strange Error happened because Atable::loadByMainIndex($objModule_id, $table_name) failed !!";
 
         return [$objTable, $message];
     }
@@ -4556,10 +4558,21 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     {
         $tableClass = AfwStringHelper::tableToClass($table_name);
         AfwAutoLoader::addModule($module_code);
+        /**
+         * @var AFWObject $objToPag 
+         */
         $objToPag = new $tableClass();
 
-        list($fld_i, $fld_u) = $objToPag->pagMe($sh = 3, $update_if_exists = true);
-        return "$fld_i fields inserted, $fld_u fields updated";
+        list($fld_i, $fld_u, $mdl_new, $tbl_new, $mdl, $tbl) = $objToPag->pagMe($sh = 3, $update_if_exists = true);
+        $return = "$fld_i fields inserted, $fld_u fields updated";
+        if($mdl_new) $return .= ", new module created : ";
+        else $return .= ", module used : ";
+        if($mdl) $return .= $mdl->getDisplay("en")."/id=".$mdl->id;
+        
+        if($tbl_new) $return .= ", new table created : ".$tbl->getDisplay("en");
+
+        return $return;
+        
     }
 
     public function reverseMe($module_code = "")
