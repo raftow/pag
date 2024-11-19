@@ -2089,6 +2089,7 @@ class $className extends AFWObject{
                                 $UNIQUE_KEY
                                 $edit_by_step_php
                                 // \$obj->after_save_edit = array(\"class\"=>'Road',\"attribute\"=>'road_id', \"currmod\"=>'btb',\"currstep\"=>9);
+                                \$obj->after_save_edit = array(\"mode\"=>\"qsearch\", \"currmod\"=>'adm', \"class\"=>'$className',\"submit\"=>true);
                         }
                         else 
                         {
