@@ -95,6 +95,7 @@ $structTemplate = "<?php
                                 \$obj->editByStep = true;
                                 \$obj->editNbSteps = [STEPS]; 
                                 // \$obj->after_save_edit = array(\"class\"=>'aconditionOriginType',\"attribute\"=>'acondition_origin_type_id', \"currmod\"=>'$module',\"currstep\"=>1);
+                                \$obj->after_save_edit = array(\"mode\"=>\"qsearch\", \"currmod\"=>'adm', \"class\"=>'[CLASS_NAME]',\"submit\"=>true);
                         }
                         else 
                         {

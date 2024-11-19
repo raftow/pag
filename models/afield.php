@@ -432,7 +432,9 @@ class Afield extends AFWObject{
         protected function repareMeBeforeUpdate()
         {
             // to be overridden if needed
-            global $me, $default_date_system, $server_db_prefix, $mode_pag_me;
+            global $me, $default_date_system, $mode_pag_me;
+
+            $server_db_prefix = AfwSession::config('db_prefix', "default_db_");
             
             // @rafik 13/11/2022 : important optimisation for pagme process no need to repare
             if($mode_pag_me) return true;

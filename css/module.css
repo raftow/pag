@@ -360,11 +360,11 @@ a.hzm3-button.hzm3-light-grey.hzm3-block {
 }
 
 .hzm_body.cline.go {
-    background-color: black;
-    background-image: url(../pic/cline-bg.png);
-    background-size: 100%;
-    min-height: inherit;
-    color: wheat;
+    background-color: black  !important;
+    background-image: url(../pic/cline-bg.png)  !important;
+    background-size: 100% !important;
+    min-height: inherit !important;
+    color: wheat !important;
 }
 
 nav#front_main_menu {

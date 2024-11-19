@@ -79,9 +79,11 @@ span.cline-message.cline-log_odd {
 }
 
 span.cline-message.cline-error {
-    color: #ed0d0d;
-    font-size: 16px;
-    background-color: transparent;
+    color: white;
+    font-size: 19px !important;
+    font-family: monospace;
+    background-color: red;
+    padding: 10px;
 }
 
 span.cline-message.cline-title {
