@@ -1715,9 +1715,9 @@ class Atable extends AFWObject
 
         foreach ($name_cols as $i => $name_col) {
             $name_with_language = "";
-            if (se_termine_par($name_col, "_ar")) $name_with_language = "ar";
-            if (se_termine_par($name_col, "_fr")) $name_with_language = "fr";
-            if (se_termine_par($name_col, "_en")) $name_with_language = "en";
+            if (AfwStringHelper::stringStartsWith($name_col, "_ar")) $name_with_language = "ar";
+            if (AfwStringHelper::stringStartsWith($name_col, "_fr")) $name_with_language = "fr";
+            if (AfwStringHelper::stringStartsWith($name_col, "_en")) $name_with_language = "en";
             if ($name_with_language) {
                 $displayAttribute_list .= "               list(\$data[\"$name_with_language\"],\$link[\"$name_with_language\"]) = \$this->displayAttribute(\"$name_col\",false, \$lang);\n";
                 $names_are_with_language = true;

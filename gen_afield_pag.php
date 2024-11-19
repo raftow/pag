@@ -281,17 +281,17 @@ if($table_name and $fields)
                                    $known_already = "F";
                                    $need_validation = "F";
                                    $entry_type_id = 1;
-                                   if ((($field_sql_type=="VARCHAR2") or ($field_sql_type=="VARCHAR")) and ($field_sql_type_len==8) and (se_termine_par($field_name,"_DATE")))
+                                   if ((($field_sql_type=="VARCHAR2") or ($field_sql_type=="VARCHAR")) and ($field_sql_type_len==8) and (AfwStringHelper::stringStartsWith($field_name,"_DATE")))
                                        $afield_type_id = 2; // 2	date	تاريخ	Date
                                     elseif ($field_sql_type=="AMOUNT") 
                                        $afield_type_id = 3; // 3	amnt	مبلغ من المال	Amount
                                     elseif ($field_sql_type=="TIME") 
                                        $afield_type_id = 4;  // 4	time	وقت	Time
-                                    elseif (($field_sql_type=="NUMBER") and (se_termine_par($field_name,"_ID")) and ($field_name!=$key_f)) 
+                                    elseif (($field_sql_type=="NUMBER") and (AfwStringHelper::stringStartsWith($field_name,"_ID")) and ($field_name!=$key_f)) 
                                        $afield_type_id = 5;  // 5	list	اختيار من قائمة	Choose from list
                                     elseif ((AfwStringHelper::stringStartsWith($field_sql_type,"NUMBER")) or (AfwStringHelper::stringStartsWith($field_sql_type,"FLOAT")))
                                        $afield_type_id = 1; // 1	nmbr	قيمة عددية	Numeric Value
-                                    elseif (AfwStringHelper::stringStartsWith($field_sql_type,"VARCHAR") and (se_termine_par($field_name,"_MFK")))  
+                                    elseif (AfwStringHelper::stringStartsWith($field_sql_type,"VARCHAR") and (AfwStringHelper::stringStartsWith($field_name,"_MFK")))  
                                        $afield_type_id = 6; // 6	mlst	اختيار متعدد من قائمة	multiple choice from list
                                     elseif ($field_sql_type=="PCTG") 
                                        $afield_type_id = 7; // 7	pctg	نسبة مائوية	Percentage

@@ -536,12 +536,12 @@ class Afield extends AFWObject{
                            $this->set("additional","Y");    
                 }        
                 
-                if(se_termine_par($field_name,"_mfk"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_mfk"))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_mlst);
                 }  
                 
-                if(se_termine_par($field_name,"_fl"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_fl"))   
                 {
                       if($this->getVal("entity_relation_type_id")==self::$ENTITY_RELATION_TYPE_UNKN) $this->set("entity_relation_type_id",0);
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_list);
@@ -552,19 +552,19 @@ class Afield extends AFWObject{
                       
                 }
                 
-                if(se_termine_par($field_name,"_id"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_id"))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_list);
                 }
                 
-                if(se_termine_par($field_name,"_pk") or se_termine_par($field_name,"_ms"))   // ms as will be master of this record (the record will be its detail) (so one to many)
+                if(AfwStringHelper::stringStartsWith($field_name,"_pk") or AfwStringHelper::stringStartsWith($field_name,"_ms"))   // ms as will be master of this record (the record will be its detail) (so one to many)
                 {
                       if($this->getVal("entity_relation_type_id")==self::$ENTITY_RELATION_TYPE_UNKN) $this->set("entity_relation_type_id",0);
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_list);
                       if(!$this->getVal("entity_relation_type_id")) $this->set("entity_relation_type_id",self::$ENTITY_RELATION_TYPE_ONETOMANY);
                 }
 
-                if(se_termine_par($field_name,"_ou"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_ou"))   
                 {
                       if($this->getVal("entity_relation_type_id")==self::$ENTITY_RELATION_TYPE_UNKN) $this->set("entity_relation_type_id",0);
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_list);
@@ -572,19 +572,19 @@ class Afield extends AFWObject{
                 }
                 
                 
-                if(se_termine_par($field_name,"_ob"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_ob"))   
                 {
                       if($this->getVal("entity_relation_type_id")==self::$ENTITY_RELATION_TYPE_UNKN) $this->set("entity_relation_type_id",0);
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_list);
                       if(!$this->getVal("entity_relation_type_id")) $this->set("entity_relation_type_id",self::$ENTITY_RELATION_TYPE_ONETOONEBIDIRECTIONAL);
                 }
                 
-                if(se_termine_par($field_name,"_enm") or se_termine_par($field_name,"_enum"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_enm") or AfwStringHelper::stringStartsWith($field_name,"_enum"))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_enum);
                 }
                 
-                if(se_termine_par($field_name,"_men") or se_termine_par($field_name,"_menum"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_men") or AfwStringHelper::stringStartsWith($field_name,"_menum"))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",AfwUmsPagHelper::$afield_type_menum);
                 }      
@@ -702,7 +702,7 @@ class Afield extends AFWObject{
                       if((!$this->getVal("entity_relation_type_id")) and ($this->getVal("afield_type_id")==AfwUmsPagHelper::$afield_type_list))  $this->set("entity_relation_type_id",3);
                       
                       
-                      if(se_termine_par($field_name,"_enm") or se_termine_par($field_name,"_enum") or se_termine_par($field_name,"_men") or se_termine_par($field_name,"_menum"))
+                      if(AfwStringHelper::stringStartsWith($field_name,"_enm") or AfwStringHelper::stringStartsWith($field_name,"_enum") or AfwStringHelper::stringStartsWith($field_name,"_men") or AfwStringHelper::stringStartsWith($field_name,"_menum"))
                       {
                               if($this->lookupListWithoutLookupTable())    
                               {
@@ -737,7 +737,7 @@ class Afield extends AFWObject{
                     if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,3,9,');
                 }
                 
-                if(se_termine_par($field_name,"_code"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_code"))   
                 {
                       if(!$this->getVal("titre_short")) $this->set("titre_short", "رمز .......");
                       if(!$this->getVal("titre_short_en")) $this->set("titre_short_en", "........ code");
@@ -747,7 +747,7 @@ class Afield extends AFWObject{
                       if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,3,9,');
                 }
                 
-                if(se_termine_par($field_name,"_website"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_website"))   
                 {
                       if(!$this->getVal("titre_short")) $this->set("titre_short", "موقع .......");
                       if(!$this->getVal("titre_short_en")) $this->set("titre_short_en", "........ web site");
@@ -757,7 +757,7 @@ class Afield extends AFWObject{
                       if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,6,4,3,7,9,');
                 }
                 
-                if(se_termine_par($field_name,"_webpage"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_webpage"))   
                 {
                       if(!$this->getVal("titre_short")) $this->set("titre_short", "صفحة .......");
                       if(!$this->getVal("titre_short_en")) $this->set("titre_short_en", "........ web page");
@@ -767,7 +767,7 @@ class Afield extends AFWObject{
                       if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,6,4,3,7,9,');
                 }
                 
-                if(se_termine_par($field_name,"_link"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_link"))   
                 {
                       if(!$this->getVal("titre_short")) $this->set("titre_short", "رابط .......");
                       if(!$this->getVal("titre_short_en")) $this->set("titre_short_en", "........ web link");
@@ -777,7 +777,7 @@ class Afield extends AFWObject{
                       if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,6,4,3,7,9,');
                 }
                 
-                if(se_termine_par($field_name,"_location") or se_termine_par($field_name,"_gmap"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_location") or AfwStringHelper::stringStartsWith($field_name,"_gmap"))   
                 {
                       if(!$this->getVal("titre_short")) $this->set("titre_short", "رابط الموقع على الخرائط");
                       if(!$this->getVal("titre_short_en")) $this->set("titre_short_en", "google map location link");
@@ -831,7 +831,7 @@ class Afield extends AFWObject{
                     if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,7,');
                 } 
                 
-                if(($field_name == "comment") or se_termine_par($field_name,"_comment"))
+                if(($field_name == "comment") or AfwStringHelper::stringStartsWith($field_name,"_comment"))
                 {
                      if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",10);
                      if(!$this->getVal("titre_short")) $this->set("titre_short","ملاحظات");
@@ -841,7 +841,7 @@ class Afield extends AFWObject{
                      if(!$this->getVal("char_group_men")) $this->set("char_group_men",',11,');
                 }
                 
-                if(($field_name == "comment_en") or se_termine_par($field_name,"_comment_en"))
+                if(($field_name == "comment_en") or AfwStringHelper::stringStartsWith($field_name,"_comment_en"))
                 {
                      if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",10);
                      if(!$this->getVal("titre_short")) $this->set("titre_short","ملاحظات بالانجليزي");
@@ -852,7 +852,7 @@ class Afield extends AFWObject{
                 }
                 
                 
-                if(($field_name == "comments") or se_termine_par($field_name,"_comments"))
+                if(($field_name == "comments") or AfwStringHelper::stringStartsWith($field_name,"_comments"))
                 {
                      if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",11);
                      if(!$this->getVal("titre_short")) $this->set("titre_short","ملاحظات");
@@ -860,7 +860,7 @@ class Afield extends AFWObject{
                      if(!$this->getVal("char_group_men")) $this->set("char_group_men",',11,');
                 }
                 
-                if(($field_name == "comments_en") or se_termine_par($field_name,"_comments_en"))
+                if(($field_name == "comments_en") or AfwStringHelper::stringStartsWith($field_name,"_comments_en"))
                 {
                      if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",11);
                      if(!$this->getVal("titre_short")) $this->set("titre_short","ملاحظات بالانجليزي");
@@ -868,7 +868,7 @@ class Afield extends AFWObject{
                      if(!$this->getVal("char_group_men")) $this->set("char_group_men",',11,');
                 }
                 
-                if((se_termine_par($field_name,"_name") or (se_termine_par($field_name,"_name_en") or (se_termine_par($field_name,"_name_fr")))))   
+                if((AfwStringHelper::stringStartsWith($field_name,"_name") or (AfwStringHelper::stringStartsWith($field_name,"_name_en") or (AfwStringHelper::stringStartsWith($field_name,"_name_fr")))))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",10);
                       if(!$this->getVal("field_size")) $this->set("field_size",48);
@@ -876,7 +876,7 @@ class Afield extends AFWObject{
                       if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,7,');
                 }
                 
-                if((se_termine_par($field_name,"_mobile") or (se_termine_par($field_name,"_phone") or (se_termine_par($field_name,"_telephone")))))   
+                if((AfwStringHelper::stringStartsWith($field_name,"_mobile") or (AfwStringHelper::stringStartsWith($field_name,"_phone") or (AfwStringHelper::stringStartsWith($field_name,"_telephone")))))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",10);
                       if(!$this->getVal("field_size"))     $this->set("field_size",20);
@@ -885,17 +885,17 @@ class Afield extends AFWObject{
                 }
                 
                 
-                if(se_termine_par($field_name,"_title") or 
-                   se_termine_par($field_name,"_title_ar") or 
-                   se_termine_par($field_name,"_title_en") or 
-                   se_termine_par($field_name,"_title_fr"))
+                if(AfwStringHelper::stringStartsWith($field_name,"_title") or 
+                   AfwStringHelper::stringStartsWith($field_name,"_title_ar") or 
+                   AfwStringHelper::stringStartsWith($field_name,"_title_en") or 
+                   AfwStringHelper::stringStartsWith($field_name,"_title_fr"))
                 {
-                      if(se_termine_par($field_name,"_title") or se_termine_par($field_name,"_title_ar"))
+                      if(AfwStringHelper::stringStartsWith($field_name,"_title") or AfwStringHelper::stringStartsWith($field_name,"_title_ar"))
                       {
                            if(!$this->getVal("titre_short")) $this->set("titre_short","عنوان ".AfwStringHelper::arabicTaarif($my_tab_tu));
                            if(!$this->getVal("titre_short_en")) $this->set("titre_short_en","Arabic " . $my_tab_tu_en." title");
                       }
-                      elseif(se_termine_par($field_name,"_title_fr"))
+                      elseif(AfwStringHelper::stringStartsWith($field_name,"_title_fr"))
                       {
                            if(!$this->getVal("titre_short")) $this->set("titre_short","عنوان ".AfwStringHelper::arabicTaarif($my_tab_tu)." بالفرنسي");
                            if(!$this->getVal("titre_short_en")) $this->set("titre_short_en","titre du ".$my_tab_tu_en);
@@ -911,10 +911,10 @@ class Afield extends AFWObject{
                       if(!$this->getVal("char_group_men")) $this->set("char_group_men",',1,7,');
                 }
                 
-                if((se_termine_par($field_name,"_desc")) or 
-                   (se_termine_par($field_name,"_desc_ar")) or 
-                   (se_termine_par($field_name,"_desc_en")) or 
-                   (se_termine_par($field_name,"_desc_fr")))      
+                if((AfwStringHelper::stringStartsWith($field_name,"_desc")) or 
+                   (AfwStringHelper::stringStartsWith($field_name,"_desc_ar")) or 
+                   (AfwStringHelper::stringStartsWith($field_name,"_desc_en")) or 
+                   (AfwStringHelper::stringStartsWith($field_name,"_desc_fr")))      
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",11);
                 }
@@ -955,40 +955,40 @@ class Afield extends AFWObject{
                 }
                 
                 
-                if(se_termine_par($field_name,"_hdate"))   {
+                if(AfwStringHelper::stringStartsWith($field_name,"_hdate"))   {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",2);
                       // if(!$this->getVal("titre_short")) $this->set("titre_short","تاريخ -------");
                 }
                 
-                if(se_termine_par($field_name,"_hdate"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_hdate"))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",2);
-                      if(!$this->getVal("titre_short") and (se_termine_par($field_name,"_start_hdate"))) $this->set("titre_short","تاريخ بداية ------- بالهجري");
-                      if(!$this->getVal("titre_short") and (se_termine_par($field_name,"_end_hdate"))) $this->set("titre_short","تاريخ نهاية ------- بالهجري");
+                      if(!$this->getVal("titre_short") and (AfwStringHelper::stringStartsWith($field_name,"_start_hdate"))) $this->set("titre_short","تاريخ بداية ------- بالهجري");
+                      if(!$this->getVal("titre_short") and (AfwStringHelper::stringStartsWith($field_name,"_end_hdate"))) $this->set("titre_short","تاريخ نهاية ------- بالهجري");
                       if(!$this->getVal("field_size")) $this->set("field_size",10);
                 }
 
                 
                 
-                if(se_termine_par($field_name,"_date"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_date"))   
                 {
                       
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",$default_date_system);         
                       if(!$this->getVal("field_size")) $this->set("field_size",10);
                 }
 
-                if(se_termine_par($field_name,"_amount"))   {
+                if(AfwStringHelper::stringStartsWith($field_name,"_amount"))   {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",3);
                       if(!$this->getVal("titre_short")) $this->set("titre_short","مبلغ ");
                 }
                 
-                if(se_termine_par($field_name,"_time"))   {
+                if(AfwStringHelper::stringStartsWith($field_name,"_time"))   {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",4);
                       if(!$this->getVal("titre_short")) $this->set("titre_short","وقت ");
                       if(!$this->getVal("field_size")) $this->set("field_size",8);
                 }
                 
-                if(se_termine_par($field_name,"_num"))   
+                if(AfwStringHelper::stringStartsWith($field_name,"_num"))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",13);
                 }
@@ -998,8 +998,8 @@ class Afield extends AFWObject{
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",8);
                 }
                 
-                if((se_termine_par($this->getVal("titre_short"),"?"))   
-                  or (se_termine_par($this->getVal("titre_short"),"؟")))
+                if((AfwStringHelper::stringStartsWith($this->getVal("titre_short"),"?"))   
+                  or (AfwStringHelper::stringStartsWith($this->getVal("titre_short"),"؟")))
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",8);
                 }
@@ -1113,7 +1113,7 @@ class Afield extends AFWObject{
                     }
                 }      
                       
-		if((se_termine_par($field_name,"_nb") or (se_termine_par($field_name,"_number"))))   
+		if((AfwStringHelper::stringStartsWith($field_name,"_nb") or (AfwStringHelper::stringStartsWith($field_name,"_number"))))   
                 {
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",1);
                       if(!$this->getVal("titre_short")) $this->set("titre_short","عدد ");
@@ -1159,15 +1159,15 @@ class Afield extends AFWObject{
                 
                 
                 
-                if(se_termine_par($field_name,"_date"))   {
+                if(AfwStringHelper::stringStartsWith($field_name,"_date"))   {
                       
                       if(!$this->getVal("afield_type_id")) $this->set("afield_type_id",$default_date_system);
-                      if(!$this->getVal("titre_short") and (se_termine_par($field_name,"_start_date"))) 
+                      if(!$this->getVal("titre_short") and (AfwStringHelper::stringStartsWith($field_name,"_start_date"))) 
                       {
                         $this->set("titre_short","تاريخ بداية -------");
                         $this->set("titre_short","---- start date");
                       }  
-                      if(!$this->getVal("titre_short") and (se_termine_par($field_name,"_end_date")))
+                      if(!$this->getVal("titre_short") and (AfwStringHelper::stringStartsWith($field_name,"_end_date")))
                       {
                         $this->set("titre_short","تاريخ نهاية -------");
                         $this->set("titre_short","---- end date");
@@ -1871,17 +1871,17 @@ class Afield extends AFWObject{
                         $row["SHORTNAME"]="\"title\"";      
                 }
                 
-                if(se_termine_par($colname,"_ar"))
+                if(AfwStringHelper::stringStartsWith($colname,"_ar"))
                 {
                         $row["UTF8"]="true";      
                 }
                 
-                if(se_termine_par($colname,"_fr"))
+                if(AfwStringHelper::stringStartsWith($colname,"_fr"))
                 {
                         $row["UTF8"]="false";      
                 }
                 
-                if(se_termine_par($colname,"_en"))
+                if(AfwStringHelper::stringStartsWith($colname,"_en"))
                 {
                         $row["UTF8"]="false";      
                 }
@@ -2235,7 +2235,7 @@ class Afield extends AFWObject{
                      if(!$anstab) return "error : no answer table for $this_field_name($this_field_id) ".$this;    
                      if($atab->getVal("id_module") == $anstab->getVal("id_module"))
                      {
-                          if(se_termine_par(strtoupper($this_field_name),"_ID"))
+                          if(AfwStringHelper::stringStartsWith(strtoupper($this_field_name),"_ID"))
                           {
                                 $this_field_name = substr($this_field_name,0,strlen($this_field_name)-3);
                           }

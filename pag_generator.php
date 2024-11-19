@@ -1137,7 +1137,7 @@ $YDesc
                         $row["SHORTNAME"]="\"title\"";      
                 }
                 
-                if(se_termine_par($colname,"_ar"))
+                if(AfwStringHelper::stringStartsWith($colname,"_ar"))
                 {
                         $row["UTF8"]="true";      
                 }
