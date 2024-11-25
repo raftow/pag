@@ -1,3 +1,13 @@
+<html>
+<head>        
+        <title>CLINE</title>
+        <link href='favicon.ico' rel='shortcut icon'>
+</head>        
+<body>
+<?php
+  $tkn=md5("tkf".date("His"));
+  echo "<link href=\"../pag/cline.css?crsf=$tkn\" rel=\"stylesheet\" type=\"text/css\">";
+?>
 <div class="fleft home_banner home_banner4" dir="ltr">
         <div class="fleft command_line_container" height-flag="true" style="height: 200px;">
                 <form method="post" action="cline_go.php">
@@ -45,3 +55,5 @@ $(document).ready(function() {
 	//document.getElementById("command_line").focus();
 });
 </script>
+</body>
+</html>

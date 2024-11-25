@@ -4,9 +4,8 @@
   if(!$lang) $lang = "ar";
   $file_dir_name = dirname(__FILE__);
   $command_line_result_arr = array();
-  $tkn=md5("tkf".date("His"));
   require_once("$file_dir_name/../lib/afw/afw_utils.php");
-  echo "<link href=\"../pag/cline.css?crsf=$tkn\" rel=\"stylesheet\" type=\"text/css\">";
+  
 
 
   if($clinego and (!$command_line))

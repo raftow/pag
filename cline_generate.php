@@ -121,7 +121,7 @@
         
             if((!$restriction) or $restriction=="sql")
             {
-                $command_line_result_arr[] = hzm_format_command_line("info", "generating SQL : ");
+                $command_line_result_arr[] = hzm_format_command_line("info", "generating SQL of $table_code: ");
                 list($sqlTable, $sqlFKs) = $objTable->generateSQLStructure();
                 $sql = $sqlTable . "\n\n\n -- FKs\n\n" . $sqlFKs;
                 $command_line_result_arr[] = hzm_format_command_line("sql", $sql, "en", "cline sql");
@@ -129,7 +129,7 @@
             
             if((!$restriction) or $restriction=="model")
             {
-                $command_line_result_arr[] = hzm_format_command_line("info", "generating PHP-MODEL-CLASS : ");
+                $command_line_result_arr[] = hzm_format_command_line("info", "generating PHP-MODEL-CLASS $table_code.php: ");
                 list($php_code, $phpErrors_arr, $new_php_file) = $objTable->generatePhpClass($dbstruct_only=false, $dbstruct_outside=true);
                 $php_code .= "\n\n\n// errors \n\n" . implode("\n",$phpErrors_arr);
                 $php_code = "<"."?"."php \n".$php_code;
@@ -138,7 +138,7 @@
 
             if((!$restriction) or $restriction=="struct")
             {
-                $command_line_result_arr[] = hzm_format_command_line("info", "generating PHP-STRUCT-CLASS : ");
+                $command_line_result_arr[] = hzm_format_command_line("info", "generating PHP-STRUCT-CLASS $table_code"."_afw_structure.php: ");
                 list($php_code, $phpErrors_arr, $new_php_file) = $objTable->generatePhpClass($dbstruct_only=true, $dbstruct_outside=true);
                 $php_code .= "\n\n\n// errors \n\n" . implode("\n",$phpErrors_arr);
                 $php_code = "<"."?"."php \n".$php_code;
@@ -147,11 +147,11 @@
 
             if((!$restriction) or $restriction=="tr")
             {
-                $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION AR : ");
+                $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION AR trad_ar_".$table_code.".php : ");
                 $php_code_ar = $objTable->genereTranslation("ar");
-                $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION EN : ");
-                $php_code_en = $objTable->genereTranslation("en");
                 $command_line_result_arr[] = hzm_format_command_line("php", $php_code_ar, "ar", "cline tr ar php");
+                $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION EN trad_en_".$table_code.".php : ");
+                $php_code_en = $objTable->genereTranslation("en");
                 $command_line_result_arr[] = hzm_format_command_line("php", $php_code_en, "en", "cline tr en php");
             }
         }

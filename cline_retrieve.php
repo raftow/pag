@@ -11,7 +11,7 @@
             foreach($liste_obj as $oneObj)
             {
                 list($is_ok, $dataErr) = $oneObj->isOk($force=true, $returnErrors=true);                             
-                $dataErrors = truncateArabicJomla(implode(", ", $dataErr), $maxlen=56);
+                $dataErrors = AfwStringHelper::truncateArabicJomla(implode(", ", $dataErr), $maxlen=56);
                 //$dataErrors = var_export($dataErr,true);
                 
                 if($dataErrors) $errorClass = "error";

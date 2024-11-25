@@ -1,6 +1,31 @@
 <?php
 class ClineUtils
 {
+    public static function systemCommandFormat($system_command, $vars)
+    {
+        $parent_project_path = AfwSession::config("parent_project_path", "");
+        
+        $system_command = str_replace("[project_path]", $parent_project_path, $system_command);
+        foreach($vars as $var_name => $var_value)
+        {
+            $system_command = str_replace("[$var_name]", $var_value, $system_command);
+        }
+        
+
+
+        return $system_command;
+    }
+    public static function systemCommand($system_command, $vars)
+    {
+        
+        $system_command = ClineUtils::systemCommandFormat($system_command, $vars);
+        // here to add some security to prevent bad developers to make catastrophe
+        // @todo
+        $output=null;
+        $retval=null;
+        $res = exec($system_command, $output, $retval);
+        return [$res, $retval, $output];
+    }
 
     public static function similarCommand($command_to_help, $command_similar)
     {

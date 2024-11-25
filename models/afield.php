@@ -3188,6 +3188,43 @@ class Afield extends AFWObject{
                 return $attribute;
         }
 
+        public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $update_if_exists=false)
+        {
+                if (count($object_code_arr) != 3) throw new AfwRuntimeException("addByCodes : 3 params are needed module and table and field name, given : " . var_export($object_code_arr, true));
+                $module_code = $object_code_arr[2];
+                $table_name = $object_code_arr[1];
+                $field_name = $object_code_arr[0];
+                
+                AfwAutoLoader::addModule($module_code);
+
+                if (!$module_code or !$table_name or !$field_name) throw new AfwRuntimeException("addByCodes : module and table field_name are needed, given : module=$module_code and table=$table_name and field=$field_name");
+                $objModule = Module::loadByMainIndex($module_code);
+                if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("addByCodes : module $module_code not found");    
+                $objModule_id = $objModule->id;
+                $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
+                if (!$objTable or (!$objTable->id)) throw new AfwRuntimeException("addByCodes : table $table_name not found in module  $module_code/$objModule_id");
+                // $tableClass = AfwStringHelper::tableToClass($table_name);
+                $objTable_id = $objTable->id;
+                $afObj = Afield::loadByMainIndex($objTable_id, $field_name, true, true);
+                if(!$afObj) $message = "Strange Error happened because Afield::loadByMainIndex($objTable_id, $field_name) failed !!";
+                else
+                {
+                        if((!$afObj->is_new) and (!$update_if_exists))
+                        {
+                                throw new AfwRuntimeException("This field already exists");
+                        }
+                        $afObj->set("titre_short_en", $object_name_en);
+                        $afObj->set("titre_short", $object_name_ar);
+                        $afObj->commit();
+
+                        $message = "successfully done";
+                }
+                
+
+                return [$afObj, $message];
+
+        }
+    
         public static function reverseByCodes($object_code_arr)
         {
             if (count($object_code_arr) != 3) throw new AfwRuntimeException("reverseByCodes : 3 params are needed module and table and field name, given : " . var_export($object_code_arr, true));
@@ -3198,9 +3235,9 @@ class Afield extends AFWObject{
             if (!$module_code or !$table_name or !$field_name) throw new AfwRuntimeException("reverseByCodes : module and table field_name are needed, given : module=$module_code and table=$table_name and field=$field_name");
             $objModule = Module::loadByMainIndex($module_code);
             if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("reverseByCodes : module $module_code not found");
-
-            $objTable = Atable::loadByMainIndex($objModule->id, $table_name);
-
+            $objModule_id = $objModule->id;
+            $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
+            if (!$objTable or (!$objTable->id)) throw new AfwRuntimeException("reverseByCodes : table $table_name not found in module  $module_code/$objModule_id");
             $tableClass = AfwStringHelper::tableToClass($table_name);
             AfwAutoLoader::addModule($module_code);
             $objToPag = new $tableClass();

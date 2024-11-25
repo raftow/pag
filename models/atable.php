@@ -4530,6 +4530,36 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return $attribute;
     }
 
+    
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $update_if_exists=false)
+    {
+        if (count($object_code_arr) != 2) throw new AfwRuntimeException("addByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));
+        $table_name = $object_code_arr[0];
+        $module_code = $object_code_arr[1];
+        if (!$module_code or !$table_name) throw new AfwRuntimeException("addByCodes : module and table are needed, given : module=$module_code and table=$table_name");
+        $objModule = Module::loadByMainIndex($module_code);
+        if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("addByCodes : module $module_code not found");
+
+        $objModule_id = $objModule->id;
+        $objTable = Atable::loadByMainIndex($objModule_id, $table_name, true);
+        if(!$objTable) $message = "Strange Error happened because Atable::loadByMainIndex($objModule_id, $table_name) failed !!";
+        else
+        {
+            if((!$objTable->is_new) and (!$update_if_exists))
+            {
+                throw new AfwRuntimeException("This table already exists");
+            }
+            $objTable->set("titre_short_en", $object_name_en);
+            $objTable->set("titre_short", $object_name_ar);
+            $objTable->commit();
+
+            $message = "successfully done";
+        }
+        
+
+        return [$objTable, $message];
+    }
+
     /**
      * function reverseByCodes do a reverse engineering on this table
      * 

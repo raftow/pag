@@ -227,7 +227,7 @@ else
                                 
                                 if($user_connected)
                                 {
-                                        $user_infos = recup_row("select id, avail, firstname, email from ${server_db_prefix}ums.auser where avail = 'Y' and username='$username' limit 1");
+                                        $user_infos = AfwDatabase::db_recup_row("select id, avail, firstname, email from ${server_db_prefix}ums.auser where avail = 'Y' and username='$username' limit 1");
                                                 
                                         $after_login_dbg = "<b>------------------------------- AFTER LOGIN USER INFOS for $username ---------------------------</b>\n";
                                         $after_login_dbg .= var_export($user_infos,true);

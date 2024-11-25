@@ -1,7 +1,7 @@
 <?php
     $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code on ".$command_line_words[1]);
     $currmod_code = $command_line_words[1];    
-    $objModule = Module::getModuleByCode(0, $currmod_code);
+    $objModule = Module::loadByMainIndex($currmod_code);
     if($objModule and (!$objModule->isEmpty()))
     {
         $new_currmod = $objModule->getVal("module_code");
@@ -26,7 +26,7 @@
     }
     else
     {
-        $command_line_result_arr[] = hzm_format_command_line("error", "module $currmod_code not found");
+        $command_line_result_arr[] = hzm_format_command_line("error", "selected module $currmod_code not found");
         $nb_errors++;$command_finished = true;return;
     }
     $command_done = true;

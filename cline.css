@@ -22,7 +22,8 @@ body{
     min-height: 520px;
     color: #d5f77791;
     font-family: courrier, arial;
-    font-size: 90%;
+    font-size: 100%;
+    height: min-content !important;
 }
 
 .form-cline>label {
@@ -44,15 +45,18 @@ input.command_line_input {
     border-color: #f5deb354;
 }
 
-input.command_line_input:focus {
+input.command_line_input:focus, 
+input.command_line_input:focus-visible,
+input.command_line_input:focus-within {
     box-shadow: none;
+    border-width: 0px 0px 1px 0px !important;
     border-color: #cdf55f99 !important;
 }
 
 span.cline-message {
     width: 100%;
     font-family: kufi;
-    font-size: 93%;
+    font-size: 100%;
 }
 
 span.cline-message.cline-warning {
@@ -84,6 +88,8 @@ span.cline-message.cline-error {
     font-family: monospace;
     background-color: red;
     padding: 10px;
+    display: block;
+    margin-top: 8px;    
 }
 
 span.cline-message.cline-title {
@@ -97,17 +103,17 @@ span.cline-message.cline-title {
 
 span.cline-ar {
     font-family: kufi;
-    font-size: 90%;
+    font-size: 100%;
 }
 
 span.cline-en {
     font-family: tahoma,arial;
-    font-size: 93% !important;
+    font-size: 100% !important;
 }
 
 span.object_code{
     font-family: tahoma,arial;
-    font-size: 93% !important;
+    font-size: 100% !important;
 }
 
 
@@ -119,7 +125,7 @@ td.cline_td
 }
 
 td.cline_td>span.cline-normal {
-    font-size: 70% !important;
+    font-size: 90% !important;
     color: #87b8ed;
     font-family: arial, courrier !important;
 }
@@ -188,6 +194,8 @@ input:not(:focus):valid ~ .floating-label{
     font-size: 10px;
     color: #87b8ed;
     opacity: 1;
+    z-index: 9999;
+    background-color: black;
 }
 
 .inputText {
@@ -305,6 +313,13 @@ textarea.cline.struct.php {
 }
 
 .home_banner {
-    background-image: url(../pic/cline-bg.png) !important;
+    background-image: url(pic/cline-bg.png) !important;
+    background-size: cover;
+    background-repeat: repeat-y;
+    min-height: 1000px;
 }
 
+div.cline-obj span.cline-message.cline-error {
+    padding: 0;
+    font-size: 11px !important;
+}
