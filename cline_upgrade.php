@@ -94,13 +94,13 @@ if(($command_action == "run") or ($command_action == "ignore"))
             $resultIcon = $doneIcon; 
             $errorClass = "info";
         } 
-        
+        if(!$dataErrors) $dataErrors = "no errors";
 
         $command_line_result_arr[] = hzm_object_command_line($errorClass, $odd_oven, $resultIcon, $title, $dataErrors, $errorClass, $lang);
-        if($info) $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $doneIcon, $info, "", $errorClass, $lang);
-        if($error) $command_line_result_arr[] = hzm_object_command_line("error", $odd_oven, $errorIcon, $error, "", $errorClass, $lang);
-        if($warning) $command_line_result_arr[] = hzm_object_command_line("warning", $odd_oven, $warningIcon, $warning, "", $errorClass, $lang);
-        if($tech) $command_line_result_arr[] = hzm_object_command_line("tech", $odd_oven, $migrCode, $tech, "", $errorClass, $lang);
+        if($info) $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $doneIcon, $info, "--", $errorClass, $lang);
+        if($error) $command_line_result_arr[] = hzm_object_command_line("error", $odd_oven, $errorIcon, $error, "--", $errorClass, $lang);
+        if($warning) $command_line_result_arr[] = hzm_object_command_line("warning", $odd_oven, $warningIcon, $warning, "--", $errorClass, $lang);
+        if($tech) $command_line_result_arr[] = hzm_object_command_line("tech", $odd_oven, $migrCode, $tech, "--", $errorClass, $lang);
 
         if($odd_oven != "odd") $odd_oven = "odd";
         else $odd_oven = "oven";

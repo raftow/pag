@@ -197,19 +197,27 @@ class Afield extends AFWObject{
             return $this->findInMfk("foption_mfk",$option,false);
         }
         
-        public function lookupListWithoutLookupTable()
+        public function enumFieldAnswerTableIsPhpFunction()
         {
-            return $this->hasOption(114);
+            // rafik 29/11/2024 : I don't understand the code below and for me it is obsolete 
+            // any enum or menum Answer Table Is always Php Function and doesn't need answer table    
+            // return $this->hasOption(114);
+
+            return true;
         }
         
         public function needAnswerTable()
         {
-             if(in_array($this->getVal("afield_type_id"),array(12,15))) 
+             if(in_array($this->getVal("afield_type_id"),array(AfwUmsPagHelper::$afield_type_menum,
+                                                               AfwUmsPagHelper::$afield_type_enum))) 
              {
-                 return (!$this->lookupListWithoutLookupTable());
+                 return (!$this->enumFieldAnswerTableIsPhpFunction());
              }   
 
-             return (in_array($this->getVal("afield_type_id"),array(5,6,17)));
+
+             return (in_array($this->getVal("afield_type_id"),array(AfwUmsPagHelper::$afield_type_items,
+                                                                    AfwUmsPagHelper::$afield_type_mlst,
+                                                                    AfwUmsPagHelper::$afield_type_list)));
         }
         
         public function myAnswerTableName()
@@ -622,7 +630,7 @@ class Afield extends AFWObject{
                 if(($this->getVal("afield_type_id")==AfwUmsPagHelper::$afield_type_list) or 
                    ($this->getVal("afield_type_id")==AfwUmsPagHelper::$afield_type_mlst) or
                    (
-                           (!$this->lookupListWithoutLookupTable())
+                           (!$this->enumFieldAnswerTableIsPhpFunction())
                            and
                            (
                                    ($this->getVal("afield_type_id")==AfwUmsPagHelper::$afield_type_enum) or 
@@ -706,7 +714,7 @@ class Afield extends AFWObject{
                       
                       if(AfwStringHelper::stringStartsWith($field_name,"_enm") or AfwStringHelper::stringStartsWith($field_name,"_enum") or AfwStringHelper::stringStartsWith($field_name,"_men") or AfwStringHelper::stringStartsWith($field_name,"_menum"))
                       {
-                              if($this->lookupListWithoutLookupTable())    
+                              if($this->enumFieldAnswerTableIsPhpFunction())    
                               {
                                       $this->set("specification",'FUNCTION');
                               }

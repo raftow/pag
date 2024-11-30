@@ -151,7 +151,7 @@ td.cline_td>span.cline-normal {
 
 .cline-obj-id {
     width: 15%;
-    float: right;
+    float: left;
 }
 
 .cline-obj-title {

@@ -38,7 +38,7 @@ class ClineUtils
             // nothing to do
         }
 
-        if (($command_code == "curr") or ($command_code == "curm") or ($command_code == "currm")) {
+        if (($command_code == "curr") or ($command_code == "use") or ($command_code == "curm") or ($command_code == "currm")) {
             $command_code = "curr_mod";
         }
 
