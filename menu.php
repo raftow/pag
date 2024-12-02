@@ -1,6 +1,6 @@
+obsolete 5
 <?php
 /*
-obsolete
 $user_titre_short = $_SESS ION["user_titre_short"];
 if(!$user_titre_short) $user_titre_short = $_SE SSION["user_titre"];
 if(!$user_titre_short) $user_titre_short = $_SES SION["user_firstname"];
@@ -214,7 +214,7 @@ function get_menu_html($num, $idclass="menu")
 
 if($showmenu)
 {
-  include("common.php");
+  include("com mon.php");
   include("hzm_header.php");
   include("trad.php");
   if(count($menu[$pere])>1)

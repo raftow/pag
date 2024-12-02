@@ -2632,7 +2632,6 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
     public function beforeMAJ($id, $fields_updated)
     {
-        //// old require of common_string
         //if(!$this->getVal("atable_name")) return false;
 
         //$this->createDefaultFields();

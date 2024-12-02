@@ -1,7 +1,7 @@
 <?php
 require_once ("ini.php");
 require_once ("db.php");
-require_once ("common.php");
+// require_once ("com mon.php");
 $only_members = false;
 include("check_member.php");
 

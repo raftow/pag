@@ -447,8 +447,6 @@ class Afield extends AFWObject{
             // @rafik 13/11/2022 : important optimisation for pagme process no need to repare
             if($mode_pag_me) return true;
 
-                // old require of common_string
-                
                 if($this->getVal("system_id")==1)
                 {
                     if(!$this->getVal("id"))

@@ -237,7 +237,7 @@ class Domain extends AFWObject
 
       public function beforeMAJ($id, $fields_updated)
       {
-            global $lang;  //// old require of common_string
+            global $lang;  
 
 
             if ((!$this->getVal("domain_code")) or ($this->getVal("domain_code") == "--")) {

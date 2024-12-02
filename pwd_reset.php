@@ -24,7 +24,7 @@ if(!$lang) $lang = "ar";
 
 
 require_once ("$file_dir_name/../external/db.php");
-// here old require of common.php
+// 
 
 $html_debugg_login = true;  // useful in prod
 $debugg_login = false;

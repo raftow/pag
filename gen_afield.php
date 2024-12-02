@@ -1,7 +1,8 @@
+obsolete 4
 <?php
-
+/*
 require_once ("db.php");
-require_once ("common.php");
+require_once ("co mmon.php");
 require_once ("oci_1.php"); 
 
 
@@ -168,12 +169,12 @@ if($table_name and $fields)
          $sql_generated .= "values ('$table_name','$table_desc','$table_name',$creation_user_id,$creation_date,'T',null,0,null,'F','');";
       
          $sql_generated .= "\n select * from ATABLE where ATABLE_NAME = '$table_name';";
-         /*
-         $sql_generated .= "\n";
-         $sql_generated .= "---------------------------------------------------\n\n";
-         $sql_generated .= "\n Insert into ATABLE (ATABLE_ID,ATABLE_NAME,TITLE,TITLE_EN,ACTIVE,DISPLAY_FIELD,VERSION,KEY_FIELD,AUDITABLE,VH) ";
-         $sql_generated .= "values (??,'$table_name','$table_desc','$table_name','T',null,0,null,'F','');";
-         */
+         
+         // $sql_generated .= "\n";
+         // $sql_generated .= "---------------------------------------------------\n\n";
+         // $sql_generated .= "\n Insert into ATABLE (ATABLE_ID,ATABLE_NAME,TITLE,TITLE_EN,ACTIVE,DISPLAY_FIELD,VERSION,KEY_FIELD,AUDITABLE,VH) ";
+         // $sql_generated .= "values (??,'$table_name','$table_desc','$table_name','T',null,0,null,'F','');";
+         
       }
       
       
@@ -379,4 +380,5 @@ if($text_warning)
 </center>
 <?php
 include("footer.php");
+*/
 ?>

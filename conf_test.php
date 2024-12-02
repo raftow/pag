@@ -65,7 +65,7 @@ else
 
 
         require_once ("$file_dir_name/../external/db.php");
-        // here old require of common.php
+        // 
 
         $afw_debugg_in_file = $GET_["dbgfile"];
         $debugg_login = true;
