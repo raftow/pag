@@ -4530,8 +4530,9 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     }
 
     
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $update_if_exists=false)
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists=false)
     {
+
         if (count($object_code_arr) != 2) throw new AfwRuntimeException("addByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));
         $table_name = $object_code_arr[0];
         $module_code = $object_code_arr[1];
@@ -4550,6 +4551,8 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             }
             $objTable->set("titre_short_en", $object_name_en);
             $objTable->set("titre_short", $object_name_ar);
+            if($object_title_en) $objTable->set("titre_u_en", $object_title_en);
+            if($object_title_ar) $objTable->set("titre_u", $object_title_ar);
             $objTable->commit();
 
             $message = "successfully done";

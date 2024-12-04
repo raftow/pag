@@ -32,39 +32,41 @@ if(!$object_table)
 }
 
 
+
+
 $object_code = $command_line_words[2];
-/*
 $object_code_nb_parts = count(explode(".",$object_code));
-if($object_code_nb_parts == 0)
+
+if($object_table == "module") 
 {
-    // current context is used
-    if($currmod) 
-    {
-        $object_code = $currmod;
-        $object_code_nb_parts++;
-    }
+    $nb_parts_needed = 1;
+}
+elseif($object_table == "atable")
+{
+    $nb_parts_needed = 2;
+}
+elseif($object_table == "afield")
+{
+    $nb_parts_needed = 3;
 }
 
-if(($object_table == "atable") and ($object_code_nb_parts==1))
+$nb_parts_missed = $nb_parts_needed - $object_code_nb_parts;
+
+$object_code_before = $object_code;
+
+if($nb_parts_missed==1)
 {
-    if($currtbl_code) 
-    {
-        if($object_code) $object_code = ".".$object_code;
-        $object_code = $currtbl_code.$object_code;
-        $object_code_nb_parts++;
-    }
+    $object_code .= ".".$currmod;
 }
- 
-if(($object_table == "afield") and ($object_code_nb_parts==2))
+
+if($nb_parts_missed==2)
 {
-    if($currfld) 
-    {
-        if($object_code) $object_code = ".".$object_code;
-        $object_code = $currfld.$object_code;
-        $object_code_nb_parts++;
-    }
+    $object_code .= ".".$currtbl_code;
+    $object_code .= ".".$currmod;
 }
-*/
+
+// die("object_code=$object_code object_code_before=$object_code_before");
+
 if(!$object_code)
 {
     $command_line_result_arr[] = hzm_format_command_line("error", "add command need the thing to add !! try to see {help add}");
@@ -74,11 +76,19 @@ if(!$object_code)
 $object_code_arr = explode(".", $object_code);
 
 $object_name_ar = $command_line_words[3];
-$object_name_en = $command_line_words[4];
+$object_title_ar = $command_line_words[4];
+if($object_title_ar=='-') $object_title_ar = $object_name_ar;
 
+$object_name_en = $command_line_words[5];
+$object_title_en = $command_line_words[6];
+if($object_title_en=='-') $object_title_en = $object_name_en;
 
 $object_name_en = str_replace("-"," ",$object_name_en);
 $object_name_ar = str_replace("-"," ",$object_name_ar);
+
+$object_title_en = str_replace("-"," ",$object_title_en);
+$object_title_ar = str_replace("-"," ",$object_title_ar);
+
 
 $module_path = "$file_dir_name/../$object_module/models";
 if (file_exists("$module_path/$object_table.php")) {
@@ -88,7 +98,7 @@ if (file_exists("$module_path/$object_table.php")) {
 
     if ($object_code) {
         if ($addByCodeArr[$object_table]) {            
-            [$objToShow, $message] = $object_class::addByCodes($object_code_arr, $object_name_en, $object_name_ar);
+            [$objToShow, $message] = $object_class::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar);
         } else {
             $command_line_result_arr[] = hzm_format_command_line("error", "add $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;$command_finished = true;return;

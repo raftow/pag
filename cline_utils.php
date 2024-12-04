@@ -61,8 +61,8 @@ class ClineUtils
             // nothing to do
         }
 
-        if ($command_code == "list") {
-            // nothing to do
+        if (($command_code == "ls")  or ($command_code == "lst")) {
+            $command_code = "list";
         }
 
         if ($command_code == "reverse") {
@@ -71,6 +71,10 @@ class ClineUtils
 
         if (($command_code == "rev") or ($command_code == "r")) {
             $command_code = "reverse";
+        }
+
+        if (($command_code == "++") or ($command_code == "+")) {
+            $command_code = "add";
         }
 
         if (($command_code == "upgr") or ($command_code == "upg") or ($command_code == "up")or ($command_code == "u")) {

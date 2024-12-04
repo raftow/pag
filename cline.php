@@ -82,7 +82,7 @@
       $original_command_code = $command_code;
       $command_code = ClineUtils::formatCommand($command_code);
 
-
+      $modeSuperDeveloper = AfwSession::config("super-dev", false);
       // die("command_code=$command_code");
       
       while(!$command_finished)
@@ -103,7 +103,7 @@
         }
         catch(Exception $e)
         {
-            throw $e;
+            if($modeSuperDeveloper) throw $e;
             $command_line_result_arr[] = hzm_format_command_line("error", $e->getMessage()); $nb_errors++;
             $command_finished = true;
         }

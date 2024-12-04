@@ -6,6 +6,27 @@
     if(ClineUtils::similarCommand($command_to_help, "curr_tbl")) $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "curt @table[.@module]", "to change the current table", "en", "log");
     if(ClineUtils::similarCommand($command_to_help, "curr_fld")) $command_line_result_arr[] = hzm_attribute_command_line("info", "odd", "curf @field[.@table][.@module]", "to change the current field", "en", "log");
     
+    
+
+    if(ClineUtils::similarCommand($command_to_help, "add")) 
+    {
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "add[or +] @what @table.@module @name-ar @title-ar @name-en @title-en @fieldType.SIZE", "to find an object into a specific module", "en", "log");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        examples: + table app.workflow التطبيقات تطبيق applications application");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        for @what parameter table or t is same field or f is same module or m is same, examples"); 
+        $command_line_result_arr[] = hzm_format_command_line("warning", "                  + t content محتويات محتوى contents content");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        for @titles-en-and-ar if you put dash `-` it will be same as name, examples"); 
+        $command_line_result_arr[] = hzm_format_command_line("warning", "                  + f content_type_enum نوع-المحتوى -");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "                  + f app_code رمز-التطبيق - application-code - text.16");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        when english title and name ar omitted it will be deduced from the code of object, example"); 
+        $command_line_result_arr[] = hzm_format_command_line("warning", "                  + t page_section أقسام-الصفحات قسم-صفحة");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        is same as you do : ");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "                  + t page_section أقسام-الصفحات قسم-صفحة page-sections page-section");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "        if the column to add is a FK on existing created table you don't need to add any props other than field name all the rest is intelligently deduced, example : ");
+        $command_line_result_arr[] = hzm_format_command_line("warning", "                  + f section_template_id");
+        
+        
+    }
+
     if(ClineUtils::similarCommand($command_to_help, "find")) 
     {
         $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "find @table[.@module] @filter @find-method @find-param", "to find an object into a specific module", "en", "log");

@@ -154,6 +154,11 @@ td.cline_td>span.cline-normal {
     float: left;
 }
 
+span.cline-info>a {
+    text-decoration: none;
+    color: white;
+}
+
 .cline-obj-title {
     width: 35%;
     float: left;
@@ -167,6 +172,7 @@ td.cline_td>span.cline-normal {
 .cline-obj {
     width: 100%;
     direction:ltr;
+    float: left;
 }
 
 .cline-obj.obj-error {
@@ -177,6 +183,9 @@ td.cline_td>span.cline-normal {
     background-color: #f7af8c;
 }
 
+.bg-odd {
+    background-color: #1a487a;
+}
 
 .bg-oven {
     background-color: #000;
