@@ -692,7 +692,7 @@ class Atable extends AFWObject
         $af->select("answer_table_id", $this->getId());
         $af->select("avail", 'Y');
         $af->select("reel", 'Y');
-        $af->select("afield_type_id", Afield::$AFIELD_TYPE_LIST);   // LIST - اختيار من قائمة  
+        $af->select("afield_type_id", AfwUmsPagHelper::$afield_type_list);   // LIST - اختيار من قائمة  
         if ($entity_relation_type_id) $af->select("entity_relation_type_id", $entity_relation_type_id);
         if (($atable_id_list_arr) and (count($atable_id_list_arr) > 0)) {
             $atable_id_list_txt = implode(",", $atable_id_list_arr);
@@ -3295,6 +3295,21 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return ($this->getVal("exp_u_records") > 50);
     }
 
+    public function repareMe($lang="ar")
+    {
+        $afList = $this->getAllFieldList();
+        //die($this->getVal("atable_name")." ".var_export($afList, true));
+        $cnt = 0;
+        /**
+         * @var Afield $afItem
+         */
+        foreach ($afList as $afItem) {
+            $cnt += $afItem->repareMe($lang);
+        }
+
+        return $cnt;
+    }
+
 
     public function reorderFields($lang)
     {
@@ -4532,11 +4547,11 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     
     public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists=false)
     {
-
-        if (count($object_code_arr) != 2) throw new AfwRuntimeException("addByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));
+        if (count($object_code_arr) != 2) throw new AfwRuntimeException("Atable::addByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));        
         $table_name = $object_code_arr[0];
         $module_code = $object_code_arr[1];
-        if (!$module_code or !$table_name) throw new AfwRuntimeException("addByCodes : module and table are needed, given : module=$module_code and table=$table_name");
+        if (!$module_code or !$table_name) throw new AfwRuntimeException("Atable::addByCodes : module and table are needed, given : module=$module_code and table=$table_name");
+        if (!$object_name_en or !$object_name_ar or !$object_title_en or !$object_title_ar) throw new AfwRuntimeException("Atable::addByCodes : names and titles are required");
         $objModule = Module::loadByMainIndex($module_code);
         if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("addByCodes : module $module_code not found");
 
@@ -4567,7 +4582,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
      * 
      */
 
-    public static function reverseByCodes($object_code_arr)
+    public static function reverseByCodes($object_code_arr, $doReverse=true)
     {
         if (count($object_code_arr) != 2) throw new AfwRuntimeException("reverseByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));
         $table_name = $object_code_arr[0];
@@ -4575,16 +4590,31 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         if (!$module_code or !$table_name) throw new AfwRuntimeException("reverseByCodes : module and table are needed, given : module=$module_code and table=$table_name");
         $objModule = Module::loadByMainIndex($module_code);
         if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("reverseByCodes : module $module_code not found");
-
-
-
-        $message = self::reverseTable($module_code, $table_name);
         $objModule_id = $objModule->id;
-        $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
+        $message = "";
 
-        if(!$objTable) $message.= " strange Error happened because Atable::loadByMainIndex($objModule_id, $table_name) failed !!";
+        if($doReverse)
+        {
+            $message .= self::reverseTable($module_code, $table_name);            
+        }
+        $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
+        if(!$objTable) $message.= " Strange Error happened because Atable::loadByMainIndex($objModule_id, $table_name) returned empty, may be table need reverse engineering !!";
+        else $message .= " Table $table_name loaded successfully";
 
         return [$objTable, $message];
+    }
+
+
+    public static function repareByCodes($object_code_arr, $restriction)
+    {
+        list($objTable, $message) = self::reverseByCodes($object_code_arr, ($restriction=="reverse"));
+        if($objTable) 
+        {
+            $cnt = $objTable->repareMe('en');
+            $message .= "\n and $cnt attributes have been repared";
+        }
+
+        return [$objTable  , $message];
     }
 
     public static function reverseTable($module_code, $table_name)

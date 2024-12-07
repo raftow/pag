@@ -10,6 +10,7 @@ class Dbengine extends AFWObject{
 	
 	public function __construct(){
 		parent::__construct("dbengine","id","pag");
+		$this->DISPLAY_FIELD = "dbengine_name";
 	}
 
 	public static function loadById($id)

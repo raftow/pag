@@ -126,6 +126,9 @@
                 $sql = $sqlTable . "\n\n\n -- FKs\n\n" . $sqlFKs;
                 $command_line_result_arr[] = hzm_format_command_line("sql", $sql, "en", "cline sql");
             }
+
+            $arr_cmd_lines = [];
+            $mv_cmd_lines = [];
             
             if((!$restriction) or $restriction=="model")
             {
@@ -134,6 +137,10 @@
                 $php_code .= "\n\n\n// errors \n\n" . implode("\n",$phpErrors_arr);
                 $php_code = "<"."?"."php \n".$php_code;
                 $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline php");
+                // generate file
+                $fileName = $table_code . ".php";
+                list($arr_cmd_lines["models"], $mv_cmd) = ClineUtils::generatePhpFile($module_code, $fileName, $php_code, "models");
+                $mv_cmd_lines[] = $mv_cmd;
             }
 
             if((!$restriction) or $restriction=="struct")
@@ -143,6 +150,9 @@
                 $php_code .= "\n\n\n// errors \n\n" . implode("\n",$phpErrors_arr);
                 $php_code = "<"."?"."php \n".$php_code;
                 $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline struct php");
+                $fileName = $table_code . "_afw_structure.php";
+                list($arr_cmd_lines["struct"], $mv_cmd) = ClineUtils::generatePhpFile($module_code, $fileName, $php_code, "struct");
+                $mv_cmd_lines[] = $mv_cmd;
             }
 
             if((!$restriction) or $restriction=="tr")
@@ -150,10 +160,21 @@
                 $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION AR trad_ar_".$table_code.".php : ");
                 $php_code_ar = $objTable->genereTranslation("ar");
                 $command_line_result_arr[] = hzm_format_command_line("php", $php_code_ar, "ar", "cline tr ar php");
+                $fileName = "trad_ar_".$table_code . ".php";
+                list($arr_cmd_lines["tr-ar"], $mv_cmd) = ClineUtils::generatePhpFile($module_code, $fileName, $php_code_ar, "tr");
+                $mv_cmd_lines[] = $mv_cmd;
+
                 $command_line_result_arr[] = hzm_format_command_line("info", "generating TRANSLATION EN trad_en_".$table_code.".php : ");
                 $php_code_en = $objTable->genereTranslation("en");
                 $command_line_result_arr[] = hzm_format_command_line("php", $php_code_en, "en", "cline tr en php");
+                $fileName = "trad_en_".$table_code . ".php";
+                list($arr_cmd_lines["tr-en"], $mv_cmd) = ClineUtils::generatePhpFile($module_code, $fileName, $php_code_en, "tr");
+                $mv_cmd_lines[] = $mv_cmd;
             }
+
+            $all_cmd_mv_lines = implode("\n", $mv_cmd_lines);
+
+            $command_line_result_arr[] = hzm_format_command_line("cmd", $all_cmd_mv_lines, "en", "cline cmd");
         }
         elseif(!$module_code)
         {

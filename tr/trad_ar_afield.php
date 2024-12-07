@@ -72,7 +72,7 @@
 	$trad["afield"]["imethod_id"] = "مرتبط بوظيفة على الشبكة";
 	$trad["afield"]["afield_type_id"] = "نوع الحقل";
 	$trad["afield"]["formula_type_id"] = "نوع المعادلة";
-	$trad["afield"]["mandatory"] = "حقل إجباري";
+	$trad["afield"]["mandatory"] = "إجبارية ادخال الحقل";
 	$trad["afield"]["need_validation"] = "يحتاج للإعتماد";
 
 	$trad["afield"]["mode_search"] = "معيار للبحث";

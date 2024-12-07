@@ -26,7 +26,7 @@
                                                   <td class='cline_td'> <span class='cline-en cline-message cline-normal'> [context] > </span> 
                                                   </td>
                                                   <td>
-                                                        <input dir="ltr" type="text" class="inputText form-control command_line_input" name="command_line" size="32" maxlength="1000" value="[newsug_command_line]" id="command_line" autocomplete="off" required>
+                                                        <input dir="ltr" type="text" class="inputText form-control command_line_input" name="command_line" size="32" maxlength="1000" value="[newsug_command_line]" id="command_line" autofocus required>
                                                         <span class="floating-label">Type your command or type help</span>
                                                   </td>
                                         </tr>

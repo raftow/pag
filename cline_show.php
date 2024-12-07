@@ -40,6 +40,10 @@
             $object_codeOrId = "$currmod.$currtbl_code.$currfld";
         }        
     }
+
+    if(($object_table == "module") and (!$object_codeOrId)) $object_codeOrId = $currmod;
+    if(($object_table == "atable") and (!$object_codeOrId)) $object_codeOrId = "$currmod.$currtbl_code";
+    if(($object_table == "afield") and (!$object_codeOrId)) $object_codeOrId = "$currmod.$currtbl_code.$currfld";
     
     if(!$object_module) $object_module = $currmod;
     

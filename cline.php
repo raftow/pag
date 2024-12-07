@@ -71,6 +71,16 @@
       $loopCount = 0;
       $loopArr = [];
    
+      // short commands
+      if($command_line=="l") $command_line = "list all fields";
+      if($command_line=="lv") $command_line = "list virtual fields";
+      if($command_line=="lt") $command_line = "list all tables";
+      if($command_line=="sm") $command_line = "show module";
+      if($command_line=="st") $command_line = "show table";
+      if($command_line=="sf") $command_line = "show field";
+      if($command_line=="gm") $command_line = "g module";
+      if($command_line=="gt") $command_line = "g table";
+      if($command_line=="gf") $command_line = "g field";
    
       $command_line = trim($command_line);
       $command_line_words = explode(" ", $command_line);
@@ -174,7 +184,16 @@
 
    $file_dir_name = dirname(__FILE__);
    $html_template_file = "$file_dir_name/tpl/cline_tpl.php";
-   $data_tokens["command_line_result"] = implode("<br>\n",$command_line_result_arr);
+   $data_tokens["command_line_result"] = "";
+   foreach($arr_cmd_lines as $cmd_group => $cmd_lines)
+   {
+      $data_tokens["command_line_result"] .= "<div class='cmdgroup'>$cmd_group</div><br>\n";
+      $data_tokens["command_line_result"] .= implode("<br>\n", $cmd_lines);
+   }
+   $data_tokens["command_line_result"] .= implode("<br>\n",$command_line_result_arr);
+   // die("arr_cmd_lines = ".var_export($arr_cmd_lines, true));
+   
+   //die("data_tokens = ".var_export($data_tokens, true));
    $data_tokens["newsug_command_line"] = $data_token_new_suggested_command_line;
    $data_tokens["currmod"] = $currmod;
     

@@ -25,6 +25,12 @@
         $object_list_attribute="afieldOptionValueList";
     }
 
+    if($object_list_attribute_origin=="tables")
+    {
+        $object_entity = "module";
+        $object_list_attribute="allMyTables";                
+    }
+
     if($object_list_attribute_origin=="fields")
     {
         $object_list_attribute="origFieldList";
@@ -135,6 +141,10 @@
         if($object_list_attribute=="relations") 
         {
             $liste_obj = $objToShow->getAllTablesRelatedWithMeFields();
+        }
+        elseif($object_list_attribute=="allMyTables") 
+        {
+            $liste_obj = $objToShow->getAllMyTables();
         }
         else 
         {

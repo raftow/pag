@@ -105,28 +105,28 @@
 				),
 
 			'shortname_en' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  
-				'TYPE' => 'TEXT',  'FGROUP' => 'naming',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'TYPE' => 'TEXT',  'FGROUP' => 'general_props',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 			'titre_short' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'SEARCH-AR' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'UTF8' => true,  'EXCEL' => true,  'SIZE' => 40,  'SHORTNAME' => 'title',  
 				'TYPE' => 'TEXT',  'FGROUP' => 'naming',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'QEDIT_ALL_FGROUP' => true,  'ALL_FGROUP' => true,  'DYNAMIC-HELP' => true,  'ALL-RETRIEVE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50',
 				),
 
 			'titre_short_en' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'SEARCH-EN' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 40,  'SHORTNAME' => 'title',  
 				'TYPE' => 'TEXT',  'EXCEL' => false,  'FGROUP' => 'naming',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50',
 				),
 
 			'titre' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'SEARCH-AR' => true,  'RETRIEVE-AR' => true,  'QEDIT' => false,  'EDIT' => true,  'UTF8' => true,  'SIZE' => 64,  
-				'TYPE' => 'TEXT',  'FGROUP' => 'step_group',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'TYPE' => 'TEXT',  'FGROUP' => 'naming',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50',
 				),
 
 			'titre_en' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'SEARCH-EN' => true,  'RETRIEVE-EN' => true,  'QEDIT' => false,  'EDIT' => true,  'SIZE' => 64,  
-				'TYPE' => 'TEXT',  'FGROUP' => 'step_group',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'TYPE' => 'TEXT',  'FGROUP' => 'naming',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50',
 				),
 
 			'reel' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'SEARCH' => true,  'QSEARCH' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  
@@ -434,7 +434,8 @@
 				),
 
 			'mandatory' => array('SHOW' => true,  'RETRIEVE_FGROUP' => true,  'EDIT' => true,  'QEDIT' => false,  
-				'TYPE' => 'YN',  'DEFAUT' => 'W',  'MANDATORY' => true,  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'FGROUP' => 'field_rules',  'STEP' => 7,  'FIELD_RULES-RETRIEVE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'TYPE' => 'YN',  'DEFAUT' => 'W',  'MANDATORY' => true,  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'FGROUP' => 'field_rules',  
+				'STEP' => 7,  'FIELD_RULES-RETRIEVE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
 				),
 
