@@ -79,12 +79,15 @@
     {
             $command_line_result_arr[] = hzm_format_command_line("error", "3.please check that class $object_table file exists in module '$object_module'"); $nb_errors++;$command_finished = true;return;
     }
-    
+    /**
+     * @var AFWObject $objToShow
+     */
     if($objToShow and (!$objToShow->isEmpty()))
     {
         $arrAttributes = $objToShow->getColsByMode($command_mode);
         $module_translated = $objToShow->translate("module.single",$lang);
-        $command_line_result_arr[] = hzm_format_command_line("success", $module_translated." : ".$objToShow->getDisplay($lang), $lang);
+        $myDisplayAndLink = $module_translated ." : ".$objToShow->getDisplay($lang)." => ".$objToShow->showMyLink();
+        $command_line_result_arr[] = hzm_format_command_line("success", $myDisplayAndLink, $lang,false,true);
         $odd_oven = "odd";
         foreach($arrAttributes as $attribute)
         {

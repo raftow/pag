@@ -986,6 +986,40 @@ class Afield extends AFWObject
                         }
                 }
 
+                if ($anstab) {
+                        $titre = trim($this->getVal("titre"));
+                        $titre_en = trim($this->getVal("titre_en"));
+                        //if ($this->getVal("field_name")  == "page_id") die("will repare 1 titre_en=$titre_en titre=$titre");
+                        if ((!$titre) or (!$titre_en) or ($titre==$titre_en)) {
+                                if (($this->getVal("afield_type_id") == AfwUmsPagHelper::$afield_type_list)) {
+                                        $titre_propose = $anstab->getVal("titre_u");
+                                        $titre_propose_en = $anstab->getVal("titre_u_en");
+                                        // if ($this->getVal("field_name")  == "page_id") die("will repare 2 titre_en=$titre_en titre=$titre titre_propose_en=$titre_propose_en titre_propose=$titre_propose anstab=".$anstab);
+                                        if ($titre_propose) $titre_propose = AfwStringHelper::arabicTaarif($titre_propose);
+                                        $this->set("titre", $titre_propose);
+                                        $this->set("titre_en", $titre_propose_en);
+                                        //die("titre_propose = $titre_propose, this = ".var_export($this,true));  
+                                } elseif (($this->getVal("afield_type_id") == AfwUmsPagHelper::$afield_type_mlst)) {
+                                    $titre_propose = $anstab->getVal("titre");
+                                    $titre_propose_en = $anstab->getVal("titre_en");
+                                    $this->set("titre", $titre_propose);
+                                    $this->set("titre_en", $titre_propose_en);
+                                    //die("titre_propose = $titre_propose, this = ".var_export($this,true));  
+                                } else {
+                                        $this->set("titre", $anstab->getVal("titre_short"));
+                                        $this->set("titre_en", $anstab->getVal("titre_short_en"));
+                                }
+                        }
+
+                        if (!trim($this->getVal("titre_short"))) {
+                                $this->set("titre_short", $this->getVal("titre"));
+                        }
+
+                        if (!trim($this->getVal("titre_short_en"))) {
+                                $this->set("titre_short_en", $this->getVal("titre_en"));
+                        }
+                }
+
 
 
                 if (($field_name) and
@@ -996,7 +1030,16 @@ class Afield extends AFWObject
                         $afield_similar = self::get_similar_field($field_name, $my_id);
 
                         //die("this = ".var_export($this,true) . "<br>\n<br>\n<br>\n-------------------------------------<br>\n<br>\n<br>\n<br>\n afield_similar = " . var_export($afield_similar,true));
-                        if ($afield_similar) {
+                        if ($afield_similar) 
+                        {
+                                if (!trim($this->getVal("afield_type_id"))) $this->set("afield_type_id", $afield_similar->getVal("afield_type_id"));
+                                if (!trim($this->getVal("field_size"))) $this->set("field_size", $afield_similar->getVal("field_size"));
+                                if(!$this->getVal("answer_table_id") or !$afield_similar->getVal("answer_module_id"))
+                                {
+                                        $this->set("answer_module_id", $afield_similar->getVal("answer_module_id"));
+                                        $this->set("answer_table_id", $afield_similar->getVal("answer_table_id"));
+                                }
+
                                 $this->set("titre", $afield_similar->getVal("titre"));
                                 $this->set("titre_en", $afield_similar->getVal("titre_en"));
                                 $this->set("titre_short", $afield_similar->getVal("titre_short"));
@@ -1032,11 +1075,10 @@ class Afield extends AFWObject
                                 $this->set("mode_name", $afield_similar->getVal("mode_name"));
 
                                 $this->set("foption_mfk", $afield_similar->getVal("foption_mfk"));
-                                $this->set("answer_module_id", $afield_similar->getVal("answer_module_id"));
-                                $this->set("answer_table_id", $afield_similar->getVal("answer_table_id"));
+                                
+                                
 
-                                if (!trim($this->getVal("afield_type_id"))) $this->set("afield_type_id", $afield_similar->getVal("afield_type_id"));
-                                if (!trim($this->getVal("field_size"))) $this->set("field_size", $afield_similar->getVal("field_size"));
+                                
                         } else {
                                 // $this->set("titre","-------");
                                 // $this->set("titre_short","$field_name not found");
@@ -1052,39 +1094,7 @@ class Afield extends AFWObject
                 }
 
 
-                if ($anstab) {
-                        $titre = trim($this->getVal("titre"));
-                        $titre_en = trim($this->getVal("titre_en"));
-                        //if ($this->getVal("field_name")  == "page_id") die("will repare 1 titre_en=$titre_en titre=$titre");
-                        if ((!$titre) or (!$titre_en) or ($titre==$titre_en)) {
-                                if (($this->getVal("afield_type_id") == AfwUmsPagHelper::$afield_type_list)) {
-                                        $titre_propose = $anstab->getVal("titre_u");
-                                        $titre_propose_en = $anstab->getVal("titre_u_en");
-                                        // if ($this->getVal("field_name")  == "page_id") die("will repare 2 titre_en=$titre_en titre=$titre titre_propose_en=$titre_propose_en titre_propose=$titre_propose anstab=".$anstab);
-                                        if ($titre_propose) $titre_propose = AfwStringHelper::arabicTaarif($titre_propose);
-                                        $this->set("titre", $titre_propose);
-                                        $this->set("titre_en", $titre_propose_en);
-                                        //die("titre_propose = $titre_propose, this = ".var_export($this,true));  
-                                } elseif (($this->getVal("afield_type_id") == AfwUmsPagHelper::$afield_type_mlst)) {
-                                    $titre_propose = $anstab->getVal("titre");
-                                    $titre_propose_en = $anstab->getVal("titre_en");
-                                    $this->set("titre", $titre_propose);
-                                    $this->set("titre_en", $titre_propose_en);
-                                    //die("titre_propose = $titre_propose, this = ".var_export($this,true));  
-                                } else {
-                                        $this->set("titre", $anstab->getVal("titre_short"));
-                                        $this->set("titre_en", $anstab->getVal("titre_short_en"));
-                                }
-                        }
-
-                        if (!trim($this->getVal("titre_short"))) {
-                                $this->set("titre_short", $this->getVal("titre"));
-                        }
-
-                        if (!trim($this->getVal("titre_short_en"))) {
-                                $this->set("titre_short_en", $this->getVal("titre_en"));
-                        }
-                }
+                
 
 
 
@@ -1912,9 +1922,11 @@ class Afield extends AFWObject
         {
                 //return $this->translateOperator("FIELD",$lang)." ".$this->getShortDisplay($lang);
                 $return = $this->getVal("field_name") . " " . $this->getShortDisplay($lang);
+                /*
                 if ($this->getVal("atable_id") > 0) {
                         $return .= " " . $this->showAttribute("atable_id", null, true, $lang);
-                }
+                }*/
+                if($this->sureIs("distinct_for_list")) $return .= "<span class='sql key'>U</span>";
 
                 return $return;
         }
@@ -2054,7 +2066,7 @@ class Afield extends AFWObject
 
                 $table_name = $my_tab->getVal("atable_name");
                 $mcode = $server_db_prefix . $my_tab->getModule()->getVal("module_code");
-                if ($alter_table) $alter_table_sql = "ALTER TABLE $mcode.$table_name add";
+                if ($alter_table) $alter_table_sql = "-- ALTER TABLE $mcode.$table_name add";
                 else $alter_table_sql = "";
 
                 if ($alter_table) {

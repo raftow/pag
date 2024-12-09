@@ -1548,9 +1548,13 @@ class Atable extends AFWObject
 
 
 
-        $UNIQUE_KEY = "";
-        if ((count($indx_cols) > 0) and (!$UNIQUE_KEY)) {
+        $UNIQUE_KEY = "";        
+        if (count($indx_cols) > 0) {
             $UNIQUE_KEY = "\$obj->UNIQUE_KEY = array('" . implode("','", $indx_cols) . "');";
+        }
+        else
+        {
+            $UNIQUE_KEY = "// \$obj->UNIQUE_KEY = array('XXX', 'YYY');";
         }
         //else  $UNIQUE_KEY = "no unique key(UNIQUE_KEY=$UNIQUE_KEY) and indx_cols=".var_export($indx_cols,true);
 
@@ -2618,19 +2622,8 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return $this->createDefaultFields();
     }
 
-    public function beforeInsert($id, $fields_updated)
-    {
-        return $this->beforeMAJ($id, $fields_updated);
-    }
 
-
-    public function beforeUpdate($id, $fields_updated)
-    {
-        return $this->beforeMAJ($id, $fields_updated);
-    }
-
-
-    public function beforeMAJ($id, $fields_updated)
+    public function beforeMaj($id, $fields_updated)
     {
         //if(!$this->getVal("atable_name")) return false;
 
@@ -2646,7 +2639,8 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
 
         $this_table_name = $this->getVal("atable_name");
-
+        $single_en = AfwStringHelper::toEnglishText(strtolower($this_table_name));
+        $plural_en = $single_en."s";
         if (
             AfwStringHelper::stringStartsWith($this->getVal("titre_short_en"), "--") or
             AfwStringHelper::stringStartsWith($this->getVal("titre_short_en"), "??")
@@ -2668,20 +2662,20 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $this->set("titre_en", "");
         }
 
-        if (!$this->getVal("titre_u_en")) {
-            $this->set("titre_u_en", AfwStringHelper::toEnglishText($this_table_name));
+        if (!trim($this->getVal("titre_u_en"))) {
+            $this->set("titre_u_en", $single_en);
         }
 
-        if (!$this->getVal("titre_short_en")) {
+        if (!trim($this->getVal("titre_short_en"))) {
             $this->set("titre_short_en", $this->getVal("titre_u_en") . "s");
         }
 
 
-        if (!$this->getVal("titre_short")) {
+        if (!trim($this->getVal("titre_short"))) {
             $this->set("titre_short", $this->getVal("titre"));
         }
 
-        if (!$this->getVal("titre")) {
+        if (!trim($this->getVal("titre"))) {
             $this->set("titre", $this->getVal("titre_short"));
         }
 
@@ -2693,7 +2687,19 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $this->set("titre_short_en", $this->getVal("titre_en"));
         }
 
+        
 
+        if (!$this->getVal("titre_en")) {
+            $this->set("titre_en", $plural_en);
+        }
+
+        if (!$this->getVal("titre_short_en")) {
+            $this->set("titre_short_en", $plural_en);
+        }
+
+        if (!$this->getVal("titre_en")) {
+            $this->set("titre_en", $plural_en);
+        }
 
         if (!$this->getVal("dbengine_id")) {
             $this->set("dbengine_id", 2);

@@ -144,6 +144,22 @@ class PagAtableAfwStructure
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
 
+		'titre_short_en' => array(
+			'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE-EN' => true,  'EDIT' => true,  'QEDIT' => false,  'SEARCH' => true,  'SIZE' => 40,  'SHORTNAME' => 'pluraltitle_en',  'STEP' => 1,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
+		),
+
+		'titre_u_en' => array(
+			'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE-EN' => false,  'EDIT' => true,  'QEDIT' => false,  'SEARCH' => true,  'SIZE' => 64,  'SHORTNAME' => 'singletitle_en',  'STEP' => 1,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
+		),
+
+		'titre_en' => array(
+			'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE-EN' => false,  'EDIT' => true,  'QEDIT' => false,  'SEARCH' => false,
+			'SIZE' => 'AREA',  'SHORTNAME' => 'description_en',  'STEP' => 1,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
+			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
+		),
+
 		'tboption_mfk' => array(
 			'STEP' => 1,  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 255,  'MANDATORY' => true,  'UTF8' => false,
 			'TYPE' => 'MFK',  'ANSWER' => 'tboption',  'ANSMODULE' => 'pag',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
@@ -175,21 +191,7 @@ class PagAtableAfwStructure
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
 
-		'titre_short_en' => array(
-			'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE-EN' => true,  'EDIT' => true,  'QEDIT' => false,  'SEARCH' => true,  'SIZE' => 40,  'SHORTNAME' => 'pluraltitle_en',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
-			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
-		),
-
-		'titre_u_en' => array(
-			'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE-EN' => false,  'EDIT' => true,  'QEDIT' => false,  'SEARCH' => true,  'SIZE' => 64,  'SHORTNAME' => 'singletitle_en',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
-			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
-		),
-
-		'titre_en' => array(
-			'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE-EN' => false,  'EDIT' => true,  'QEDIT' => false,  'SEARCH' => false,
-			'SIZE' => 'AREA',  'SHORTNAME' => 'description_en',  'STEP' => 2,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
-			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
-		),
+		
 
 		'look_from_field_id' => array(
 			'TYPE' => 'FK',  'ANSWER' => 'afield',  'SHOW' => false,  'FORMAT' => '',  'RETRIEVE' => false,  'EDIT' => false,  'QEDIT' => false,  'SEARCH' => false,

@@ -173,7 +173,7 @@
             }
 
             $all_cmd_mv_lines = implode("\n", $mv_cmd_lines);
-
+            $command_line_result_arr[] = hzm_format_command_line("info", "generating mv-commands : ");
             $command_line_result_arr[] = hzm_format_command_line("cmd", $all_cmd_mv_lines, "en", "cline cmd");
         }
         elseif(!$module_code)

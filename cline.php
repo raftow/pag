@@ -73,6 +73,7 @@
    
       // short commands
       if($command_line=="l") $command_line = "list all fields";
+      if($command_line=="lf") $command_line = "list all fields";
       if($command_line=="lv") $command_line = "list virtual fields";
       if($command_line=="lt") $command_line = "list all tables";
       if($command_line=="sm") $command_line = "show module";
@@ -81,6 +82,8 @@
       if($command_line=="gm") $command_line = "g module";
       if($command_line=="gt") $command_line = "g table";
       if($command_line=="gf") $command_line = "g field";
+      if($command_line=="sql") $command_line = "g-sql table";
+      
    
       $command_line = trim($command_line);
       $command_line_words = explode(" ", $command_line);
