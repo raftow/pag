@@ -62,6 +62,25 @@
         
         if($setted_phrase) $command_line_result_arr[] = hzm_format_command_line("warning", $setted_phrase);
     }
+
+    if($object_list_attribute_origin=="jobs")
+    {
+        if(!$object_entity) $object_entity = "domain";
+        
+        if($object_entity=="domain") 
+        {
+            $object_list_attribute="jobroleList";
+            $setted_phrase .= "object_entity setted to $object_entity, ";
+            
+        }
+        
+        $setted_phrase .= "object_list_attribute setted to $object_list_attribute, "; 
+        
+
+        
+        if($setted_phrase) $command_line_result_arr[] = hzm_format_command_line("warning", $setted_phrase);
+    }
+
     if(!$object_entity)                
     {
         $command_line_result_arr[] = hzm_format_command_line("error", "Error 0003 : missed word-4 object_entity in your command (note that object_list_attribute_origin=$object_list_attribute_origin)");
@@ -89,13 +108,20 @@
         $object_codeOrId = $currfld_id;
         
     }
-    // the below word Number 5 should be domain code but generally it is same as module code 
-    // otherwise command words should all be explicit (6 words including command name), ex : 
-    // list all goals of domain hr (module code is hrm)
+    
     if(!$object_codeOrId) 
     {
-        $object_codeOrId = $currmod;  
-        $setted_phrase .= "object_codeOrId setted to $currmod, ";
+        if($object_entity == "domain")
+        {
+            $object_codeOrId = Module::moduleCodeToDomainId($currmod);  
+        }
+        elseif($object_entity == "module")
+        {
+            $object_codeOrId = $currmod;  
+        }
+        
+        // die("$object_codeOrId = Module::moduleCodeToDomainId($currmod)");
+        $setted_phrase .= "object_codeOrId setted to $object_codeOrId from $currmod, ";
     }
     
     $object_code = is_numeric($object_codeOrId) ? "" : $object_codeOrId;
@@ -169,7 +195,7 @@
     }
     else
     {
-        $command_line_result_arr[] = hzm_format_command_line("error", "object $object_class [$object_codeOrId] not found"); $nb_errors++;$command_finished = true;return;
+        $command_line_result_arr[] = hzm_format_command_line("error", "object [Class=$object_class  CodeOrId=$object_codeOrId] not found"); $nb_errors++;$command_finished = true;return;
     }
     
     $command_done = true;

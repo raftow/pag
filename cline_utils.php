@@ -130,6 +130,12 @@ class ClineUtils
         } elseif ($object_module_table == "d") {
             $object_table = "domain";
             $object_module = "pag";
+        } elseif ($object_module_table == "goal") {
+            $object_table = "goal";
+            $object_module = "bau";
+        } elseif ($object_module_table == "g") {
+            $object_table = "goal";
+            $object_module = "bau";
         } else {
             list($object_table, $object_module) = explode(".", $object_module_table);
         }

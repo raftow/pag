@@ -76,6 +76,9 @@
       if($command_line=="lf") $command_line = "list all fields";
       if($command_line=="lv") $command_line = "list virtual fields";
       if($command_line=="lt") $command_line = "list all tables";
+      if($command_line=="lg") $command_line = "list all goals";
+      if($command_line=="lj") $command_line = "list all jobs";
+      
       if($command_line=="sm") $command_line = "show module";
       if($command_line=="st") $command_line = "show table";
       if($command_line=="sf") $command_line = "show field";

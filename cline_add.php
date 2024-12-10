@@ -6,6 +6,7 @@ $addByCodeArr = array();
 $addByCodeArr["module"] = true;
 $addByCodeArr["atable"] = true;
 $addByCodeArr["afield"] = true;
+$addByCodeArr["goal"] = true;
 
 
 $what_to_add = $command_line_words[1];
