@@ -6,8 +6,8 @@ $config_arr = [
 
         'x_module_means_company'=>false,
 
-        'application_name' => array('ar' => "ممكن لهندسة النظم", 
-                                  'en' => "MOMKEN System Architecture",),
+        'application_name' => array('ar' => "هندسة التطبيقات", 
+                                    'en' => "Application Engineering",),
 
 
         // APPLICATION SETTINGS
