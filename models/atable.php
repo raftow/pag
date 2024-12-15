@@ -1102,10 +1102,19 @@ class Atable extends AFWObject
                 $modSystem = $this->hetModule();
                 // if($this->getId()==1423) die(var_export($modSystem,true));
                 if ($modSystem) {
-                    $system = $modSystem->hetSys();
-                    if ($system) return $system;
-                    else return 0;
-                } else return 0;
+                    if($what=='value')
+                    {
+                        return $modSystem->getVal("id_system");
+                    }
+                    else
+                    {
+                        $system = $modSystem->hetSys();
+                        if ($system) return $system;
+                        else return null;
+                    }
+                    
+                } 
+                else return ($what=='value') ? 0 : null;
                 break;
 
             case "fieldcount":
