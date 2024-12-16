@@ -520,6 +520,7 @@ AFTER GENERATION :
                        
                         
                        
+                       
                        foreach($at_list as $atb_id => $atb_obj)
                        {
                              $module_code = $atb_obj->myModuleCode();
