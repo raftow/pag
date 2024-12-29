@@ -4871,6 +4871,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         }
 
         $TDesc = implode("\n", $tempTdesc);
+
+        if($langUC=="En") $CLASS_NAMETranslator = $className."ArTranslator";
+        else $CLASS_NAMETranslator = $className."EnTranslator";
+
         $php_code = 
         
 "<?php
@@ -4886,6 +4890,7 @@ $TDesc
 
     public static function getInstance()
 	{
+        if(false) return new $CLASS_NAMETranslator();
 		return new $className();
 	}
 }";

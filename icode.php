@@ -612,22 +612,28 @@ foreach($FIELDS_TRAD_ARR as $field_name => $trad)
         $phpTrad_en .= "	\$trad[\"$TABLE_NAME\"][\"$field_name\"] = \"$trad_en\";\n";
 }
 
+$CLASS_NAMETranslator = $CLASS_NAME."EnTranslator";
+
 $phpTrad_ar .= "        return \$trad;
         }
 
         public static function getInstance()
 	{
+                if(false) return new $CLASS_NAMETranslator();
 		return new $CLASS_NAME();
 	}
 }
 
 ";
 
+$CLASS_NAMETranslator = $CLASS_NAME."ArTranslator";
+
 $phpTrad_en .= "        return \$trad;
         }
 
         public static function getInstance()
 	{
+                if(false) return new $CLASS_NAMETranslator();
 		return new $CLASS_NAME();
 	}
 }
