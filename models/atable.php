@@ -152,14 +152,15 @@ class Atable extends AFWObject
         $objAtable = Atable::loadByMainIndex($moduleId, $atable_name);
         if($objAtable and (!$objAtable->isEmpty()))
         {
-            return $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action);
+            list($info, $goalObj) = $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action);
+            return $info;
         }
         else throw new AfwRuntimeException("generateTablePrevileges : Table `$atable_name` not found in module `$module`");
     }
 
     public function manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action="+t")
     {
-        list($error, $info0) = $this->genereUserBFs('ar');
+        list($error, $info0) = $this->createOnlyFrameWorkScreens();
         if($error) throw new AfwRuntimeException("generateTablePrevileges::objAtable::genereUserBFs : error : $error");
         AfwAutoLoader::addModule("bau");
         $goalObj = Goal::loadById($goal_id);
@@ -167,7 +168,7 @@ class Atable extends AFWObject
         list($error, $info) = $goalObj->manageTable($this->id, $jobrole_id, $action, $framework_mode);
         if($error) throw new AfwRuntimeException("generateTablePrevileges : error : $error");
 
-        return $info;
+        return [$info, $goalObj];
     }
 
     public function getJobrolesByCode($code)
@@ -3837,6 +3838,11 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return $bf_row;
     }
 
+    public function createOnlyFrameWorkScreens($framework_id = 0)
+    {
+        return $this->createFrameWorkScreens($framework_id, $resetAll = false, $resetUS = false);
+    }
+
     public function createFrameWorkScreens($framework_id = 0, $resetAll = true, $resetUS = true)
     {
         global $lang, $_sql_analysis_seuil_calls;
@@ -3886,7 +3892,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                  */
                 list($bf, $bf_new) = Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code, 0, 0, $resetUS);
                 if (is_object($bf) and ($bf->getId() > 0)) {
-                    $bf->generateUserStory($lang, $framework_id);
+                    if($resetUS)
+                    {
+                        $bf->generateUserStory($lang, $framework_id);
+                    }                    
                     $bf_arr[$bf->getId()] = array("mode" => $framework_mode, "bf" => $bf, "bf_new" => $bf_new, "menu" => $framework_mode_item["menu"][$cat]);
                     if ($bf) $bf_arr_empty = false;
                 } else throw new AfwRuntimeException("failed Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code) : " . var_export($bf, true));

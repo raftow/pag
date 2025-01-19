@@ -356,3 +356,7 @@ span.sql.key {
     margin-right: 4px;
     background-color: #135ddf;
 }
+
+div#analysis_log {
+    background-color: wheat;
+}

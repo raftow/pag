@@ -8,7 +8,7 @@ $setted_phrase = "";
 $goal_id = $command_line_words[1];
 $action = $command_line_words[2];
 $atable_name = $command_line_words[3];
-if(!$atable_name) $atable_name = $currtbl;
+if(!$atable_name) $atable_name = $currtbl_code;
 $framework_mode = $command_line_words[4];
 if(!$framework_mode) $framework_mode = "qsearch";
 $full = $command_line_words[5];
@@ -59,19 +59,21 @@ if($goal_id>0)
                                     $nb_errors++;$command_finished = true;return;
                             }
                             list($error, $info) = $goalObj->fullManageTable($idTab, $jobrole_id, $action);
+                            $what_done = "fullManageTable($idTab, $jobrole_id, $action)";
                         }
                         else 
                         {
-                            $info = $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action="+t");
+                            list($info, $goalObj) = $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action="+t");
+                            $what_done = "manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action)";
                         }
 
                         if($error)
                         {
-                            $command_line_result_arr[] = hzm_format_command_line("error", "error while doing fullManageTable($idTab, $jobrole_id, $action)");
+                            $command_line_result_arr[] = hzm_format_command_line("error", "error while doing $what_done");
                             $nb_errors++;$command_finished = true;return;
                         }
 
-                        $command_line_result_arr[] = hzm_format_command_line("info", "while doing fullManageTable($idTab, $jobrole_id, $action) result was :");
+                        $command_line_result_arr[] = hzm_format_command_line("info", "while doing $what_done result was :");
                         $command_line_result_arr[] = hzm_format_command_line("success", $info);
                         $command_line_result_arr[] = hzm_format_command_line("info", $atable_translated." has been managed by goal ".$goalObj->getDisplay($lang), $lang);
                         $command_line_result_arr[] = hzm_format_command_line("warning", "You can check now if your menus are changed", $lang);
@@ -80,7 +82,7 @@ if($goal_id>0)
                 }
                 else
                 {
-                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $currmod");
+                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $currmod/$idMod");
                         $nb_errors++;$command_finished = true;return;
                 }
         }
