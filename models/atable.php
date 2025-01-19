@@ -130,6 +130,46 @@ class Atable extends AFWObject
         } else return null;
     }
 
+
+    public static function generateTablePrevileges($module, $atable_name, $goal_id, $action="+t", $framework_mode = "qsearch", $jobrole_id=null)
+    {
+        if($action=="add") $action="+t";
+        if($action=="remove") $action="-t";
+        if(is_integer($module))
+        {
+            $moduleId = $module;
+            $objModule = Module::loadById($moduleId);
+            $moduleCode = $objModule->getVal("module_code");
+        }
+        else
+        {
+            $moduleCode = $module;
+            $objModule = Module::getModuleByCode(0, $moduleCode);
+            if(!$objModule) throw new AfwRuntimeException("generateTablePrevileges : Module `$module` not found");
+            $moduleId = $objModule->id;
+        }
+        // $logReverse = Atable::reverseTable($moduleCode, $atable_name);
+        $objAtable = Atable::loadByMainIndex($moduleId, $atable_name);
+        if($objAtable and (!$objAtable->isEmpty()))
+        {
+            return $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action);
+        }
+        else throw new AfwRuntimeException("generateTablePrevileges : Table `$atable_name` not found in module `$module`");
+    }
+
+    public function manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action="+t")
+    {
+        list($error, $info0) = $this->genereUserBFs('ar');
+        if($error) throw new AfwRuntimeException("generateTablePrevileges::objAtable::genereUserBFs : error : $error");
+        AfwAutoLoader::addModule("bau");
+        $goalObj = Goal::loadById($goal_id);
+        if(!$goalObj) throw new AfwRuntimeException("generateTablePrevileges : goal `$goal_id` not found");
+        list($error, $info) = $goalObj->manageTable($this->id, $jobrole_id, $action, $framework_mode);
+        if($error) throw new AfwRuntimeException("generateTablePrevileges : error : $error");
+
+        return $info;
+    }
+
     public function getJobrolesByCode($code)
     {
         if ($code == "djs") return $this->getDisplayJobroles();
@@ -3841,7 +3881,9 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 $bf_spec = $this->decodeTpl($framework_mode_item["bf_spec"]);
                 $bf_code = $this->decodeTpl($framework_mode_item["bf_code"]);
                 $id_module = $this->getVal("id_module");
-
+                /**
+                 * @var Bfunction $bf
+                 */
                 list($bf, $bf_new) = Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code, 0, 0, $resetUS);
                 if (is_object($bf) and ($bf->getId() > 0)) {
                     $bf->generateUserStory($lang, $framework_id);
@@ -4636,20 +4678,34 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     {
         $tableClass = AfwStringHelper::tableToClass($table_name);
         AfwAutoLoader::addModule($module_code);
-        /**
-         * @var AFWObject $objToPag 
-         */
-        $objToPag = new $tableClass();
-
-        list($fld_i, $fld_u, $mdl_new, $tbl_new, $mdl, $tbl) = $objToPag->pagMe($sh = 3, $update_if_exists = true);
-        $return = "$fld_i fields inserted, $fld_u fields updated";
-        if($mdl_new) $return .= ", new module created : ";
-        else $return .= ", module used : ";
-        if($mdl) $return .= $mdl->getDisplay("en")."/id=".$mdl->id;
         
-        if($tbl_new) $return .= ", new table created : ".$tbl->getDisplay("en");
+        /* if(!class_exists($tableClass, false))
+        {
+            return "Error $tableClass class not found";
+        }*/
 
-        return $return;
+        try
+        {
+            /**
+             * @var AFWObject $objToPag 
+             */
+            $objToPag = new $tableClass();
+
+            list($fld_i, $fld_u, $mdl_new, $tbl_new, $mdl, $tbl) = $objToPag->pagMe($sh = 3, $update_if_exists = true);
+            $return = "$fld_i fields inserted, $fld_u fields updated";
+            if($mdl_new) $return .= ", new module created : ";
+            else $return .= ", module used : ";
+            if($mdl) $return .= $mdl->getDisplay("en")."/id=".$mdl->id;
+            
+            if($tbl_new) $return .= ", new table created : ".$tbl->getDisplay("en");
+
+            return $return;
+        }
+        catch(Exception $e)
+        {
+            return "Error loading and pagging $tableClass instance : ".$e->getMessage();
+        }
+        
         
     }
 

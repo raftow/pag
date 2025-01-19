@@ -3,17 +3,23 @@ $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_cod
 // ex goal 180 +t app_model_api : to add table api_endpoint to the goal 180 (ie. settings management for example)
 //           -> the impact is to find business functions such as quick search on api_endpoint in the menu role of this goal 180
 // ex goal 180 -t api_endpoint : to remove table api_endpoint from the goal 180 
-
+//
 $setted_phrase = "";
 $goal_id = $command_line_words[1];
 $action = $command_line_words[2];
+$atable_name = $command_line_words[3];
+if(!$atable_name) $atable_name = $currtbl;
+$framework_mode = $command_line_words[4];
+if(!$framework_mode) $framework_mode = "qsearch";
+$full = $command_line_words[5];
+$jobrole_id = $command_line_words[6];
+
 AfwAutoLoader::addModule("bau");
 if($goal_id>0)
 {
     if(($action=="+t") or ($action=="-t"))
     {
-        $atable_name = $command_line_words[3];
-        $jobrole_id = $command_line_words[4];
+        
         if(!$atable_name)
         {
             $command_line_result_arr[] = hzm_format_command_line("error", "goal command need that you specify the table name see {help goal} examples");
@@ -42,15 +48,23 @@ if($goal_id>0)
                         $currtbl = $idTab;                        
                         $atable_translated = $objAtable->translate("atable.single",$lang);
 
-                        $goalObj = Goal::loadById($goal_id);
-
-                        if(!$goalObj)
-                        {
-                                $command_line_result_arr[] = hzm_format_command_line("error", "failed to load goal with id = $goal_id");
-                                $nb_errors++;$command_finished = true;return;
-                        }
                         
-                        list($error, $info) = $goalObj->fullManageTable($idTab, $jobrole_id, $action);
+                        if($full) 
+                        {
+                            $goalObj = Goal::loadById($goal_id);
+
+                            if(!$goalObj)
+                            {
+                                    $command_line_result_arr[] = hzm_format_command_line("error", "failed to load goal with id = $goal_id");
+                                    $nb_errors++;$command_finished = true;return;
+                            }
+                            list($error, $info) = $goalObj->fullManageTable($idTab, $jobrole_id, $action);
+                        }
+                        else 
+                        {
+                            $info = $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action="+t");
+                        }
+
                         if($error)
                         {
                             $command_line_result_arr[] = hzm_format_command_line("error", "error while doing fullManageTable($idTab, $jobrole_id, $action)");

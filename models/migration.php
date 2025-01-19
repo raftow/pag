@@ -15,6 +15,7 @@ class Migration extends AFWObject
     }
 
     
+    
 
     public static function ignoreMigration($moduleId, $moduleCode, $migration_code, $title, $auser_id)
     {
@@ -58,10 +59,16 @@ class Migration extends AFWObject
         {
             try
             {
+                $migration_info="";
+                $migration_warning="";
+                $migration_error="";
                 $migObj = self::migrating($moduleId, $migration_code, $title, $auser_id);
                 include($file_migration_name);
                 $migObj->migrated();
-                $info = "migration $migration_code done sucessfully";
+                $info = "migration $migration_code done sucessfully ";
+                if($migration_info) $info .= $migration_info;
+                if($migration_warning) $warning .= $migration_warning. " ";
+                if($migration_error) $info .= $migration_error. " ";
             }
             catch(Exception $e)
             {
@@ -334,3 +341,4 @@ class Migration extends AFWObject
     
     
 }
+
