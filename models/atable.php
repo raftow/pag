@@ -148,7 +148,7 @@ class Atable extends AFWObject
             if(!$objModule) throw new AfwRuntimeException("generateTablePrevileges : Module `$module` not found");
             $moduleId = $objModule->id;
         }
-        // $logReverse = Atable::reverseTable($moduleCode, $atable_name);
+        $logReverse = Atable::reverseTable($moduleCode, $atable_name);
         $objAtable = Atable::loadByMainIndex($moduleId, $atable_name);
         if($objAtable and (!$objAtable->isEmpty()))
         {
