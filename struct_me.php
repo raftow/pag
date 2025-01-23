@@ -173,7 +173,7 @@ function getPhpOfDbStructure($mytable, $myObj, $module_code)
                         'sci_id'                        => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'QEDIT' => false, 
                                                                 'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'ums', 'FGROUP' => 'tech_fields'),
 
-                        'tech_notes' 	                => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'TYPE' => 'TEXT', 'CATEGORY' => 'FORMULA', \"SHOW-ADMIN\" => true, 
+                        'tech_notes' 	                => array('STEP' => 99, 'QEDIT' => false, 'HIDE_IF_NEW' => true, 'TYPE' => 'TEXT', 'CATEGORY' => 'FORMULA', \"SHOW-ADMIN\" => true, 
                                                                 'TOKEN_SEP'=>\"§\", 'READONLY'=>true, \"NO-ERROR-CHECK\"=>true, 'FGROUP' => 'tech_fields'),
                 ); 
         } 
