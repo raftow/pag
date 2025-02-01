@@ -357,7 +357,7 @@
 
 			'foption_mfk' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  
 				'FGROUP' => 'advanced_props',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'RETRIEVE_FGROUP' => true,  'SIZE' => 32,  'MEDIUM_DROPDOWN_WIDTH' => true,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  
-				'TYPE' => 'MFK',  'ANSWER' => 'foption',  'ANSMODULE' => 'pag',  
+				'TYPE' => 'MFK',  'ANSWER' => 'foption',  'ANSMODULE' => 'pag',  'DEFAUT' => ',2,',  
 				'WHERE' => "(afield_type_mfk like '%,§afield_type_id§,%' or afield_type_mfk='' or afield_type_mfk is null)", 
 				 'STEP' => 6,  'ADVANCED_PROPS-RETRIEVE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
