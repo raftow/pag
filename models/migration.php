@@ -81,7 +81,7 @@ class Migration extends AFWObject
                 $error .= $e->__toString();
             }
         }
-        else $error = "migration $migration_code has been ignored file not found";
+        else $warning = "migration $migration_code has been ignored file waiting to provide the migration file ...";
         
         
 
