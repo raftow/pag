@@ -148,7 +148,7 @@
 			'scenario_item_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  
 				'RETRIEVE' => false,  'EDIT' => true,  'RETRIEVE_FGROUP' => true,  'SIZE' => 40,  
 				'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  
-				'TYPE' => 'FK',  'ANSWER' => 'scenario_item',  'ANSMODULE' => 'pag',  'SHORTNAME' => 'step',  
+				'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'ums',  'ANSMODULE' => 'pag',  'SHORTNAME' => 'step',  
 				'MANDATORY' => true,  'QEDIT' => false,  'FGROUP' => 'step_group',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  
 				'WHERE' => "atable_id = §atable_id§", 
 				 'BUTTONS' => true,  'DEFAUT' => 0,  'STEP_GROUP-RETRIEVE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
@@ -522,7 +522,7 @@
                                                                 'QEDIT' => false, 'ANSWER' => 'ugroup', 'ANSMODULE' => 'ums', 'TYPE' => 'MFK', 'FGROUP' => 'tech_fields'),
 
                         'sci_id'                        => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'QEDIT' => false, 
-                                                                'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'ums', 'FGROUP' => 'tech_fields'),
+                                                                'TYPE' => 'INT', /*stepnum-not-the-object*/ 'FGROUP' => 'tech_fields'),
 
                         'tech_notes' 	                => array('STEP' => 99, 'HIDE_IF_NEW' => true, 'TYPE' => 'TEXT', 'CATEGORY' => 'FORMULA', "SHOW-ADMIN" => true, 
                                                                 'TOKEN_SEP'=>"§", 'READONLY'=>true, "NO-ERROR-CHECK"=>true, 'FGROUP' => 'tech_fields'),

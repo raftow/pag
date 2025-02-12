@@ -3907,7 +3907,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     }
 
 
-
+    // to be reviewed because scenario_item_id is no more FK but INT
     public function copyFieldsToTableAsShortcuts($tab, $shortcut_path, $shortcut_prefix)
     {
         if (!$tab) return;

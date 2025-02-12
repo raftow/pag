@@ -501,7 +501,7 @@ class PagAtableAfwStructure
 		),
 
 		'scis' => array(
-			'TYPE' => 'FK',  'ANSWER' => 'scenario_item',
+			'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'ums',
 			'CATEGORY' => 'ITEMS',  'ITEM' => 'atable_id',
 			'WHERE' => "",
 			'SHOW' => true,  'ROLES' => '',  'FORMAT' => 'retrieve',  'EDIT' => false,  'NO-LABEL' => true,  'STEP' => 6,  'BUTTONS' => true,  'FGROUP' => 'scis',  'ANSMODULE' => 'pag',  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
@@ -623,7 +623,7 @@ class PagAtableAfwStructure
 
 		'sci_id'                        => array(
 			'STEP' => 99, 'HIDE_IF_NEW' => true, 'SHOW' => true, 'RETRIEVE' => false, 'QEDIT' => false,
-			'TYPE' => 'FK', 'ANSWER' => 'scenario_item', 'ANSMODULE' => 'ums', 'FGROUP' => 'tech_fields'
+			'TYPE' => 'INT', /*stepnum-not-the-object*/ 'FGROUP' => 'tech_fields'
 		),
 
 		'tech_notes' 	                => array(
