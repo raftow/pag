@@ -10,13 +10,13 @@
 				),
 
 			'domain_code' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'SEARCH' => true,  'QSEARCH' => true,  
-				'TYPE' => 'TEXT',  'REQUIRED' => true,  
+				'TYPE' => 'TEXT',  'REQUIRED' => true,  'QEDIT' => true,
 				'SIZE' => '16',  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'MANDATORY' => true,  'ERROR-CHECK' => true, 
 				),
 
 			'application_code' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'SEARCH' => true,  'QSEARCH' => true,  'EDIT' => true,  
-				'TYPE' => 'TEXT',  'REQUIRED' => true,  
+				'TYPE' => 'TEXT',  'REQUIRED' => true, 'QEDIT' => true, 
 				'SIZE' => '16',  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'MANDATORY' => true,  'ERROR-CHECK' => true, 
 				),
@@ -34,13 +34,13 @@
 				),
 
 			'domain_name_ar' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'SEARCH' => true,  'QSEARCH' => true,  'EDIT' => true,  'UTF8' => true,  
-				'TYPE' => 'TEXT',  'REQUIRED' => true,  
+				'TYPE' => 'TEXT',  'REQUIRED' => true, 'QEDIT' => true, 
 				'SIZE' => '80',  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'MANDATORY' => true,  'ERROR-CHECK' => true, 
 				),
 
 			'domain_name_en' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => false,  'SEARCH' => true,  'QSEARCH' => true,  'EDIT' => true,  
-				'TYPE' => 'TEXT',  'REQUIRED' => true,  
+				'TYPE' => 'TEXT',  'REQUIRED' => true, 'QEDIT' => true, 
 				'SIZE' => '80',  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'MANDATORY' => true,  'ERROR-CHECK' => true, 
 				),
