@@ -27,6 +27,7 @@
                 $objAtable = Atable::loadByMainIndex($idMod, $atable_name);
                 if($objAtable and (!$objAtable->isEmpty()))
                 {
+                        $linkBtn = $objAtable->showMyLink($stepTB = 2, $target = 'table-pag');
                         if($currtbl_code != $atable_name)
                         {
                                 $atable_class = AfwStringHelper::tableToClass($atable_name);
@@ -37,7 +38,8 @@
                                 
                                 $atable_translated = $objAtable->translate("atable.single",$lang);
                                 $command_line_result_arr[] = hzm_format_command_line("info", "current table changed to $atable_class id of table is $idTab, id of module is $idMod, it contain $nbFields field(s)");
-                                $command_line_result_arr[] = hzm_format_command_line("success", $atable_translated." : ".$objAtable->getDisplay($lang), $lang);
+                                
+                                $command_line_result_arr[] = hzm_format_command_line("success", $atable_translated." : ".$objAtable->getDisplay($lang)."\n".$linkBtn, $lang);
                                 list($isOk, $dataErr) = $objAtable->isOk(true,true);
                                 if(!$isOk)
                                 {
@@ -47,7 +49,7 @@
                         }
                         else
                         {
-                                $command_line_result_arr[] = hzm_format_command_line("info", "current table is already $atable_name", $lang);
+                                $command_line_result_arr[] = hzm_format_command_line("info", "current table is already $atable_name : ".$objAtable->getDisplay($lang)."\n".$linkBtn, $lang);
                         }
                 }
                 else

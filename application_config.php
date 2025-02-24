@@ -1,7 +1,7 @@
 <?php
 $config_arr = [
         'application_id' => 4,
-
+        'pag_application_id' => 4,
         'application_code' => 'pag',
 
         'x_module_means_company'=>false,
