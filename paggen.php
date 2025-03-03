@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__)."/../../external/db.php");
+require_once(dirname(__FILE__)."/../../config/global_config.php");
 require_once("pag_generator.php");
 // old require of afw_debugg
 // old require of afw_ini

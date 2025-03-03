@@ -6,7 +6,7 @@ rafik @todo the copy of module should replace answer_table_id in the copied tabl
 */
 
 
-require_once("../external/db.php");
+require_once("../config/global_config.php");
 require_once("afw_rights.php");
 require_once("afw_config.php");
 require_once("afw_shower.php");

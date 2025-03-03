@@ -160,7 +160,8 @@ include_once("../lib/hzm/web/hzm_footer_features_js.php");
 <?php
       $file_dir_name = dirname(__FILE__); 
       $quick_links_arr = array();
-      include("$file_dir_name/../external/quick_links.php");
+      $company = AfwSession::currentCompany();
+      include("$file_dir_name/../client-$company/quick_links.php");
       if($objme and (!$objme->isCustomer()))
       {
            $mauList = $objme->loadMyModules();

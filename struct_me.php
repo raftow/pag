@@ -193,7 +193,7 @@ $out_scr = "astruct will work on module : ".$myModule->getDisplay($lang);
 $mod_code = $myModule->getVal("module_code");
 
 AfwAutoLoader::addModule($mod_code);
-require_once ("$file_dir_name/../../external/config.php");
+// require_once ("$file_dir_name/../../ext-ernal/config.php");
 $struct_dir = $START_GEN_TREE."/$mod_code/struct";
 $arrTables = $myModule->getMyAllTables();
 

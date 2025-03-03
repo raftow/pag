@@ -64,7 +64,7 @@ else
 
 
 
-        require_once ("$file_dir_name/../external/db.php");
+        require_once ("$file_dir_name/../config/global_config.php");
         // 
 
         $afw_debugg_in_file = $GET_["dbgfile"];

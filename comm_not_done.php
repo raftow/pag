@@ -1,5 +1,5 @@
 <?php
-require_once("../external/db.php");
+require_once("../config/global_config.php");
 // here was old const php
 
 require_once("afw_config.php");

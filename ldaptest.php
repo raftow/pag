@@ -1,7 +1,7 @@
 <?php
 $file_dir_name = dirname(__FILE__); 
 require_once ("$file_dir_name/../afw/afw_autoloader.php");
-// require_once("$file_dir_name/../external/db.php");        
+// require_once("$file_dir_name/../config/global_config.php");        
 $MODULE = "pag";
 require_once ("$file_dir_name/../$MODULE/ini.php"); 
 require_once ("$file_dir_name/../$MODULE/module_config.php");

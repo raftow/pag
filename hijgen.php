@@ -1,6 +1,6 @@
 <?php
 $file_dir_name = dirname(__FILE__); 
-include_once("$file_dir_name/../external/db.php");
+include_once("$file_dir_name/../config/global_config.php");
 // 
 require_once("$file_dir_name/../lib/afw/afw_debugg.php");
 require_once("$file_dir_name/../lib/afw/afw_ini.php");

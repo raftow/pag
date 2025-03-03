@@ -55,7 +55,7 @@ if((!$tbl_name) and $tbl_id)
       $tab->load($tbl_id);
       $tbl_name =  $tab->getVal("atable_name");
 }
-require_once (dirname(__FILE__)."/../external/config.php");
+// require_once (dirname(__FILE__)."/../ext-ernal/config.php");
 if($genere_sql)
 {
         $sqldir = $START_GEN_TREE."sql";

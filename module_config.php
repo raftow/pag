@@ -50,9 +50,9 @@
                 $front_header = true;
                 $front_application = true;
                 
-                //$config["img-path"] = "../external/pic/";
+                //// $config["img-path"] = "../exte-rnal/pic/";
                 $config["img-path"] = "pic/";
-                $config["img-company-path"] = "../external/pic/";
+                // $config["img-company-path"] = "../exte-rnal/pic/";
                 
                 $jstree_activate = true;
                 $display_in_edit_mode["*"] = true;

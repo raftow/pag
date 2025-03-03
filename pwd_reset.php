@@ -23,7 +23,7 @@ $lang = AfwSession::getSessionVar("lang");
 if(!$lang) $lang = "ar";
 
 
-require_once ("$file_dir_name/../external/db.php");
+require_once ("$file_dir_name/../config/global_config.php");
 // 
 
 $html_debugg_login = true;  // useful in prod

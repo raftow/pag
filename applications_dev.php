@@ -2,7 +2,7 @@
 
 $file_dir_name = dirname(__FILE__);
 
-require_once("$file_dir_name/../external/db.php");
+require_once("$file_dir_name/../config/global_config.php");
 // old include of afw.php
 require_once("$file_dir_name/../lib/afw/modes/afw_config.php");
 
