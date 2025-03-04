@@ -5,6 +5,7 @@
     if($objModule and (!$objModule->isEmpty()))
     {
         $new_currmod = $objModule->getVal("module_code");
+        $linkBtn = $objModule->showMyLink($stepTB = 7, $target = 'module-pag');
         if($new_currmod != $currmod)
         {
             $command_line_result_arr[] = hzm_format_command_line("info", "current module changed from $currmod to $new_currmod");
@@ -22,7 +23,7 @@
         
         $module_translated = $objModule->translate("module.single",$lang);
         $command_line_result_arr[] = hzm_format_command_line("info", "current module $currmod : id of module is $idMod , it contain $nbTables table(s)");
-        $command_line_result_arr[] = hzm_format_command_line("success", $module_translated." : ".$objModule->getDisplay($lang), $lang);
+        $command_line_result_arr[] = hzm_format_command_line("success", $module_translated." : ".$objModule->getDisplay($lang)."\n".$linkBtn, $lang);
     }
     else
     {

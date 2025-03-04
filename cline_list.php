@@ -19,7 +19,25 @@
     if(!$object_entity and ($object_list_attribute_origin=="options")) $object_entity = "field";
     if(!$object_entity and ($object_list_attribute_origin=="fields")) $object_entity = "table";
     if(!$object_entity and ($object_list_attribute_origin=="relations")) $object_entity = "table";
+
+    if(!$object_entity and ($object_list_attribute_origin=="bfs" or $object_list_attribute_origin=="bf")) 
+    {
+        $object_entity = "table";
+        $object_list_attribute = "bfunctionList";
+    }
+
+    if(!$object_entity and ($object_list_attribute_origin=="roles"))
+    {
+        $object_entity = "module";
+        $object_list_attribute = "allRolesAndSubRoles";
+    }
     
+    if(!$object_entity and ($object_list_attribute_origin=="levels"))
+    {
+        $object_entity = "module";
+        $object_list_attribute = "allLevels";
+    }
+
     if($object_list_attribute_origin=="options")
     {
         $object_list_attribute="afieldOptionValueList";

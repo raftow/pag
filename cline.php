@@ -78,6 +78,10 @@
       if($command_line=="lt") $command_line = "list all tables";
       if($command_line=="lg") $command_line = "list all goals";
       if($command_line=="lj") $command_line = "list all jobs";
+      if($command_line=="lr") $command_line = "list all roles";
+      if($command_line=="ll") $command_line = "list all levels";
+      if($command_line=="lb") $command_line = "list all bfs";
+      
       
       if($command_line=="sm") $command_line = "show module";
       if($command_line=="st") $command_line = "show table";
