@@ -19,9 +19,10 @@
                 if(!$dataErrors) $dataErrors = "no errors";
                 $dataErrors = "<span class='object_code'>".$dataErrors."</span> "; // $oneObj->getMyCode("")
                 
+                $display_node = ClineUtils::makeReplacements($oneObj->getNodeDisplay($lang), $currmod);
                 
                 $oneObjIdLinked = $oneObj->showAttributeAsLinkMode("id","EDIT");
-                $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $oneObj->getNodeDisplay($lang), $dataErrors, $lang, $errorClass);
+                $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $display_node, $dataErrors, $lang, $errorClass);
                 if($odd_oven != "odd") $odd_oven = "odd";
                 else $odd_oven = "oven";
                 unset($oneObj);

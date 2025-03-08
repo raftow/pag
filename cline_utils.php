@@ -173,4 +173,32 @@ class ClineUtils
 
         return [$command_lines_arr, $mv_command_line];
     }
+
+
+    public static function makeReplacements($text, $currmod)
+    {        
+        $file_dir_name = dirname(__FILE__);
+        $cline_replacements = include("$file_dir_name/../$currmod/extra/cline_replacements.php");
+
+        foreach($cline_replacements as $substr => $rowSubstr)
+        {
+            
+
+            $substrclass = $rowSubstr["class"];
+            if($substrclass)
+            {
+                $replace_str = "<span class='cline-rep $substrclass'>$substr</span>";
+                $text = str_replace($substr, $replace_str, $text);
+            }
+
+            $substradd = $rowSubstr["add"];
+            if($substradd)
+            {
+                $replace_str = $substr.$substradd;
+                $text = str_replace($substr, $replace_str, $text);
+            }
+        }
+
+        return $text;
+    }
 }

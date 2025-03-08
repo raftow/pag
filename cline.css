@@ -360,3 +360,25 @@ span.sql.key {
 div#analysis_log {
     background-color: wheat;
 }
+
+span.cline-rep {
+    padding: 0px 8px;
+    border-radius: 8px;
+    color: white;
+}
+
+span.cline-rep.btn-green {
+    background-color: green;
+}
+
+span.cline-rep.btn-blue {
+    background-color: blue;
+}
+
+span.cline-rep.btn-orange {
+    background-color: orange;
+}
+
+span.cline-rep.btn-red {
+    background-color: red;
+}

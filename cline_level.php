@@ -24,8 +24,8 @@ $levelByCodeArr["auser"] = true;
 list($object_table, $object_module) = ClineUtils::parse_table_and_module($what_to_level);
 
 
-$object_code = $command_line_words[2];
-$object_code_nb_parts = count(explode(".",$object_code));
+$object_code = "";
+$object_code_nb_parts = 0;
 
 if($object_table == "module") 
 {
@@ -54,6 +54,8 @@ if($nb_parts_missed==2)
     $object_code .= ".".$currtbl_code;
     $object_code .= ".".$currmod;
 }
+
+$object_code = trim($object_code,".");
 
 // die("object_code=$object_code object_code_before=$object_code_before");
 
