@@ -2740,11 +2740,55 @@ class Afield extends AFWObject
                         'MODE' => array("mode_scenario_item_id" => true),
                 );
 
+                $color = "orange";
+                $title_ar = "انشاء نسخة مطابقة"; 
+                $methodName = "duplicateField";
+                $pbms[AfwStringHelper::hzmEncode($methodName)] 
+                                = array("METHOD"=>$methodName,
+                                        "COLOR"=>$color, "LABEL_AR"=>$title_ar, 
+                                        "PUBLIC"=>true, "BF-ID"=>"", "HZM-SIZE" =>12, 'STEP'=>1,
+                );       
+
                 /**/
 
                 return $pbms;
         }
 
+        public function duplicateField($lang="ar", $cloneOptions=true)
+        {
+                $field_name = $this->getVal("field_name");
+                $field_order = $this->getVal("field_order");
+                $name_ar = $this->getVal("titre_short");
+                $name_en = $this->getVal("titre_short_en");
+                list($new_field_name, $new_name_ar, $new_name_en) = AfwStringHelper::duplicateName($field_name, "_", $name_ar, " ", $name_en, " ");                
+
+                $afieldOptionValueList = $this->get("afieldOptionValueList");
+                
+
+                $fieldCloned = clone $this;
+                $nb_inserts = 0;
+                $fieldCloned->resetAsCopy();
+                $fieldCloned->set("field_name", $new_field_name);
+                $fieldCloned->set("titre_short", $new_name_ar);
+                $fieldCloned->set("titre_short_en", $new_name_en);
+                $fieldCloned->set("field_order", $field_order+10);
+                if($fieldCloned->insert()) 
+                {
+                        if($cloneOptions)
+                        {
+                                foreach($afieldOptionValueList as $afieldOptionValueItem)
+                                {
+                                        
+                                        if($afieldOptionValueItem->cloneInField($fieldCloned->id)) $nb_inserts++;
+                                }
+                        }
+                }
+                
+                
+                return ["", "field cloned, $nb_inserts option(s) has been copied"];
+
+                
+        }
 
         public function createShortcutFieldsForOneToOneObject($lang = "ar")
         {

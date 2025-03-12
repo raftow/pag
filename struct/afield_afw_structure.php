@@ -392,11 +392,14 @@
 				),
 
 		'afieldRuleList' => array(
-				'TYPE' => 'FK',  'ANSWER' => 'afield_rule',  'ANSMODULE' => 'pag',  
-				'CATEGORY' => 'ITEMS',  'ITEM' => 'afield_id',  
-				'WHERE' => "", 
-				 'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'QEDIT' => false,  'READONLY' => true,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  'NO-LABEL' => false,  'FGROUP' => 'afieldRuleList',  'STEP' => 7,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+					'TYPE' => 'FK',  'ANSWER' => 'afield_rule',  'ANSMODULE' => 'pag',  
+					'CATEGORY' => 'ITEMS',  'ITEM' => 'afield_id',  
+					'WHERE' => "", 
+					'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => false,  'QEDIT' => false,  
+					'READONLY' => true,  'ICONS' => true,  'DELETE-ICON' => true,  'BUTTONS' => true,  
+					'NO-LABEL' => false,  'FGROUP' => 'afieldRuleList',  'STEP' => 7,  
+					'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+					'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
 		'afieldDependencyList' => array(

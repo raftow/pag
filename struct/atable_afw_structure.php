@@ -278,7 +278,7 @@ class PagAtableAfwStructure
 			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true, 'READONLY'=>true,  'STEP' => 4,  'ICONS' => true,
 			'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'origFieldList',
 			'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
-			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'FGROUP_BEHAVIOR' => 'collapsed',
+			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', /*'FGROUP_BEHAVIOR' => 'collapsed',*/
 		),
 
 		'auditFieldList' => array(

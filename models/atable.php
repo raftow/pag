@@ -970,7 +970,7 @@ class Atable extends AFWObject
     {
         $afield_order = $afield->getVal("field_order");
         if (!$from_all_table) $scenario_item_id = $afield->getVal("scenario_item_id");
-        if (!$afield_order) return null;
+        if (!$afield_order) $afield_order = 0;
 
         // require_once("afield.php");
         $af = new Afield();

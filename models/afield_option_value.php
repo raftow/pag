@@ -105,6 +105,23 @@ class AfieldOptionValue extends AFWObject{
             return $pbms;
         }
         
+
+        public function cloneInField($newFieldId, $erase_existing=true)
+        {
+                $foption_id = $this->getVal('foption_id');
+                $option_value = $this->getVal('option_value');
+                $option_value_comments = $this->getVal('option_value_comments');
+                
+                
+
+                $pvObj = AfieldOptionValue::loadByMainIndex($newFieldId, $foption_id, $create_obj_if_not_found =true);
+                if($erase_existing or $pvObj->is_new)
+                {
+                        $pvObj->set("option_value", $option_value);  
+                        $pvObj->set("option_value_comments", $option_value_comments);  
+                        $pvObj->commit();
+                }
+        }
         
         public function beforeDelete($id,$id_replace) 
         {

@@ -27,7 +27,7 @@
 
 			'related_afield_id' => array('SHORTNAME' => 'related',  'SEARCH' => true,  'QSEARCH' => true,  'SHOW' => true,  'RETRIEVE' => true,  'EDIT' => true,  'QEDIT' => true,  'SIZE' => 40,  'UTF8' => false,  
 				'TYPE' => 'FK',  'ANSWER' => 'afield',  'ANSMODULE' => 'pag',  
-				'WHERE' => "atable_id = (select atable_id from §DBPREFIX§adm.afield where id = §afield_id§) and id != §afield_id§", 
+				'WHERE' => "atable_id = (select atable_id from §DBPREFIX§pag.afield where id = §afield_id§) and id != §afield_id§", 
 				 
 				'RELATION' => 'ManyToOne',  'READONLY' => false,  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
