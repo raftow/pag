@@ -174,8 +174,8 @@
               //die("data_token_new_suggested_command_line=$data_token_new_suggested_command_line");
       }
       
-      
-      $command_line_result_arr[] = hzm_format_command_line("normal", "Your command history : ");
+      $command_line_hist_arr = [];
+      $command_line_hist_arr[] = hzm_format_command_line("normal", "Your command history : ");
       
       $log_hist_class = "";
       
@@ -184,7 +184,10 @@
       {
           if($log_hist_class != "log_odd") $log_hist_class = "log_odd"; else $log_hist_class = "log";
           $kord = count($hist_arr) - $hord;
-          $command_line_result_arr[] = "<div class='tamakkan_hiostory'><div class='tamakkan_rt'>$kord. Momken> </div> " .hzm_format_command_line($log_hist_class, $hist_item)."</div>";
+          $command_line_hist_arr[] = "<div class='tamakkan_hiostory'>
+              <div class='tamakkan_rt'>
+                  <span class='bcounter' id='bcounter-$kord'>$kord</span> 
+              </div> " .hzm_format_command_line($log_hist_class, $hist_item, "en", false, false, $kord, "hist")."</div>";
       }
 
       $hist = implode("\n", $hist_arr);
@@ -201,6 +204,8 @@
       $data_tokens["command_line_result"] .= implode("<br>\n", $cmd_lines);
    }
    $data_tokens["command_line_result"] .= implode("<br>\n",$command_line_result_arr);
+   $data_tokens["command_line_history"] .= implode("\n",$command_line_hist_arr);
+   
    // die("arr_cmd_lines = ".var_export($arr_cmd_lines, true));
    
    //die("data_tokens = ".var_export($data_tokens, true));

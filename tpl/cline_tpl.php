@@ -2,35 +2,33 @@
 <head>        
         <title>CLINE</title>
         <link href='favicon.ico' rel='shortcut icon'>
+        <script src='../lib/js/jquery-1.12.0.min.js'></script>
+        <script src='./js/cline.js'></script>
 </head>        
 <body>
 <?php
   $tkn=md5("tkf".date("His"));
-  echo "<link href=\"../pag/cline.css?crsf=$tkn\" rel=\"stylesheet\" type=\"text/css\">";
+  echo "<link href=\"../pag/css/cline.css?crsf=$tkn\" rel=\"stylesheet\" type=\"text/css\">";
 ?>
 <div class="fleft home_banner home_banner4" dir="ltr">
         <div class="fleft command_line_container" height-flag="true" style="height: 200px;">
                 <form method="post" action="cline_go.php">
                 <div class="fleft row command_line col-xs-12">
-                           <div class="form-group form-cline" dir="ltr">
-                                <label>Momken framework comand line &nbsp;
+                           <div class="form-group form-cline top" dir="ltr">
+                                <div class='div-cline title-cline'>
+                                       <span class='cline prompt'>[Momken framework comand line] &nbsp;</span>
                                        <img src="../lib/images/help.png" data-toggle="tooltip" data-placement="top" title="type help [keyword1] [keyword2] ... to see help on Momken framework comand line" width="20" heigth="20">
                                        <span class='cline field'>[currfld]</span>
                                        <span class='cline table'>[currtbl_code]</span>
                                        <span class='cline module'>[currmod]</span>
                                        <span class='cline title'>[db_prefix] work objects</span>
-                                </label>
+                                </div>
                                 <!--  -->
-                                <table style='width:100%'>
-                                        <tr>
-                                                  <td class='cline_td'> <span class='cline-en cline-message cline-normal'> [context] > </span> 
-                                                  </td>
-                                                  <td>
+                                <div class='div-cline cmd-cline'>
+                                                  <!-- [context] > --> 
                                                         <input dir="ltr" type="text" class="inputText form-control command_line_input" name="command_line" size="32" maxlength="1000" value="[newsug_command_line]" id="command_line" autofocus required>
                                                         <span class="floating-label">Type your command or type help</span>
-                                                  </td>
-                                        </tr>
-                                </table>    
+                                </div>    
                                 <input type="hidden" name="currmod" id="currmod" value="[currmod]">
                                 <input type="hidden" name="currtbl" id="currtbl" value="[currtbl]">
                                 <input type="hidden" name="currtbl_code" id="currtbl_code" value="[currtbl_code]">
@@ -45,12 +43,27 @@
                 </div>
                 </form>
                 <div class="fleft row command_line_result col-xs-12">
+                        <nav>
+                                [command_line_history]				
+                        </nav>
                 [command_line_result]				
                 </div>
         </div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+        $(".bcounter").click(function()
+                { 
+                        console.log('id='+$(this).attr("id"));
+                        // alert("rafik 02");
+                        arr_data = $(this).attr("id").split("-");
+                        clicked_id = 'cline-hist-'+arr_data[1];
+                        console.log('clicked_id='+clicked_id);
+                        clicked_id_val = $("#"+clicked_id).text();
+                        console.log('clicked_id_val='+clicked_id_val);
+                        $("#command_line").val(clicked_id_val);
+                }
+        );
         $("#command_line").focus();
 	//document.getElementById("command_line").focus();
 });

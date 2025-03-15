@@ -84,7 +84,7 @@
      */
     if($objToShow and (!$objToShow->isEmpty()))
     {
-        $arrAttributes = $objToShow->getColsByMode($command_mode);
+        $arrAttributes = AfwFrameworkHelper::getColsByMode($objToShow, $command_mode);
         $module_translated = $objToShow->translate("module.single",$lang);
         $myDisplayAndLink = $module_translated ." : ".$objToShow->getDisplay($lang)." => ".$objToShow->showMyLink();
         $command_line_result_arr[] = hzm_format_command_line("success", $myDisplayAndLink, $lang,false,true);

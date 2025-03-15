@@ -1471,6 +1471,66 @@ class Atable extends AFWObject
         return $this->generatePhpClass($dbstruct_only = true);
     }
 
+
+  
+     /*
+            rafik : @todo all this should be generated in beforeDelete 
+            (may be already done to-ckeck, i found this in old version of afw)
+            $can_delete_or_hide = false;
+            if($id_replace)
+            {
+                   $this->affected_rows = $this->replaceAllObjUsingMeBy($id_replace);
+                   $can_delete_or_hide = true;
+            }
+            else
+            {
+                list($not_allow_objs, $not_allow_objs_nb) = $this-> getAllObjUsingMe("DEL-ACTION","not-allow");
+                if($not_allow_objs_nb>0)
+                {
+                       $html_error = "";
+                       foreach($not_allow_objs as $fk_on_me_table => $not_allow_objs_arr)
+                       {
+                         
+                         foreach($not_allow_objs_arr as $fk_on_me_col => $not_allow_obj_list)
+                         {
+                            foreach($not_allow_obj_list as $fk_obj_id => $fk_obj)
+                            {
+                                $html_error .= "<br>".$fk_obj->transClassSingle() . " : " . $fk_obj->__toString(). " (" . $fk_obj->getId() . ") <br>";                        
+                            }
+                         }
+                       }
+                       throw new AfwRuntimeException("used_record_error",$html_error);
+                       $can_delete_or_hide = false;                
+                }
+                else $can_delete_or_hide = true;
+            }      
+            
+            if($can_delete_or_hide)
+            {
+                list($not_avail_objs, $not_avail_objs_nb) =  $this-> getAllObjUsingMe("DEL-ACTION","not-avail",1);
+                if($not_avail_objs_nb>0)
+                {
+                    return $this->hide(); 
+                }
+                else
+                {
+                    $return = false;
+        			if($this->beforeDelete($this->getAfieldValue($this->getPKField()))) 
+                    {
+        				$query = "DELETE FROM " . self::_prefix_table(static::$TABLE) . " 
+                               WHERE " . $this->getPKField() . " = '" . $this->getAfieldValue($this->getPKField()) . "'";
+                        $return = $this->execQuery($query);
+                        //die("query : $query");
+                        $this->afterDelete($this->getAfieldValue($this->getPKField()));
+        			}
+        			
+        			return $return;
+                }
+			}
+            else return false;
+            */ 
+     
+
     public function generatePhpClass($dbstruct_only = false, $dbstruct_outside = false)
     {
         global $lang;

@@ -178,7 +178,7 @@
     
     if($objToShow and (!$objToShow->isEmpty()))
     {
-        // $arrAttributes = $objToShow->getColsByMode($command_mode);
+        // $arrAttributes = AfwFrameworkHelper::getColsByMode($objToShow, $command_mode);
         $module_translated = $objToShow->translate("$object_table.single",$lang);
         if($lang!="ar") $arrow = "&rarr;";
         else $arrow = "&larr;";
