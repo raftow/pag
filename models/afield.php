@@ -20,6 +20,10 @@ global $enum_tables, $lookup_tables, $count_here;
 
 class Afield extends AFWObject
 {
+        public static $DATABASE                = "";
+        public static $MODULE                    = "pag";
+        public static $TABLE                        = "afield";
+        public static $DB_STRUCTURE = null;
 
         public function __construct()
         {
@@ -49,10 +53,7 @@ class Afield extends AFWObject
 
         public static $lookup_tables;
 
-        public static $DATABASE                = "";
-        public static $MODULE                    = "pag";
-        public static $TABLE                        = "";
-        public static $DB_STRUCTURE = null;
+        
 
 
 

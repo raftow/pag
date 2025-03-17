@@ -12,7 +12,7 @@
 ?>
 <div class="fleft home_banner home_banner4" dir="ltr">
         <div class="fleft command_line_container" height-flag="true" style="height: 200px;">
-                <form method="post" action="cline_go.php">
+                <form id="cline_form" method="post" class="form_lourde" action="cline_go.php">
                 <div class="fleft row command_line col-xs-12">
                            <div class="form-group form-cline top" dir="ltr">
                                 <div class='div-cline title-cline'>
@@ -41,6 +41,11 @@
                                 <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
         		   </div>				
                 </div>
+                <div class="footer-s hzm-loader-div hide" id="myloader">
+                        <div class="hzm-loading-div" id="myloading">
+                        working on it ...
+                        </div>
+                </div>
                 </form>
                 <div class="fleft row command_line_result col-xs-12">
                         <nav>
@@ -50,6 +55,9 @@
                 </div>
         </div>
 </div>
+
+
+
 <script type="text/javascript">
 $(document).ready(function() {
         $(".bcounter").click(function()
@@ -65,6 +73,13 @@ $(document).ready(function() {
                 }
         );
         $("#command_line").focus();
+
+        $("#cline_form" ).on('submit', function( event ) {
+                
+                $(".hzm-loader-div").removeClass("hide"); 
+                // alert('here event on submit');
+                return true;
+        });
 	//document.getElementById("command_line").focus();
 });
 </script>

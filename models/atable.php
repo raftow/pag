@@ -2992,6 +2992,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
                 // pag.afield-الجدول	atable_id  OneToMany (required field)
                 // require_once "../pag/afield.php";
+                /*
                 $obj = new Afield();
                 $obj->where("atable_id = '$id' and avail='Y' ");
                 $nbRecords = $obj->count();
@@ -3002,7 +3003,14 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 }
                 // if there's no record that block the delete operation perform the delete of the other records linked with me and deletable
                 if (!$simul) $obj->deleteWhere("atable_id = '$id' and avail='N'");
+                */
 
+                if (!$simul) {
+                    // require_once "../bau/ptext.php";
+                    Afield::removeWhere("atable_id='$id'");
+                    // $this->execQuery("delete from ${server_db_prefix}bau.ptext where id_atable = '$id' ");
+
+                }
 
 
                 // FK part of me - deletable 
@@ -4590,7 +4598,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     public function getFieldGroupInfos($fgroup)
     {
         if ($fgroup == "scis") return array("name" => $fgroup, "css" => "pct_100");
-        return $this->getFieldGroupDefaultInfos($fgroup);
+        return AfwWizardHelper::getFieldGroupDefaultInfos($fgroup);
     }
 
     public function stepsAreOrdered()

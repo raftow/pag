@@ -204,7 +204,9 @@
       $data_tokens["command_line_result"] .= implode("<br>\n", $cmd_lines);
    }
    $data_tokens["command_line_result"] .= implode("<br>\n",$command_line_result_arr);
-   $data_tokens["command_line_history"] .= implode("\n",$command_line_hist_arr);
+   
+   $data_tokens["command_line_history"] = "";
+   if(is_array($command_line_hist_arr)) $data_tokens["command_line_history"] .= implode("\n",$command_line_hist_arr);
    
    // die("arr_cmd_lines = ".var_export($arr_cmd_lines, true));
    
