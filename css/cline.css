@@ -68,9 +68,9 @@ span.bcounter {
     height: 100% !important;
     background-color: #0b0b0bb8;
     min-height: 520px;
-    color: #d5f77791;
+    color: #cbfd42d1;
     font-family: courrier, arial;
-    font-size: 100%;
+    font-size: 75%;
     height: min-content !important;
 }
 
@@ -431,4 +431,42 @@ span.cline-rep.btn-orange {
 
 span.cline-rep.btn-red {
     background-color: red;
+}
+
+.hzm-loading-div {
+    position: sticky;
+    top: 80px;
+    display: block;
+    left: 0px;
+    background-color: #1a87c5;
+    background-image: url(../../lib/images/adm-loader.gif);
+    background-size: inherit;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    height: 100%;
+    /* min-width: 400px; */
+    /* min-height: 200px; */
+    text-align: center;
+    font-size: 100%;
+    color: white;
+    /* vertical-align: middle; */
+    padding-top: 25px;
+    padding-bottom: 10px;
+    z-index: 9999999;
+}
+
+.hide {
+    display: none !important;
+}
+
+div#myloader {
+    height: 300px;
+    width: 30%;
+    margin-left: 40%;
+    position: absolute;
+    top: 120px;
 }
