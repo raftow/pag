@@ -133,29 +133,33 @@ class Atable extends AFWObject
 
     public static function generateTablePrevileges($module, $atable_name, $goal_id, $action="+t", $framework_mode = "qsearch", $jobrole_id=null)
     {
-        if($action=="add") $action="+t";
-        if($action=="remove") $action="-t";
-        if(is_integer($module))
+        if(AfwSession::config("MODE_DEVELOPMENT",false) and (!AfwSession::config("MODE_TEST",true)))
         {
-            $moduleId = $module;
-            $objModule = Module::loadById($moduleId);
-            $moduleCode = $objModule->getVal("module_code");
+            if($action=="add") $action="+t";
+            if($action=="remove") $action="-t";
+            if(is_integer($module))
+            {
+                $moduleId = $module;
+                $objModule = Module::loadById($moduleId);
+                $moduleCode = $objModule->getVal("module_code");
+            }
+            else
+            {
+                $moduleCode = $module;
+                $objModule = Module::getModuleByCode(0, $moduleCode);
+                if(!$objModule) throw new AfwRuntimeException("generateTablePrevileges : Module `$module` not found");
+                $moduleId = $objModule->id;
+            }
+            $logReverse = Atable::reverseTable($moduleCode, $atable_name);
+            $objAtable = Atable::loadByMainIndex($moduleId, $atable_name);
+            if($objAtable and (!$objAtable->isEmpty()))
+            {
+                list($info, $goalObj) = $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action);
+                return $info;
+            }
+            else throw new AfwRuntimeException("generateTablePrevileges : Table `$atable_name` not found in module `$module`");
         }
-        else
-        {
-            $moduleCode = $module;
-            $objModule = Module::getModuleByCode(0, $moduleCode);
-            if(!$objModule) throw new AfwRuntimeException("generateTablePrevileges : Module `$module` not found");
-            $moduleId = $objModule->id;
-        }
-        $logReverse = Atable::reverseTable($moduleCode, $atable_name);
-        $objAtable = Atable::loadByMainIndex($moduleId, $atable_name);
-        if($objAtable and (!$objAtable->isEmpty()))
-        {
-            list($info, $goalObj) = $objAtable->manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action);
-            return $info;
-        }
-        else throw new AfwRuntimeException("generateTablePrevileges : Table `$atable_name` not found in module `$module`");
+        else return "In mode test or prod no need to generate table previleges";    
     }
 
     public function manageMeInMenuOf($goal_id, $jobrole_id, $framework_mode, $action="+t")
