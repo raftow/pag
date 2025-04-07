@@ -4230,7 +4230,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     {
         $dev_mode = AfwSession::config("MODE_DEVELOPMENT",false);
         $test_mode = AfwSession::config("MODE_TEST",true);
-        $pure_dev_mode = $dev_mode and (!$test_mode);
+        $pure_dev_mode = ($dev_mode and (!$test_mode));
         die("pure_dev_mode[$pure_dev_mode] = dev_mode:[$dev_mode] and !test_mode:[$test_mode]");
         $categ = $this->tableCategory();
 
