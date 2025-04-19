@@ -1395,6 +1395,15 @@ class Atable extends AFWObject
                */
 
         $display_field = $this->getVal("display_field");
+        if(AfwStringHelper::stringEndsWith($display_field,"_ar") and $lang != "ar")
+        {
+            $display_field = substr($display_field,0, strlen($display_field)-3)."_$lang";
+        }
+        elseif(AfwStringHelper::stringEndsWith($display_field,"_en") and $lang != "en")
+        {
+            $display_field = substr($display_field,0, strlen($display_field)-3)."_$lang";
+        }
+
         if ($display_field == "id") $display_field = "";
         if (!$display_field) $display_field = $this->getVal("atable_name") . "_name";
 
@@ -1538,7 +1547,7 @@ class Atable extends AFWObject
 
     public function generatePhpClass($dbstruct_only = false, $dbstruct_outside = false)
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
 
         $this_id = $this->getId();
@@ -1546,7 +1555,8 @@ class Atable extends AFWObject
         $phpErrors = array();
 
         $tabName = $this->getVal("atable_name");
-        $display_field = $this->getDisplayField($lang);
+        $display_field_ar = $this->getDisplayField('ar');
+        $display_field_en = $this->getDisplayField('en');
         $dbName = $moduleCode = $this->getModule()->getModuleCode();
         $prefixed_db_name = $server_db_prefix . $moduleCode;
         $fileName = AfwStringHelper::tableToFile($tabName);
@@ -2198,7 +2208,7 @@ class $className extends AFWObject{
                         if (\$obj instanceof $className ) 
                         {
                                 \$obj->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 15;
-                                \$obj->DISPLAY_FIELD = \"$display_field\";
+                                \$obj->DISPLAY_FIELD_BY_LANG = ['ar'=>\"$display_field_ar\", 'en'=>\"$display_field_en\"];
                                 
                                 // \$obj->ENABLE_DISPLAY_MODE_IN_QEDIT=true;
                                 \$obj->ORDER_BY_FIELDS = \"$order_by_fields\";
