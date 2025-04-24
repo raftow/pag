@@ -72,6 +72,10 @@
       $loopArr = [];
    
       // short commands
+      if($command_line=="usa") $command_line = "upgrade show all";
+      if($command_line=="ust") $command_line = "upgrade show todo";
+      if($command_line=="urtodo") $command_line = "upgrade run todo";
+      
       if($command_line=="l") $command_line = "list all fields";
       if($command_line=="lf") $command_line = "list all fields";
       if($command_line=="lv") $command_line = "list virtual fields";
