@@ -14,7 +14,7 @@
         
         if((!$restriction) or $restriction=="chsys" or $restriction=="prev")
         {
-            $command_line_result_arr[] = hzm_format_command_line("info", "generating [your server]/$module_code/previleges.php file : ");
+            $command_line_result_arr[] = hzm_format_command_line("info", "generating [your server]/$module_code/privileges.php file : ");
             $php_code = $objModule->calcPhp_module(false);        
             $command_line_result_arr[] = hzm_format_command_line("php", $php_code, "en", "cline php");
         }

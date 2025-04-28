@@ -132,6 +132,7 @@
         if($object_entity == "domain")
         {
             $object_codeOrId = Module::moduleCodeToDomainId($currmod);  
+            //die("object_codeOrId=$object_codeOrId = Module::moduleCodeToDomainId($currmod);  ");
         }
         elseif($object_entity == "module")
         {
