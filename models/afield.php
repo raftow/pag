@@ -894,7 +894,13 @@ class Afield extends AFWObject
                         if (!$this->getVal("field_size")) $this->set("field_size", 10);
                 }
 
+                if (AfwStringHelper::stringEndsWith($field_name, "_yn")) {
+                        if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", AfwUmsPagHelper::$afield_type_yn);
+                }
 
+                if (AfwStringHelper::stringEndsWith($field_name, "_ind")) {
+                        if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", AfwUmsPagHelper::$afield_type_yn);
+                }
 
                 if (AfwStringHelper::stringEndsWith($field_name, "_hdate")) {
                         if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", AfwUmsPagHelper::$afield_type_date);                        
