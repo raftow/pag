@@ -3056,4 +3056,9 @@ class Afield extends AFWObject
 
                 return [$objField, $message];
         }
+
+        public function moveColumn()
+        {
+                return "field_order";
+        }
 }

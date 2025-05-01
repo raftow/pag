@@ -18,8 +18,9 @@
 							$obj->nbQeditLinksByRow = 5;
 							$obj->ENABLE_DISPLAY_MODE_IN_QEDIT = true;
 							$obj->OBJECT_CODE = "field_name";
+							$obj->MOVE_UP_ACTION = true;
 							//$obj->qedit_minibox = true;    
-                            // $obj->after_save_edit = array("class"=>'Road',"attribute"=>'road_id', "currmod"=>'btb',"currstep"=>9);
+                            $obj->after_save_edit = array("class"=>'Atable',"attribute"=>'atable_id', "currmod"=>'pag',"currstep"=>4);
                         }
                 }
                 public static $DB_STRUCTURE = array(
@@ -81,8 +82,10 @@
 				),
 
 			'afield_type_id' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'RETRIEVE' => true,  'QEDIT' => true,  'EDIT' => true,  
-				'TYPE' => 'FK',  'ANSWER' => 'afield_type',  'ANSMODULE' => 'pag',  'SIZE' => 40,  'DEFAUT' => 0,  'STYLE' => 'width:150px',  'SHORTNAME' => 'ftype',  'FGROUP' => 'general_props',  'NO_KEEP_VAL' => true,  'LOAD_ALL' => true,  'NO-COTE' => true,  'SEARCH' => true,  'SEARCH-BY-ONE' => true,  'QSEARCH' => true,  'DISPLAY' => true,  'STEP' => 1,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				'TYPE' => 'FK',  'ANSWER' => 'afield_type',  'ANSMODULE' => 'pag',  'SIZE' => 40,  'DEFAUT' => 0,  'STYLE' => 'width:150px',  
+				'SHORTNAME' => 'ftype',  'FGROUP' => 'general_props',  'NO_KEEP_VAL' => true,  
+				'LOAD_ALL' => true,  'NO-COTE' => true,  'SEARCH' => true,  'SEARCH-BY-ONE' => true,  'QSEARCH' => true,  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'MANDATORY' => true,  
 				),
 
 		'sql_field_type' => array('STEP' => 99,  

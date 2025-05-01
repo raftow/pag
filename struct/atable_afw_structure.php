@@ -275,8 +275,9 @@ class PagAtableAfwStructure
 				6 => 'general_props',
 			),  
 			
-			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true, 'READONLY'=>true,  'STEP' => 4,  'ICONS' => true,
-			'DELETE-ICON' => true,  'BUTTONS' => true,  'FGROUP' => 'origFieldList',
+			'SHOW' => true,  'FORMAT' => 'retrieve',  'EDIT' => true, 'READONLY'=>true,  'STEP' => 4,  
+			'ICONS' => true, 'D'.'ELETE-ICON' => true, 'MOVE_UP-ICON' => true, 'VIEW-ICON' => false,
+			'BUTTONS' => true,  'FGROUP' => 'origFieldList',
 			'NO-LABEL' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', /*'FGROUP_BEHAVIOR' => 'collapsed',*/
 		),
