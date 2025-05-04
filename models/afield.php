@@ -938,6 +938,11 @@ class Afield extends AFWObject
                         if (!$this->getVal("titre_short")) $this->set("titre_short", "مبلغ ");
                 }
 
+                if (AfwStringHelper::stringEndsWith($field_name, "_price")) {
+                        if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", 3);
+                        if (!$this->getVal("titre_short")) $this->set("titre_short", "مبلغ ");
+                }
+
                 if (AfwStringHelper::stringEndsWith($field_name, "_time")) {
                         if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", 4);
                         if (!$this->getVal("titre_short")) $this->set("titre_short", "وقت ");
@@ -946,7 +951,15 @@ class Afield extends AFWObject
 
                 if (AfwStringHelper::stringEndsWith($field_name, "_num")) {
                         if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", 13);
+                        if (!$this->getVal("titre_short")) $this->set("titre_short", "عدد ");
                 }
+
+                if (AfwStringHelper::stringEndsWith($field_name, "_quantity")) {
+                        if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", 13);
+                        if (!$this->getVal("titre_short")) $this->set("titre_short", "كمية ");
+                }
+
+                
 
                 if (AfwStringHelper::stringEndsWith($field_name, "is_")) {
                         if (!$this->getVal("afield_type_id")) $this->set("afield_type_id", 8);
