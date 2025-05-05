@@ -7,7 +7,7 @@ require_once ("$file_dir_name/../$MODULE/ini.php");
 require_once ("$file_dir_name/../$MODULE/module_config.php");
 require_once ("$file_dir_name/../$MODULE/application_config.php");
 // die("DBG-begin of session start");
-AfwSession::initConfig($config_arr);
+AfwSession::initConfig($config_arr, "system", "$file_dir_name/../$MODULE/application_config.php");
 AfwSession::startSession();
 
 list($user_connected, $user_not_connected_reason, $info0, $ldap_dbg) = AfwLoginUtilities::ldap_login("rboubaker","Moa2021th");

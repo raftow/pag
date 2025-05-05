@@ -4801,7 +4801,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         }
         $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
         if(!$objTable) $message.= " Strange Error happened because Atable::loadByMainIndex($objModule_id, $table_name) returned empty, may be table need reverse engineering !!";
-        else $message .= " Table $table_name loaded successfully";
+        else $message .= " >> Table $table_name loaded successfully in module ($module_code / $objModule_id)";
 
         return [$objTable, $message];
     }
