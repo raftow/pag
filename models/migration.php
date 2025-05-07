@@ -338,6 +338,28 @@ class Migration extends AFWObject
             }    
 	}
 
+    public static function genereUpdateDataMigrationLines($objItem)
+    {
+        $indexValues = $objItem->getMyIndexArray();
+        $rowValues = $objItem->getAllfieldValues();
+        $php = "unset(\$obj); \$obj=".get_class($objItem)."::loadWithUniqueKey(".var_export($indexValues,true).");\n";
+        $php .= "\$obj->multipleSet(".var_export($rowValues,true).", true);\n";
+
+        return $php;
+    }
+
+    public static function genereUpdateDataMigration($objList)
+    {
+        $codePhp = "";
+        foreach($objList as $objItem)
+        {            
+            $codePhp .= self::genereUpdateDataMigrationLines($objItem)."\n";
+        }
+        
+
+        return $codePhp;
+    }
+
     
     
 }
