@@ -345,6 +345,15 @@ class Migration extends AFWObject
         $php = "unset(\$obj); \$obj=".get_class($objItem)."::loadWithUniqueKey(".var_export($indexValues,true).");\n";
         $php .= "\$obj->multipleSet(".var_export($rowValues,true).", true);\n";
 
+        $pillarObjectList = $objItem->getPillarObjects();
+
+        foreach($pillarObjectList as $pillarObjectItem)
+        {
+            $php .= self::genereUpdateDataMigrationLines($pillarObjectItem);
+        }
+
+        
+
         return $php;
     }
 
