@@ -2109,7 +2109,7 @@ class Afield extends AFWObject
 
         public function getFormuleResult($attribute, $what = 'value')
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 $this_id = $this->getId();
                 $mytable = $this->hetTable();
                 $fk_tab = $this->het("answer_table_id");
@@ -2228,7 +2228,7 @@ class Afield extends AFWObject
 
         public function getPhpAfwAttribute()
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 $this_id = $this->getId();
                 $mytable = $this->hetTable();
 
@@ -2271,7 +2271,7 @@ class Afield extends AFWObject
 
         protected function getOtherLinksArray($mode, $genereLog = false, $step = "all")
         {
-                global $lang;
+                $lang = AfwLanguageHelper::getGlobalLanguage();
                 $objme = AfwSession::getUserConnected();
                 $me = ($objme) ? $objme->id : 0;
 

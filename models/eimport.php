@@ -70,7 +70,8 @@ class Eimport extends AFWObject{
         
         public function getFormuleResult($attribute, $what='value') 
         {
-            global $lang,$LANG_NAMES;    
+            global $LANG_NAMES;    
+            $lang = AfwLanguageHelper::getGlobalLanguage();
                
 	       switch($attribute) 
                {

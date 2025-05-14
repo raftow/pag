@@ -289,7 +289,7 @@ class Atable extends AFWObject
 
     protected function getOtherLinksArray($mode, $genereLog = false, $step = "all")
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         $objme = AfwSession::getUserConnected();
         $me = ($objme) ? $objme->id : 0;
 
@@ -1370,7 +1370,7 @@ class Atable extends AFWObject
 
     public function __toString()
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
 
         return $this->getDisplay($lang);
     }
@@ -2302,7 +2302,7 @@ $enumAtable_functions
         
         protected function getOtherLinksArray(\$mode,\$genereLog=false,\$step=\"all\")      
         {
-             global \$lang;
+             \$lang = AfwLanguageHelper::getGlobalLanguage();
              // \$objme = AfwSession::getUserConnected();
              // \$me = (\$objme) ? \$objme->id : 0;
 
@@ -3868,7 +3868,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
     public function createModeScreen($framework_mode, $framework_id = 0, $resetUS = false)
     {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         if (!$framework_id) $framework_id = AfwSession::config("framework_id", 1);
         // for heavy processes allow bigger seuil
         // $_sql_analysis_seuil_calls = 250;
@@ -3936,7 +3936,8 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
     public function createFrameWorkScreens($framework_id = 0, $resetAll = true, $resetUS = true)
     {
-        global $lang, $_sql_analysis_seuil_calls;
+        global $_sql_analysis_seuil_calls;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         if (!$framework_id) $framework_id = AfwSession::config("framework_id", 1);
         // for heavy processes allow bigger seuil
         $_sql_analysis_seuil_calls = 250;

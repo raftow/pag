@@ -12,7 +12,7 @@ function afw_struct_array($arr)
 
 function getPhpAfwAttribute($db_structure, $field_name)
 {
-        global $lang;
+        $lang = AfwLanguageHelper::getGlobalLanguage();
         
         // $scis = $mytable->get("scis");
         // list($phpDesc,$php_errors) = $this->generePhpDesc($scis);

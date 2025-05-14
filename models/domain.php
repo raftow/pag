@@ -96,7 +96,7 @@ class Domain extends AFWObject
 
       public function getDisplay($langue = "ar")
       {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             if (!$langue)   $langue = $lang;
             if (!$langue)   $langue = "ar";
             $data = array();
@@ -111,7 +111,7 @@ class Domain extends AFWObject
 
       protected function getOtherLinksArray($mode, $genereLog = false, $step = "all")
       {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
             $objme = AfwSession::getUserConnected();
             $me = ($objme) ? $objme->id : 0;
 
@@ -214,7 +214,7 @@ class Domain extends AFWObject
 
       public function getDataJobResp($create_obj_if_not_found = true, $always_update_name = false)
       {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
 
             $mainApplication = $this->get("mainApplication");
             if (!$mainApplication) return array(null, null, "no main application defined");
@@ -227,7 +227,7 @@ class Domain extends AFWObject
 
       public function getLookupJobResp($create_obj_if_not_found = true, $always_update_name = false)
       {
-            global $lang;
+            $lang = AfwLanguageHelper::getGlobalLanguage();
 
             $mainApplication = $this->get("mainApplication");
             if (!$mainApplication) return array(null, null, "no main application defined");
@@ -263,7 +263,7 @@ class Domain extends AFWObject
 
       public function beforeMAJ($id, $fields_updated)
       {
-            global $lang;  
+            $lang = AfwLanguageHelper::getGlobalLanguage();  
 
 
             if ((!$this->getVal("domain_code")) or ($this->getVal("domain_code") == "--")) {

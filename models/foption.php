@@ -98,7 +98,7 @@ class Foption extends AFWObject{
  
         protected function getOtherLinksArray($mode, $genereLog = false, $step="all")      
         {
-             global $lang;
+             $lang = AfwLanguageHelper::getGlobalLanguage();
              $otherLinksArray = array();
              $my_id = $this->getId();
              $displ = $this->getDisplay($lang);
