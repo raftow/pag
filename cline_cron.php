@@ -41,7 +41,7 @@
 
     
     
-    if((!$command_what_to_do) or (!in_array($command_what_to_do,["erase","add","update","list","run"])))
+    if((!$command_what_to_do) or (!in_array($command_what_to_do,["erase","add","update","list","run","more"])))
     {
         $command_line_result_arr[] = hzm_format_command_line("error", "cron command need a correct action todo !! value given $command_bf_id is not correct should be from erase/add/update choices");
         $nb_errors++;$command_finished = true;return;
@@ -63,10 +63,9 @@
         $log_path = "/var/www/adm/log/";
         $run_path = "/var/www/adm/batchs/";
         $command_line_result_arr[] = hzm_format_command_line("info", "preparing scripts and log privileges ... ");
-        $shell_to_show[] = $shell_to_run = 'chmod 777 '.$log_path;
-        $shell_to_show[] = shell_exec($shell_to_run);
-        $shell_to_show[] = $shell_to_run = 'chmod 777 '.$script_to_run;
-        $shell_to_show[] = shell_exec($shell_to_run);
+        // $shell_to_show[] = $shell_to_run = 'chmod 777 '.$log_path;
+        // $shell_to_show[] = shell_exec($shell_to_run);
+        
         $shell_to_show[] = $shell_to_run = 'ls -l '.$log_path;
         $shell_to_show[] = shell_exec($shell_to_run);
         $shell_to_show[] = $shell_to_run = 'ls -l '.$run_path;
@@ -90,6 +89,16 @@
         elseif($command_what_to_do=="list")
         {
             $shell_to_show[] = $shell_to_run = 'crontab -l';
+            $shell_to_show[] = shell_exec($shell_to_run);
+        }
+        elseif($command_what_to_do=="more")
+        {
+            $shell_to_show[] = $shell_to_run = $script_to_run;
+            $shell_to_show[] = shell_exec("more ".$shell_to_run);
+        }
+        elseif($command_what_to_do=="install")
+        {
+            $shell_to_show[] = $shell_to_run = 'chmod +x '.$script_to_run;
             $shell_to_show[] = shell_exec($shell_to_run);
         }
         elseif($command_what_to_do=="run")
