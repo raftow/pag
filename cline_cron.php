@@ -71,7 +71,7 @@
         $shell_to_show[] = shell_exec($shell_to_run);
         $shell_to_show[] = $shell_to_run = 'ls -l '.$run_path;
         $shell_to_show[] = shell_exec($shell_to_run);
-        $command_line_result_arr[] = hzm_format_command_line("cmd", implode("\n", $shell_to_show), "en", "cline cmd");
+        
         
         
         
@@ -83,15 +83,18 @@
         elseif($command_what_to_do=="erase")
         {
             // replace/erase
-            $output = shell_exec('{echo "30 * * * * '.$script_to_run.'"; } | crontab - ');
+            
+            $shell_to_show[] = $shell_to_run = '{echo "30 * * * * '.$script_to_run.'"; } | crontab - ';
+            $shell_to_show[] = shell_exec($shell_to_run);
         }
         elseif($command_what_to_do=="list")
         {
-            $output = shell_exec('crontab -l');
+            $shell_to_show[] = $shell_to_run = 'crontab -l';
+            $shell_to_show[] = shell_exec($shell_to_run);
         }
 
-        $command_line_result_arr[] = hzm_format_command_line("info", "running shell command ... ");
-        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+        
+        $command_line_result_arr[] = hzm_format_command_line("cmd", implode("\n", $shell_to_show), "en", "cline cmd");
     }
     
 
