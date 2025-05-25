@@ -29,7 +29,7 @@
 
     if(ClineUtils::similarCommand($command_to_help, "cron")) 
     {
-        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "cron [erase/add/update] @bf-id @cron-sched", "to schedule an script BF into the crontab", "en", "log");
+        $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "cron [erase/add/update/list/run] @bf-id @cron-sched", "to schedule an script BF into the crontab", "en", "log");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        example : cron erase 158770 */15-*-*-*-*");
         $command_line_result_arr[] = hzm_format_command_line("warning", "        Schedule the job defined in BF (id=158770) to be run each 15 minutes");
     }

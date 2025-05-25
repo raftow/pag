@@ -41,7 +41,7 @@
 
     
     
-    if((!$command_what_to_do) or (!in_array($command_what_to_do,["erase","add","update","list"])))
+    if((!$command_what_to_do) or (!in_array($command_what_to_do,["erase","add","update","list","run"])))
     {
         $command_line_result_arr[] = hzm_format_command_line("error", "cron command need a correct action todo !! value given $command_bf_id is not correct should be from erase/add/update choices");
         $nb_errors++;$command_finished = true;return;
@@ -90,6 +90,11 @@
         elseif($command_what_to_do=="list")
         {
             $shell_to_show[] = $shell_to_run = 'crontab -l';
+            $shell_to_show[] = shell_exec($shell_to_run);
+        }
+        elseif($command_what_to_do=="run")
+        {
+            $shell_to_show[] = $shell_to_run = $script_to_run;
             $shell_to_show[] = shell_exec($shell_to_run);
         }
 
