@@ -58,17 +58,20 @@
     }
     else
     {
+        $shell_to_show = [];
         $script_to_run = "/var/www/adm/batchs/adm_simulator_job.sh";
         $log_path = "/var/www/adm/log/";
-        $command_line_result_arr[] = hzm_format_command_line("info", "preparing log privileges ... ");
-        $output = shell_exec('chmod 777 '.$log_path);
-        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+        $command_line_result_arr[] = hzm_format_command_line("info", "preparing scripts and log privileges ... ");
+        $shell_to_show[] = $shell_to_run = 'chmod 777 '.$log_path;
+        $shell_to_show[] = shell_exec($shell_to_run);
+        $shell_to_show[] = $shell_to_run = 'chmod 777 '.$script_to_run;
+        $shell_to_show[] = shell_exec($shell_to_run);
+        $shell_to_show[] = $shell_to_run = 'ls -l '.$log_path;
+        $shell_to_show[] = shell_exec($shell_to_run);
+        $command_line_result_arr[] = hzm_format_command_line("cmd", implode("\n", $shell_to_show), "en", "cline cmd");
         
-        $command_line_result_arr[] = hzm_format_command_line("info", "preparing scripts privileges ... ");
-        $output = shell_exec('chmod 777 '.$script_to_run);
-        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
-        $output = shell_exec('ls -l '.$log_path);
-        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+        
+        
         
         if($command_what_to_do=="add")
         {
