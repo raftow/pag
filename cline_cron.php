@@ -59,7 +59,7 @@
     else
     {
         $shell_to_show = [];
-        $script_to_run = "/var/www/adm/batchs/adm_simulator_job.sh";
+        $script_to_run = "/var/www/adm/batchs/adm_app_simulator_job.sh";
         $log_path = "/var/www/adm/log/";
         $run_path = "/var/www/adm/batchs/";
         $command_line_result_arr[] = hzm_format_command_line("info", "preparing scripts and log privileges ... ");
