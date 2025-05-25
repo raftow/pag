@@ -67,8 +67,9 @@
         $command_line_result_arr[] = hzm_format_command_line("info", "preparing scripts privileges ... ");
         $output = shell_exec('chmod 777 '.$script_to_run);
         $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
-
-
+        $output = shell_exec('ls -l '.$log_path);
+        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+        
         if($command_what_to_do=="add")
         {
             // { crontab -l; echo "30 * * * * /path_to/script/"; } | crontab -
