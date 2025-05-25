@@ -61,12 +61,15 @@
         $shell_to_show = [];
         $script_to_run = "/var/www/adm/batchs/adm_simulator_job.sh";
         $log_path = "/var/www/adm/log/";
+        $run_path = "/var/www/adm/batchs/";
         $command_line_result_arr[] = hzm_format_command_line("info", "preparing scripts and log privileges ... ");
         $shell_to_show[] = $shell_to_run = 'chmod 777 '.$log_path;
         $shell_to_show[] = shell_exec($shell_to_run);
         $shell_to_show[] = $shell_to_run = 'chmod 777 '.$script_to_run;
         $shell_to_show[] = shell_exec($shell_to_run);
         $shell_to_show[] = $shell_to_run = 'ls -l '.$log_path;
+        $shell_to_show[] = shell_exec($shell_to_run);
+        $shell_to_show[] = $shell_to_run = 'ls -l '.$run_path;
         $shell_to_show[] = shell_exec($shell_to_run);
         $command_line_result_arr[] = hzm_format_command_line("cmd", implode("\n", $shell_to_show), "en", "cline cmd");
         
