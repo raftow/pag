@@ -23,6 +23,9 @@
         $nb_errors++;$command_finished = true;return;
     }
     */
+
+    
+
     $command_sched = $command_line_words[3];
 
 
@@ -43,22 +46,37 @@
         $command_line_result_arr[] = hzm_format_command_line("error", "cron command need the correct scheduling params for your script !! value given $command_sched is not correct");
         $nb_errors++;$command_finished = true;return;
     }
-    elseif($command_what_to_do=="add")
+    else
     {
-        // { crontab -l; echo "30 * * * * /path_to/script/"; } | crontab -
-    }
-    elseif($command_what_to_do=="erase")
-    {
-        // replace/erase
-        $output = shell_exec('{echo "30 * * * * /path_to/script/"; } | crontab - ');
-    }
-    elseif($command_what_to_do=="list")
-    {
-        $output = shell_exec('crontab -l');
-    }
+        $script_to_run = "/var/www/adm/batchs/adm_simulator_job.sh";
+        $log_path = "/var/www/adm/log/";
+        $command_line_result_arr[] = hzm_format_command_line("info", "preparing log privileges ... ");
+        $output = shell_exec('chmod 777 '.$log_path);
+        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+        
+        $command_line_result_arr[] = hzm_format_command_line("info", "preparing scripts privileges ... ");
+        $output = shell_exec('chmod 777 '.$script_to_run);
+        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
 
-    $command_line_result_arr[] = hzm_format_command_line("info", "running shell command ... ");
-    $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+
+        if($command_what_to_do=="add")
+        {
+            // { crontab -l; echo "30 * * * * /path_to/script/"; } | crontab -
+        }
+        elseif($command_what_to_do=="erase")
+        {
+            // replace/erase
+            $output = shell_exec('{echo "30 * * * * '.$script_to_run.'"; } | crontab - ');
+        }
+        elseif($command_what_to_do=="list")
+        {
+            $output = shell_exec('crontab -l');
+        }
+
+        $command_line_result_arr[] = hzm_format_command_line("info", "running shell command ... ");
+        $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+    }
+    
 
     $command_done = true;
     $command_finished = true;
