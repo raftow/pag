@@ -1,0 +1,65 @@
+<?php
+
+    $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code with restriction = [$restriction]");
+
+    $command_what_to_do = $command_line_words[1];
+    if($command_what_to_do=="r") $command_what_to_do = "erase";
+    if($command_what_to_do=="replace") $command_what_to_do = "erase";
+    if($command_what_to_do=="a") $command_what_to_do = "add";
+    if($command_what_to_do=="+") $command_what_to_do = "add";
+    if($command_what_to_do=="e") $command_what_to_do = "update";
+    if($command_what_to_do=="u") $command_what_to_do = "update";
+    if($command_what_to_do=="edit") $command_what_to_do = "update";
+    if($command_what_to_do=="l") $command_what_to_do = "list";
+    
+    
+    
+    $command_bf_id = $command_line_words[2];
+    /*
+    $objBF = Bfunction::loadById($command_bf_id);
+    if((!$objBF) or (!objBF->id))
+    {
+        $command_line_result_arr[] = hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! The object is not found for ID = $command_bf_id");
+        $nb_errors++;$command_finished = true;return;
+    }
+    */
+    $command_sched = $command_line_words[3];
+
+
+    
+    
+    if((!$command_what_to_do) or (!in_array($command_what_to_do,["erase","add","update","list"])))
+    {
+        $command_line_result_arr[] = hzm_format_command_line("error", "cron command need a correct action todo !! value given $command_bf_id is not correct should be from erase/add/update choices");
+        $nb_errors++;$command_finished = true;return;
+    }
+    elseif((!$command_bf_id) or (!is_numeric($command_bf_id)))
+    {
+        $command_line_result_arr[] = hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! value given $command_bf_id is not correct");
+        $nb_errors++;$command_finished = true;return;
+    }
+    elseif((!$command_sched) or (!ClineUtils::correctSchedulingParams($command_sched)))
+    {
+        $command_line_result_arr[] = hzm_format_command_line("error", "cron command need the correct scheduling params for your script !! value given $command_sched is not correct");
+        $nb_errors++;$command_finished = true;return;
+    }
+    elseif($command_what_to_do=="add")
+    {
+        // { crontab -l; echo "30 * * * * /path_to/script/"; } | crontab -
+    }
+    elseif($command_what_to_do=="erase")
+    {
+        // replace/erase
+        $output = shell_exec('{echo "30 * * * * /path_to/script/"; } | crontab - ');
+    }
+    elseif($command_what_to_do=="list")
+    {
+        $output = shell_exec('crontab -l');
+    }
+
+    $command_line_result_arr[] = hzm_format_command_line("info", "running shell command ... ");
+    $command_line_result_arr[] = hzm_format_command_line("cmd", $output, "en", "cline cmd");
+
+    $command_done = true;
+    $command_finished = true;
+

@@ -201,4 +201,11 @@ class ClineUtils
 
         return $text;
     }
+
+
+    public static function correctSchedulingParams($text)
+    {
+        // @todo
+        return true;
+    }
 }
