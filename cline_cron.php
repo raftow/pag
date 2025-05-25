@@ -11,17 +11,27 @@
     if($command_what_to_do=="u") $command_what_to_do = "update";
     if($command_what_to_do=="edit") $command_what_to_do = "update";
     if($command_what_to_do=="l") $command_what_to_do = "list";
+
+    if($command_what_to_do == "list")
+    {
+        $command_line_words[2] = 1;
+        $command_line_words[3] = "*";
+    }
     
     
     
     $command_bf_id = $command_line_words[2];
     /*
-    $objBF = Bfunction::loadById($command_bf_id);
-    if((!$objBF) or (!objBF->id))
+    if($command_bf_id != 1)
     {
-        $command_line_result_arr[] = hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! The object is not found for ID = $command_bf_id");
-        $nb_errors++;$command_finished = true;return;
+        $objBF = Bfunction::loadById($command_bf_id);
+        if((!$objBF) or (!objBF->id))
+        {
+            $command_line_result_arr[] = hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! The object is not found for ID = $command_bf_id");
+            $nb_errors++;$command_finished = true;return;
+        }
     }
+    
     */
 
     
