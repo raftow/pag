@@ -289,9 +289,7 @@ class Migration extends AFWObject
         	return  "avail";
         }
         
-        public function isTechField($attribute) {
-            return (($attribute=="id_aut") or ($attribute=="date_aut") or ($attribute=="id_mod") or ($attribute=="date_mod") or ($attribute=="id_valid") or ($attribute=="date_valid") or ($attribute=="version"));  
-        }
+        
         
         
         public function beforeDelete($id,$id_replace) 

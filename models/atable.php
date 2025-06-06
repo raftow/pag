@@ -2373,9 +2373,15 @@ $enumAtable_functions
         	return  \"$fld_active\";
         }
         
+        /*
         public function isTechField(\$attribute) {
-            return ((\$attribute==\"$fld_creation_user_id\") or (\$attribute==\"$fld_creation_date\") or (\$attribute==\"$fld_update_user_id\") or (\$attribute==\"$fld_update_date\") or (\$attribute==\"$fld_validation_user_id\") or (\$attribute==\"$fld_validation_date\") or (\$attribute==\"$fld_version\"));  
-        }
+            return ((\$attribute==\"$fld_creation_user_id\") or 
+                    (\$attribute==\"$fld_creation_date\") or 
+                    (\$attribute==\"$fld_update_user_id\") or 
+                    (\$attribute==\"$fld_update_date\") or 
+                    // (\$attribute==\"$fld_validation_user_id\") or (\$attribute==\"$fld_validation_date\") or 
+                    (\$attribute==\"$fld_version\"));  
+        }*/
         
         
         public function beforeDelete(\$id,\$id_replace) 
@@ -4604,10 +4610,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return  "avail";
     }
 
-    public function isTechField($attribute)
-    {
-        return (($attribute == "id_aut") or ($attribute == "date_aut") or ($attribute == "id_mod") or ($attribute == "date_mod") or ($attribute == "id_valid") or ($attribute == "date_valid") or ($attribute == "version"));
-    }
+    
 
     public function getGoalConcernList($oper_id)
     {
