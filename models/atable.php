@@ -581,7 +581,7 @@ class Atable extends AFWObject
 
     public function forceDelete()
     {
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
         $this_id = $this->id;
 
         AfwDatabase::db_query("delete from ".$server_db_prefix."ums.bfunction where curr_class_atable_id = $this_id");
@@ -667,7 +667,7 @@ class Atable extends AFWObject
 
     public function getMaster()
     {
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
         $master = new Atable();
 
         if ($this->dataIsFullOwnedByMaster()) {
@@ -1123,7 +1123,7 @@ class Atable extends AFWObject
         $af->select("avail", 'Y');
         $af->select("reel", 'Y');
         $af->select("afield_type_id", 5);
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
         $af->where("answer_table_id in (select id from ${server_db_prefix}pag.atable where avail='Y' and id_module=$this_id_module)");
 
         $af_list = $af->loadMany();
@@ -1141,7 +1141,7 @@ class Atable extends AFWObject
         global $images;
         $objme = AfwSession::getUserConnected();
         $file_dir_name = dirname(__FILE__);
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
         switch ($attribute) {
 
             case "system_id":
@@ -1548,7 +1548,7 @@ class Atable extends AFWObject
     public function generatePhpClass($dbstruct_only = false, $dbstruct_outside = false)
     {
         $lang = AfwLanguageHelper::getGlobalLanguage();
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
 
         $this_id = $this->getId();
 
@@ -2014,13 +2014,13 @@ $displayAttribute_list
         // FK part of me - not deletable 
         $check_list_fk_part_of_me_not_deletable = "";
 
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - deletable 
+        $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - deletable 
         $delete_list_fk_part_of_me_deletable = "";
 
         // FK not part of me - replaceable 
         $replace_list_fk_not_part_of_me_replaceable = "";
 
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK on me 
+        $server_db_prefix = AfwSession::currentDBPrefix(); // FK on me 
         $replace_val_in_list_of_fk = "";
 
 
@@ -2449,7 +2449,7 @@ $replace_val_in_list_of_mfk
     public function generateSQLStructure()
     {
 
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
         $dbName = $this->getModule()->getModuleCode();
         $prefixed_db_name = $server_db_prefix . $dbName;
 
@@ -2742,7 +2742,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     public function select_visibilite_horizontale($dropdown = false)
     {
         $me = AfwSession::getUserIdActing();
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
         $this->select_visibilite_horizontale_default();
 
         $this->where("(me.id_aut = '$me' or me.id_module in (select mu.id_module from ${server_db_prefix}ums.module_auser mu where mu.id_auser = '$me' and mu.avail='Y'))");
@@ -2986,7 +2986,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
     public function beforeDelete($id, $id_replace)
     {
-        $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+        $server_db_prefix = AfwSession::currentDBPrefix();
 
         if (!$id) {
             $id = $this->getId();

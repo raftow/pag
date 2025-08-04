@@ -128,7 +128,7 @@ class Afield extends AFWObject
 
         public function select_visibilite_horizontale($dropdown = false)
         {
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+                $server_db_prefix = AfwSession::currentDBPrefix();
                 $objme = AfwSession::getUserConnected();
                 $me = ($objme) ? $objme->id : 0;
                 $this->select_visibilite_horizontale_default();
@@ -2059,7 +2059,7 @@ class Afield extends AFWObject
 
         public function getGeneraltedSQL($dbms, $syntax_values, $fields_naming_uc, $alter_table = false)
         {
-                $server_db_prefix = AfwSession::config("db_prefix", "default_db_");
+                $server_db_prefix = AfwSession::currentDBPrefix();
 
                 $null_syntax = $syntax_values["NULL_SYNTAX"];
                 $notnull_syntax = $syntax_values["NOTNULL_SYNTAX"];
@@ -2693,10 +2693,10 @@ class Afield extends AFWObject
 
                 if ($id) {
                         if ($id_replace == 0) {
-                                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - not deletable 
+                                $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - not deletable 
 
 
-                                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK part of me - deletable 
+                                $server_db_prefix = AfwSession::currentDBPrefix(); // FK part of me - deletable 
 
 
                                 // FK not part of me - replaceable 
@@ -2715,7 +2715,7 @@ class Afield extends AFWObject
                                 // pag.atable-الحقول الثابتة في التعديل السريع	qfim_fields_mfk  
                                 $this->execQuery("update ${server_db_prefix}pag.atable set qfim_fields_mfk=REPLACE(qfim_fields_mfk, ',$id,', ',') where qfim_fields_mfk like '%,$id,%' ");
                         } else {
-                                $server_db_prefix = AfwSession::config("db_prefix", "default_db_"); // FK on me 
+                                $server_db_prefix = AfwSession::currentDBPrefix(); // FK on me 
                                 // pag.atable-ادارة السجلات عبر احتمالات الحقل	look_from_field_id  حقل يفلتر به-ManyToOne
                                 $this->execQuery("update ${server_db_prefix}pag.atable set look_from_field_id='$id_replace' where look_from_field_id='$id' ");
                                 // pag.db_link-الحقل سبب العلاقة	field_id  حقل يفلتر به-ManyToOne
