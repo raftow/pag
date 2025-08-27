@@ -2130,7 +2130,7 @@ class Afield extends AFWObject
                 if (!$field_mandatory) {
                         $field_null = $null_syntax;
                 } else {
-                        $field_null = $notnull_syntax;
+                        $field_null = $notnull_syntax. " XX";
                         if(!$this->sureIs("distinct_for_list"))
                         {
                                 // if field is not in the Unique Index and should be not null
