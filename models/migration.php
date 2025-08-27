@@ -64,8 +64,8 @@ class Migration extends AFWObject
                 $migration_error="";
                 $migObj = self::migrating($moduleId, $migration_code, $title, $auser_id);
                 include($file_migration_name);
-                $migObj->migrated();
-                $info = "migration $migration_code done sucessfully ";
+                
+                $info = "";
                 if($migration_info) $info .= $migration_info;
                 if($migration_warning) $warning .= $migration_warning. " ";
                 if($migration_error) $error .= $migration_error. " ";
@@ -83,7 +83,11 @@ class Migration extends AFWObject
         }
         else $warning = "migration $migration_code has been ignored file waiting to provide the migration file ...";
         
-        
+        if(!$error) 
+        {
+            $migObj->migrated();
+            $info .= " > migration $migration_code done sucessfully";
+        }
 
         return [$error,
                 $info,
