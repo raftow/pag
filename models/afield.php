@@ -2035,7 +2035,51 @@ class Afield extends AFWObject
 
         }
 
+        public function getStandardDefaultValue()
+        {
+                $type = $this->getVal("afield_type_id");    
 
+                switch($type)
+                {
+                        // 	6	اختيار متعدد من قائمة
+                        case AfwUmsPagHelper::$afield_type_mlst : return "','";
+                        // 	5	اختيار من قائمة
+                        case AfwUmsPagHelper::$afield_type_list : return '0';
+                        // 	12	إختيار من قائمة قصيرة
+                        case AfwUmsPagHelper::$afield_type_enum : return '0';
+                        // 	15	إختيار متعدد من قائمة قصيرة
+                        case AfwUmsPagHelper::$afield_type_menum : return "','";
+
+                        // 	2	تاريخ
+                        case AfwUmsPagHelper::$afield_type_date : return "'14000101'";
+                        // 	9	تاريخ ميلادي
+                        case AfwUmsPagHelper::$afield_type_Gdat : return "'19800101'";
+                        // 	4	وقت
+                        case AfwUmsPagHelper::$afield_type_time : return "'00:00'";
+
+                        // 	1	قيمة عددية متوسطة
+                        case AfwUmsPagHelper::$afield_type_nmbr : return '0';
+                        // 	13	قيمة عددية صغيرة
+                        case AfwUmsPagHelper::$afield_type_int : return '0';
+                        // 	14	قيمة عددية كبيرة
+                        case AfwUmsPagHelper::$afield_type_bigint : return '0';
+                        // 	3	مبلغ من المال
+                        case AfwUmsPagHelper::$afield_type_amnt : return '0.0';
+                        // 	7	نسبة مائوية
+                        case AfwUmsPagHelper::$afield_type_pctg : return '0.0';
+                        // 	16	قيمة عددية كسرية
+                        case AfwUmsPagHelper::$afield_type_float : return '0.0';
+
+                        // 	11	نص طويل
+                        case AfwUmsPagHelper::$afield_type_mtxt : return "''";
+                        // 	10	نص قصير
+                        case AfwUmsPagHelper::$afield_type_text : return "''";
+                        // 	8	نعم/لا
+                        case AfwUmsPagHelper::$afield_type_yn : return "'W'";
+                }
+
+                return '?? default value missed';
+        }
 
         public function myJavaName()
         {
@@ -2087,6 +2131,16 @@ class Afield extends AFWObject
                         $field_null = $null_syntax;
                 } else {
                         $field_null = $notnull_syntax;
+                        if(!$this->surIs("distinct_for_list"))
+                        {
+                                // if field is not in the Unique Index and should be not null
+                                // it should have default value
+                                if($this->surIs("utf8")) $default_value = $this->getVal("default_value_utf8");
+                                if(!$default_value) $default_value = $this->getVal("default_value");
+                                if(!$default_value) $default_value = $this->getVal("default_value_utf8");
+                                if(!$default_value)  $default_value = $this->getStandardDefaultValue();
+                                $field_null .= " DEFAULT $default_value";
+                        }
                 }
 
                 $table_name = $my_tab->getVal("atable_name");
