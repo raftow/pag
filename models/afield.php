@@ -2130,7 +2130,7 @@ class Afield extends AFWObject
                 if (!$field_mandatory) {
                         $field_null = $null_syntax;
                 } else {
-                        $field_null = $notnull_syntax. " XX";
+                        $field_null = $notnull_syntax;
                         if(!$this->sureIs("distinct_for_list"))
                         {
                                 // if field is not in the Unique Index and should be not null
@@ -2141,6 +2141,7 @@ class Afield extends AFWObject
                                 if(!$default_value)  $default_value = $this->getStandardDefaultValue();
                                 $field_null .= " DEFAULT $default_value";
                         }
+                        else $field_null .= " distinct_for_list = ".$this->getVal("distinct_for_list");
                 }
 
                 $table_name = $my_tab->getVal("atable_name");
