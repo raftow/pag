@@ -68,7 +68,7 @@ class Migration extends AFWObject
                 $info = "migration $migration_code done sucessfully ";
                 if($migration_info) $info .= $migration_info;
                 if($migration_warning) $warning .= $migration_warning. " ";
-                if($migration_error) $info .= $migration_error. " ";
+                if($migration_error) $error .= $migration_error. " ";
             }
             catch(Exception $e)
             {
