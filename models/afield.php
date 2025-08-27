@@ -2131,11 +2131,11 @@ class Afield extends AFWObject
                         $field_null = $null_syntax;
                 } else {
                         $field_null = $notnull_syntax;
-                        if(!$this->surIs("distinct_for_list"))
+                        if(!$this->sureIs("distinct_for_list"))
                         {
                                 // if field is not in the Unique Index and should be not null
                                 // it should have default value
-                                if($this->surIs("utf8")) $default_value = $this->getVal("default_value_utf8");
+                                if($this->sureIs("utf8")) $default_value = $this->getVal("default_value_utf8");
                                 if(!$default_value) $default_value = $this->getVal("default_value");
                                 if(!$default_value) $default_value = $this->getVal("default_value_utf8");
                                 if(!$default_value)  $default_value = $this->getStandardDefaultValue();
