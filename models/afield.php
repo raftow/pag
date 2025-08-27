@@ -2141,7 +2141,7 @@ class Afield extends AFWObject
                                 if(!$default_value)  $default_value = $this->getStandardDefaultValue();
                                 $field_null .= " DEFAULT $default_value";
                         }
-                        else $field_null .= " distinct_for_list = ".$this->getVal("distinct_for_list");
+                        // else $field_null .= " distinct_for_list = ".$this->getVal("distinct_for_list");
                 }
 
                 $table_name = $my_tab->getVal("atable_name");
