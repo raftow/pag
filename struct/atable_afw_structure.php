@@ -38,13 +38,14 @@ class PagAtableAfwStructure
 		),
 
 		'system_id' => array(
-			'SHOW' => true,  'SEARCH' => true,
+			'SHOW' => true,  'SEARCH' => true,  'EDIT' => true, 'DISPLAY' => true, 'READONLY' => true,  
 			'TYPE' => 'FK',  'ANSWER' => 'module',  'ANSMODULE' => 'ums',
 			'WHERE' => "id_module_type in (4,7)",
 
-			'CATEGORY' => 'FORMULA',  'FORMULA_MODULE' => 'pag',  'SHORTNAME' => 'sys',  'SEARCH-BY-ONE' => true,  'CAN-BE-SETTED' => true,  'DIRECT_ACCESS' => true,
+			'CATEGORY' => 'FORMULA',  'FORMULA_MODULE' => 'pag',  'SHORTNAME' => 'sys',  
+			'SEARCH-BY-ONE' => true,  'CAN-BE-SETTED' => true,  'DIRECT_ACCESS' => true,
 			'DEPENDENT_OFME' => array(0 => 'id_module', 1 => 'id_sub_module',),
-			'FGROUP' => 'step1',  'DISPLAY' => true,  'STEP' => 1,
+			'FGROUP' => 'step1',  'STEP' => 1,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
 
