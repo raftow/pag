@@ -1145,16 +1145,16 @@ class Atable extends AFWObject
         switch ($attribute) {
 
             case "system_id":
-                $modSystem = $this->hetModule();
-                // if($this->getId()==1423) die(var_export($modSystem,true));
-                if ($modSystem) {
+                $moduleOfTable = $this->hetModule();
+                // if($this->getId()==1423) die(var_export($moduleOfTable,true));
+                if ($moduleOfTable) {
                     if($what=='value')
                     {
-                        return $modSystem->getVal("id_system");
+                        return $moduleOfTable->getVal("id_system");
                     }
                     else
                     {
-                        $system = $modSystem->hetSys();
+                        $system = $moduleOfTable->hetSys();
                         if ($system) return $system;
                         else return null;
                     }
@@ -4795,7 +4795,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $module_code = $object_code_arr[1];
         if (!$module_code or !$table_name) throw new AfwBusinessException("reverseByCodes : module and table are needed, given : module=$module_code and table=$table_name");
         $objModule = Module::loadByMainIndex($module_code);
-        if (!$objModule or (!$objModule->id)) throw new AfwBusinessException("reverseByCodes : module $module_code not found");
+        if (!$objModule or (!$objModule->id)) throw new AfwBusinessException("reverseByCodes : module $module_code not found when reversing $table_name table");
         $objModule_id = $objModule->id;
         $message = "";
 
