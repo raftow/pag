@@ -50,17 +50,17 @@ elseif(($_POST["mobile"]) and ($_POST["idn"]) and ($_POST["resetGo"]))
         //die("AFWDebugg::initialiser(".$DEBUGG_SQL_DIR.$my_debug_file.")");
         AFWDebugg::initialiser($DEBUGG_SQL_DIR,$my_debug_file);
         AFWDebugg::log("reset process starting");
-        AfwSession::resetSession();
+        AfwSession::resetSession("main_company");
         $idn    = AfwStringHelper::hardSecureCleanString($_POST["idn"]);
         $mobile = AfwStringHelper::hardSecureCleanString($_POST["mobile"]);
 
-        list($idn_correct, $idn_type) = AfwLoginUtilities::getIdnTypeId($idn);
+        list($idn_correct, $idn_type) = AfwFormatHelper::getIdnTypeId($idn);
         
         if(!$idn_correct)
         {
                 $result_message = AfwLanguageHelper::tt("FORMAT-SA-IDN", $lang);
         } 
-        elseif(!AfwLoginUtilities::isCorrectMobileNum($mobile))
+        elseif(!AfwFormatHelper::isCorrectMobileNum($mobile))
         {
                 $result_message = AfwLanguageHelper::tt("FORMAT-SA-MOBILE", $lang);
         } 

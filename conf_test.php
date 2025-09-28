@@ -89,7 +89,7 @@ else
                         AFWDebugg::log("login process starting");
                         echo "debugg file created in $DEBUGG_SQL_DIR => $my_debug_file";
                 }
-                //AfwSession::resetSession();
+                //AfwSession::resetSession("main_company");
         
                 $user_name_c = AfwStringHelper::hardSecureCleanString(strtolower($_POST["mail"]));
                 $pwd_c = $_POST["pwd"];
@@ -138,7 +138,7 @@ else
                 if($user_connected and (!$user_found))
                 {        // load infos from HR
                         $emp_num = "00";
-                        $hasseb_num = left_complete_len($emp_num, 7, "0");
+                        $hasseb_num = AfwStringHelper::left_complete_len($emp_num, 7, "0");
                         
                         if($username)
                         {
@@ -269,7 +269,7 @@ else
                 
                                 //effacer les var d'une eventuelle session précédente
                                 
-                                AfwSession::resetSession();
+                                AfwSession::resetSession("main_company");
                         
                                 foreach($user_infos as $col => $val) 
                                 {
