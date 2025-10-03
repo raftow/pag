@@ -90,6 +90,7 @@ class FoptionCase extends AFWObject{
            {
                 $foption_case = var_export($foption_case,true);
            }
+           if(strlen($foption_case)>24) return null;
            $obj->select("foption_case",$foption_case);
 
            if($obj->load())

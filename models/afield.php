@@ -1951,7 +1951,9 @@ class Afield extends AFWObject
                 if ($this->getVal("atable_id") > 0) {
                         $return .= " " . $this->showAttribute("atable_id", null, true, $lang);
                 }*/
-                if($this->sureIs("distinct_for_list")) $return .= "<span class='sql key'>U</span>";
+                if($this->sureIs("distinct_for_list")) $return .= " <span class='sql key'>U</span>";
+
+                $return .= " <span class='afw type'>".$this->showAttribute("afield_type_id")." | ".$this->showAttribute("afield_category_id")."</span>";
 
                 return $return;
         }

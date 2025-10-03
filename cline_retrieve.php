@@ -16,7 +16,7 @@
                 
                 if($dataErrors) $errorClass = "error";
                 else $errorClass = "success";
-                if(!$dataErrors) $dataErrors = "no errors";
+                if(!$dataErrors) $dataErrors = $oneObj->getNodeDisplay($lang);
                 $dataErrors = "<span class='object_code'>".$dataErrors."</span> "; // $oneObj->getMyCode("")
                 
                 $display_node = ClineUtils::makeReplacements($oneObj->getNodeDisplay($lang), $currmod);

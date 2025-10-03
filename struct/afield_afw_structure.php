@@ -165,6 +165,8 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
+				
+
 			'afield_category_id' => array('STEP' => 2,  'SHORTNAME' => 'category',  'SEARCH' => true,  'QSEARCH' => true,  'SHOW' => true,  'RETRIEVE_FGROUP' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 32,  'MANDATORY' => true,  'UTF8' => false,  'FGROUP' => 'answer_props',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  
 				'TYPE' => 'FK',  'ANSWER' => 'afield_category',  'ANSMODULE' => 'pag',  
 				'RELATION' => 'ManyToOne',  'READONLY' => false,  'ANSWER_PROPS-RETRIEVE' => true,  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  
