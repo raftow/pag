@@ -96,7 +96,7 @@ else
 // hzm_stop_immediate_output();
 if(!$objToShow)
 {
-    $command_line_result_arr[] = hzm_format_command_line("error", "Error 0001 reverse $object_class by code failed with message $message");
+    $command_line_result_arr[] = hzm_format_command_line("error", "Error 0001 reverse $object_class by code failed with error message $message");
     $nb_errors++;$command_finished = true;return;
 }
 else
