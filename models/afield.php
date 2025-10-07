@@ -1996,6 +1996,17 @@ class Afield extends AFWObject
                 return $fn;
         }
 
+        public function getWideDisplay($lang = "ar")
+        {
+                $this_field_name = $this->getVal("field_name");
+                $this_field_type = $this->showAttribute("afield_type_id");
+                $fn = $this->getShortDisplay($lang) . " $this_field_name/$this_field_type";
+
+                return $fn;
+        }
+
+        
+
         public function getFieldDim()
         {
                 if ($this->getVal("field_width") > 10) return $this->getVal("field_width");
