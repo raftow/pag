@@ -7,8 +7,6 @@ $reverseByCodeArr["module"] = true;
 $reverseByCodeArr["atable"] = true;
 $reverseByCodeArr["afield"] = true;
 
-$reversableByCodeArr = AfwSession::config("reversable_by_code_arr", []);
-foreach($reversableByCodeArr as $reversableByCode) $reverseByCodeArr[$reversableByCode] = true;
 
 
 $what_to_reverse = $command_line_words[1];
@@ -67,6 +65,12 @@ $object_code_arr = explode(".", $object_code);
 $module_path = "$file_dir_name/../$object_module/models";
 if (file_exists("$module_path/$object_table.php")) {
     AfwAutoLoader::addModule($object_module);
+
+    include_once ("$file_dir_name/../$object_module/application_config.php");
+    AfwSession::initConfig($config_arr, "system", "$file_dir_name/../$object_module/application_config.php");
+
+    $reversableByCodeArr = AfwSession::config("reversable_by_code_arr", []);
+    foreach($reversableByCodeArr as $reversableByCode) $reverseByCodeArr[$reversableByCode] = true;
 
     $object_class = AfwStringHelper::tableToClass($object_table);
 
