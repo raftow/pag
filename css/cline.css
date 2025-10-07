@@ -115,6 +115,11 @@ span.cline-message.cline-info {
     color: #87b8ed;
 }
 
+div.cline-message.cline-info {
+    color: #87b8ed;
+    background-color: black;
+}
+
 span.cline-message.cline-success {
     color: #81c728;
     font-size: 16px;
