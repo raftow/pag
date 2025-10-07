@@ -7,6 +7,9 @@ $reverseByCodeArr["module"] = true;
 $reverseByCodeArr["atable"] = true;
 $reverseByCodeArr["afield"] = true;
 
+$reversableByCodeArr = AfwSession::config("reversable_by_code_arr", []);
+foreach($reversableByCodeArr as $reversableByCode) $reverseByCodeArr[$reversableByCode] = true;
+
 
 $what_to_reverse = $command_line_words[1];
 
