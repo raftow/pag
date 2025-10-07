@@ -76,7 +76,7 @@ if (file_exists("$module_path/$object_table.php")) {
 
     if ($object_code) {
         if ($reverseByCodeArr[$object_table]) {            
-            list($objToShow, $message) = $object_class::reverseByCodes($object_code_arr);
+            list($objToShow, $message, $keepAsIs) = $object_class::reverseByCodes($object_code_arr);
         } else {
             $command_line_result_arr[] = hzm_format_command_line("error", "reverse $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;$command_finished = true;return;
@@ -101,14 +101,23 @@ if(!$objToShow)
 }
 else
 {
-    $messages_arr = explode("<br>\n",$message);
-    foreach($messages_arr as $message_item)
+    if(!$keepAsIs)
+    {
+        $messages_arr = explode("<br>\n",$message);
+        foreach($messages_arr as $message_item)
+        {
+            $typeMess = "success";            
+            if(AfwStringHelper::stringStartsWith($message_item, "Warning")) $typeMess = "warning";
+            if(AfwStringHelper::stringStartsWith($message_item, "Error")) $typeMess = "error";
+            $command_line_result_arr[] = hzm_format_command_line($typeMess, $message_item);
+        }
+    }
+    else
     {
         $typeMess = "success";
-        if(AfwStringHelper::stringStartsWith($message_item, "Warning")) $typeMess = "warning";
-        if(AfwStringHelper::stringStartsWith($message_item, "Error")) $typeMess = "error";
-        $command_line_result_arr[] = hzm_format_command_line($typeMess, $message_item);
+        $command_line_result_arr[] = hzm_format_command_line($typeMess, $message);
     }
+    
     
     if(count($object_code_arr)==3) 
     {
