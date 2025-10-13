@@ -4223,7 +4223,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $countObjs = count($obj_list);
             foreach ($obj_list as $obj_item) {
                 $lookup_code = $obj_item->getVal("lookup_code");
-                if (!$lookup_code) $lookup_code = $obj_item->snv("lookup_code");
+                if (!$lookup_code) $lookup_code = $obj_item->getVal("lookup_code");
                 if (!$lookup_code) $lookup_code = get_class($obj_item) . "-" . $obj_item->id;
                 if ($lookup_code) {
                     $lkpVal = LookupValue::loadByMainIndex($this->getId(), $lookup_code, true);
