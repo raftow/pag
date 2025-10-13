@@ -432,6 +432,11 @@ class PagGenerator extends AFWRoot {
                $file_dir_name = dirname(__FILE__); 
                
                $phpErrors = "";
+
+                if(($phpdir!="no-gen") and (!AfwFileSystem::isDir($phpdir)))
+                {
+                        $phpdir="no-gen";
+                }
                
                if(($phpdir=="no-gen") or AfwFileSystem::isDir($phpdir))
                {
