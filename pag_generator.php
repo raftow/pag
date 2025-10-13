@@ -624,6 +624,10 @@ $php  \n"; //
                     
                 } 
 		// require_once "afw.php";
+                if(($dir!="no-gen") and (!AfwFileSystem::isDir($dir)))
+                {
+                        $dir="no-gen";
+                }
                 if(($dir=="no-gen") or AfwFileSystem::isDir($dir))
                 {
 			$tbl_list_txt = "";
