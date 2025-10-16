@@ -1308,7 +1308,7 @@ class Afield extends AFWObject
                 else return 0;
         }
 
-        public function afterInsert($id, $fields_updated)
+        public function afterInsert($id, $fields_updated, $disableAfterCommitDBEvent=false)
         {
                 $this->resetDefaultModes($commit = true);
         }

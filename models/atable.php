@@ -2748,7 +2748,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $this->where("(me.id_aut = '$me' or me.id_module in (select mu.id_module from ${server_db_prefix}ums.module_auser mu where mu.id_auser = '$me' and mu.avail='Y'))");
     }
 
-    public function afterInsert($id, $fields_updated)
+    public function afterInsert($id, $fields_updated, $disableAfterCommitDBEvent=false)
     {
         return $this->createDefaultFields();
     }
