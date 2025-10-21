@@ -4833,8 +4833,8 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             return "Error $tableClass class not found";
         }*/
 
-        try
-        {
+        // try
+        // {
             /**
              * @var AFWObject $objToPag 
              */
@@ -4849,11 +4849,12 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             if($tbl_new) $return .= ", new table created : ".$tbl->getDisplay("en");
 
             return $return;
+        /*    
         }
         catch(Exception $e)
         {
             return "Error loading and pagging $tableClass instance : ".$e->getMessage();
-        }
+        }*/
         
         
     }
