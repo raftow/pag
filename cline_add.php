@@ -99,7 +99,7 @@ if (file_exists("$module_path/$object_table.php")) {
 
     if ($object_code) {
         if ($addByCodeArr[$object_table]) {            
-            [$objToShow, $message] = $object_class::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar);
+            [$objToShow, $message] = $object_class::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, false, $command_code_option);
         } else {
             $command_line_result_arr[] = hzm_format_command_line("error", "add $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;$command_finished = true;return;

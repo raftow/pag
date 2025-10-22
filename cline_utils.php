@@ -34,6 +34,7 @@ class ClineUtils
 
     public static function formatCommand($command_code)
     {
+        $command_code_option = "";
         if ($command_code == "help") {
             // nothing to do
         }
@@ -77,8 +78,10 @@ class ClineUtils
             $command_code = "reverse";
         }
 
-        if (($command_code == "++") or ($command_code == "+")) {
+        if (($command_code == "+l") or ($command_code == "++") or ($command_code == "+++") or ($command_code == "+v") or ($command_code == "+")) {
             $command_code = "add";
+            if (($command_code == "+l") or ($command_code == "++")) $command_code_option = "light";
+            if (($command_code == "+v") or ($command_code == "+++")) $command_code_option = "very-light";
         }
 
         if (($command_code == "upgr") or ($command_code == "upg") or ($command_code == "up")or ($command_code == "u")) {
@@ -99,7 +102,7 @@ class ClineUtils
             // nothing to do             
         }
 
-        return $command_code;
+        return [$command_code, $command_code_option];
     }
 
     public static function parse_table_and_module($object_module_table)

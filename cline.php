@@ -104,7 +104,7 @@
       $command_done = false;
       $command_finished = false;
       $original_command_code = $command_code;
-      $command_code = ClineUtils::formatCommand($command_code);
+      list($command_code, $command_code_option) = ClineUtils::formatCommand($command_code);
 
       $modeSuperDeveloper = AfwSession::config("super-dev", true);
       // die("modeSuperDeveloper=$modeSuperDeveloper");

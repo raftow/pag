@@ -1,6 +1,6 @@
 <?php
     $command_to_help = $command_line_words[1];
-    $command_to_help = ClineUtils::formatCommand($command_to_help);
+    list($command_to_help, ) = ClineUtils::formatCommand($command_to_help);
     $command_line_result_arr[] = hzm_attribute_command_line("info", "header", "COMMAND", "DESCRIPTION", "en", "info");
     if(ClineUtils::similarCommand($command_to_help, "curr_mod")) $command_line_result_arr[] = hzm_attribute_command_line("info", "odd", "curr @module", "to change the current module", "en", "log");
     if(ClineUtils::similarCommand($command_to_help, "curr_tbl")) $command_line_result_arr[] = hzm_attribute_command_line("info", "oven", "curt @table[.@module]", "to change the current table", "en", "log");

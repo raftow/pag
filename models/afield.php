@@ -3043,7 +3043,7 @@ class Afield extends AFWObject
                 return $attribute;
         }
 
-        public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false)
+        public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false, $command_code_option="")
         {
                 if (count($object_code_arr) < 3) throw new AfwRuntimeException("addByCodes : 3 params are needed module and table and field name, given : " . var_export($object_code_arr, true));
                 $module_code = $object_code_arr[2];

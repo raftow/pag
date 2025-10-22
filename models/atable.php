@@ -17,6 +17,12 @@ $file_dir_name = dirname(__FILE__);
 class Atable extends AFWObject
 {
 
+    public function __construct()
+    {
+        parent::__construct("atable", "id", "pag");
+        PagAtableAfwStructure::initInstance($this);
+    }
+
     // SPECIAL_PROCESS_TABLE - جدول لحفظ بعض الاجراءات الخاصة  
     public static $TBOPTION_SPECIAL_PROCESS_TABLE = 2;
 
@@ -64,11 +70,7 @@ class Atable extends AFWObject
     public static $DB_STRUCTURE = null;
 
 
-    public function __construct()
-    {
-        parent::__construct("atable", "id", "pag");
-        PagAtableAfwStructure::initInstance($this);
-    }
+    
 
     public static function loadById($id)
     {
@@ -4751,7 +4753,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return [$objTable, $message];
     }
     
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists=false)
+    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists=false, $command_code_option="")
     {
         if (count($object_code_arr) != 2) throw new AfwRuntimeException("Atable::addByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));        
         $table_name = $object_code_arr[0];
@@ -4774,6 +4776,17 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $objTable->set("titre_short", $object_name_ar);
             if($object_title_en) $objTable->set("titre_u_en", $object_title_en);
             if($object_title_ar) $objTable->set("titre_u", $object_title_ar);
+            $objTable->set('is_entity', "Y");
+            $objTable->set('is_lookup', "N");                    
+            if($command_code_option=="light")
+            {
+                    $objTable->set('is_lookup', "Y");                    
+            }
+            elseif($command_code_option=="very-light")
+            {
+                    $objTable->set('is_lookup', "Y");                    
+                    $objTable->set('is_entity', "N");
+            }
             $objTable->commit();
 
             $message = "successfully done";
