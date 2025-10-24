@@ -1,6 +1,6 @@
 <?php
-      // here was old const php
-      
+// obsolete
+ /*     
       $nummenu = 1;
       $numtheme = 0;
       $numsubtheme = 0;
@@ -72,7 +72,7 @@
       $numfrontclass = ($numfrontclass + 1) % 15;
       $menu[$numtheme][$numsubtheme][$nummenu++]  =  array("page"=>"main.php?Main_Page=afw_mode_search.php&cl=ModuleAuser", "png"=>"../lib/images/settingicon.png", "titre"=>"صلاحيات المستخدم", "id"=>"", "class"=>"front_$numfrontclass", "subtheme"=>1);
       $numfrontclass = ($numfrontclass + 1) % 15;
-      $menu[$numtheme][$numsubtheme][$nummenu++] = array("page"=>"main.php?Main_Page=afw_mode_qedit.php&ids=all&cl=Jobrole", "png"=>"../lib/images/profile.png", "titre"=>"الأدوار الوظيفية", "id"=>"", "class"=>"front_$numfrontclass", "subtheme"=>2);
+      $menu[$numtheme][$numsubtheme][$nummenu++] = array("page"=>"main.php?Main_Page=afw_mode_qedit.php&ids=all&cl=Job role", "png"=>"../lib/images/profile.png", "titre"=>"الأدوار الوظيفية", "id"=>"", "class"=>"front_$numfrontclass", "subtheme"=>2);
       $numsubtheme++;
 
       $subtheme[$numtheme][$numsubtheme] = "إدارة الهيكل التنظيمي"; 
@@ -160,6 +160,6 @@
       if($bootstrapMenu)
           include "menu_bootstrap.php";
       else
-          include "menu_constructor.php";
+          include "menu_constructor.php";*/
 ?>
 

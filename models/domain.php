@@ -125,7 +125,7 @@ class Domain extends AFWObject
                   $link = array();
                   $title = "إدارة المسؤوليات  الوظيفية ";
                   $title_detailed = $title . "لـ : " . $displ;
-                  $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Jobrole&currmod=pag&id_origin=$my_id&class_origin=Domain&module_origin=pag&newo=10&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=id_domain=$my_id&sel_id_domain=$my_id";
+                  $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Jobrole&currmod=ums&id_origin=$my_id&class_origin=Domain&module_origin=pag&newo=10&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=id_domain=$my_id&sel_id_domain=$my_id";
                   $link["TITLE"] = $title;
                   $link["UGROUPS"] = array();
                   $otherLinksArray[] = $link;

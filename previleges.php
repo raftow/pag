@@ -1977,7 +1977,7 @@
             array (
               'id' => '102918',
               'menu_name' => 'إدارة المسؤوليات الوظيفية',
-              'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Jobrole&currmod=pag&ids=all&newo=3',
+              'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Jobrole&currmod=ums&ids=all&newo=3',
               'css' => 'bf',
               'icon' => 'edit',
             ),
@@ -2211,7 +2211,7 @@
         array (
           'id' => '102918',
           'menu_name' => 'إدارة المسؤوليات الوظيفية',
-          'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Jobrole&currmod=pag&ids=all&newo=3',
+          'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Jobrole&currmod=ums&ids=all&newo=3',
           'css' => 'bf',
           'icon' => 'edit',
         ),

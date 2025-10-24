@@ -1,7 +1,6 @@
 <?php
-      
-      // here was old const php
-      
+// obsolete
+/*      
       $theme[0] = "الادارة";
       $theme[1] = "المشاريع";
       $theme[2] = "الجهات";
@@ -23,7 +22,7 @@
       
       
       $menu[1][2][4] = array("page"=>"main.php?Main_Page=afw_mode_search.php&cl=Auser", "png"=>"../lib/images/profile.png", "titre"=>"الموظفين", "id"=>"", "class"=>"opened", "subtheme"=>2);
-      $menu[1][2][5] = array("page"=>"main.php?Main_Page=afw_mode_search.php&cl=Jobrole", "png"=>"../lib/images/profile.png", "titre"=>"الأدوار الوظيفية", "id"=>"", "class"=>"opened", "subtheme"=>2);
+      $menu[1][2][5] = array("page"=>"main.php?Main_Page=afw_mode_search.php&cl=Job role", "png"=>"../lib/images/profile.png", "titre"=>"الأدوار الوظيفية", "id"=>"", "class"=>"opened", "subtheme"=>2);
 
 
       $subtheme[2][3] = "إدارة الجهات"; 
@@ -84,6 +83,6 @@ $html .= "
       }
       $html .= "</div>";
 
-      echo $html;
+      echo $html;*/
 ?>
 
