@@ -94,6 +94,7 @@
       if($command_line=="gt") $command_line = "g table";
       if($command_line=="gf") $command_line = "g field";
       if($command_line=="sql") $command_line = "g-sql table";
+      if($command_line=="revall") $command_line = "reverse-erase module";
       
    
       $command_line = trim($command_line);
