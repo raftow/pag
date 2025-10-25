@@ -3090,7 +3090,7 @@ class Afield extends AFWObject
                 return [$afObj, $message];
         }
 
-        public static function reverseByCodes($object_code_arr, $doReverse=true)
+        public static function reverseByCodes($object_code_arr, $doReverse = true, $restriction="")
         {
                 if (count($object_code_arr) != 3) throw new AfwRuntimeException("reverseByCodes : 3 params are needed module and table and field name, given : " . var_export($object_code_arr, true));
                 $module_code = $object_code_arr[2];

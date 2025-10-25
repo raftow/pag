@@ -4801,7 +4801,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
      * 
      */
 
-    public static function reverseByCodes($object_code_arr, $doReverse=true)
+    public static function reverseByCodes($object_code_arr, $doReverse = true, $restriction="")
     {
         if (count($object_code_arr) != 2) throw new AfwBusinessException("reverseByCodes : 2 params are needed module and table, given : " . var_export($object_code_arr, true));
         $table_name = $object_code_arr[0];
