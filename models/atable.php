@@ -2219,8 +2219,8 @@ class $className extends AFWObject{
                                 $clause_ignore_insert_doublon
                                 $UNIQUE_KEY
                                 $edit_by_step_php
-                                // \$obj->after_save_edit = array(\"class\"=>'Road',\"attribute\"=>'road_id', \"currmod\"=>'btb',\"currstep\"=>9);
-                                \$obj->after_save_edit = array(\"mode\"=>\"qsearch\", \"currmod\"=>'adm', \"class\"=>'$className',\"submit\"=>true);
+                                // \$obj->after_save_edit = array(\"class\"=>'$className',\"attribute\"=>'xxxx_id', \"currmod\"=>'$moduleCode',\"currstep\"=>2);
+                                \$obj->after_save_edit = array(\"mode\"=>\"qsearch\", \"currmod\"=>'$moduleCode', \"class\"=>'$className',\"submit\"=>true);
                         }
                         else 
                         {
