@@ -1538,7 +1538,7 @@ class Afield extends AFWObject
                 if (!$afield_att["afield_type_id"]) $afield_att["afield_type_id"] = AfwUmsPagHelper::fromAFWtoAfieldType($row["TYPE"], $row["CATEGORY"], $row);
 
                 if (($afield_att["afield_type_id"] == AfwUmsPagHelper::$afield_type_list) or ($afield_att["afield_type_id"] == AfwUmsPagHelper::$afield_type_mlst)) {
-                        list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row["ANSMODULE"], $row["ANSWER"], true);
+                        list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row["ANSMODULE"], $row["ANSWER"], false, false);
                         if (!$mdl_id) throw new AfwRuntimeException("ANSMODULE=" . $row["ANSMODULE"] . ", doesnt have module id");
                         if (!$tbl_id) throw new AfwRuntimeException("ANSMODULE=" . $row["ANSMODULE"] . ", ANSWER=" . $row["ANSWER"] . " doesnt have table id");
                         $afield_att["answer_module_id"] = $mdl_id;
