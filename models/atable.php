@@ -4759,7 +4759,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $table_name = $object_code_arr[0];
         $module_code = $object_code_arr[1];
         if (!$module_code or !$table_name) throw new AfwRuntimeException("Atable::addByCodes : module and table are needed, given : module=$module_code and table=$table_name");
-        if (!$object_name_en or !$object_name_ar or !$object_title_en or !$object_title_ar) throw new AfwRuntimeException("Atable::addByCodes : names and titles are required");
+        if (!$object_name_en or !$object_name_ar or !$object_title_en or !$object_title_ar) throw new AfwRuntimeException("Atable::addByCodes : names and titles are required (object_name_en=$object_name_en / object_name_ar=$object_name_ar / object_title_en=$object_title_en / object_title_ar=$object_title_ar)");
         $objModule = Module::loadByMainIndex($module_code);
         if (!$objModule or (!$objModule->id)) throw new AfwRuntimeException("addByCodes : module $module_code not found");
 
