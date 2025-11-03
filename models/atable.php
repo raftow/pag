@@ -885,25 +885,33 @@ class Atable extends AFWObject
 
     public function getRowCount($only_active = true)
     {
-        if ($this->isOriginal()) {
-            $table = $this->valAtable_name();
-            if (!$this->getVal("id_module")) return "النظام لم يحدد بعد";
-            $module = $this->myModuleCode();
-            list($fileName, $className) = AfwStringHelper::getHisFactory($table, $module);
-            /*
-                        if(file_exists($fileName)) {
-                                require_once $fileName;
-                                
-                                
-                                //$aaa->select("atable_id", $this->getId());
-                                
-                        }
-                        else return -1;*/
+        if ($this->isOriginal()) 
+        {
+            try
+            {
+                $table = $this->valAtable_name();
+                if (!$this->getVal("id_module")) return -1;
+                $module = $this->myModuleCode();
+                list($fileName, $className) = AfwStringHelper::getHisFactory($table, $module);
+                /*
+                            if(file_exists($fileName)) {
+                                    require_once $fileName;
+                                    
+                                    
+                                    //$aaa->select("atable_id", $this->getId());
+                                    
+                            }
+                            else return -1;*/
 
 
-            $aaa = new $className();
-            if ($only_active) $aaa->select($aaa->fld_ACTIVE(), 'Y');
-            return $aaa->count(false);
+                $aaa = new $className();
+                if ($only_active) $aaa->select($aaa->fld_ACTIVE(), 'Y');
+                return $aaa->count(false);
+            }
+            catch(Exception $e)
+            {
+                return -2;
+            }
         } else {
             /*
                      $tblid = $this->getId();
