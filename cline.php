@@ -98,6 +98,12 @@
       
    
       $command_line = trim($command_line);
+      // ignore double space
+      $command_line = str_replace("   ", " ", $command_line);
+      $command_line = str_replace("  ", " ", $command_line);
+      $command_line = str_replace("  ", " ", $command_line);
+      $command_line = str_replace("  ", " ", $command_line);
+
       $command_line_words = explode(" ", $command_line);
       
       list($command_code, $restriction) = explode("-", $command_line_words[0]);
