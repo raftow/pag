@@ -122,14 +122,22 @@ class Atable extends AFWObject
         if ($obj->load()) {
             if ($create_obj_if_not_found) $obj->activate();
             return $obj;
-        } elseif ($create_obj_if_not_found) {
-            $obj->set("id_module", $id_module);
-            $obj->set("atable_name", $atable_name);
+        } 
+        else
+        {
+            if((!$create_obj_if_not_found) and ($atable_name=="xxxy")) throw new AfwRuntimeException("failed to load Atable by main index : id_module=$id_module atable_name=$atable_name obj=".var_export($obj, true));
+            if ($create_obj_if_not_found) {
+                    $obj->set("id_module", $id_module);
+                    $obj->set("atable_name", $atable_name);
 
-            $obj->insert();
-            $obj->is_new = true;
-            return $obj;
-        } else return null;
+                    $obj->insert();
+                    $obj->is_new = true;
+                    return $obj;
+            } 
+            else return null;
+        }
+
+        
     }
 
 

@@ -1,5 +1,7 @@
 <?php
     $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code on ".$command_line_words[1]);
+    AfwLoadHelper::noCacheManagement("Atable");
+    AfwLoadHelper::noCacheManagement("Module");
     list($atable_name, $module_code) = explode(".",$command_line_words[1]);
     if(!$atable_name) $atable_name = $currtbl_code;
     if(!$module_code) $module_code = $currmod;
@@ -54,7 +56,7 @@
                 }
                 else
                 {
-                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $module_code (id=$idMod)");
+                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $module_code (id=$idMod) objAtable=".var_export($objAtable, true));
                         $nb_errors++;$command_finished = true;return;
                 }
         }
