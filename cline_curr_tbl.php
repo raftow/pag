@@ -54,7 +54,7 @@
                 }
                 else
                 {
-                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $module_code");
+                        $command_line_result_arr[] = hzm_format_command_line("error", "table $atable_name not found in module $module_code (id=$idMod)");
                         $nb_errors++;$command_finished = true;return;
                 }
         }
