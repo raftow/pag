@@ -2983,7 +2983,7 @@ class Afield extends AFWObject
                                 // $this->set("afield_category_id", ....);
                         }
                         if ($oldvalue == "Y" and $newvalue == "N") {
-                                throw new AfwRuntimeException("Rafik see here a problem to set reel to N");
+                                // throw new AfwRuntimeException("Rafik see here a problem to set reel to N");
                                 // $this->set("afield_category_id", ....);
                         }
                 }
