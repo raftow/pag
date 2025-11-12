@@ -1,5 +1,9 @@
 <?php
     $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_code on ".$command_line_words[1]);
+    AfwLoadHelper::noCacheManagement("Module");
+    AfwLoadHelper::noCacheManagement("Atable");
+    AfwLoadHelper::noCacheManagement("Afield");
+    
     list($field_name, $atable_name, $module_code) = explode(".",$command_line_words[1]);
     if(!$field_name) $field_name = $currfld;
     if(!$atable_name) $atable_name = $currtbl_code;

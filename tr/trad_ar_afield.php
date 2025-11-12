@@ -28,6 +28,7 @@ $trad["afield"]["question_text"] = "السؤال الذي يطرح و يتعلق
 $trad["afield"]["shortname"] = "الرمز القصير";
 $trad["afield"]["titre_short"] = "مسمى الحقل المختصر";
 $trad["afield"]["titre"] = "مسمى الحقل";
+$trad["afield"]["reel"] = "حقل حقيقي";
 
 $trad["afield"]["title_after_en"] = "عنوان بعدي بالانجليزي";
 $trad["afield"]["help_text_en"] = "مساعدة لفهم دور هذا الحقل بالانجليزي";

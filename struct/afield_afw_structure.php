@@ -88,6 +88,13 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'MANDATORY' => true,  
 				),
 
+			'reel' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'SEARCH' => true,  
+				'QSEARCH' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  
+				'TYPE' => 'YN',  'DEFAUT' => 'Y',  'FGROUP' => 'general_props',  'EDIT_FGROUP' => true,  
+				'QEDIT_FGROUP' => true,  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),
+
 		'sql_field_type' => array('STEP' => 99,  
 				'TYPE' => 'TEXT',  'SHOW' => true,  'RETRIEVE' => true,  
 				'CATEGORY' => 'SHORTCUT',  'SHORTCUT' => 'afield_type_id.sql_field_type',  'UTF8' => false,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
@@ -141,12 +148,7 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 'CSS' => 'width_pct_50',
 				),
 
-			'reel' => array('IMPORTANT' => 'IN',  'SHOW' => true,  'SEARCH' => true,  
-				'QSEARCH' => true,  'RETRIEVE' => false,  'EDIT' => true,  'QEDIT' => false,  
-				'TYPE' => 'YN',  'DEFAUT' => 'Y',  'FGROUP' => 'step_group',  'EDIT_FGROUP' => true,  
-				'QEDIT_FGROUP' => true,  'SEARCH-BY-ONE' => true,  'DISPLAY' => true,  'STEP' => 3,  
-				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
-				),
+			
 
 			'scenario_item_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  
 				'RETRIEVE' => false,  'EDIT' => true,  'RETRIEVE_FGROUP' => true,  'SIZE' => 40,  
@@ -456,7 +458,7 @@
 				),
 
 			'mandatory' => array('SHOW' => true,  'RETRIEVE_FGROUP' => true,  'EDIT' => true,  'QEDIT' => false,  
-				'TYPE' => 'YN',  'DEFAUT' => 'W',  'MANDATORY' => true,  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'FGROUP' => 'field_rules',  
+				'TYPE' => 'YN',  'DEFAUT' => 'Y',  'MANDATORY' => true,  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  'FGROUP' => 'field_rules',  
 				'STEP' => 7,  'FIELD_RULES-RETRIEVE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',  'ERROR-CHECK' => true, 
 				),

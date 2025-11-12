@@ -1325,7 +1325,7 @@ class Afield extends AFWObject
         } */
 
 
-        public static function get_similar_field($field_name, $my_id = 0)
+        public static function get_similar_field($field_name, $my_id = 0, $reel=true)
         {
                 $file_dir_name = dirname(__FILE__);
                 require_once("$file_dir_name/afield.php");
@@ -1334,7 +1334,8 @@ class Afield extends AFWObject
 
                 $af->select("field_name", $field_name);
                 $af->where("titre_short != '' and titre_short is not null and id != '$my_id'");
-                $af_list = $af->loadMany($limit = "1", $order_by = "date_aut desc");
+                $reel_sens = $reel ? "desc" : "asc";
+                $af_list = $af->loadMany($limit = "1", $order_by = "reel $reel_sens, date_aut desc");
 
                 if (count($af_list) > 0) {
                         return current($af_list);
@@ -2977,6 +2978,15 @@ class Afield extends AFWObject
         protected function beforeSetAttribute($attribute, $newvalue)
         {
                 $oldvalue = $this->getVal($attribute);
+                if ($attribute == "reel") {
+                        if ($oldvalue == "N" and $newvalue == "Y") {
+                                // $this->set("afield_category_id", ....);
+                        }
+                        if ($oldvalue == "Y" and $newvalue == "N") {
+                                throw new AfwRuntimeException("Rafik see here a problem to set reel to N");
+                                // $this->set("afield_category_id", ....);
+                        }
+                }
                 if ($attribute == "titre_short") {
                         $old_titre_value = $this->getVal("titre");
                         if ($old_titre_value == $oldvalue) {
@@ -3138,4 +3148,7 @@ class Afield extends AFWObject
         {
                 return "field_order";
         }
+
+
+        
 }

@@ -156,12 +156,12 @@ span.cline-message.cline-title {
 
 span.cline-ar {
     font-family: kufi;
-    font-size: 100%;
+    font-size: 16px;
 }
 
 span.cline-en {
     font-family: tahoma,arial;
-    font-size: 100% !important;
+    font-size: 16px !important;
 }
 
 span.cline-en.cline-message.cline-help-mv {
@@ -249,7 +249,7 @@ span.cline-info>a {
 }
 
 .bg-odd {
-    background-color: #1a487a;
+    background-color: #17293d;
 }
 
 .bg-oven {
