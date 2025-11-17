@@ -8,9 +8,11 @@ class Dbsystem extends AFWObject{
 	public static $TABLE			= "dbsystem"; 
 	public static $DB_STRUCTURE = null; 
 	
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct("dbsystem","id","pag");
-                $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
+        $this->QEDIT_MODE_NEW_OBJECTS_DEFAULT_NUMBER = 10;
+		$this->DISPLAY_FIELD = "dbsystem_name";
 	}
 
 	public static function loadById($id)

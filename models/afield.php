@@ -1701,11 +1701,27 @@ class Afield extends AFWObject
                         $row["BUTTONS"] = "true";
                 }
 
+                $colname_is_display_field_ar = AfwStringHelper::stringEndsWith($colname,"_ar") ? "true" : "false";
+                $colname_is_display_field_en = AfwStringHelper::stringEndsWith($colname,"_en") ? "true" : "false";
+                //$colname_is_display_field_ar = ($colname=="name_ar" or ($colname == $table_name."_name_ar"));
+                //$colname_is_display_field_en = ($colname=="name_en" or ($colname == $table_name."_name_en"));
+
                 $row["SEARCH"] = ($this->getVal("mode_search") == "Y") ? "true" : "false";
                 $row["QSEARCH"] = ($this->getVal("qsearch") == "Y") ? "true" : "false";
                 $row["SHOW"] = ($this->getVal("mode_show") == "Y") ? "true" : "false";
                 $row["AUDIT"] = ($this->getVal("mode_audit") == "Y") ? "true" : "false";
-                $row["RETRIEVE"] = ($this->getVal("mode_retrieve") == "Y") ? "true" : "false";
+                
+                if(($this->getVal("mode_retrieve") == "Y") and ($afield_type_id == AfwUmsPagHelper::$afield_type_mtxt))
+                {
+                        $row["RETRIEVE-AR"] = $colname_is_display_field_ar;
+                        $row["RETRIEVE-EN"] = $colname_is_display_field_en;
+                }
+                else
+                {
+                        $row["RETRIEVE"] = ($this->getVal("mode_retrieve") == "Y") ? "true" : "false";
+                }
+                
+                
                 $row["EDIT"] = ($this->getVal("mode_edit") == "Y") ? "true" : "false";
                 $row["QEDIT"] = ($this->getVal("mode_qedit") == "Y") ? "true" : "false";
                 if ($this->getVal("field_width")) $row["SIZE"] = $this->getVal("field_width");
@@ -2309,8 +2325,10 @@ class Afield extends AFWObject
                 list($phpDesc, $php_errors) = $this->generePhpDesc($scis);
                 $fn = "'" . $field_name . "' => array(";
                 $tempRdesc = array();
-                foreach ($phpDesc as $prop => $val) {
-
+                $width_css = 50;
+                foreach ($phpDesc as $prop => $val) {                        
+                        if (($prop == "SIZE") and ($val=="'AREA'")) $width_css = 100;
+                        if (($prop == "TYPE") and ($val=="'MFK'")) $width_css = 100;
                         if (($val != "true")
                                 and ($val != "false")
                                 and (!is_numeric($val))
@@ -2332,7 +2350,7 @@ class Afield extends AFWObject
                         else
                                 array_push($tempRdesc, "'$prop' => $val, ");
                 }
-                $fn .= implode(" ", $tempRdesc) . "\n\t\t\t\t'CSS' => 'width_pct_50', ),\n";
+                $fn .= implode(" ", $tempRdesc) . "\n\t\t\t\t'CSS' => 'width_pct_$width_css', ),\n";
 
 
                 return $fn;

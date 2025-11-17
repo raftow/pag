@@ -1632,7 +1632,9 @@ class Atable extends AFWObject
         $af_reel->select("avail", 'Y');
 
         $af_reel_list = $af_reel->loadMany($limit = "", $order_by = "field_order asc, afield_type_id asc, field_name asc");
-
+        /**
+         * @var Afield $af_reel_obj
+         */
         foreach ($af_reel_list as $af_reel_id => $af_reel_obj) {
             $columnName  = $af_reel_obj->valfield_name();
             $field_order = $af_reel_obj->valfield_order();
@@ -3665,7 +3667,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $fieldcount = intval($this->getVal("fieldcount"));
 
         if ($fieldcount < 3) {
-            if ((!$this->no_default_fields) /* and ($this->isLookup())*/) {
+            if (!AfwSession::hasOption("CLINE-NO-DEFAULT-FIELDS")) {
                 $this_table_name = $this->getVal("atable_name");
                 $table_titre_u = $this->valTitre_u();
                 $table_titre_u_en = trim(trim(trim($this->valTitre_u_en(), "?"), "؟"));
@@ -3691,20 +3693,6 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 $af_new->commit();
 
                 unset($af_new);
-                $field_name = "desc_ar";  // ${this_table_name}_
-                $af_new = Afield::loadByMainIndex($atable_id, $field_name, $create_obj_if_not_found = true);
-
-                $af_new->set("reel", 'Y');
-                $af_new->set("utf8", 'Y');
-                $af_new->set("mandatory", 'N');
-                $af_new->set("afield_type_id", 11);
-                $af_new->set("titre", "وصف " . $table_titre_u . " بالعربية");
-                $af_new->set("titre_en", "Arabic " . $table_titre_u_en . " description");
-                $af_new->set("titre_short", "وصف " . $table_titre_u . " بالعربية");
-                $af_new->set("titre_short_en", "Arabic " . $table_titre_u_en . " description");
-                $af_new->commit();
-
-                unset($af_new);
                 $field_name = "name_en"; // ${this_table_name}_
                 $af_new = Afield::loadByMainIndex($atable_id, $field_name, $create_obj_if_not_found = true);
 
@@ -3721,6 +3709,22 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 $af_new->set("field_min_size", 5);
                 $af_new->set("char_group_men", ',1,7,');
                 $af_new->commit();
+
+                unset($af_new);
+                $field_name = "desc_ar";  // ${this_table_name}_
+                $af_new = Afield::loadByMainIndex($atable_id, $field_name, $create_obj_if_not_found = true);
+
+                $af_new->set("reel", 'Y');
+                $af_new->set("utf8", 'Y');
+                $af_new->set("mandatory", 'N');
+                $af_new->set("afield_type_id", 11);
+                $af_new->set("titre", "وصف " . $table_titre_u . " بالعربية");
+                $af_new->set("titre_en", "Arabic " . $table_titre_u_en . " description");
+                $af_new->set("titre_short", "وصف " . $table_titre_u . " بالعربية");
+                $af_new->set("titre_short_en", "Arabic " . $table_titre_u_en . " description");
+                $af_new->commit();
+
+                
 
 
                 unset($af_new);
