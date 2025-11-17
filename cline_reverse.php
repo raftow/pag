@@ -77,6 +77,7 @@ if (file_exists("$module_path/$object_table.php")) {
     if ($object_code) {
         if ($reverseByCodeArr[$object_table]) {            
             list($objToShow, $message, $keepAsIs) = $object_class::reverseByCodes($object_code_arr, true, $restriction);
+            if($objToShow) $command_done = true;
         } else {
             $command_line_result_arr[] = hzm_format_command_line("error", "reverse $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;$command_finished = true;return;

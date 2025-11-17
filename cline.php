@@ -156,7 +156,7 @@
       
       if(!$command_done)
       {
-          $command_line_result_arr[] = hzm_format_command_line("warning", "The command $command_code has failed !");
+          $command_line_result_arr[] = hzm_format_command_line("warning", "The command $command_code seems not well done !");
       }
 
       

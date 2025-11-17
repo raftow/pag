@@ -29,6 +29,8 @@ class PagSynonymHelper {
                 self::linkWordsAsSynonyms($word, $synonym);
             }
         }
+
+        return true;
     }
 
     public static function findOrCreateSynonymWord($word) 
