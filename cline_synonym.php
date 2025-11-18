@@ -4,7 +4,19 @@
 
 $action = $command_line_words[1];
 
+if(!$action)
+{
+    $command_line_result_arr[] = hzm_format_command_line("error", "synonym command need the action ex add or show !! try to see {help synonym}");
+    $nb_errors++;$command_finished = true;return;    
+}
+
 $word_to_synonym = $command_line_words[2];
+
+if(!$word_to_synonym)
+{
+    $command_line_result_arr[] = hzm_format_command_line("error", "synonym command need the word to synonym !! try to see {help synonym}");
+    $nb_errors++;$command_finished = true;return;    
+}
 
 $the_synonyms = $command_line_words[3];
 
@@ -14,11 +26,7 @@ $command_line_result_arr[] = hzm_format_command_line("info", "doing $command_cod
 
 if($action == "add")
 {
-    if(!$word_to_synonym)
-    {
-        $command_line_result_arr[] = hzm_format_command_line("error", "synonym command need the wor to synonym !! try to see {help synonym}");
-        $nb_errors++;$command_finished = true;return;    
-    }
+    
 
     if(!$the_synonyms)
     {

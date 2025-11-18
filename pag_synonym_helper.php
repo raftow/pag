@@ -38,9 +38,9 @@ class PagSynonymHelper {
         $server_db_prefix = AfwSession::currentDBPrefix();
 
         // Check if the word exists, if not insert it
-        $word_id = AfwDatabase::db_recup_value("SELECT id FROM $server_db_prefix"."pag.words WHERE word = '$word'");
+        $word_id = AfwDatabase::db_recup_value("SELECT id FROM $server_db_prefix"."pag.words WHERE  word = '$word' or word = _utf8'$word'");
         if(!$word_id) {
-            list($result, $project_link_name) = AfwDatabase::db_query("INSERT INTO $server_db_prefix"."pag.words (word) VALUES ('$word')");
+            list($result, $project_link_name) = AfwDatabase::db_query("INSERT INTO $server_db_prefix"."pag.words (word) VALUES (_utf8'$word')");
             $word_id = AfwDatabase::db_last_insert_id($project_link_name);
         }
 

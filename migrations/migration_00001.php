@@ -3,15 +3,29 @@
     // ALTER TABLE `afield` CHANGE `field_size` `field_size` int NULL AFTER `field_name`;
 
     /*
-CREATE TABLE words (     id INT AUTO_INCREMENT PRIMARY KEY,     word VARCHAR(100) NOT NULL, UNIQUE INDEX word_index(word) );
+
+DROP TABLE IF EXISTS tvtc_pag.synonyms_link;
+
+DROP TABLE IF EXISTS tvtc_pag.words;
+
+CREATE TABLE tvtc_pag.words ( 
+    id INT AUTO_INCREMENT PRIMARY KEY,     
+    word VARCHAR(100) NOT NULL, UNIQUE INDEX word_index(word)
+) ENGINE=innodb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1;
 
 
-CREATE TABLE synonyms_link (
+
+CREATE TABLE tvtc_pag.synonyms_link (
          word_id INT NOT NULL,
          synonym_id INT NOT NULL,
          PRIMARY KEY (word_id, synonym_id),
          FOREIGN KEY (word_id) REFERENCES words(id) ON DELETE CASCADE,
          FOREIGN KEY (synonym_id) REFERENCES words(id) ON DELETE CASCADE
     );
+
+
+
+
+
 
 */
