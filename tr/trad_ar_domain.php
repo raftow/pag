@@ -14,12 +14,12 @@
         
         $trad["domain"]["moduleList"] = "الأنظمة والتطبيقات";
         $trad["domain"]["jobsddList"] = "المسميات الوظيفية";
-        $trad["domain"]["jobroleList"] = "المهام الوظيفية";
+        $trad["domain"]["jobroleList"] = "المسؤوليات الوظيفية";
         $trad["domain"]["goalList"] = "الأهداف";
         
         
         $trad["domain"]["step1"] = "الرموز والمسمى";
-        $trad["domain"]["step2"] = "المهام الوظيفية";
+        $trad["domain"]["step2"] = "المسؤوليات";
         $trad["domain"]["step3"] = "الأهداف";
         
         
