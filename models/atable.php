@@ -1375,12 +1375,20 @@ class Atable extends AFWObject
         return array(implode("<br>\n", $err_arr), implode("<br>\n", $info_arr));
     }
 
+    public static function getJobRoleGoalCountUsingTable($jobrole_id,$atable_id)
+    {
+        $obj = new GoalConcern();
+        if(!$atable_id) $obj->_error("getJobRoleGoalCountUsingTable : atable_id is mandatory field");
+        
+        if($jobrole_id) $obj->select("jobrole_id",$jobrole_id);
+        $obj->where("avail = 'Y' and atable_mfk like '%,$atable_id,%'");
+        return $obj->count();
+    }
 
-    public function isNotManagedByGoals()
+    public function nbGoalsManagingMe()
     {
         AfwAutoLoader::addModule('bau');
-        $count = GoalConcern::getJobRoleGoalCountUsingTable(0, $this->getId());
-        return ($count == 0);
+        return  self::getJobRoleGoalCountUsingTable(0, $this->getId());
     }
 
     public function getNodeDisplay($lang = "ar")
@@ -1389,7 +1397,9 @@ class Atable extends AFWObject
         $fn = trim($this->myModuleCode());
         $fn = trim($fn . "." . $this->valAtable_name());
         $fn = trim($fn . "-" . $this->valTitre_short());
-        if($this->isNotManagedByGoals()) $fn = trim($fn . " <span class='badge badge-secondary'>new</span>");
+        $nbG = $this->nbGoalsManagingMe();
+        if($nbG==0) $fn = trim($fn . " <span class='badge badge-secondary error'>new</span>");
+        else $fn = trim($fn . " <span class='badge badge-secondary'>$nbG</span>");
         //$fn = trim($fn." (" . $this->getAFieldCount().")");
 
         return $fn;
