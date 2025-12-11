@@ -1375,6 +1375,26 @@ class Atable extends AFWObject
         return array(implode("<br>\n", $err_arr), implode("<br>\n", $info_arr));
     }
 
+
+    public function isNotManagedByGoals()
+    {
+        AfwAutoLoader::addModule('bau');
+        $count = GoalConcern::getJobRoleGoalCountUsingTable(0, $this->getId());
+        return ($count == 0);
+    }
+
+    public function getNodeDisplay($lang = "ar")
+    {
+
+        $fn = trim($this->myModuleCode());
+        $fn = trim($fn . "." . $this->valAtable_name());
+        $fn = trim($fn . "-" . $this->valTitre_short());
+        if($this->isNotManagedByGoals()) $fn = trim($fn . " <span class='badge badge-secondary'>new</span>");
+        //$fn = trim($fn." (" . $this->getAFieldCount().")");
+
+        return $fn;
+    }
+
     public function getDisplay($lang = "ar")
     {
 
