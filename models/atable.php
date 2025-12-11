@@ -54,6 +54,10 @@ class Atable extends AFWObject
     // DATA_IS_READONLY - بيانات هذا الجدول بعد انشائها غير قابلة للتعديل السريع  
     public static $TBOPTION_DATA_IS_READONLY = 11;
 
+    //  INSERT INTO nauss_pag.tboption SET foption_name_ar = _utf8'توليد احصائيات على هذا الجدول', foption_name_en = _utf8'Generate statistics on this table', lookup_code = 'GEN_STATS', avail = 'Y', id_aut = 1, id_mod = 1, id_valid = 0, update_groups_mfk = ',', delete_groups_mfk = ',', display_groups_mfk = ',', date_aut = '2025-12-11 13:15:16', date_mod = '2025-12-11 13:15:16', version = 1
+    // GEN_STATS - توليد احصائيات على هذا الجدول - Generate statistics on this table
+    public static $TBOPTION_GEN_STATS = 12;
+
     // NEVER_GENERATED - لا يتم بحال توليد البيانات آليا  
     public static $TBOPTION_NEVER_GENERATED = 10;
 
@@ -4029,8 +4033,9 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 throw new AfwRuntimeException("no bf type defined for category : $cat mode $framework_mode");
             }
 
-
-            if ($framework_mode_item["categories"][$cat]) {
+            // framework mode applicable to this category ?
+            $framework_mode_applicable_to_category = $framework_mode_item["categories"][$cat];
+            if ($framework_mode_applicable_to_category and (($framework_mode != "stats") or ($this->hasOption(self::$TBOPTION_GEN_STATS)))) {
                 $titre = $this->decodeTpl($framework_mode_item["titre"]);
                 $titre_en = $this->decodeTpl($framework_mode_item["titre_en"]);
                 $file_name = $framework_mode;
