@@ -3514,7 +3514,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     {
         $scis = $this->getScis();
 
-        $lastorder = 10;
+        $currentorder = $startorder = $steporder = 2;
 
         if (count($scis) == 0) {
             $scis[0] = null;
@@ -3524,15 +3524,15 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $afList = $this->getAllFieldList($sci_id);
 
             foreach ($afList as $afItem) {
-                $afItem->set("field_order", $lastorder);
+                $afItem->set("field_order", $currentorder);
                 $afItem->commit();
-                $lastorder += 10;
+                $currentorder += $steporder;
             }
         }
 
-        $lastorder -= 10;
+        $currentorder -= $steporder;
 
-        return array("", "fields reordered from 10 to $lastorder");
+        return array("", "fields reordered from $startorder to $currentorder");
     }
 
     public function createTranslationFieldsToEnglish($lang)
