@@ -105,13 +105,27 @@
       $command_line = str_replace("  ", " ", $command_line);
 
       $command_line_words = explode(" ", $command_line);
+      if(strpos($command_line_words[0],"-")!==false)
+      {
+          list($command_code, $restriction) = explode("-", $command_line_words[0], 2);
+      }
+      else 
+      {
+        $restriction = "";
+        $command_code = $command_line_words[0];
+      }
+
       
-      list($command_code, $restriction) = explode("-", $command_line_words[0]);
-      
+      // die("command_code=$command_code, restriction=$restriction");
       $command_done = false;
       $command_finished = false;
       $original_command_code = $command_code;
       list($command_code, $command_code_option) = ClineUtils::formatCommand($command_code);
+
+      if(strpos($command_code,"-")!==false)
+      {
+          list($command_code, $restriction) = explode("-", $command_code, 2);
+      }      
 
       $modeSuperDeveloper = AfwSession::config("super-dev", true);
       // die("modeSuperDeveloper=$modeSuperDeveloper");
