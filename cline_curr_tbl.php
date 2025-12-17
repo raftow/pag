@@ -3,6 +3,10 @@
     AfwLoadHelper::noCacheManagement("Atable");
     AfwLoadHelper::noCacheManagement("Module");
     list($atable_name, $module_code) = explode(".",$command_line_words[1]);
+    if($restriction=="class")
+    {
+        $atable_name = AfwStringHelper::classToTable($atable_name);
+    }
     if(!$atable_name) $atable_name = $currtbl_code;
     if(!$module_code) $module_code = $currmod;
     if(!$atable_name)

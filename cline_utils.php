@@ -47,6 +47,11 @@ class ClineUtils
             $command_code = "curr_tbl";
         }
 
+        if ($command_code == "cc")
+        {
+            $command_code = "curr_tbl-class";
+        }
+
         if (($command_code == "cf") or ($command_code == "cuf") or ($command_code == "curf") or ($command_code == "currf")) {
             $command_code = "curr_fld";
         }
