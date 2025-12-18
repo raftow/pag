@@ -2427,15 +2427,12 @@ $enumAtable_functions
         	return  \"$fld_active\";
         }
         
-        /*
-        public function isTechField(\$attribute) {
-            return ((\$attribute==\"$fld_creation_user_id\") or 
-                    (\$attribute==\"$fld_creation_date\") or 
-                    (\$attribute==\"$fld_update_user_id\") or 
-                    (\$attribute==\"$fld_update_date\") or 
-                    // (\$attribute==\"$fld_validation_user_id\") or (\$attribute==\"$fld_validation_date\") or 
-                    (\$attribute==\"$fld_version\"));  
-        }*/
+        
+
+        public function beforeMaj(\$id, \$fields_updated)
+        {
+            return true;
+        }            
         
         
         public function beforeDelete(\$id,\$id_replace) 
