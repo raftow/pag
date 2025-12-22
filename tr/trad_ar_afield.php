@@ -20,6 +20,11 @@ $trad["afield"]["interface_saisie"] = "واجهة الإدخال";
 $trad["afield"]["technical_info"] = "الخصائص الفنية";
 $trad["afield"]["generation"] = "التوليد";
 
+$trad["afield"]["previous field"] = "الحقل السابق";
+$trad["afield"]["next field"] = "الحقل الموالي";
+$trad["afield"]["table properties"] = "خصائص الجدول";
+$trad["afield"]["answer_table_id"] = "جدول قائمة الإختيارات"; 
+
 
 
 $trad["afield"]["title_after"] = "عنوان بعدي";

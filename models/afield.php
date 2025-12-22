@@ -2381,7 +2381,7 @@ class Afield extends AFWObject
                 if (($mode == "edit") and ($next_field_id)) {
                         $link = array();
                         $link["URL"] = "main.php?Main_Page=afw_mode_display.php&cl=Afield&currmod=pag&id=$next_field_id";
-                        $link["TITLE"] = "الحقل الموالي : " . $nf->getDisplay($lang);
+                        $link["TITLE"] = $this->translate("next field", $lang)." : " . $nf->getDisplay($lang);
                         $link["COLOR"] = "yellow";
                         $link["UGROUPS"] = array();
                         // $link["STEP"] = 8;
@@ -2391,7 +2391,7 @@ class Afield extends AFWObject
                 if (($mode == "edit") and ($previous_field_id)) {
                         $link = array();
                         $link["URL"] = "main.php?Main_Page=afw_mode_display.php&cl=Afield&currmod=pag&id=$previous_field_id";
-                        $link["TITLE"] = "الحقل السابق : " . $pf->getDisplay($lang);
+                        $link["TITLE"] = $this->translate("previous field", $lang)." : " . $pf->getDisplay($lang);
                         $link["COLOR"] = "yellow";
                         $link["UGROUPS"] = array();
                         // $link["STEP"] = 8;
@@ -2401,7 +2401,7 @@ class Afield extends AFWObject
                         $link = array();
 
                         $link["URL"] = "main.php?Main_Page=afw_mode_display.php&cl=Atable&currmod=pag&id=$tbl_id";
-                        $link["TITLE"] = "خصائص الجدول " . $tbl->valTitre_short();
+                        $link["TITLE"] = $this->translate("table properties", $lang)." : " . $tbl->valTitre_short();
                         $link["COLOR"] = "yellow";
                         $link["UGROUPS"] = array();
                         $otherLinksArray[] = $link;
