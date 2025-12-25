@@ -4,18 +4,18 @@
 
     /*
 
-DROP TABLE IF EXISTS tvtc_pag.synonyms_link;
+DROP TABLE IF EXISTS ttc_pag.synonyms_link;
 
-DROP TABLE IF EXISTS tvtc_pag.words;
+DROP TABLE IF EXISTS ttc_pag.words;
 
-CREATE TABLE tvtc_pag.words ( 
+CREATE TABLE ttc_pag.words ( 
     id INT AUTO_INCREMENT PRIMARY KEY,     
     word VARCHAR(100) NOT NULL, UNIQUE INDEX word_index(word)
 ) ENGINE=innodb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci AUTO_INCREMENT=1;
 
 
 
-CREATE TABLE tvtc_pag.synonyms_link (
+CREATE TABLE ttc_pag.synonyms_link (
          word_id INT NOT NULL,
          synonym_id INT NOT NULL,
          PRIMARY KEY (word_id, synonym_id),
