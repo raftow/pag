@@ -3833,7 +3833,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         /** @var Bfunction $bfunctionItem */
         foreach ($bfunctionList as $bfunctionItem) {
             $bf_title = $bfunctionItem->getNodeDisplay($lang);
-            $bfunctionItem->set('hierarchy_level_enum', 99);
+            $bfunctionItem->set('hierarchy_level_enum', 999);
             if ($bfunctionItem->commit()) {
                 $arrLeveled[] = $bf_title;
             }
@@ -4212,7 +4212,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
             $color = 'orange';
             $title_ar = 'المستوى الأدنى للجميع';
-            $pbms['5a1hJ5'] = array(
+            $pbms['5axyz5'] = array(
                 'METHOD' => 'minLevelForAll',
                 'COLOR' => $color,
                 'LABEL_AR' => $title_ar,
