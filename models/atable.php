@@ -1667,7 +1667,9 @@ class Atable extends AFWObject
             $edit_by_step_php = "\$obj->editByStep = true;
                 \$obj->editNbSteps = $scis_count;";
         } else
-            $edit_by_step_php = '';
+            
+            $edit_by_step_php = "\$obj->editByStep = false;
+                \$obj->editNbSteps = 0;";
 
         $edit_by_step_php .= '
                 $obj->showQeditErrors = true;

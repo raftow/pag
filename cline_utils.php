@@ -164,7 +164,7 @@ class ClineUtils
         {
             $generated_fileName = $php_generation_folder . $dir_sep . $fileName;
             try{
-                AfwFileSystem::write($generated_fileName, $php);
+                $bytes = AfwFileSystem::write($generated_fileName, $php);
                 
             }
             catch(Exception $e)
@@ -175,7 +175,7 @@ class ClineUtils
             {
                 $root_module_path = $root_www_path. $dir_sep . $module_code . $dir_sep . $subFolder;
                 $destination_fileName = $root_module_path . $dir_sep . $fileName;
-                $command_lines_arr[] = hzm_format_command_line("info", "php file $fileName has been generated under $php_generation_folder \n");
+                $command_lines_arr[] = hzm_format_command_line("info", "php file $fileName has been generated under $php_generation_folder (written $bytes bytes)\n");
                 $command_lines_arr[] = hzm_format_command_line("info", "  to install the file :");
                 $command_lines_arr[] = hzm_format_command_line("info", "  if the file is not new use your merge tool $merge_tool and do the following command to merge manually : ");
                 $command_lines_arr[] = hzm_format_command_line("help", "  $merge_tool $generated_fileName $destination_fileName <br>\n");
