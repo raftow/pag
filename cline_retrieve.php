@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * @var Array $liste_obj
+ */
+
 if (count($liste_obj) > 0) {
         reset($liste_obj);
         $obj_first = current($liste_obj);
@@ -20,7 +25,7 @@ if (count($liste_obj) > 0) {
                 $display_node = ClineUtils::makeReplacements($oneObj->getNodeDisplay($lang), $currmod);
 
                 $oneObjIdLinked = $oneObj->showAttributeAsLinkMode("id", "EDIT");
-                $command_line_result_arr[] = hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $display_node, $dataErrors, $lang, $errorClass);
+                $command_line_result_arr[] = AfwUtils::hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $display_node, $dataErrors, $lang, $errorClass);
                 if ($odd_oven != "odd") $odd_oven = "odd";
                 else $odd_oven = "oven";
                 unset($oneObj);
