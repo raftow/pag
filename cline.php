@@ -193,7 +193,7 @@ if ($command_line) {
     $command_line_hist_arr[] = "<div class='tamakkan_hiostory'>
               <div class='tamakkan_rt'>
                   <span class='bcounter' id='bcounter-$kord'>$kord</span> 
-              </div> " . hzm_format_command_line($log_hist_class, $hist_item, "en", false, false, $kord, "hist") . "</div>";
+              </div> " . AfwUtils::hzm_format_command_line($log_hist_class, $hist_item, "en", false, false, $kord, "hist") . "</div>";
   }
 
   $hist = implode("\n", $hist_arr);
@@ -236,7 +236,7 @@ $data_tokens["context"] = $context;
 
 $data_tokens["hist"] = $hist;
 
-echo showUsingHzmTemplate($html_template_file, $data_tokens);
+echo AfwUtils::showUsingHzmTemplate($html_template_file, $data_tokens);
 
 echo "<div id='analysis_log'><div class=\"fleft\"><h1><b>System LOG activated :</b></h1></div><br><br>";
 echo "_sql_picture=" . var_export($_sql_picture, true) . "<br>";

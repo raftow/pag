@@ -2374,8 +2374,16 @@ $enumAtable_functions
             
             \$color = \"green\";
             \$title_ar = \"xxxxxxxxxxxxxxxxxxxx\"; 
+            \$title_en = \"xxxxxxxxxxxxxxxxxxxx\"; 
             \$methodName = \"mmmmmmmmmmmmmmmmmmmmmmm\";
-            //\$pbms[AfwStringHelper::hzmEncode(\$methodName)] = array(\"METHOD\"=>\$methodName,\"COLOR\"=>\$color, \"LABEL_AR\"=>\$title_ar, \"ADMIN-ONLY\"=>true, \"BF-ID\"=>\"\", 'STEP' =>\$this->stepOfAttribute(\"xxyy\"));
+            //\$pbms[AfwStringHelper::hzmEncode(\$methodName)] = 
+                    array(\"METHOD\"=>\$methodName,
+                          \"COLOR\"=>\$color, 
+                          \"LABEL_AR\"=>\$title_ar, 
+                          \"LABEL_EN\"=>\$title_en,
+                          \"ADMIN-ONLY\"=>true, 
+                          \"BF-ID\"=>\"\", 
+                          'STEP' =>\$this->stepOfAttribute(\"xxyy\"));
             
             
             
