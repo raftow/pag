@@ -60,6 +60,7 @@ $object_code_arr = explode(".", $object_code);
 // $module_path = "$file_dir_name/../$object_module/models";
 
 if ($object_table == "afield") {
+    include("cline_gen_field.php");
 }
 
 if ($object_table == "atable") {
