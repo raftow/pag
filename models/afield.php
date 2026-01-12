@@ -1545,6 +1545,7 @@ class Afield extends AFWObject
         // row below is structure of attribute and more ...  (atable, obj)
         public static function to_afield_att($id_main_sh, $row)
         {
+                $create_table_if_not_exists = AfwSession::config("create_table_if_not_exists", false);
                 $file_dir_name = dirname(__FILE__);
                 $myTable = $row['atable'];
                 $myObj = $row['obj'];
@@ -1635,11 +1636,11 @@ class Afield extends AFWObject
                         $afield_att['afield_type_id'] = AfwUmsPagHelper::fromAFWtoAfieldType($row['TYPE'], $row['CATEGORY'], $row);
 
                 if (($afield_att['afield_type_id'] == AfwUmsPagHelper::$afield_type_list) or ($afield_att['afield_type_id'] == AfwUmsPagHelper::$afield_type_mlst)) {
-                        list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row['ANSMODULE'], $row['ANSWER'], false, false);
+                        list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row['ANSMODULE'], $row['ANSWER'], false, $create_table_if_not_exists);
                         if (!$mdl_id)
                                 throw new AfwRuntimeException('ANSMODULE=' . $row['ANSMODULE'] . ', doesnt have module id');
                         if (!$tbl_id)
-                                throw new AfwRuntimeException('ANSMODULE=' . $row['ANSMODULE'] . ', ANSWER=' . $row['ANSWER'] . ' doesnt have table id');
+                                throw new AfwRuntimeException('ANSMODULE=' . $row['ANSMODULE'] . ', ANSWER=' . $row['ANSWER'] . ' doesnt have table id (create_table_if_not_exists='.$create_table_if_not_exists.')');
                         $afield_att['answer_module_id'] = $mdl_id;
                         $afield_att['answer_table_id'] = $tbl_id;
                         if (!$afield_att['entity_relation_type_id'])
