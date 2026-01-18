@@ -2318,7 +2318,7 @@ class $className extends AFWObject{
             return array($dbstruct_code, $phpErrors, '');
 
         $php_class_code .= "
-        public static \$DATABASE\t\t= \"$prefixed_db_name\";
+        public static \$DATABASE\t\t= \"\";
         public static \$MODULE\t\t        = \"$moduleCode\";        
         public static \$TABLE\t\t\t= \"$tabName\";
 
