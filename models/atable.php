@@ -1667,7 +1667,7 @@ class Atable extends AFWObject
             $edit_by_step_php = "\$obj->editByStep = true;
                 \$obj->editNbSteps = $scis_count;";
         } else
-            
+
             $edit_by_step_php = "\$obj->editByStep = false;
                 \$obj->editNbSteps = 0;";
 
@@ -1772,7 +1772,7 @@ class Atable extends AFWObject
 
         $file_dir_name = dirname(__FILE__);
         $module = strtolower($this->myModuleCode());
-        include ("$file_dir_name/../../$module/module_config.php");
+        include("$file_dir_name/../../$module/module_config.php");
         $fld_creation_user_id = $TECH_FIELDS[$module]['CREATION_USER_ID_FIELD'];
         $fld_creation_date = $TECH_FIELDS[$module]['CREATION_DATE_FIELD'];
         $fld_update_user_id = $TECH_FIELDS[$module]['UPDATE_USER_ID_FIELD'];
@@ -2572,7 +2572,7 @@ $replace_val_in_list_of_mfk
         if (!file_exists($module_config_file)) {
             throw new AfwRuntimeException("file $module_config_file not found");
         } else {
-            include ($module_config_file);
+            include($module_config_file);
             $fld_creation_user_id = $TECH_FIELDS[$module]['CREATION_USER_ID_FIELD'];
             $fld_creation_date = $TECH_FIELDS[$module]['CREATION_DATE_FIELD'];
             $fld_update_user_id = $TECH_FIELDS[$module]['UPDATE_USER_ID_FIELD'];
@@ -3862,7 +3862,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $server_db_prefix = AfwSession::config('db_prefix', 'default_db_');
         $framework_id = AfwSession::config('framework_id', 1);
         $file_dir_name = dirname(__FILE__);
-        include ("$file_dir_name/../../lib/framework_$framework_id" . '_specification.php');
+        include("$file_dir_name/../../lib/framework_$framework_id" . '_specification.php');
 
         if ($framework_screens_bfcode_starts_with)
             $bf_code_starts_with = $framework_screens_bfcode_starts_with . '-';
@@ -3908,9 +3908,9 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $error = '';
         $info = '';
         if (($bf_arr_count == 1) and ($bf_arr[-1]))
-            $error = 'Error happened : some categories/modes are not defined in framework specification file ' . var_export($bf_arr, true);
+            $error = "Error happened : some categories/modes are not defined in framework (ID:$framework_id) specification file " . var_export($bf_arr, true);
         else
-            $info = "$inf0<br>treated : $bf_arr_count bf(s)";
+            $info = "Used framework (ID:$framework_id) $inf0<br>treated : $bf_arr_count bf(s)";
 
         $MODE_SQL_PROCESS_LOURD = $old_MODE_SQL_PROCESS_LOURD;
         $nb_queries_executed = $old_nb_queries_executed;
@@ -3928,7 +3928,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
         $file_dir_name = dirname(__FILE__);
 
-        require ("$file_dir_name/../../lib/framework_$framework_id" . '_specification.php');
+        require("$file_dir_name/../../lib/framework_$framework_id" . '_specification.php');
 
         $this_id = $this->getId();
         $cat = $this->tableCategory();
@@ -4001,7 +4001,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
         $file_dir_name = dirname(__FILE__);
 
-        require ("$file_dir_name/../../lib/framework_$framework_id" . '_specification.php');
+        require("$file_dir_name/../../lib/framework_$framework_id" . '_specification.php');
         // include_once("$file_dir_name/../ums/bfunction.php");
 
         $this_id = $this->getId();
@@ -4288,7 +4288,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
             // if afw autoloader not loaded load it
             if (!class_exists('AfwAutoLoader')) {
-                require_once ("$file_dir_name/../../lib/afw/afw_autoloader.php");
+                require_once("$file_dir_name/../../lib/afw/afw_autoloader.php");
             }
             // add the $my_module module
             if ($my_module)
@@ -5046,7 +5046,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         global $file_dir_name;
 
         $framework = AfwSession::config('framework_id', 1);
-        include ("$file_dir_name/../lib/framework_${framework}_specification.php");
+        include("$file_dir_name/../lib/framework_${framework}_specification.php");
         $removed_count = 0;
         $added_count = 0;
         $menu_removed_count = 0;
