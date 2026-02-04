@@ -195,10 +195,11 @@ class Afield extends AFWObject
                 }
 
                 if (($attribute == 'sql') or
-                                ($attribute == 'sql_gen') or
-                                ($attribute == 'mode_qsearch') or
-                                ($attribute == 'mandatory') or
-                                ($attribute == 'distinct_for_list')) {
+                        ($attribute == 'sql_gen') or
+                        ($attribute == 'mode_qsearch') or
+                        ($attribute == 'mandatory') or
+                        ($attribute == 'distinct_for_list')
+                ) {
                         return ($this->may('reel'));
                 }
 
@@ -293,16 +294,16 @@ class Afield extends AFWObject
                         case 8:
                                 return 'select';
 
-                        // 1	قيمة عددية متوسطة	nmbr
-                        // 2	تاريخ	date
-                        // 3	مبلغ من المال	amnt
-                        // 4	وقت	time
-                        // 7	نسبة مائوية	pctg
-                        // 9	تاريخ ميلادي	gdat
-                        // 10	نص قصير	text
-                        // 11	نص طويل
-                        // 13	قيمة عددية صغيرة
-                        // 14	قيمة عددية كبيرة
+                                // 1	قيمة عددية متوسطة	nmbr
+                                // 2	تاريخ	date
+                                // 3	مبلغ من المال	amnt
+                                // 4	وقت	time
+                                // 7	نسبة مائوية	pctg
+                                // 9	تاريخ ميلادي	gdat
+                                // 10	نص قصير	text
+                                // 11	نص طويل
+                                // 13	قيمة عددية صغيرة
+                                // 14	قيمة عددية كبيرة
 
                         case 1:
                         case 2:
@@ -316,8 +317,8 @@ class Afield extends AFWObject
                         case 14:
                                 return 'text';
 
-                        // 12	إختيار من قائمة قصيرة
-                        // 15	إختيار متعدد من قائمة قصيرة	menum
+                                // 12	إختيار من قائمة قصيرة
+                                // 15	إختيار متعدد من قائمة قصيرة	menum
                         default:
                                 return '???';
                 }
@@ -551,16 +552,18 @@ class Afield extends AFWObject
                                 $this->set('afield_type_id', AfwUmsPagHelper::$afield_type_menum);
                 }
                 if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_mlst) or
-                                ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_menum)) {
+                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_menum)
+                ) {
                         $this->set('mode_name', 'N');
                 }
 
                 if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_list) and
-                                (
-                                        ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_ONETOMANY) or
-                                        ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_ONETOONEUNIDIRECTIONAL) or
-                                        ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_ONETOONEBIDIRECTIONAL)
-                                )) {
+                        (
+                                ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_ONETOMANY) or
+                                ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_ONETOONEUNIDIRECTIONAL) or
+                                ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_ONETOONEBIDIRECTIONAL)
+                        )
+                ) {
                         if ($this->may('mandatory', true))
                                 $this->set('mandatory', 'Y');
                         if ($this->may('mode_search', true))
@@ -579,14 +582,15 @@ class Afield extends AFWObject
                 // if ($this->getVal("field_name")  == "page_id") die($this->getVal("field_name") . " step 2 : afield_type_id=" . $this->getVal("afield_type_id"));
 
                 if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_list) or
-                                ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_mlst) or
+                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_mlst) or
+                        (
+                                (!$this->enumFieldAnswerTableIsPhpFunction()) and
                                 (
-                                        (!$this->enumFieldAnswerTableIsPhpFunction()) and
-                                        (
-                                                ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_enum) or
-                                                ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_menum)
-                                        )
-                                )) {
+                                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_enum) or
+                                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_menum)
+                                )
+                        )
+                ) {
                         if (!$this->getVal('answer_table_id')) {
                                 $exp_name = explode('_', $field_name);
                                 unset($exp_name[count($exp_name) - 1]);
@@ -648,10 +652,12 @@ class Afield extends AFWObject
                         if ((!$this->getVal('entity_relation_type_id')) and ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_list))
                                 $this->set('entity_relation_type_id', 3);
 
-                        if (AfwStringHelper::stringEndsWith($field_name, '_enm') or
-                                        AfwStringHelper::stringEndsWith($field_name, '_enum') or
-                                        AfwStringHelper::stringEndsWith($field_name, '_men') or
-                                        AfwStringHelper::stringEndsWith($field_name, '_menum')) {
+                        if (
+                                AfwStringHelper::stringEndsWith($field_name, '_enm') or
+                                AfwStringHelper::stringEndsWith($field_name, '_enum') or
+                                AfwStringHelper::stringEndsWith($field_name, '_men') or
+                                AfwStringHelper::stringEndsWith($field_name, '_menum')
+                        ) {
                                 if ($this->enumFieldAnswerTableIsPhpFunction()) {
                                         $this->set('specification', 'FUNCTION');
                                 } else {
@@ -667,7 +673,8 @@ class Afield extends AFWObject
                 }
 
                 if (($field_name == $my_tab_name . '_code') or
-                                ($field_name == 'code')) {
+                        ($field_name == 'code')
+                ) {
                         if (!$this->getVal('titre_short'))
                                 $this->set('titre_short', 'رمز ' . AfwStringHelper::arabicTaarif($my_tab_tu));
                         if (!$this->getVal('titre_short_en'))
@@ -759,9 +766,10 @@ class Afield extends AFWObject
                 }
 
                 if (($field_name == "${my_tab_name}_spec") or
-                                ($field_name == "${my_tab_name}_specification") or
-                                ($field_name == 'specification') or
-                                ($field_name == 'spec')) {
+                        ($field_name == "${my_tab_name}_specification") or
+                        ($field_name == 'specification') or
+                        ($field_name == 'spec')
+                ) {
                         if (!$this->getVal('titre_short'))
                                 $this->set('titre_short', 'مواصفات ' . AfwStringHelper::arabicTaarif($my_tab_tu));
                         if (!$this->getVal('titre_short_en'))
@@ -775,10 +783,11 @@ class Afield extends AFWObject
                 }
 
                 if (($field_name == "${my_tab_name}_name") or
-                                ($field_name == "${my_tab_name}_name_ar") or
-                                ($field_name == 'titre_short') or
-                                ($field_name == 'titre') or
-                                ($field_name == 'title')) {
+                        ($field_name == "${my_tab_name}_name_ar") or
+                        ($field_name == 'titre_short') or
+                        ($field_name == 'titre') or
+                        ($field_name == 'title')
+                ) {
                         if (!$this->getVal('titre_short'))
                                 $this->set('titre_short', 'مسمى ' . AfwStringHelper::arabicTaarif($my_tab_tu));
                         if (!$this->getVal('titre_short_en'))
@@ -795,9 +804,10 @@ class Afield extends AFWObject
                 }
 
                 if (($field_name == "${my_tab_name}_name_en") or
-                                ($field_name == 'titre_short_en') or
-                                ($field_name == 'titre_en') or
-                                ($field_name == 'title_en')) {
+                        ($field_name == 'titre_short_en') or
+                        ($field_name == 'titre_en') or
+                        ($field_name == 'title_en')
+                ) {
                         if (!$this->getVal('titre_short'))
                                 $this->set('titre_short', 'مسمى ' . AfwStringHelper::arabicTaarif($my_tab_tu) . ' بالانجليزي');
                         if (!$this->getVal('titre_short_en'))
@@ -918,17 +928,19 @@ class Afield extends AFWObject
                 }
 
                 if ((AfwStringHelper::stringEndsWith($field_name, '_desc')) or
-                                (AfwStringHelper::stringEndsWith($field_name, '_desc_ar')) or
-                                (AfwStringHelper::stringEndsWith($field_name, '_desc_en')) or
-                                (AfwStringHelper::stringEndsWith($field_name, '_desc_fr'))) {
+                        (AfwStringHelper::stringEndsWith($field_name, '_desc_ar')) or
+                        (AfwStringHelper::stringEndsWith($field_name, '_desc_en')) or
+                        (AfwStringHelper::stringEndsWith($field_name, '_desc_fr'))
+                ) {
                         if (!$this->getVal('afield_type_id'))
                                 $this->set('afield_type_id', 11);
                 }
 
                 if (($field_name == "${my_tab_name}_desc") or
-                                ($field_name == "${my_tab_name}_desc_ar") or
-                                ($field_name == 'description') or
-                                ($field_name == 'description_ar')) {
+                        ($field_name == "${my_tab_name}_desc_ar") or
+                        ($field_name == 'description') or
+                        ($field_name == 'description_ar')
+                ) {
                         if (!$this->getVal('titre_short'))
                                 $this->set('titre_short', 'وصف ' . AfwStringHelper::arabicTaarif($my_tab_tu));
                         if (!$this->getVal('titre_short_en'))
@@ -936,7 +948,8 @@ class Afield extends AFWObject
                 }
 
                 if (($field_name == "${my_tab_name}_desc_en") or
-                                ($field_name == 'description_en')) {
+                        ($field_name == 'description_en')
+                ) {
                         if (!$this->getVal('titre_short'))
                                 $this->set('titre_short', 'وصف ' . AfwStringHelper::arabicTaarif($my_tab_tu) . ' بالانجليزي');
                         if (!$this->getVal('titre_short_en'))
@@ -986,14 +999,17 @@ class Afield extends AFWObject
                                 $this->set('afield_type_id', AfwUmsPagHelper::$afield_type_date);
                 }
 
-                if (AfwStringHelper::stringEndsWith($field_name, '_gdat') or
-                                AfwStringHelper::stringEndsWith($field_name, '_gdate')) {
+                if (
+                        AfwStringHelper::stringEndsWith($field_name, '_gdat') or
+                        AfwStringHelper::stringEndsWith($field_name, '_gdate')
+                ) {
                         if (!$this->getVal('afield_type_id'))
                                 $this->set('afield_type_id', AfwUmsPagHelper::$afield_type_Gdat);
                 }
 
                 if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_date) or
-                                ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_Gdat)) {
+                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_Gdat)
+                ) {
                         if (!$this->sureIs('mandatory'))
                                 $this->set('mandatory', 'N');
 
@@ -1057,13 +1073,15 @@ class Afield extends AFWObject
                 }
 
                 if ((AfwStringHelper::stringEndsWith($this->getVal('titre_short'), '?')) or
-                                (AfwStringHelper::stringEndsWith($this->getVal('titre_short'), '؟'))) {
+                        (AfwStringHelper::stringEndsWith($this->getVal('titre_short'), '؟'))
+                ) {
                         if (!$this->getVal('afield_type_id'))
                                 $this->set('afield_type_id', 8);
                 }
 
                 if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_date) or
-                                ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_Gdat)) {
+                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_Gdat)
+                ) {
                         if (!$this->getVal('field_size'))
                                 $this->set('field_size', 10);
                         if (!$this->may('mode_name', false))
@@ -1141,8 +1159,9 @@ class Afield extends AFWObject
                 }
 
                 if (($field_name) and
-                                (!trim($this->getVal('titre'))) and
-                                (!trim($this->getVal('titre_short')))) {
+                        (!trim($this->getVal('titre'))) and
+                        (!trim($this->getVal('titre_short')))
+                ) {
                         $my_id = $this->getId();
                         $afield_similar = self::get_similar_field($field_name, $my_id);
 
@@ -1244,7 +1263,7 @@ class Afield extends AFWObject
                         if ($this->may('readonly', true))
                                 $this->set('readonly', 'Y');
                         if (!$this->getVal('afield_category_id')) {
-                                require_once ('afield_category.php');
+                                require_once('afield_category.php');
 
                                 $spec = $this->getVal('specification');
                                 $spec_arr = explode('/', $spec);
@@ -1300,7 +1319,8 @@ class Afield extends AFWObject
                 }
 
                 if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_mtxt) or
-                                ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_text)) {
+                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_text)
+                ) {
                         $this->set('qsearch', 'Y');
                 }
 
@@ -1368,7 +1388,8 @@ class Afield extends AFWObject
                 }
 
                 if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_mtxt) or
-                                (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_text) and ($this->getVal('field_size') > 196))) {
+                        (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_text) and ($this->getVal('field_size') > 196))
+                ) {
                         $this->set('retrieve', 'N');
                         $this->set('qedit', 'N');
                         $this->set('show', 'Y');
@@ -1409,7 +1430,7 @@ class Afield extends AFWObject
         public static function get_similar_field($field_name, $my_id = 0, $reel = true)
         {
                 $file_dir_name = dirname(__FILE__);
-                require_once ("$file_dir_name/afield.php");
+                require_once("$file_dir_name/afield.php");
 
                 $af = new Afield();
 
@@ -1469,9 +1490,9 @@ class Afield extends AFWObject
         {
                 global $foptionArr;
                 $file_dir_name = dirname(__FILE__);
-                require_once ("$file_dir_name/foption.php");
-                require_once ("$file_dir_name/foption_case.php");
-                require_once ("$file_dir_name/afield_option_value.php");
+                require_once("$file_dir_name/foption.php");
+                require_once("$file_dir_name/foption_case.php");
+                require_once("$file_dir_name/afield_option_value.php");
 
                 $attribute = $afieldObject->getVal('field_name');
                 $af_type_id = $afieldObject->getVal('afield_type_id');
@@ -1610,7 +1631,7 @@ class Afield extends AFWObject
                 }
 
                 if ($row['CATEGORY']) {
-                        require_once ("$file_dir_name/afield_category.php");
+                        require_once("$file_dir_name/afield_category.php");
                         $afcObj = AfieldCategory::loadByMainIndex($row['CATEGORY'], false);
                         if ($afcObj)
                                 $afield_att['afield_category_id'] = $afcObj->getId();
@@ -1640,7 +1661,7 @@ class Afield extends AFWObject
                         if (!$mdl_id)
                                 throw new AfwRuntimeException('ANSMODULE=' . $row['ANSMODULE'] . ', doesnt have module id');
                         if (!$tbl_id)
-                                throw new AfwRuntimeException('ANSMODULE=' . $row['ANSMODULE'] . ', ANSWER=' . $row['ANSWER'] . ' doesnt have table id (create_table_if_not_exists='.$create_table_if_not_exists.')');
+                                throw new AfwRuntimeException('ANSMODULE=' . $row['ANSMODULE'] . ', ANSWER=' . $row['ANSWER'] . ' doesnt have table id (create_table_if_not_exists=' . $create_table_if_not_exists . ')');
                         $afield_att['answer_module_id'] = $mdl_id;
                         $afield_att['answer_table_id'] = $tbl_id;
                         if (!$afield_att['entity_relation_type_id'])
@@ -1666,7 +1687,7 @@ class Afield extends AFWObject
 
                 $afield_group_id = 0;
                 if ($row['FGROUP'] and $myTable) {
-                        require_once ("$file_dir_name/afield_group.php");
+                        require_once("$file_dir_name/afield_group.php");
                         $fgroupObj = AfieldGroup::loadByMainIndex($myTable->getId(), $row['FGROUP'], $create_obj_if_not_found = true);
                         if ($myObj) {
                                 $fgroupObj->set('fgroup_name_ar', $myObj->translate($row['FGROUP'], 'ar'));
@@ -1697,6 +1718,11 @@ class Afield extends AFWObject
                 }
 
                 if (!$row['STEP']) {
+                        $row['STEP'] = 1;
+                }
+
+                /*
+                if (!$row['STEP']) {
                         if ($scis and count($scis) > 0) {
                                 $step = 0;
                                 reset($scis);
@@ -1710,7 +1736,7 @@ class Afield extends AFWObject
                                         $row['STEP'] = $step;
                                 }
                         }
-                }
+                }*/
 
                 $my_tab = $this->het('atable_id');
                 if ($my_tab)
@@ -1728,13 +1754,14 @@ class Afield extends AFWObject
 
                 // $row["IMPORTANT"]="\"IN\"";
                 if ((!$row['SHORTNAME']) and
-                                (strlen($colname) > 8) and
-                                (
-                                        ($afield_type_id == AfwUmsPagHelper::$afield_type_list) or
-                                        ($afield_type_id == AfwUmsPagHelper::$afield_type_enum) or
-                                        ($afield_type_id == AfwUmsPagHelper::$afield_type_menum) or
-                                        ($afield_type_id == AfwUmsPagHelper::$afield_type_mlst)
-                                )) {
+                        (strlen($colname) > 8) and
+                        (
+                                ($afield_type_id == AfwUmsPagHelper::$afield_type_list) or
+                                ($afield_type_id == AfwUmsPagHelper::$afield_type_enum) or
+                                ($afield_type_id == AfwUmsPagHelper::$afield_type_menum) or
+                                ($afield_type_id == AfwUmsPagHelper::$afield_type_mlst)
+                        )
+                ) {
                         $colname_word_arr = explode('_', $colname);
                         $count_words = count($colname_word_arr);
                         if ($count_words > 1) {
@@ -1756,14 +1783,15 @@ class Afield extends AFWObject
                                                 $suggested_shortname = $colname_word_arr[$i];
 
                                                 if (($suggested_shortname == $table_name) or
-                                                                ($suggested_shortname == $table_abrev) or
-                                                                ($suggested_shortname == 'id') or
-                                                                ($suggested_shortname == 'mfk') or
-                                                                ($suggested_shortname == 'enum') or
-                                                                ($suggested_shortname == 'menum') or
-                                                                ($suggested_shortname == 'men') or
-                                                                ($suggested_shortname == 'pk') or
-                                                                (strlen($suggested_shortname) > 15)) {
+                                                        ($suggested_shortname == $table_abrev) or
+                                                        ($suggested_shortname == 'id') or
+                                                        ($suggested_shortname == 'mfk') or
+                                                        ($suggested_shortname == 'enum') or
+                                                        ($suggested_shortname == 'menum') or
+                                                        ($suggested_shortname == 'men') or
+                                                        ($suggested_shortname == 'pk') or
+                                                        (strlen($suggested_shortname) > 15)
+                                                ) {
                                                         $suggested_shortname = '';
                                                 }
                                         }
@@ -2190,52 +2218,52 @@ class Afield extends AFWObject
                         // 	6	اختيار متعدد من قائمة
                         case AfwUmsPagHelper::$afield_type_mlst:
                                 return "','";
-                        // 	5	اختيار من قائمة
+                                // 	5	اختيار من قائمة
                         case AfwUmsPagHelper::$afield_type_list:
                                 return '0';
-                        // 	12	إختيار من قائمة قصيرة
+                                // 	12	إختيار من قائمة قصيرة
                         case AfwUmsPagHelper::$afield_type_enum:
                                 return '0';
-                        // 	15	إختيار متعدد من قائمة قصيرة
+                                // 	15	إختيار متعدد من قائمة قصيرة
                         case AfwUmsPagHelper::$afield_type_menum:
                                 return "','";
 
-                        // 	2	تاريخ
+                                // 	2	تاريخ
                         case AfwUmsPagHelper::$afield_type_date:
                                 return "'14000101'";
-                        // 	9	تاريخ ميلادي
+                                // 	9	تاريخ ميلادي
                         case AfwUmsPagHelper::$afield_type_Gdat:
                                 return "'19800101'";
-                        // 	4	وقت
+                                // 	4	وقت
                         case AfwUmsPagHelper::$afield_type_time:
                                 return "'00:00'";
 
-                        // 	1	قيمة عددية متوسطة
+                                // 	1	قيمة عددية متوسطة
                         case AfwUmsPagHelper::$afield_type_mediumint:
                                 return '0';
-                        // 	13	قيمة عددية صغيرة
+                                // 	13	قيمة عددية صغيرة
                         case AfwUmsPagHelper::$afield_type_smallint:
                                 return '0';
-                        // 	14	قيمة عددية كبيرة
+                                // 	14	قيمة عددية كبيرة
                         case AfwUmsPagHelper::$afield_type_bigint:
                                 return '0';
-                        // 	3	مبلغ من المال
+                                // 	3	مبلغ من المال
                         case AfwUmsPagHelper::$afield_type_amnt:
                                 return '0.0';
-                        // 	7	نسبة مائوية
+                                // 	7	نسبة مائوية
                         case AfwUmsPagHelper::$afield_type_pctg:
                                 return '0.0';
-                        // 	16	قيمة عددية كسرية
+                                // 	16	قيمة عددية كسرية
                         case AfwUmsPagHelper::$afield_type_float:
                                 return '0.0';
 
-                        // 	11	نص طويل
+                                // 	11	نص طويل
                         case AfwUmsPagHelper::$afield_type_mtxt:
                                 return "''";
-                        // 	10	نص قصير
+                                // 	10	نص قصير
                         case AfwUmsPagHelper::$afield_type_text:
                                 return "''";
-                        // 	8	نعم/لا
+                                // 	8	نعم/لا
                         case AfwUmsPagHelper::$afield_type_yn:
                                 return "'W'";
                 }
@@ -2489,8 +2517,8 @@ class Afield extends AFWObject
                         $tabName = $mytable->getVal('atable_name');
                 else
                         return 'error : define table first';
-                $scis = $mytable->get('scis');
-                list($phpDesc, $php_errors) = $this->generePhpDesc($scis);
+                // $scis = $mytable->get('scis');
+                list($phpDesc, $php_errors) = $this->generePhpDesc();
                 $fn = "'" . $field_name . "' => array(";
                 $tempRdesc = array();
                 $width_css = 50;
@@ -2500,11 +2528,12 @@ class Afield extends AFWObject
                         if (($prop == 'TYPE') and ($val == "'MFK'"))
                                 $width_css = 100;
                         if (($val != 'true') and
-                                        ($val != 'false') and
-                                        (!is_numeric($val)) and
-                                        (!is_bool($val)) and
-                                        (!AfwStringHelper::stringStartsWith($val, '"')) and
-                                        (!AfwStringHelper::stringStartsWith($val, "'"))) {
+                                ($val != 'false') and
+                                (!is_numeric($val)) and
+                                (!is_bool($val)) and
+                                (!AfwStringHelper::stringStartsWith($val, '"')) and
+                                (!AfwStringHelper::stringStartsWith($val, "'"))
+                        ) {
                                 $val = "'$val'";
                         }
 
@@ -2955,7 +2984,7 @@ class Afield extends AFWObject
                 $category_id = 8;
 
                 $file_dir_name = dirname(__FILE__);
-                require_once ("$file_dir_name/../bau/r_a_m_object_type.php");
+                require_once("$file_dir_name/../bau/r_a_m_object_type.php");
                 $fTypeObj = $this->getFType();
                 $lookup_code = $fTypeObj->getVal('lookup_code');
                 $typeObj = RAMObjectType::loadByMainIndex('field.' . $lookup_code);
