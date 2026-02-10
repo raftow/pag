@@ -3897,7 +3897,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
     public function genereUserBFs($lang = 'ar')
     {
         global $MODE_SQL_PROCESS_LOURD, $nb_queries_executed;
-        $old_nb_queries_executed = $nb_queries_executed;
+        // $old_nb_queries_executed = $nb_queries_executed;
         $old_MODE_SQL_PROCESS_LOURD = $MODE_SQL_PROCESS_LOURD;
         $MODE_SQL_PROCESS_LOURD = true;
 
@@ -3913,7 +3913,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $info = "Used framework (ID:$framework_id) $inf0<br>treated : $bf_arr_count bf(s)";
 
         $MODE_SQL_PROCESS_LOURD = $old_MODE_SQL_PROCESS_LOURD;
-        $nb_queries_executed = $old_nb_queries_executed;
+        if(!$MODE_SQL_PROCESS_LOURD) $nb_queries_executed = 0;
 
         return array($error, $info);
     }

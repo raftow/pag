@@ -121,7 +121,7 @@ display: none;
 
 .calendar_bloc_g {
     height: 96px;
-    background-image: url(../../lib/images/calendar_bus_zz.png);
+    background-image: url(../../lib/images/calendar_pag.png);
     background-repeat: no-repeat;
     background-size: 60%;
     background-position: 10px 10px;
@@ -137,32 +137,32 @@ display: none;
 .calendar_year {
     text-align: center;
     color: #0c92cc;
-    font-family: Montserrat !important;
+    font-family: digi !important;
     font-weight: bold;
     font-size: 12px;
     margin-left: -32px !important;
-    margin-top: 2px;
+    margin-top: 6px;
 }
 
 .calendar_day {
     height: 60px;
     text-align: center;
-    color: #453a3a;
+    color: #060606;
     margin-left: -32px !important;
-    font-family: title, courrier,arial,rgt;
+    font-family: digi, title, courrier, arial, rgt;
     font-weight: bold;
     font-size: 12px;
-    padding-top: 5px;
+    padding-top: 0px;
     line-height: 13px;
-}   
-
-span.dday {
-    font-size: 12px;
-    font-family: Montserrat !important;
-    color: #ff7f27;
-    padding: 0px 2px;
 }
 
+span.dday {
+    font-size: 14px;
+    font-family: digi !important;
+    color: #d5661a;
+    padding: 0px 2px;
+    font-weight: normal;
+}
 
 
 .home_banner{
