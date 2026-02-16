@@ -12,7 +12,7 @@
 
 global $enum_tables, $lookup_tables, $count_here;
 
-class Afield extends AFWObject
+class Afield extends PagObject
 {
         public static $DATABASE = '';
         public static $MODULE = 'pag';
@@ -1675,15 +1675,11 @@ class Afield extends AFWObject
                         // else $afield_att["specification"] = "";
                 }
 
-                $scenario_item_id = 0;
-                $scenarioItemList = $myTable->getScis();
-                foreach ($scenarioItemList as $scenarioItemObj) {
-                        if ($scenarioItemObj->getVal('step_num') == $row['STEP'])
-                                $scenario_item_id = $scenarioItemObj->getId();
-                }
+                $objSci = self::getSciObjectOfAtable($myTable, $row['STEP']);
 
-                if ($scenario_item_id)
-                        $afield_att['scenario_item_id'] = $scenario_item_id;
+
+                if ($objSci)
+                        $afield_att['scenario_item_id'] = $objSci->id;
 
                 $afield_group_id = 0;
                 if ($row['FGROUP'] and $myTable) {
@@ -3167,45 +3163,7 @@ class Afield extends AFWObject
                 return $this->het('atable_id');
         }
 
-        public function fld_CREATION_USER_ID()
-        {
-                return 'id_aut';
-        }
-
-        public function fld_CREATION_DATE()
-        {
-                return 'date_aut';
-        }
-
-        public function fld_UPDATE_USER_ID()
-        {
-                return 'id_mod';
-        }
-
-        public function fld_UPDATE_DATE()
-        {
-                return 'date_mod';
-        }
-
-        public function fld_VALIDATION_USER_ID()
-        {
-                return 'id_valid';
-        }
-
-        public function fld_VALIDATION_DATE()
-        {
-                return 'date_valid';
-        }
-
-        public function fld_VERSION()
-        {
-                return 'version';
-        }
-
-        public function fld_ACTIVE()
-        {
-                return 'avail';
-        }
+       
 
         protected function beforeSetAttribute($attribute, $newvalue)
         {
