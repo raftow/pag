@@ -17,6 +17,7 @@ $trad["atable"]["step8"] = "الأهداف";
 $trad["atable"]["step8_help"] = "الأهداف المنتظرة من الجدول";
 $trad["atable"]["step9"] = "قاعدة البيانات";
 $trad["atable"]["step9_help"] = "الحقول الافتراضية والفهارس وحقول المسمى وغير ذلك";
+$trad["atable"]["step10"] = "برمجيات";
 
 
 $trad["atable"]["step_group"] = "التبويب والمجموعة";

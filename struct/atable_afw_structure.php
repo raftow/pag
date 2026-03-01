@@ -14,7 +14,7 @@ class PagAtableAfwStructure
 			$obj->AUTOCOMPLETE_FIELD = "concat(IF(ISNULL(atable_name), '', atable_name) , '/' , IF(ISNULL(titre_short), '', titre_short) , '/' , IF(ISNULL(titre_u), '', titre_u))"; 
 			$obj->copypast = false;
 			$obj->editByStep = true;
-			$obj->editNbSteps = 9;
+			$obj->editNbSteps = 10;
 			$obj->showRetrieveErrors = true;
 			$obj->showQeditErrors = true;
 			//$obj->general_check_errors = true;
@@ -390,6 +390,14 @@ class PagAtableAfwStructure
 			'FGROUP' => 'addiFieldList', 'FGROUP_BEHAVIOR' => 'collapsed',  'NO-LABEL' => true,
 			'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '',
 		),
+
+
+		'previleges_code' => array('STEP' => 10,  
+				'TYPE' => 'TEXT',  
+				'CATEGORY' => 'FORMULA',  'SHOW' => true,  'EDIT' => true, 'FORMAT' => 'PRE',
+				'READONLY' => true,  'CAN-BE-SETTED' => false,  'SIZE' => 255,  'INPUT_WIDE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),	
 
 		'jobrole_id' => array(
 			'IMPORTANT' => 'IN',  'SEARCH' => false,  'SHOW' => true,  'RETRIEVE' => 'temporaire',  

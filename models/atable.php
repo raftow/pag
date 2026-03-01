@@ -227,7 +227,7 @@ class Atable extends AFWObject
 
     public function getEntityManagerJobroles()
     {
-        $master = $this->getMaster();
+        $master = $this->calcMaster('object');
         if ($master and ($master->getId() > 0)) {
             return $master->getEntityManagerJobroles();
         }
@@ -673,26 +673,23 @@ class Atable extends AFWObject
         return ($this->debugg_is_detail_table_for_others == 'Y');
     }
 
-    public function getMaster()
+    public function calcMaster($what="value")
     {
         $server_db_prefix = AfwSession::currentDBPrefix();
-        $master = new Atable();
+        $masterTableObject = new Atable();
 
         if ($this->dataIsFullOwnedByMaster()) {
             $this_id = $this->getId();
-            $master->where('id in (select answer_table_id from ' . $server_db_prefix . "pag.afield 
+            $masterTableObject->where('id in (select answer_table_id from ' . $server_db_prefix . "pag.afield 
                                           where atable_id = $this_id 
                                             and avail='Y' 
                                             and reel='Y' 
                                             and afield_type_id = 5
                                             and entity_relation_type_id = 1)");
-            if ($master->load()) {
-                return $master;
-            } else
-                return $master;
+            $masterTableObject->load();
         }
 
-        return $master;
+        return AfwLoadHelper::giveWhat($masterTableObject, $what);
     }
 
     public function countMyMasterTables()
@@ -1345,9 +1342,7 @@ class Atable extends AFWObject
                 break;
 
             default:
-                $methodFormule = 'get' . ucfirst($attribute);
-                // die("methodFormule = $methodFormule");
-                return $this->$methodFormule();
+                return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);                
                 break;
         }
     }
@@ -1428,6 +1423,11 @@ class Atable extends AFWObject
         // $fn = trim($fn." (" . $this->getAFieldCount().")");
 
         return $fn;
+    }
+
+    public function getShortDisplay($lang = 'ar')
+    {
+        return $this->valTitre_short();
     }
 
     public function getDisplay($lang = 'ar')
@@ -5227,5 +5227,17 @@ $TDesc
 }";
 
         return $php_code;
+    }
+
+
+    public function calcPrevileges_code($what='value') {
+        $objModule = $this->het('id_module');
+        if (!$objModule)
+            return 'Error : no valid module for this table ';
+        $module_code = $objModule->getVal('module_code');
+        list($tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd) = UmsManager::genereTablePrevilegesFile($module_code, $this, true);
+        // $php_code = "will do UmsManager::genereTablePrevilegesFile($module_code, $this, true)";
+
+        return "<textarea class='code php'>".$php_code."</textarea>";
     }
 }
