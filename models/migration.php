@@ -340,18 +340,20 @@ class Migration extends AFWObject
             }    
 	}
 
-    public static function genereUpdateDataMigrationLines($objItem)
+    public static function genereUpdateDataMigrationLines($objItem, $nameObj="obj")
     {
         $indexValues = $objItem->getMyIndexArray();
         $rowValues = $objItem->getAllfieldValues();
-        $php = "unset(\$obj); \$obj=".get_class($objItem)."::loadWithUniqueKey(".var_export($indexValues,true).");\n";
-        $php .= "\$obj->multipleSet(".var_export($rowValues,true).", true);\n";
+        $php = "unset(\$$nameObj);\n";
+        $php .= "\$$nameObj=".get_class($objItem)."::loadOrCreateWithUniqueKey(".var_export($indexValues,true).");\n";
+        $php .= "\$$nameObj"."->multipleSet(".var_export($rowValues,true).", true);\n";
+        // $php .= "\$$nameObj"."->commit();\n";
 
-        $pillarObjectList = $objItem->getPillarObjects();
+        $pillarObjectList = AfwDataQualityHelper::getPillarObjects($objItem);
 
-        foreach($pillarObjectList as $pillarObjectItem)
+        foreach($pillarObjectList as $pi => $pillarObjectItem)
         {
-            $php .= self::genereUpdateDataMigrationLines($pillarObjectItem);
+            $php .= self::genereUpdateDataMigrationLines($pillarObjectItem, "objPillar$pi");
         }
 
         
