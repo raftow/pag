@@ -308,6 +308,8 @@ class AfieldType extends AFWObject
                         return 'TIME';
                 elseif ($this->getId() == AfwUmsPagHelper::$afield_type_float)
                         return 'FLOAT';
+                elseif ($this->getId() == AfwUmsPagHelper::$afield_type_amnt)
+                        return 'AMNT';
                 else {
                         return 'UNKNOWN AFW TYPE for type : ' . $this . ' id = ' . $this->getId();
                 }
