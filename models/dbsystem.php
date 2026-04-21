@@ -7,6 +7,8 @@ class Dbsystem extends AFWObject{
 	public static $MODULE		    = "pag"; 
 	public static $TABLE			= "dbsystem"; 
 	public static $DB_STRUCTURE = null; 
+
+	private static $syn_list = null;
 	
 	public function __construct()
 	{
@@ -28,11 +30,11 @@ class Dbsystem extends AFWObject{
         
         public function loadSyntax()
         {
-           $syn_list = $this->get("syn");
+           if(!self::$syn_list) self::$syn_list = $this->get("syn");
            
            $syn_arr = array();
            
-           foreach($syn_list as $syn_id => $syn_item)
+           foreach(self::$syn_list as $syn_id => $syn_item)
            {
                $syn_arr[$syn_item->getVal("code_syntax")] =  $syn_item->getVal("value_syntax");
            }
