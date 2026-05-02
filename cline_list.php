@@ -1,6 +1,6 @@
 <?php
 
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_code with params " . var_export($command_line_words, true));
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code with params " . var_export($command_line_words, true));
 // ex list index fields from table booking
 // ex list original fields from table travel 
 // ex list all goals (will take the domain of current module if same code)
@@ -66,7 +66,7 @@ if ($object_list_attribute_origin == "goals") {
 
 
 
-    if ($setted_phrase) $command_line_result_arr[] = AfwUtils::hzm_format_command_line("warning", $setted_phrase);
+    if ($setted_phrase) $command_line_result_arr[] = UfwUtils::hzm_format_command_line("warning", $setted_phrase);
 }
 
 if ($object_list_attribute_origin == "jobs") {
@@ -81,11 +81,11 @@ if ($object_list_attribute_origin == "jobs") {
 
 
 
-    if ($setted_phrase) $command_line_result_arr[] = AfwUtils::hzm_format_command_line("warning", $setted_phrase);
+    if ($setted_phrase) $command_line_result_arr[] = UfwUtils::hzm_format_command_line("warning", $setted_phrase);
 }
 
 if (!$object_entity) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0003 : missed word-4 object_entity in your command (note that object_list_attribute_origin=$object_list_attribute_origin)");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0003 : missed word-4 object_entity in your command (note that object_list_attribute_origin=$object_list_attribute_origin)");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -93,7 +93,7 @@ if (!$object_entity) {
 
 list($object_table, $object_module) = ClineUtils::parse_table_and_module($object_entity);
 if (!$object_table and !$object_module) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0004 : ClineUtils::parse_table_and_module($object_entity) returned nothing see why with framework expert");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0004 : ClineUtils::parse_table_and_module($object_entity) returned nothing see why with framework expert");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -136,7 +136,7 @@ if (file_exists("$module_path/$object_table.php")) {
             $object_code_arr = explode(".", $object_code);
             $objToShow = $object_class::loadByCodes($object_code_arr);
         } else {
-            $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "load $object_class by code still not implemented in Momken framework comand line");
+            $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "load $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;
             $command_finished = true;
             return;
@@ -147,7 +147,7 @@ if (file_exists("$module_path/$object_table.php")) {
         $objToShow = $object_class::loadById($object_id);
     }
 } else {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0002 please check that the file '$object_table.php' file exists in module path '$module_path'");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0002 please check that the file '$object_table.php' file exists in module path '$module_path'");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -167,20 +167,20 @@ if ($objToShow and (!$objToShow->isEmpty())) {
     }
 
     if (is_array($liste_obj) and (count($liste_obj) == 0)) {
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line("warning", $module_translated . " : " . $objToShow->getDisplay($lang) . " ($object_class) => get ($object_list_attribute) returned empty");
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line("warning", $module_translated . " : " . $objToShow->getDisplay($lang) . " ($object_class) => get ($object_list_attribute) returned empty");
         $command_finished = true;
         return;
     } elseif (!$liste_obj) {
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", $module_translated . " : " . $objToShow->getDisplay($lang) . " ($object_class) => get ($object_list_attribute) returned null");
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", $module_translated . " : " . $objToShow->getDisplay($lang) . " ($object_class) => get ($object_list_attribute) returned null");
         $nb_errors++;
         $command_finished = true;
         return;
     } else {
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line("success", $module_translated . " : " . $objToShow->getDisplay($lang) . " ($object_class) $arrow " . $objToShow->translate($object_list_attribute, $lang), $lang);
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line("success", $module_translated . " : " . $objToShow->getDisplay($lang) . " ($object_class) $arrow " . $objToShow->translate($object_list_attribute, $lang), $lang);
         $command_code = "retrieve";
     }
 } else {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "object [Class=$object_class  CodeOrId=$object_codeOrId] not found");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "object [Class=$object_class  CodeOrId=$object_codeOrId] not found");
     $nb_errors++;
     $command_finished = true;
     return;

@@ -6,8 +6,8 @@ ini_set('error_reporting', E_ERROR | E_PARSE | E_RECOVERABLE_ERROR | E_CORE_ERRO
 
 AfwSession::startSession();
 
-require_once("$file_dir_name/../lib/afw/afw_autoloader.php");
-$uri_module = AfwUrlManager::currentURIModule();       
+require_once("$file_dir_name/../lib/afw/core/afw_autoloader.php");
+$uri_module = UfwUrlManager::currentURIModule();       
 
 if(!$lang) $lang = "ar";
 $module_dir_name = $file_dir_name;

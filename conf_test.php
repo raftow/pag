@@ -11,7 +11,7 @@ $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")),0,10);
 
 if(!$lang) $lang = "ar";
 $module_dir_name = $file_dir_name;
-require_once("$file_dir_name/../lib/afw/afw_autoloader.php");
+require_once("$file_dir_name/../lib/afw/core/afw_autoloader.php");
 
 AfwSession::startSession();
 
@@ -54,7 +54,7 @@ elseif(!(($_POST["mail"]) and ($_POST["pwd"])))
 }
 else
 {
-        $uri_module = AfwUrlManager::currentURIModule();       
+        $uri_module = UfwUrlManager::currentURIModule();       
 
         require_once("$file_dir_name/../$uri_module/ini.php");
         require_once("$file_dir_name/../$uri_module/module_config.php");
@@ -97,7 +97,7 @@ else
 
                 echo "<br>\ntrying to ldap connect with ".$user_name_c;
                 // 1. try Active directory first (if enabled)
-                list($user_connected, $user_not_connected_reason, $info, $login_dbg[]) = AfwLoginUtilities::ldap_login($user_name_c, $pwd_c);
+                list($user_connected, $user_not_connected_reason, $info, $login_dbg[]) = UfwLoginUtilities::ldap_login($user_name_c, $pwd_c);
                 
                 if(!$user_connected)                
                 {
@@ -111,14 +111,14 @@ else
                 if(!$user_connected)
                 {
                         $login_dbg[] = "try to db_or_golden_login";
-                        list($user_connected, $user_not_connected_reason, $user_infos, $login_dbg[]) = AfwLoginUtilities::db_or_golden_login($user_name_c, $pwd_c);
+                        list($user_connected, $user_not_connected_reason, $user_infos, $login_dbg[]) = UfwLoginUtilities::db_or_golden_login($user_name_c, $pwd_c);
                         $user_found = $user_connected;
                 }
                 else
                 {
                         $user_name_ldap =  $info["samaccountname"][0];     
                         $login_dbg[] = "try to db_retrieve_user_info with ldap user name : $user_name_ldap"; 
-                        list($user_found, $user_not_found_reason, $user_infos, $login_dbg[]) = AfwLoginUtilities::db_retrieve_user_info($user_name_ldap);
+                        list($user_found, $user_not_found_reason, $user_infos, $login_dbg[]) = UfwLoginUtilities::db_retrieve_user_info($user_name_ldap);
                 }
 
                 if($user_found and $user_infos)

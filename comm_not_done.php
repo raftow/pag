@@ -3,7 +3,7 @@ require_once("../config/global_config.php");
 // here was old const php
 
 require_once("afw_config.php");
-require_once ('afw_rights.php');
+
 
 $objme = AfwSession::getUserConnected();
 $me = ($objme) ? $objme->id : 0;

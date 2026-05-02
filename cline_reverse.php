@@ -1,7 +1,7 @@
 <?php
 
 // hzm_start_immediate_output();
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
 $reverseByCodeArr = array();
 $reverseByCodeArr["module"] = true;
 $reverseByCodeArr["atable"] = true;
@@ -46,7 +46,7 @@ if (!$object_code) {
 }
 
 if (!$object_code) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "reverse command need the thing to reverse !! try to see {help reverse}");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "reverse command need the thing to reverse !! try to see {help reverse}");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -72,7 +72,7 @@ if (file_exists("$module_path/$object_table.php")) {
             list($objToShow, $message, $keepAsIs) = $object_class::reverseByCodes($object_code_arr, true, $restriction);
             if ($objToShow) $command_done = true;
         } else {
-            $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "reverse $object_class by code still not implemented in Momken framework comand line");
+            $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "reverse $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;
             $command_finished = true;
             return;
@@ -84,14 +84,14 @@ if (file_exists("$module_path/$object_table.php")) {
                   $objToShow = $object_class::loadById($object_id); 
           }*/
 } else {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0005 when reversing. Please check that the file '$object_table.php' file exists in module path '$module_path'");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0005 when reversing. Please check that the file '$object_table.php' file exists in module path '$module_path'");
     $nb_errors++;
     $command_finished = true;
     return;
 }
 // hzm_stop_immediate_output();
 if (!$objToShow) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0001 reverse $object_class by code failed with error message $message");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0001 reverse $object_class by code failed with error message $message");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -102,11 +102,11 @@ if (!$objToShow) {
             $typeMess = "success";
             if (AfwStringHelper::stringStartsWith($message_item, "Warning")) $typeMess = "warning";
             if (AfwStringHelper::stringStartsWith($message_item, "Error")) $typeMess = "error";
-            $command_line_result_arr[] = AfwUtils::hzm_format_command_line($typeMess, $message_item);
+            $command_line_result_arr[] = UfwUtils::hzm_format_command_line($typeMess, $message_item);
         }
     } else {
         $typeMess = "success";
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line($typeMess, $message);
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line($typeMess, $message);
     }
 
 
@@ -117,6 +117,14 @@ if (!$objToShow) {
 
     if (count($object_code_arr) == 2) {
         $command_code = "curr_tbl";
+        if(AfwStringHelper::stringContain($object_code_arr[1],"-"))
+        {
+            $continue_on_module = $currmod;
+        }
+        else
+        {
+            $continue_on_module = $object_code_arr[1];
+        }
         $command_line_words[1] = $object_code_arr[0] . "." . $object_code_arr[1];
     }
 

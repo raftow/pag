@@ -1,6 +1,6 @@
 <?php
 
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_code with restriction = [$restriction]");
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code with restriction = [$restriction]");
 
 $command_what_to_do = $command_line_words[1];
 if ($command_what_to_do == "r") $command_what_to_do = "erase";
@@ -26,7 +26,7 @@ $command_bf_id = $command_line_words[2];
         $objBF = Bfunction::loadById($command_bf_id);
         if((!$objBF) or (!objBF->id))
         {
-            $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! The object is not found for ID = $command_bf_id");
+            $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! The object is not found for ID = $command_bf_id");
             $nb_errors++;$command_finished = true;return;
         }
     }
@@ -41,17 +41,17 @@ $command_sched = $command_line_words[3];
 
 
 if ((!$command_what_to_do) or (!in_array($command_what_to_do, ["erase", "add", "update", "list", "run", "more"]))) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "cron command need a correct action todo !! value given $command_bf_id is not correct should be from erase/add/update choices");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "cron command need a correct action todo !! value given $command_bf_id is not correct should be from erase/add/update choices");
     $nb_errors++;
     $command_finished = true;
     return;
 } elseif ((!$command_bf_id) or (!is_numeric($command_bf_id))) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! value given $command_bf_id is not correct");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "cron command need the correct BF-ID of your script !! value given $command_bf_id is not correct");
     $nb_errors++;
     $command_finished = true;
     return;
 } elseif ((!$command_sched) or (!ClineUtils::correctSchedulingParams($command_sched))) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "cron command need the correct scheduling params for your script !! value given $command_sched is not correct");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "cron command need the correct scheduling params for your script !! value given $command_sched is not correct");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -60,7 +60,7 @@ if ((!$command_what_to_do) or (!in_array($command_what_to_do, ["erase", "add", "
     $script_to_run = "/var/www/adm/batchs/adm_app_simulator_job.sh";
     $log_path = "/var/www/adm/log/";
     $run_path = "/var/www/adm/batchs/";
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "preparing scripts and log privileges ... ");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "preparing scripts and log privileges ... ");
     // $shell_to_show[] = $shell_to_run = 'chmod 777 '.$log_path;
     // $shell_to_show[] = shell_exec($shell_to_run);
 
@@ -95,7 +95,7 @@ if ((!$command_what_to_do) or (!in_array($command_what_to_do, ["erase", "add", "
     }
 
 
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("cmd", implode("\n", $shell_to_show), "en", "cline cmd");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("cmd", implode("\n", $shell_to_show), "en", "cline cmd");
 }
 
 

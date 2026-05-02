@@ -1,7 +1,7 @@
 <?php
 
 // hzm_start_immediate_output();
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
 $addByCodeArr = array();
 $addByCodeArr["module"] = true;
 $addByCodeArr["atable"] = true;
@@ -58,7 +58,7 @@ if ($nb_parts_missed == 2) {
 // die("object_code=$object_code object_code_before=$object_code_before");
 
 if (!$object_code) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "add command need the thing to add !! try to see {help add}");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "add command need the thing to add !! try to see {help add}");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -91,7 +91,7 @@ if (file_exists("$module_path/$object_table.php")) {
         if ($addByCodeArr[$object_table]) {
             [$objToShow, $message] = $object_class::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, false, $command_code_option);
         } else {
-            $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "add $object_class by code still not implemented in Momken framework comand line");
+            $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "add $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;
             $command_finished = true;
             return;
@@ -103,7 +103,7 @@ if (file_exists("$module_path/$object_table.php")) {
                   $objToShow = $object_class::loadById($object_id); 
           }*/
 } else {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0005 when adding. Please check that the file '$object_table.php' file exists in module path '$module_path'");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0005 when adding. Please check that the file '$object_table.php' file exists in module path '$module_path'");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -115,7 +115,7 @@ if ($object_table == "module") {
 
 
 if (!$objToShow) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0001 add $object_class by code failed with message $message");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0001 add $object_class by code failed with message $message");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -125,7 +125,7 @@ if (!$objToShow) {
         $typeMess = "success";
         if (AfwStringHelper::stringStartsWith($message_item, "Warning")) $typeMess = "warning";
         if (AfwStringHelper::stringStartsWith($message_item, "Error")) $typeMess = "error";
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line($typeMess, $message_item);
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line($typeMess, $message_item);
     }
 
     if (count($object_code_arr) == 3) {

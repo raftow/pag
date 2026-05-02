@@ -7,7 +7,7 @@ require_once("pag_generator.php");
 
 $only_admin = true;
 $debug_name = "debugg_afwgen";
-require_once("afw_check_member.php");
+require_once("../lib/afw/includes/afw_check_member.php");
 
 include("hzm_header.php");
         

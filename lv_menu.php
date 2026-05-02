@@ -2,7 +2,7 @@
      
       /*
       obsolete
-      $module = AfwUrlManager::currentURIModule();       
+      $module = UfwUrlManager::currentURIModule();       
         
       $numfrontclass = 0;
       $nummenu = 1;

@@ -1,6 +1,6 @@
 <?php
       
-      $module = AfwUrlManager::currentURIModule();         
+      $module = UfwUrlManager::currentURIModule();         
       // here was old const php
       
       $nummenu = 1;

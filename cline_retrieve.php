@@ -9,7 +9,7 @@ if (count($liste_obj) > 0) {
         $obj_first = current($liste_obj);
         if ($obj_first) $object_first_class_file = $obj_first->getMyTable();
         else $object_first_class_file = "empty";
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line("title", "retrieve list of [$object_first_class_file] : ", $lang);
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line("title", "retrieve list of [$object_first_class_file] : ", $lang);
 
         $odd_oven = "odd";
         foreach ($liste_obj as $oneObj) {
@@ -25,13 +25,13 @@ if (count($liste_obj) > 0) {
                 $display_node = ClineUtils::makeReplacements($oneObj->getNodeDisplay($lang), $currmod);
 
                 $oneObjIdLinked = $oneObj->showAttributeAsLinkMode("id", "EDIT");
-                $command_line_result_arr[] = AfwUtils::hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $display_node, $dataErrors, $lang, $errorClass);
+                $command_line_result_arr[] = UfwUtils::hzm_object_command_line("info", $odd_oven, $oneObjIdLinked, $display_node, $dataErrors, $lang, $errorClass);
                 if ($odd_oven != "odd") $odd_oven = "odd";
                 else $odd_oven = "oven";
                 unset($oneObj);
         }
 } else {
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line("warning", "no record");
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line("warning", "no record");
         $nb_warnings++;
 }
 $command_done = true;

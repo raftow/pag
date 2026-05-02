@@ -1,7 +1,7 @@
 <?php
 
 // hzm_start_immediate_output();
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
 $repareByCodeArr = array();
 $repareByCodeArr["module"] = true;
 $repareByCodeArr["atable"] = true;
@@ -45,7 +45,7 @@ if (!$object_code) {
 }
 
 if (!$object_code) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "repare command need the thing to repare !! try to see {help repare}");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "repare command need the thing to repare !! try to see {help repare}");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -64,7 +64,7 @@ if (file_exists("$module_path/$object_table.php")) {
         if ($repareByCodeArr[$object_table]) {
             list($objToShow, $message) = $object_class::repareByCodes($object_code_arr, $restriction);
         } else {
-            $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "repare $object_class by code still not implemented in Momken framework comand line");
+            $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "repare $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;
             $command_finished = true;
             return;
@@ -76,14 +76,14 @@ if (file_exists("$module_path/$object_table.php")) {
                   $objToShow = $object_class::loadById($object_id); 
           }*/
 } else {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0005 when reparing. Please check that the file '$object_table.php' file exists in module path '$module_path'");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0005 when reparing. Please check that the file '$object_table.php' file exists in module path '$module_path'");
     $nb_errors++;
     $command_finished = true;
     return;
 }
 // hzm_stop_immediate_output();
 if (!$objToShow) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0001 repare $object_class by code failed with message $message");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0001 repare $object_class by code failed with message $message");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -93,7 +93,7 @@ if (!$objToShow) {
         $typeMess = "success";
         if (AfwStringHelper::stringStartsWith($message_item, "Warning")) $typeMess = "warning";
         if (AfwStringHelper::stringStartsWith($message_item, "Error")) $typeMess = "error";
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line($typeMess, $message_item);
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line($typeMess, $message_item);
     }
 
     if (count($object_code_arr) == 3) {

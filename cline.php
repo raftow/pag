@@ -4,12 +4,9 @@ $LOOP_MAX = 5;
 if (!$lang) $lang = "ar";
 $file_dir_name = dirname(__FILE__);
 $command_line_result_arr = array();
-require_once("$file_dir_name/../lib/afw/afw_utils.php");
-
-
 
 if ($clinego and (!$command_line)) {
-  $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "No command line written");
+  $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "No command line written");
   $nb_errors++;
   $command_finished = true;
 }
@@ -19,7 +16,7 @@ AfwAutoloader::addMainModule('bau');
 
 $objme = AfwSession::getUserConnected();
 if (!$objme) {
-  $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Your are not logged in !!");
+  $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Your are not logged in !!");
   $nb_errors++;
   $command_finished = true;
   $command_line = "";
@@ -52,10 +49,10 @@ if ($command_line) {
   if ($command_line == "recall") {
     if ($last_hist) {
       $command_line = $last_hist;
-      $command_line_result_arr[] = AfwUtils::hzm_format_command_line("warning", "last history command recalled");
+      $command_line_result_arr[] = UfwUtils::hzm_format_command_line("warning", "last history command recalled");
       $nb_warnings++;
     } else {
-      $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "no history command to recall");
+      $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "no history command to recall");
       $nb_errors++;
       $command_line = "";
     }
@@ -130,17 +127,17 @@ if ($command_line) {
     try {
       if (!file_exists($cmd_file_path)) {
         // throw new AfwRuntimeException("the command line $command_code not found");
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "the command $command_code not found");
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "the command $command_code not found");
         $nb_errors++;
         $command_finished = true;
       } else include $cmd_file_path;
     } catch (Exception $e) {
       if ($modeSuperDeveloper) throw $e;
-      $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", $e->getMessage());
+      $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", $e->getMessage());
       $nb_errors++;
       $command_finished = true;
     } catch (Error $e) {
-      $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", $e->__toString());
+      $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", $e->__toString());
       $nb_errors++;
       $command_finished = true;
     }
@@ -155,7 +152,7 @@ if ($command_line) {
   }
 
   if (!$command_done) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("warning", "The command $command_code seems not well done !");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("warning", "The command $command_code seems not well done !");
   }
 
 
@@ -166,22 +163,22 @@ if ($command_line) {
   $command_line_result_arr[] = "";
 
   if ((!$nb_errors) and (!$nb_warnings)) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("normal", "Your last command : ");
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("log", $command_line);
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("normal", "Your last command : ");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("log", $command_line);
 
     if ($last_hist != $command_line) {
       $hist_arr[] = $command_line;
     }
     $data_token_new_suggested_command_line = "";
   } else {
-    if ($nb_errors) $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "$nb_errors error(s)");
-    if ($nb_warnings) $command_line_result_arr[] = AfwUtils::hzm_format_command_line("warning", "$nb_warnings warning(s)");
+    if ($nb_errors) $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "$nb_errors error(s)");
+    if ($nb_warnings) $command_line_result_arr[] = UfwUtils::hzm_format_command_line("warning", "$nb_warnings warning(s)");
     $data_token_new_suggested_command_line = $command_line;
     //die("data_token_new_suggested_command_line=$data_token_new_suggested_command_line");
   }
 
   $command_line_hist_arr = [];
-  $command_line_hist_arr[] = AfwUtils::hzm_format_command_line("normal", "Your command history : ");
+  $command_line_hist_arr[] = UfwUtils::hzm_format_command_line("normal", "Your command history : ");
 
   $log_hist_class = "";
 
@@ -193,7 +190,7 @@ if ($command_line) {
     $command_line_hist_arr[] = "<div class='tamakkan_hiostory'>
               <div class='tamakkan_rt'>
                   <span class='bcounter' id='bcounter-$kord'>$kord</span> 
-              </div> " . AfwUtils::hzm_format_command_line($log_hist_class, $hist_item, "en", false, false, $kord, "hist") . "</div>";
+              </div> " . UfwUtils::hzm_format_command_line($log_hist_class, $hist_item, "en", false, false, $kord, "hist") . "</div>";
   }
 
   $hist = implode("\n", $hist_arr);
@@ -236,7 +233,7 @@ $data_tokens["context"] = $context;
 
 $data_tokens["hist"] = $hist;
 
-echo AfwUtils::showUsingHzmTemplate($html_template_file, $data_tokens);
+echo UfwUtils::showUsingOldHzmTemplate($html_template_file, $data_tokens);
 
 echo "<div id='analysis_log'><div class=\"fleft\"><h1><b>System LOG activated :</b></h1></div><br><br>";
 echo "_sql_picture=" . var_export($_sql_picture, true) . "<br>";

@@ -183,7 +183,7 @@ function getPhpOfDbStructure($mytable, $myObj, $module_code)
         return array($php_struct, "");
 }
 
-require_once ("afw_rights.php");
+
 require_once ("afw_config.php");
 include_once "$file_dir_name/../geshi/geshi.php";
 
@@ -216,7 +216,7 @@ foreach($arrTables as $idTable => $tabObj)
                 
                 $fileName = $tab_name."_afw_structure.php";
                 $fileFullName = $struct_dir."/".$fileName;
-                AfwFileSystem::write($fileFullName, $strcucture_php);
+                UfwFileSystem::write($fileFullName, $strcucture_php);
                 // output on screen
                 if(($cl == $cls) or ("all" == $cls))
                 {

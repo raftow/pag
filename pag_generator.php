@@ -59,11 +59,11 @@ class PagGenerator extends AFWRoot {
                // $server_db_prefix"."
                $log_errors = "";
                // die("here 8 : sqldir=$sqldir , show_sql=$show_sql");
-               if(AfwFileSystem::isDir($sqldir) or ($show_sql))
+               if(UfwFileSystem::isDir($sqldir) or ($show_sql))
                {
                        /*if($show_sql) $file_to_create = false;
                        else */ 
-                       $file_to_create = AfwFileSystem::isDir($sqldir); 
+                       $file_to_create = UfwFileSystem::isDir($sqldir); 
                        
                        $footer_sql = "";
                        $sql = "";
@@ -172,7 +172,7 @@ class PagGenerator extends AFWRoot {
                                 $fileName = $atb_obj->getVal("atable_name").".sql";
                                 if($file_to_create)
                                 {
-                                  AfwFileSystem::write($sqldir."/".$fileName, $sql.$footer_sql);
+                                  UfwFileSystem::write($sqldir."/".$fileName, $sql.$footer_sql);
                                   $footer_sql = "";
                                 } 
                                 else $log_errors .= "-- $fileName : \n $sql $footer_sql \n";
@@ -186,7 +186,7 @@ class PagGenerator extends AFWRoot {
                        
                        
                        if(!$decoupage) {
-                             if($file_to_create) AfwFileSystem::write($sqldir."/".$fileName, $sql.$footer_sql);
+                             if($file_to_create) UfwFileSystem::write($sqldir."/".$fileName, $sql.$footer_sql);
                              else $log_errors .= "not created ";
                              
                              $log_errors .= "$fileName : \n $sql $footer_sql \n ";
@@ -221,7 +221,7 @@ class PagGenerator extends AFWRoot {
                
                $file_dir_name = dirname(__FILE__); 
                
-               if(AfwFileSystem::isDir($phpdir))
+               if(UfwFileSystem::isDir($phpdir))
                {
                        
                        
@@ -296,13 +296,13 @@ class PagGenerator extends AFWRoot {
                              $php .= "];\n";                                
 
                              
-                             AfwFileSystem::write($phpdir."/$table_name.php", $php);
+                             UfwFileSystem::write($phpdir."/$table_name.php", $php);
                              $phpErrors .=  "php lookup file $table_name.php generated under $phpdir \n"; 
                        }
                        
 
                        
-                       //AfwFileSystem::write($phpdir."/log/".$fileName, $phpErrors);
+                       //UfwFileSystem::write($phpdir."/log/".$fileName, $phpErrors);
                        //$phpErrors .=  "log file $fileName generated under $phpdir/log <br>"; 
                
                }
@@ -321,7 +321,7 @@ class PagGenerator extends AFWRoot {
                
                $file_dir_name = dirname(__FILE__); 
                
-               if(AfwFileSystem::isDir($phpdir))
+               if(UfwFileSystem::isDir($phpdir))
                {
                        
                        
@@ -400,14 +400,14 @@ class PagGenerator extends AFWRoot {
                        }
                        
                        $php .= "];\n";
-                       AfwFileSystem::write($phpdir."/enum_codes.php", $php);
+                       UfwFileSystem::write($phpdir."/enum_codes.php", $php);
                        $phpErrors .=  "enum_codes.php file generated under $phpdir \n";         
                        
                        //$phpErrors .= $new_php_file . $list_php_files_to_copy;
                       
                        //echo $new_php_file;
                        //echo $phpErrors;
-                       // AfwFileSystem::write($phpdir."/".$fileName, $new_php_file.$phpErrors);
+                       // UfwFileSystem::write($phpdir."/".$fileName, $new_php_file.$phpErrors);
                        // echo "log file $fileName generated under $phpdir <br>"; 
                
                }
@@ -433,12 +433,12 @@ class PagGenerator extends AFWRoot {
                
                $phpErrors = "";
 
-                if(($phpdir!="no-gen") and (!AfwFileSystem::isDir($phpdir)))
+                if(($phpdir!="no-gen") and (!UfwFileSystem::isDir($phpdir)))
                 {
                         $phpdir="no-gen";
                 }
                
-               if(($phpdir=="no-gen") or AfwFileSystem::isDir($phpdir))
+               if(($phpdir=="no-gen") or UfwFileSystem::isDir($phpdir))
                {
                        
                        $list_php_files_to_copy = "";
@@ -549,7 +549,7 @@ AFTER GENERATION :
                              if($phpdir!="no-gen")
                              {
                                 $dir_fileName = $phpdir . $dir_sep . $table_name . ".php";
-                                AfwFileSystem::write($phpdir."/$table_name.php", $php);
+                                UfwFileSystem::write($phpdir."/$table_name.php", $php);
                                 $root_module_path = $ROOT_WWW_PATH.$module_code;
                                 $phpErrors .=  "php class file $table_name.php generated under $phpdir php code is :
 to install it :
@@ -629,11 +629,11 @@ $php  \n"; //
                     
                 } 
 		// require_once "afw.php";
-                if(($dir!="no-gen") and (!AfwFileSystem::isDir($dir)))
+                if(($dir!="no-gen") and (!UfwFileSystem::isDir($dir)))
                 {
                         $dir="no-gen";
                 }
-                if(($dir=="no-gen") or AfwFileSystem::isDir($dir))
+                if(($dir=="no-gen") or UfwFileSystem::isDir($dir))
                 {
 			$tbl_list_txt = "";
                         //die("tbl_list ".var_export($tbl_list,true));
@@ -808,7 +808,7 @@ $php  \n"; //
                                 $php_code = "<?php\n$TDesc\n?".">";
                                 if($dir!="no-gen")
                                 {
-                                        AfwFileSystem::write($dir."/".$fileName, $php_code);
+                                        UfwFileSystem::write($dir."/".$fileName, $php_code);
                                         $root_module_path = $ROOT_WWW_PATH.$tabModuleCode;
                                         $dir_fileName = $dir . $dir_sep . $fileName;
                                         $phpErrors .= "trad file : $fileName generated under $dir php code is :
@@ -847,7 +847,7 @@ $php_code\n";
 		if($tbl) $tbl_list[$tbl] = true;
 		else $tbl_list = $this->DB;
 		require_once "afw.php";
-		if(AfwFileSystem::isDir($dir))
+		if(UfwFileSystem::isDir($dir))
                 {
                         $fileName = "corrections.sql";
                         
@@ -882,7 +882,7 @@ $php_code\n";
 			}
                         
                         $TDesc = implode("\n", $tempTdesc);
-			AfwFileSystem::write($dir."/".$fileName,$TDesc);
+			UfwFileSystem::write($dir."/".$fileName,$TDesc);
                         if($TDesc) echo "$fileName generated under $dir <br>";
 		
 		
@@ -973,7 +973,7 @@ $php_code\n";
 			}
                 }        
 		
-		if(AfwFileSystem::isDir($dir))
+		if(UfwFileSystem::isDir($dir))
                 {
 		    foreach($FKC as $y_table => $FKC_ITEM)  	
                     {
@@ -1021,7 +1021,7 @@ $php_code\n";
                         
                         $y_fk_file_name = "fk_$y_fileName";
                         
-                        AfwFileSystem::write("$dir/$y_fk_file_name", 
+                        UfwFileSystem::write("$dir/$y_fk_file_name", 
 "<?"."php
 $YDesc
 ?".">"
@@ -1233,13 +1233,13 @@ $YDesc
 
                $file_dir_name = dirname(__FILE__); 
                
-               if((!AfwFileSystem::isDir($file_path)) and (!$show_res))
+               if((!UfwFileSystem::isDir($file_path)) and (!$show_res))
                {
                     $log_errors .=  "// folder $file_path not found \n"; 
                }
                        
                if($show_res) $file_to_create = false;
-               else $file_to_create = AfwFileSystem::isDir($file_path); 
+               else $file_to_create = UfwFileSystem::isDir($file_path); 
                
                $fileName = "gen_php_".date("YmdHis")."_";
                
@@ -1401,7 +1401,7 @@ $YDesc
 
                    if($file_to_create)
                    {
-                        AfwFileSystem::write($full_file_name, $res);
+                        UfwFileSystem::write($full_file_name, $res);
                    } 
                    else $log_errors .= "// -- $full_file_name : \n $res \n";     
 

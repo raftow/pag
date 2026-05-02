@@ -1,7 +1,7 @@
 <?php
 
 require_once("../config/global_config.php");
-require_once("afw_rights.php");
+
 require_once("afw_config.php");
 require_once("afw_shower.php");
 

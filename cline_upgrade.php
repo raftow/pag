@@ -14,7 +14,7 @@ if (!$command_action) $command_action = "show";
 if (!$action_on_what) $action_on_what = "all";
 
 if (!$currmod) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "upgrade command need you to select the current module");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "upgrade command need you to select the current module");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -22,7 +22,7 @@ if (!$currmod) {
 
 $objModule = Module::loadByMainIndex($currmod);
 
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_action of $action_on_what migration(s)");
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_action of $action_on_what migration(s)");
 
 if ($command_action == "show") {
     $migrArr = Migration::getMigrations($objModule->id, $currmod, $action_on_what);
@@ -38,7 +38,7 @@ if ($command_action == "show") {
 
         $title = $migrRow['title'] . " by " . $migrRow['by'];
 
-        $command_line_result_arr[] = AfwUtils::hzm_object_command_line("info", $odd_oven, $migration_code, $title, $dataErrors, $errorClass, $lang);
+        $command_line_result_arr[] = UfwUtils::hzm_object_command_line("info", $odd_oven, $migration_code, $title, $dataErrors, $errorClass, $lang);
         if ($odd_oven != "odd") $odd_oven = "odd";
         else $odd_oven = "oven";
         unset($oneObj);
@@ -84,11 +84,11 @@ if (($command_action == "run") or ($command_action == "ignore")) {
         }
         if (!$dataErrors) $dataErrors = "no errors";
 
-        $command_line_result_arr[] = AfwUtils::hzm_object_command_line($errorClass, $odd_oven, $resultIcon, $title, $dataErrors, $errorClass, $lang);
-        if ($info) $command_line_result_arr[] = AfwUtils::hzm_object_command_line("info", $odd_oven, $doneIcon, $info, "--", $errorClass, $lang);
-        if ($error) $command_line_result_arr[] = AfwUtils::hzm_object_command_line("error", $odd_oven, $errorIcon, $error, "--", $errorClass, $lang);
-        if ($warning) $command_line_result_arr[] = AfwUtils::hzm_object_command_line("warning", $odd_oven, $warningIcon, $warning, "--", $errorClass, $lang);
-        if ($tech) $command_line_result_arr[] = AfwUtils::hzm_object_command_line("tech", $odd_oven, $migrCode, $tech, "--", $errorClass, $lang);
+        $command_line_result_arr[] = UfwUtils::hzm_object_command_line($errorClass, $odd_oven, $resultIcon, $title, $dataErrors, $errorClass, $lang);
+        if ($info) $command_line_result_arr[] = UfwUtils::hzm_object_command_line("info", $odd_oven, $doneIcon, $info, "--", $errorClass, $lang);
+        if ($error) $command_line_result_arr[] = UfwUtils::hzm_object_command_line("error", $odd_oven, $errorIcon, $error, "--", $errorClass, $lang);
+        if ($warning) $command_line_result_arr[] = UfwUtils::hzm_object_command_line("warning", $odd_oven, $warningIcon, $warning, "--", $errorClass, $lang);
+        if ($tech) $command_line_result_arr[] = UfwUtils::hzm_object_command_line("tech", $odd_oven, $migrCode, $tech, "--", $errorClass, $lang);
 
         if ($odd_oven != "odd") $odd_oven = "odd";
         else $odd_oven = "oven";

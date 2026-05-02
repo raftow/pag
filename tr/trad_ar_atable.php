@@ -56,6 +56,14 @@ $trad["atable"]["abrev"] = "الإختصار";
 $trad["atable"]["key_field"] = "المفتاح";
 $trad["atable"]["display_field"] = "حقل الظهور";
 $trad["atable"]["auditable"] = "تقصي الأثر";
+$trad["atable"]["auditable.YES"] = "تقصي الأثر بحسب جميع الحقول";
+$trad["atable"]["auditable.NO"] = "بدون تقصي للأثر";
+$trad["atable"]["auditable.EUH"] = "تقصي الأثر بحسب الحقل";
+
+$trad["migration"]["done_ind"] = "تمت";
+	$trad["migration"]["done_ind"]  = "ليس بعد";
+	$trad["migration"]["done_ind"] = "تجاهلتها";
+
 $trad["atable"]["vh"] = "الأيقونة";
 $trad["atable"]["details_tables_mfk"] ="جداول تفاصيل الكيان";
 $trad["atable"]["system_id"] = "النظام";

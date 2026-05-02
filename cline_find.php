@@ -1,5 +1,5 @@
 <?php
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_code with params " . var_export($command_line_words, true));
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code with params " . var_export($command_line_words, true));
 // ex find module all like app
 list($object_class_file, $object_module) = ClineUtils::parse_table_and_module($command_line_words[1]);
 $filter_method = $command_line_words[2];
@@ -13,7 +13,7 @@ if (file_exists("$module_path/$object_class_file.php")) {
 
         $objMain = new $object_class();
 } else {
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "please check that the $object_class_file.php file exists in $object_module module path '$module_path'");
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "please check that the $object_class_file.php file exists in $object_module module path '$module_path'");
         $nb_errors++;
         $command_finished = true;
         return;

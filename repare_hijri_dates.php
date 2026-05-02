@@ -12,8 +12,8 @@ $logbl = substr(md5($_SERVER["HTTP_USER_AGENT"] . "-" . date("Y-m-d")),0,10);
 
 if(!$lang) $lang = "ar";
 $module_dir_name = $file_dir_name;
-require_once("$file_dir_name/../lib/afw/afw_autoloader.php");
-$uri_module = AfwUrlManager::currentURIModule();       
+require_once("$file_dir_name/../lib/afw/core/afw_autoloader.php");
+$uri_module = UfwUrlManager::currentURIModule();       
 
 require_once("$file_dir_name/../$uri_module/ini.php");
 require_once("$file_dir_name/../$uri_module/module_config.php");

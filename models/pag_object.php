@@ -10,6 +10,7 @@ class PagObject extends AfwMomkenObject
 
     public static function getSciObjectOfAtable($myTable, $step_num)
     {
+        if($step_num=='all') return null;
         if (!$myTable) return null;
         $myTableId = $myTable->id;
 

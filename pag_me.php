@@ -1,8 +1,5 @@
 <?php
 
-require_once ("../lib/afw/modes/afw_rights.php");
-
-
 $myObj = new $cl();
 if(!$sh) $sh = 3;   // main company
 $update_if_exists = $uie;

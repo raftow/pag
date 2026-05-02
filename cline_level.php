@@ -10,7 +10,7 @@ if ($filter) {
     $filtered = "filtered only on `$filter` business functions";
 }
 
-$command_line_result_arr[] = AfwUtils::hzm_format_command_line("info", "doing $command_code $new_level on " . $command_line_words[1] . " " . $filtered);
+$command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code $new_level on " . $command_line_words[1] . " " . $filtered);
 
 $levelByCodeArr = array();
 $levelByCodeArr["bfunction"] = true;
@@ -52,7 +52,7 @@ $object_code = trim($object_code, ".");
 // die("object_code=$object_code object_code_before=$object_code_before");
 
 if (!$object_code) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "level command need the thing to level !! try to see {help level}");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "level command need the thing to level !! try to see {help level}");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -70,7 +70,7 @@ if (file_exists("$module_path/$object_table.php")) {
         if ($levelByCodeArr[$object_table]) {
             [$objToShow, $message] = $object_class::levelByCodes($object_code_arr, $new_level, $filter);
         } else {
-            $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "level $object_class by code still not implemented in Momken framework comand line");
+            $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "level $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;
             $command_finished = true;
             return;
@@ -82,7 +82,7 @@ if (file_exists("$module_path/$object_table.php")) {
                   $objToShow = $object_class::loadById($object_id); 
           }*/
 } else {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0005 when leveling. Please check that the file '$object_table.php' file exists in module path '$module_path'");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0005 when leveling. Please check that the file '$object_table.php' file exists in module path '$module_path'");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -94,7 +94,7 @@ if ($object_table == "module") {
 
 
 if (!$objToShow) {
-    $command_line_result_arr[] = AfwUtils::hzm_format_command_line("error", "Error 0001 level $object_class by code failed with message $message");
+    $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Error 0001 level $object_class by code failed with message $message");
     $nb_errors++;
     $command_finished = true;
     return;
@@ -104,7 +104,7 @@ if (!$objToShow) {
         $typeMess = "success";
         if (AfwStringHelper::stringStartsWith($message_item, "Warning")) $typeMess = "warning";
         if (AfwStringHelper::stringStartsWith($message_item, "Error")) $typeMess = "error";
-        $command_line_result_arr[] = AfwUtils::hzm_format_command_line($typeMess, $message_item);
+        $command_line_result_arr[] = UfwUtils::hzm_format_command_line($typeMess, $message_item);
     }
 
     if (count($object_code_arr) == 3) {

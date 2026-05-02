@@ -1762,8 +1762,10 @@ class Atable extends AFWObject
             $fld_active_edit = 'false';
         }
 
-        if ($this->estAuditable()) {
-            $AUDIT_DATA = '$obj->AUDIT_DATA = true;';
+        if ($this->getVal("auditable")=='Y') {
+            $AUDIT_DATA = '$obj->AUDIT_DATA = "byrow_audit";';
+        } elseif ($this->getVal("auditable")=='W') {
+            $AUDIT_DATA = '$obj->AUDIT_DATA = "bycol_audit";';
         } else {
             $AUDIT_DATA = '';
         }
@@ -2328,7 +2330,10 @@ class $className extends AFWObject{
 \t\tparent::__construct(\"$tabName\",\"id\",\"$dbName\");
             $structClass::initInstance(\$this);    
 \t    }
-        
+        /**
+          * @param mixed \$id
+          * @return $className
+        */
         public static function loadById(\$id)
         {
            \$obj = new $className();
@@ -2651,20 +2656,45 @@ $replace_val_in_list_of_mfk
             $alter_table_add_field_arr[] = $af_reel_obj->calc('sql');
         }
 
+        $alter_table_add_field_arr[] = "-- ALTER TABLE $prefixed_db_name.$table_name add log varchar(255) null;";
+        
+
         $sql_column_comment_sentence_items = implode(";\n", $column_comment_sentence_arr);
 
         $table_body = '';
 
-        $syntax_values['COLUMNS'] = $columns_sql;
+        $syntax_values['COLUMNS'] = $columns_sql."    log VARCHAR(255) null,";
         $syntax_values['COLUMN_COMMENTS'] = $sql_column_comment_sentence_items;
 
-        $table_body = $syntax_values['DROP_TABLE_SENTENCE'] . "\n\n" . $syntax_values['CREATE_TABLE_SENTENCE'];
+        $br_audit_syntax_values = $syntax_values;
+        $br_audit_syntax_values["TABLE_NAME"] .= "_braudit";
+        $br_audit_syntax_values['COLUMNS'] = $columns_sql . "
+        action VARCHAR(24) NOT NULL,  
+        action_by INT(11) NOT NULL,   
+        action_at DATETIME NOT NULL,    
+        action_browser VARCHAR(255) NOT NULL,    
+        action_ip VARCHAR(24) NOT NULL,  
+        update_context VARCHAR(64) NOT NULL, ";
+        $br_audit_table_body = $table_body = $syntax_values['DROP_TABLE_SENTENCE'] . "\n\n" . $syntax_values['CREATE_TABLE_SENTENCE'];
 
         unset($syntax_values['DROP_TABLE_SENTENCE']);
         unset($syntax_values['CREATE_TABLE_SENTENCE']);
 
+        unset($br_audit_syntax_values['DROP_TABLE_SENTENCE']);
+        unset($br_audit_syntax_values['CREATE_TABLE_SENTENCE']);
+
+        // die("table_body=$table_body syntax_values=".var_export($syntax_values,true));
+
         foreach ($syntax_values as $syntax_code => $syntax_value) {
             $table_body = str_replace("[$syntax_code]", $syntax_value, $table_body);
+        }
+
+
+        $br_audit_table_body = str_replace("PRIMARY KEY (`id`)", "PRIMARY KEY (id,version,action)", $br_audit_table_body);
+        
+
+        foreach ($br_audit_syntax_values as $syntax_code => $syntax_value) {
+            $br_audit_table_body = str_replace("[$syntax_code]", $syntax_value, $br_audit_table_body);
         }
 
         //
@@ -2725,16 +2755,25 @@ $replace_val_in_list_of_mfk
         list($indx_cols, $indx_afield_list) = $this->getMainIndexFieldList();
 
         $unique_index_sentence = '';
+        $abr_unique_index_sentence = '';
         if (count($indx_cols) > 0) {
-            $unique_index_sentence_model = $syntax_values['UNIQUE_INDEX'];
-            $unique_index_sentence = $unique_index_sentence_model;
+            $abr_unique_index_sentence = $unique_index_sentence = $syntax_values['UNIQUE_INDEX'];
             $unique_index_sentence = str_replace('[TABLE_NAME]', $table_name, $unique_index_sentence);
             $unique_index_sentence = str_replace('[DB_NAME]', $prefixed_db_name, $unique_index_sentence);
-            $unique_index_sentence = str_replace('[LISTE_COL_U_INDEX]', implode(',', $indx_cols), $unique_index_sentence);
+            $my_u_index = implode(',', $indx_cols);
+            $unique_index_sentence = str_replace('[LISTE_COL_U_INDEX]', $my_u_index, $unique_index_sentence);
+            $abr_unique_index_sentence = str_replace('[TABLE_NAME]', $table_name."_braudit", $abr_unique_index_sentence);
+            $abr_unique_index_sentence = str_replace('[DB_NAME]', $prefixed_db_name, $abr_unique_index_sentence);
+            $my_abr_u_index = implode(',', $indx_cols).",version,action";
+            $abr_unique_index_sentence = str_replace('[LISTE_COL_U_INDEX]', $my_abr_u_index, $abr_unique_index_sentence);
+
         }
 
         if ($unique_index_sentence)
             $sql_foreign_key_sentence_items .= "\n\n-- unique index : \n" . $unique_index_sentence . "\n\n";
+
+        if ($abr_unique_index_sentence)
+            $sql_foreign_key_sentence_items .= "\n\n-- audit unique index : \n" . $abr_unique_index_sentence . "\n\n";
 
         // die(var_export($sql_foreign_key_sentence_items,true));
         // $alter_table_foreign_keys_sentence = str_replace("[TABLE_NAME]",$table_name,$alter_table_sentence_model);
@@ -2758,7 +2797,11 @@ $replace_val_in_list_of_mfk
             }
         }
 
-        if ($this->estAuditable()) {
+        if ($this->getVal("auditable")=='Y') {
+            $table_body .= $br_audit_table_body;
+        } 
+        elseif ($this->getVal("auditable")=='W') {
+
             $auditFieldList = $this->get('auditFieldList');
             foreach ($auditFieldList as $auditFieldItem) {
                 $field_name = $auditFieldItem->getVal('field_name');
@@ -3744,7 +3787,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $rows_updated = 0;
         $rows_inserted = 0;
         $file_dir_name = dirname(__FILE__);
-        // require_once ("$file_dir_name/../lib/afw/afw_autoloader.php");
+        // require_once ("$file_dir_name/../lib/afw/core/afw_autoloader.php");
         if ($module)
             AfwAutoLoader::addModule($module);
 
@@ -4288,7 +4331,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
             // if afw autoloader not loaded load it
             if (!class_exists('AfwAutoLoader')) {
-                require_once("$file_dir_name/../../lib/afw/afw_autoloader.php");
+                require_once("$file_dir_name/../../lib/afw/core/afw_autoloader.php");
             }
             // add the $my_module module
             if ($my_module)
@@ -4905,6 +4948,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
      */
     public static function reverseByCodes($object_code_arr, $doReverse = true, $restriction = '')
     {
+        global $MODE_BATCH_LOURD;
+        $old_MODE_BATCH_LOURD = $MODE_BATCH_LOURD;
+        $MODE_BATCH_LOURD = true;
+
         if (count($object_code_arr) != 2)
             throw new AfwBusinessException('reverseByCodes : 2 params are needed module and table, given : ' . var_export($object_code_arr, true));
         $table_name = $object_code_arr[0];
@@ -4925,6 +4972,9 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $message .= " Strange Error happened because Atable::loadByMainIndex($objModule_id, $table_name) returned empty, may be table need reverse engineering !!";
         else
             $message .= " >> Table $table_name loaded successfully in module ($module_code / $objModule_id)";
+
+        UfwQueryAnalyzer::resetQueriesExecuted();
+        $MODE_BATCH_LOURD = $old_MODE_BATCH_LOURD;
 
         return [$objTable, $message];
     }
