@@ -1,4 +1,18 @@
 <?php
+$file_dir_name = dirname(__FILE__);
+if(!isset($command_line_words)) {
+    $command_line_words = array();
+}
+if(!isset($currmod)) {
+    $currmod = "ums";
+}
+if(!isset($currfld)) {
+    $currfld = "";
+}
+if(!isset($restriction)) {
+    $restriction = "";
+}
+
 
 // hzm_start_immediate_output();
 $command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
@@ -59,7 +73,10 @@ $module_path = "$file_dir_name/../$object_module/models";
 if (file_exists("$module_path/$object_table.php")) {
     AfwAutoLoader::addModule($object_module);
 
-    include_once("$file_dir_name/../$object_module/application_config.php");
+    $config_returned_arr = include_once("$file_dir_name/../$object_module/application_config.php");
+    if(!isset($config_arr)) {
+        $config_arr = $config_returned_arr;
+    }
     AfwSession::initConfig($config_arr, "system", "$file_dir_name/../$object_module/application_config.php");
 
     $reversableByCodeArr = AfwSession::config("reversable_by_code_arr", []);

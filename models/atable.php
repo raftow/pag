@@ -2772,7 +2772,7 @@ $replace_val_in_list_of_mfk
         if ($unique_index_sentence)
             $sql_foreign_key_sentence_items .= "\n\n-- unique index : \n" . $unique_index_sentence . "\n\n";
 
-        if ($abr_unique_index_sentence)
+        if ($abr_unique_index_sentence and ($this->getVal("auditable")=='Y'))
             $sql_foreign_key_sentence_items .= "\n\n-- audit unique index : \n" . $abr_unique_index_sentence . "\n\n";
 
         // die(var_export($sql_foreign_key_sentence_items,true));
