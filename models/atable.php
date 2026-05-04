@@ -72,6 +72,9 @@ class Atable extends AFWObject
 
     public static $TABLE = 'atable';
 
+    /**
+     * @var array|null
+     */
     public static $DB_STRUCTURE = null;
 
     public static $moduleCodeOfId = [];
@@ -2323,7 +2326,9 @@ class $className extends AFWObject{
         public static \$DATABASE\t\t= \"\";
         public static \$MODULE\t\t        = \"$moduleCode\";        
         public static \$TABLE\t\t\t= \"$tabName\";
-
+\t    /**
+\t     * @var array|null
+\t     */
 \t    public static \$DB_STRUCTURE = null;
 \t
 \t    public function __construct(){
@@ -4945,6 +4950,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
     /**
      * function reverseByCodes do a reverse engineering on this table
+     * @param array $object_code_arr : should contain 2 values : [0] => table_name and [1] => module_code
+     * @param bool $doReverse : if true the reverse engineering will be done, 
+     *                          if false the function will just try to load the table 
+     * @param string $restriction : 
      */
     public static function reverseByCodes($object_code_arr, $doReverse = true, $restriction = '')
     {
