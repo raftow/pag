@@ -2283,7 +2283,13 @@ class $className extends AFWObject{
                                 $enTranslateClass::initData();
                         }
                 }
-                
+              
+                /**
+				 * DB_STRUCTURE is the main source of configuration for the class 
+				 *    it is used in all the modules and methods to know how 
+				 *    to handle the class attributes
+				 * @var array
+				 */
                 
                 public static \$DB_STRUCTURE = ";
             $dbstruct_close = '     }';
@@ -2327,6 +2333,9 @@ class $className extends AFWObject{
         public static \$MODULE\t\t        = \"$moduleCode\";        
         public static \$TABLE\t\t\t= \"$tabName\";
 \t    /**
+\t       * DB_STRUCTURE is the main source of configuration for the class 
+\t       *    it is used in all the modules and methods to know how 
+\t       *    to handle the class attributes
 \t     * @var array|null
 \t     */
 \t    public static \$DB_STRUCTURE = null;
@@ -3470,6 +3479,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         }
     }
 
+    /**
+     * @param string $field_name_ar
+     * @param string $to_lang
+     */
     public function createMyTranslation($field_name_ar, $to_lang = 'en')
     {
         $field_name_ar .= '#';
@@ -3486,10 +3499,12 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 $afar->set('titre', $afar->getVal('titre') . ' بالانجليزي');
                 $afar->set('utf8', 'N');
                 $afar->insert();
+                return $afar;
             } else
                 throw new AfwRuntimeException("$field_name_ar is not a text field");
+
         }
-        return $afar;
+        else return $af_trans;
     }
 
     public function hasManyData()
@@ -4165,11 +4180,13 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $scis = $this->get('scis');
         $scis_count = count($scis);
 
+        $added_scis = 0;
+        $updated_scis = 0;
+        $moved_scis = 0;
+        $keeped_scis = 0;
+
         if ($scis_count > 0) {
-            $added_scis = 0;
-            $updated_scis = 0;
-            $moved_scis = 0;
-            $keeped_scis = 0;
+            
 
             $currStep = $fromStep;
             foreach ($scis as $sci_id => $sci_item) {

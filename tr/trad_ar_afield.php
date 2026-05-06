@@ -61,6 +61,7 @@ $trad["afield"]["parent_module_id"] = "التطبيق";
 
 $trad["afield"]["atable_id"] = "الجدول";
 $trad["afield"]["afield_group_id"] = "مجموعة الحقول";
+$trad["afield"]["audit_group_id"] = "مجموعة التدقيق";
 $trad["afield"]["scenario_item_id"] = "العلامة التبويبية";
 
 $trad["afield"]["entry_type_id"] = "طريقة الإدخال";

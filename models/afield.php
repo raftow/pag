@@ -17,6 +17,13 @@ class Afield extends PagObject
         public static $DATABASE = '';
         public static $MODULE = 'pag';
         public static $TABLE = 'afield';
+        /**
+         * DB_STRUCTURE is the main source of configuration for the class 
+         *    it is used in all the modules and methods to know how 
+         *    to handle the class attributes
+         * @var array
+         */
+
         public static $DB_STRUCTURE = null;
 
         public function __construct()
@@ -605,6 +612,7 @@ class Afield extends PagObject
                                         $this->set('answer_table_id', $anstab->getId());
                                 } else {
                                         unset($anstab);
+                                        $anstab = null;
                                 }
 
                                 if (!$anstab) {
@@ -616,6 +624,7 @@ class Afield extends PagObject
                                                 $this->set('answer_table_id', $anstab->getId());
                                         } else {
                                                 unset($anstab);
+                                                $anstab = null;
                                         }
                                 }
 
@@ -1475,6 +1484,7 @@ class Afield extends PagObject
 
                 $field_to_prop_arr['scenario_item_id'] = 'STEP';
                 $field_to_prop_arr['afield_group_id'] = 'FGROUP';
+                $field_to_prop_arr['audit_group_id'] = 'AGROUP';
                 $field_to_prop_arr['answer_table_id'] = 'ANSWER';
                 $field_to_prop_arr['answer_module_id'] = 'ANSMODULE';
 
@@ -1693,6 +1703,20 @@ class Afield extends PagObject
                         $afield_group_id = $fgroupObj->getId();
                         if ($afield_group_id)
                                 $afield_att['afield_group_id'] = $afield_group_id;
+                }
+
+                $audit_group_id = 0;
+                if ($row['AGROUP'] and $myTable) {
+                        require_once("$file_dir_name/afield_group.php");
+                        $agroupObj = AfieldGroup::loadByMainIndex($myTable->getId(), $row['AGROUP'], $create_obj_if_not_found = true);
+                        if ($myObj) {
+                                $agroupObj->set('agroup_name_ar', $myObj->translate($row['AGROUP'], 'ar'));
+                                $agroupObj->set('agroup_name_en', $myObj->translate($row['AGROUP'], 'en'));
+                                $agroupObj->update();
+                        }
+                        $audit_group_id = $agroupObj->getId();
+                        if ($audit_group_id)
+                                $afield_att['audit_group_id'] = $audit_group_id;
                 }
 
                 return $afield_att;
@@ -2366,6 +2390,7 @@ class Afield extends PagObject
         {
                 $lang = AfwLanguageHelper::getGlobalLanguage();
                 $this_id = $this->getId();
+                $fn = null;
                 $mytable = $this->hetTable();
                 $fk_tab = $this->het('answer_table_id');
                 if ($fk_tab)

@@ -23,6 +23,12 @@
                             $obj->after_save_edit = array("class"=>'Atable',"attribute"=>'atable_id', "currmod"=>'pag',"currstep"=>4);
                         }
                 }
+				/**
+				 * DB_STRUCTURE is the main source of configuration for the class 
+				 *    it is used in all the modules and methods to know how 
+				 *    to handle the class attributes
+				 * @var array
+				 */
                 public static $DB_STRUCTURE = array(
 
                         
@@ -167,7 +173,12 @@
 				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
 				),
 
-				
+			'audit_group_id' => array('IMPORTANT' => 'IN',  'SEARCH' => true,  'SHOW' => true,  'RETRIEVE' => false,  'EDIT' => true,  'RETRIEVE_FGROUP' => true,  'SIZE' => 40,  'SEARCH-ADMIN' => true,  'SHOW-ADMIN' => true,  'EDIT-ADMIN' => true,  
+				'TYPE' => 'FK',  'ANSWER' => 'afield_group',  'ANSMODULE' => 'pag',  'QEDIT' => false,  'FGROUP' => 'step_group',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  
+				'WHERE' => "atable_id = §atable_id§", 
+				 'DEFAUT' => 0,  'STEP_GROUP-RETRIEVE' => true,  'SEARCH-BY-ONE' => '',  'DISPLAY' => true,  'STEP' => 1,  
+				'DISPLAY-UGROUPS' => '',  'EDIT-UGROUPS' => '', 
+				),				
 
 			'afield_category_id' => array('STEP' => 2,  'SHORTNAME' => 'category',  'SEARCH' => true,  'QSEARCH' => true,  'SHOW' => true,  'RETRIEVE_FGROUP' => true,  'EDIT' => true,  'QEDIT' => false,  'SIZE' => 32,  'MANDATORY' => true,  'UTF8' => false,  'FGROUP' => 'answer_props',  'EDIT_FGROUP' => true,  'QEDIT_FGROUP' => true,  
 				'TYPE' => 'FK',  'ANSWER' => 'afield_category',  'ANSMODULE' => 'pag',  
