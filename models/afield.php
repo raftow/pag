@@ -9,6 +9,7 @@
 // 13-Nov-2022 :
 // alter table afield add key afield_atable_id(atable_id);
 // alter table afield add key afield_field_name(field_name);
+// alter table afield add `audit_group_id` int(11) DEFAULT NULL after afield_group_id;
 
 global $enum_tables, $lookup_tables, $count_here;
 
