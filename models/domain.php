@@ -9,31 +9,31 @@ class Domain extends AFWObject
       public static $TABLE                  = "";
       public static $DB_STRUCTURE = null;
 
-      public static $DOMAIN_GENERAL=1;                                    // المجالات العامة - general                                      
-      public static $DOMAIN_STUDENT_INFORMATION_SYSTEM=2;                 // إدارة الطلاب والمدارس - education                                  
-      public static $DOMAIN_PAG=3;                                        // تحليل وتصميم النظم - system analysis & design                     
-      public static $DOMAIN_TVT=4;                                        //التدريب التقني - TVT                                               
-      public static $DOMAIN_IT_SUPPORT=5;                                 //صيانة النظم - IT - system support                           
-      public static $DOMAIN_PLANNING=6;                                   //التخطيط - Planning                                            
-      public static $DOMAIN_BUDGET=7;                                     //الميزانية - Budget                                              
-      public static $DOMAIN_HEALTH=8;                                     //الصحة - Health                                                  
-      public static $DOMAIN_IT_USER_MANAGEMENT_SYSTEM=9;                  //الصلاحيات على التطبيقات - IT-UMS                                
-      public static $DOMAIN_HUMAN_RESSOURCE=10;                           //الموارد البشرية - Human Ressource                                  
-      public static $DOMAIN_MEDIA_AND_PUBLIC_RELATIONS=11;                //الإعلام والعلاقات العامة - Public Relations                       
-      public static $DOMAIN_BUSINESS_MANAGEMENT_SYSTEM=12;                //إدارة الأعمال - Business                                           
-      public static $DOMAIN_CRM=13;                                       //خدمة العملاء - Customer service                                   
-      public static $DOMAIN_TRANSPORT=14;                                 //النقل والمواصلات - transportation                           
-      public static $DOMAIN_TRAVEL=15;                                    //عالم الأسفار - Travel company                                 
-      public static $DOMAIN_SUMMER_TRAINING=20;                           //التدريب الصيفي - summer training                               
+      public static $DOMAIN_GENERAL = 1;                                    // المجالات العامة - general                                      
+      public static $DOMAIN_STUDENT_INFORMATION_SYSTEM = 2;                 // إدارة الطلاب والمدارس - education                                  
+      public static $DOMAIN_PAG = 3;                                        // تحليل وتصميم النظم - system analysis & design                     
+      public static $DOMAIN_TVT = 4;                                        //التدريب التقني - TVT                                               
+      public static $DOMAIN_IT_SUPPORT = 5;                                 //صيانة النظم - IT - system support                           
+      public static $DOMAIN_PLANNING = 6;                                   //التخطيط - Planning                                            
+      public static $DOMAIN_BUDGET = 7;                                     //الميزانية - Budget                                              
+      public static $DOMAIN_HEALTH = 8;                                     //الصحة - Health                                                  
+      public static $DOMAIN_IT_USER_MANAGEMENT_SYSTEM = 9;                  //الصلاحيات على التطبيقات - IT-UMS                                
+      public static $DOMAIN_HUMAN_RESSOURCE = 10;                           //الموارد البشرية - Human Ressource                                  
+      public static $DOMAIN_MEDIA_AND_PUBLIC_RELATIONS = 11;                //الإعلام والعلاقات العامة - Public Relations                       
+      public static $DOMAIN_BUSINESS_MANAGEMENT_SYSTEM = 12;                //إدارة الأعمال - Business                                           
+      public static $DOMAIN_CRM = 13;                                       //خدمة العملاء - Customer service                                   
+      public static $DOMAIN_TRANSPORT = 14;                                 //النقل والمواصلات - transportation                           
+      public static $DOMAIN_TRAVEL = 15;                                    //عالم الأسفار - Travel company                                 
+      public static $DOMAIN_SUMMER_TRAINING = 20;                           //التدريب الصيفي - summer training                               
       public static $DOMAIN_EXPERIENCE_SHARING = 16;                      // تبادل الخبرات وادارتها - share exp-self dev                                
       public static $DOMAIN_RESOURCES_AND_ASSETS = 17;                    //الموارد والأصول - resources & assets                              
-      public static $DOMAIN_CONTENT_MANAGEMENT_SYSTEM=18;                 //إدارة المحتوى - Content Management                                
-      public static $DOMAIN_MANAHEJ=19;                                   //المناهج التعليمية - Studies programs                          
-      public static $DOMAIN_TALENT=21;                                    //المسابقات - Competitions                                       
-      public static $DOMAIN_CARD=22;                                      //طباعة بطاقات الاشتراك - member cards print                       
-      public static $DOMAIN_ENQ_COMMON=23;                                //البحوث والدراسات - Research and Studies                    
-      public static $DOMAIN_LICENSE=24;                                   //إدارة التراخيص - licenses management                          
-      public static $DOMAIN_ADMISSION=25;                                 //التسجيل والقبول - application & admission                     
+      public static $DOMAIN_CONTENT_MANAGEMENT_SYSTEM = 18;                 //إدارة المحتوى - Content Management                                
+      public static $DOMAIN_MANAHEJ = 19;                                   //المناهج التعليمية - Studies programs                          
+      public static $DOMAIN_TALENT = 21;                                    //المسابقات - Competitions                                       
+      public static $DOMAIN_CARD = 22;                                      //طباعة بطاقات الاشتراك - member cards print                       
+      public static $DOMAIN_ENQ_COMMON = 23;                                //البحوث والدراسات - Research and Studies                    
+      public static $DOMAIN_LICENSE = 24;                                   //إدارة التراخيص - licenses management                          
+      public static $DOMAIN_ADMISSION = 25;                                 //التسجيل والقبول - application & admission                     
 
       public function __construct()
       {
@@ -135,13 +135,26 @@ class Domain extends AFWObject
                   unset($link);
                   $my_id = $this->getId();
                   $link = array();
+                  $title = "إضافة هدف جديد";
+                  $title_detailed = $title . "لـ : " . $displ;
+                  $link["URL"] = "main.php?Main_Page=afw_mode_edit.php&cl=Goal&currmod=bau&id_origin=$my_id&class_origin=Domain&module_origin=pag&sel_domain_id=$my_id";
+                  $link["TITLE"] = $title;
+                  $link["UGROUPS"] = array();
+                  $otherLinksArray[] = $link;
+            }
+
+            /*
+            if ($mode == "mode_goalList") {
+                  unset($link);
+                  $my_id = $this->getId();
+                  $link = array();
                   $title = "إدارة الأهداف ";
                   $title_detailed = $title . "لـ : " . $displ;
                   $link["URL"] = "main.php?Main_Page=afw_mode_qedit.php&cl=Goal&currmod=bau&id_origin=$my_id&class_origin=Domain&module_origin=pag&newo=3&limit=30&ids=all&fixmtit=$title_detailed&fixmdisable=1&fixm=domain_id=$my_id&sel_domain_id=$my_id";
                   $link["TITLE"] = $title;
                   $link["UGROUPS"] = array();
                   $otherLinksArray[] = $link;
-            }
+            }*/
 
 
 
@@ -263,7 +276,7 @@ class Domain extends AFWObject
 
       public function beforeMAJ($id, $fields_updated)
       {
-            $lang = AfwLanguageHelper::getGlobalLanguage();  
+            $lang = AfwLanguageHelper::getGlobalLanguage();
 
 
             if ((!$this->getVal("domain_code")) or ($this->getVal("domain_code") == "--")) {
