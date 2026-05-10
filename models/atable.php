@@ -234,7 +234,7 @@ class Atable extends AFWObject
         if ($master and ($master->getId() > 0)) {
             return $master->getEntityManagerJobroles();
         }
-        // مسؤولية التعديل
+        // صلاحية التعديل
         $jr = $this->hetEMJob();
         $parent = $this->hetModule();
         if ((!$jr) and ($parent)) {
@@ -676,7 +676,7 @@ class Atable extends AFWObject
         return ($this->debugg_is_detail_table_for_others == 'Y');
     }
 
-    public function calcMaster($what="value")
+    public function calcMaster($what = "value")
     {
         $server_db_prefix = AfwSession::currentDBPrefix();
         $masterTableObject = new Atable();
@@ -1345,7 +1345,7 @@ class Atable extends AFWObject
                 break;
 
             default:
-                return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);                
+                return AfwFormulaHelper::calculateFormulaResult($this, $attribute, $what);
                 break;
         }
     }
@@ -1765,9 +1765,9 @@ class Atable extends AFWObject
             $fld_active_edit = 'false';
         }
 
-        if ($this->getVal("auditable")=='Y') {
+        if ($this->getVal("auditable") == 'Y') {
             $AUDIT_DATA = '$obj->AUDIT_DATA = "byrow_audit";';
-        } elseif ($this->getVal("auditable")=='W') {
+        } elseif ($this->getVal("auditable") == 'W') {
             $AUDIT_DATA = '$obj->AUDIT_DATA = "bycol_audit";';
         } else {
             $AUDIT_DATA = '';
@@ -2671,13 +2671,13 @@ $replace_val_in_list_of_mfk
         }
 
         $alter_table_add_field_arr[] = "-- ALTER TABLE $prefixed_db_name.$table_name add log varchar(255) null;";
-        
+
 
         $sql_column_comment_sentence_items = implode(";\n", $column_comment_sentence_arr);
 
         $table_body = '';
 
-        $syntax_values['COLUMNS'] = $columns_sql."    log VARCHAR(255) null,";
+        $syntax_values['COLUMNS'] = $columns_sql . "    log VARCHAR(255) null,";
         $syntax_values['COLUMN_COMMENTS'] = $sql_column_comment_sentence_items;
 
         $br_audit_syntax_values = $syntax_values;
@@ -2705,7 +2705,7 @@ $replace_val_in_list_of_mfk
 
 
         $br_audit_table_body = str_replace("PRIMARY KEY (`id`)", "PRIMARY KEY (id,version,action)", $br_audit_table_body);
-        
+
 
         foreach ($br_audit_syntax_values as $syntax_code => $syntax_value) {
             $br_audit_table_body = str_replace("[$syntax_code]", $syntax_value, $br_audit_table_body);
@@ -2776,17 +2776,16 @@ $replace_val_in_list_of_mfk
             $unique_index_sentence = str_replace('[DB_NAME]', $prefixed_db_name, $unique_index_sentence);
             $my_u_index = implode(',', $indx_cols);
             $unique_index_sentence = str_replace('[LISTE_COL_U_INDEX]', $my_u_index, $unique_index_sentence);
-            $abr_unique_index_sentence = str_replace('[TABLE_NAME]', $table_name."_braudit", $abr_unique_index_sentence);
+            $abr_unique_index_sentence = str_replace('[TABLE_NAME]', $table_name . "_braudit", $abr_unique_index_sentence);
             $abr_unique_index_sentence = str_replace('[DB_NAME]', $prefixed_db_name, $abr_unique_index_sentence);
-            $my_abr_u_index = implode(',', $indx_cols).",version,action";
+            $my_abr_u_index = implode(',', $indx_cols) . ",version,action";
             $abr_unique_index_sentence = str_replace('[LISTE_COL_U_INDEX]', $my_abr_u_index, $abr_unique_index_sentence);
-
         }
 
         if ($unique_index_sentence)
             $sql_foreign_key_sentence_items .= "\n\n-- unique index : \n" . $unique_index_sentence . "\n\n";
 
-        if ($abr_unique_index_sentence and ($this->getVal("auditable")=='Y'))
+        if ($abr_unique_index_sentence and ($this->getVal("auditable") == 'Y'))
             $sql_foreign_key_sentence_items .= "\n\n-- audit unique index : \n" . $abr_unique_index_sentence . "\n\n";
 
         // die(var_export($sql_foreign_key_sentence_items,true));
@@ -2811,10 +2810,9 @@ $replace_val_in_list_of_mfk
             }
         }
 
-        if ($this->getVal("auditable")=='Y') {
+        if ($this->getVal("auditable") == 'Y') {
             $table_body .= $br_audit_table_body;
-        } 
-        elseif ($this->getVal("auditable")=='W') {
+        } elseif ($this->getVal("auditable") == 'W') {
 
             $auditFieldList = $this->get('auditFieldList');
             foreach ($auditFieldList as $auditFieldItem) {
@@ -3502,9 +3500,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 return $afar;
             } else
                 throw new AfwRuntimeException("$field_name_ar is not a text field");
-
-        }
-        else return $af_trans;
+        } else return $af_trans;
     }
 
     public function hasManyData()
@@ -3976,7 +3972,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             $info = "Used framework (ID:$framework_id) $inf0<br>treated : $bf_arr_count bf(s)";
 
         $MODE_SQL_PROCESS_LOURD = $old_MODE_SQL_PROCESS_LOURD;
-        if(!$MODE_SQL_PROCESS_LOURD) $nb_queries_executed = 0;
+        if (!$MODE_SQL_PROCESS_LOURD) $nb_queries_executed = 0;
 
         return array($error, $info);
     }
@@ -4186,7 +4182,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $keeped_scis = 0;
 
         if ($scis_count > 0) {
-            
+
 
             $currStep = $fromStep;
             foreach ($scis as $sci_id => $sci_item) {
@@ -4478,9 +4474,9 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
          */
 
         /*
-         * 1 : المسؤوليات التي تحتاج صلاحية التعديل
-         * 3 : المسؤوليات التي تحتاج صلاحية المسح
-         * 5 : المسؤوليات التي تحتاج صلاحية التعديل السريع
+         * 1 : الصلاحيات التي تحتاج صلاحية التعديل
+         * 3 : الصلاحيات التي تحتاج صلاحية المسح
+         * 5 : الصلاحيات التي تحتاج صلاحية التعديل السريع
          */
 
         if (($attribute == 'goalConcernList1') or ($attribute == 'goalConcernList3') or ($attribute == 'goalConcernList5')) {
@@ -4493,12 +4489,12 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 ($categ != 'vobj'));  //  and (count($this->get("scis"))==0) : @todo rafik may be we need to add option for this in tboption
         }
 
-        // المسؤوليات التي تحتاج صلاحية الإستعلام
+        // الصلاحيات التي تحتاج صلاحية الإستعلام
         if ($attribute == 'goalConcernList2') {
             return ($pure_dev_mode and ($categ != 'detail_owned') and $this->_isEntity() and (!$this->dataIsAutoGenerated()));  //  and (count($this->get("scis"))==0) : @todo rafik may be we need to add option for this in tboption
         }
 
-        // المسؤوليات التي تحتاج إجراء إحصائيات على هذا الجدول
+        // الصلاحيات التي تحتاج إجراء إحصائيات على هذا الجدول
         if ($attribute == 'goalConcernList4') {
             return ($pure_dev_mode and ($categ == 'entity'));
         }
@@ -5306,7 +5302,8 @@ $TDesc
     }
 
 
-    public function calcPrevileges_code($what='value') {
+    public function calcPrevileges_code($what = 'value')
+    {
         $objModule = $this->het('id_module');
         if (!$objModule)
             return 'Error : no valid module for this table ';
@@ -5314,6 +5311,6 @@ $TDesc
         list($tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd) = UmsManager::genereTablePrevilegesFile($module_code, $this, true);
         // $php_code = "will do UmsManager::genereTablePrevilegesFile($module_code, $this, true)";
 
-        return "<textarea class='code php'>".$php_code."</textarea>";
+        return "<textarea class='code php'>" . $php_code . "</textarea>";
     }
 }

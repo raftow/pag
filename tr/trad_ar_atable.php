@@ -61,11 +61,11 @@ $trad["atable"]["auditable.NO"] = "بدون تقصي للأثر";
 $trad["atable"]["auditable.EUH"] = "تقصي الأثر بحسب الحقل";
 
 $trad["migration"]["done_ind"] = "تمت";
-	$trad["migration"]["done_ind"]  = "ليس بعد";
-	$trad["migration"]["done_ind"] = "تجاهلتها";
+$trad["migration"]["done_ind"]  = "ليس بعد";
+$trad["migration"]["done_ind"] = "تجاهلتها";
 
 $trad["atable"]["vh"] = "الأيقونة";
-$trad["atable"]["details_tables_mfk"] ="جداول تفاصيل الكيان";
+$trad["atable"]["details_tables_mfk"] = "جداول تفاصيل الكيان";
 $trad["atable"]["system_id"] = "النظام";
 $trad["atable"]["id_module"] = "التطبيق";
 $trad["atable"]["id_sub_module"] = "الوحدة";
@@ -96,8 +96,8 @@ $trad["atable"]["exp_u_records"] = "العدد المتوقع للسجلات ف�
 $trad["atable"]["exp_u_records.short"] = "سجلات متوقعة";
 $trad["atable"]["max_period"] = "المدة القصوى لعدم التحديث";
 $trad["atable"]["exp_period"] = "المدة المقبولة لعدم التحديث";
-$trad["atable"]["jobrole_id"] = "مسؤولية التعديل";
-$trad["atable"]["jobrole_mfk"] = "مسؤوليات العرض";
+$trad["atable"]["jobrole_id"] = "صلاحية التعديل";
+$trad["atable"]["jobrole_mfk"] = "صلاحيات العرض";
 $trad["atable"]["data_auser_mfk"] = "الموظف(ون) المكلف(ون) بتحديث البيانات";
 
 
@@ -106,7 +106,7 @@ $trad["atable"]["entity_name"] = "مرتبط بالكيان";
 $trad["atable"]["id_auto_increment"] = "الترقيم المؤتمت";
 $trad["atable"]["utf8"] = "اللغة العربية";
 $trad["atable"]["partition_function"] = "partition function";
-$trad["atable"]["sql_gen"] = "تم إضافة الجدول"; 
+$trad["atable"]["sql_gen"] = "تم إضافة الجدول";
 
 $trad["atable"]["stats"] = "الإحصائيات";
 $trad["atable"]["fieldcount"] = "عدد الحقول";
@@ -137,14 +137,11 @@ $trad["atable"]["lookupValueList"] = "المفردات";
 $trad["atable"]["concernedGoalList"] = "السعي لتحقيق الأهداف من هذا الكيان";
 $trad["atable"]["mainGoal"] = "الهدف الرئيسي";
 
-$trad["atable"]["goalConcernList1"] = "المسؤوليات التي تحتاج صلاحية التعديل";
-$trad["atable"]["goalConcernList2"] = "المسؤوليات التي تحتاج صلاحية الإستعلام";
-$trad["atable"]["goalConcernList3"] = "المسؤوليات التي تحتاج صلاحية المسح";
-$trad["atable"]["goalConcernList4"] = "المسؤوليات التي تحتاج إجراء إحصائيات على هذا الجدول"; 
-$trad["atable"]["goalConcernList5"] = "المسؤوليات التي تحتاج صلاحية التعديل السريع";
- 
- 
+$trad["atable"]["goalConcernList1"] = "الصلاحيات التي تحتاج صلاحية التعديل";
+$trad["atable"]["goalConcernList2"] = "الصلاحيات التي تحتاج صلاحية الإستعلام";
+$trad["atable"]["goalConcernList3"] = "الصلاحيات التي تحتاج صلاحية المسح";
+$trad["atable"]["goalConcernList4"] = "الصلاحيات التي تحتاج إجراء إحصائيات على هذا الجدول";
+$trad["atable"]["goalConcernList5"] = "الصلاحيات التي تحتاج صلاحية التعديل السريع";
+
+
 $pct_tab_search_result = "60%";
-
-
-?>  
