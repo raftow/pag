@@ -2688,7 +2688,7 @@ $replace_val_in_list_of_mfk
         action_at DATETIME NOT NULL,    
         action_browser VARCHAR(255) NOT NULL,    
         action_ip VARCHAR(24) NOT NULL,  
-        update_context VARCHAR(64) NOT NULL, ";
+        update_context VARCHAR(255) NOT NULL, ";
         $br_audit_table_body = $table_body = $syntax_values['DROP_TABLE_SENTENCE'] . "\n\n" . $syntax_values['CREATE_TABLE_SENTENCE'];
 
         unset($syntax_values['DROP_TABLE_SENTENCE']);
@@ -2833,7 +2833,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
   `val` VARCHAR(255) DEFAULT NULL,
   `update_date` datetime NOT NULL,
   `update_auser_id` INT(11) NOT NULL,
-  `update_context` VARCHAR(255) DEFAULT NULL,
+  update_context VARCHAR(255) NOT NULL,
  
  
   PRIMARY KEY (`id`, `version`)
