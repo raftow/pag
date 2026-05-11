@@ -3977,7 +3977,10 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return array($error, $info);
     }
 
-    public function createModeScreen($framework_mode, $framework_id = 0, $resetUS = false)
+    /**
+     * @param string $framework_mode
+     */
+    public function createModeScreen($framework_mode, $framework_id = 0, $resetUS = false, $force = false)
     {
         $lang = AfwLanguageHelper::getGlobalLanguage();
         if (!$framework_id)
@@ -4013,7 +4016,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             else
                 $bf_type = '';
             if (!$bf_type) {
-                throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no bf type defined for category : $cat mode $framework_mode");
+                throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no bf type defined for category : $cat mode $framework_mode found code is [$bf_type_code]");
             }
 
             if ($framework_mode_item['categories'][$cat]) {
@@ -4032,13 +4035,13 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                     throw new AfwRuntimeException("failed Bfunction::getOrCreateBF($system_id, $file_name, $id_module, $this_id, $bf_spec, $titre, $titre_en, $titre, $titre_en, $direct_access, $public, $bf_type, $bf_code) : " . var_export($bf, true));
                 }
             } else {
-                throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no category : $cat in mode $framework_mode");
+                if ($force) throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no category : $cat in mode $framework_mode");
             };
         } else {
-            throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], no mode $framework_mode");
+            throw new AfwRuntimeException("Working on $atable_name using framework config [framework_$framework_id], unknown mode $framework_mode");
         }
 
-        if (($bf_row_empty) and (!$no_screen[$cat])) {
+        if ($bf_row_empty and $force) {
             throw new AfwRuntimeException("atable_id = $this, no screen created for mode $framework_mode, cat=$cat framework_id=$framework_id, system=$system_id : " . var_export($bf_row, true));
         }
         return $bf_row;
@@ -4111,7 +4114,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
             } else
                 $bf_arr[-1]["$framework_mode.$cat"]++;
         }
-        if (($bf_arr_empty) and (!$no_screen[$cat]))
+        if ($bf_arr_empty)
             throw new AfwRuntimeException("atable_id = $this, no frame work screen created, cat=$cat framework_id=$framework_id, system=$system_id : " . var_export($bf_arr, true));
         // else throw new AfwRuntimeException("frame work screens created for cat=$cat framework_id=$framework_id: ".var_export($bf_arr,true));
         return $bf_arr;
