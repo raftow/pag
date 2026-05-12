@@ -1,4 +1,16 @@
 <?php
+/**
+ * @var bool $clinego
+ * @var string $command_line
+ * @var int $nb_errors
+ * @var string $hist
+ * @var string $currmod  
+ * @var string $currfld
+ * @var int $currfld_id
+ * @var array $arr_cmd_lines
+ * @var array $_sql_picture
+ * 
+ */
 $immediate_output = false;
 $LOOP_MAX = 5;
 if (!$lang) $lang = "ar";
@@ -31,7 +43,8 @@ if (!$objme) {
     $command_finished = true;
     AfwRunHelper::safeDie("loopArr= ".var_export($loopArr,true)." command_line_result_arr= ".var_export($command_line_result_arr,true));
   }*/
-
+$command_line_hist_arr = [];
+$data_token_new_suggested_command_line = "";
 if ($command_line) {
 
   $hist = trim($hist);
@@ -59,7 +72,7 @@ if ($command_line) {
   }
 
 
-  $data_token_new_suggested_command_line = "";
+  
 
   $loopCount = 0;
   $loopArr = [];
@@ -177,7 +190,7 @@ if ($command_line) {
     //die("data_token_new_suggested_command_line=$data_token_new_suggested_command_line");
   }
 
-  $command_line_hist_arr = [];
+  
   $command_line_hist_arr[] = UfwUtils::hzm_format_command_line("normal", "Your command history : ");
 
   $log_hist_class = "";
