@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * @var string $currmod
+ * @var string $currfld
+ * @var string $currtbl_code
+ * @var string $command_code_option
+ * @var array $command_line_words
+ */
 // hzm_start_immediate_output();
 $command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
 $addByCodeArr = array();
@@ -7,7 +13,9 @@ $addByCodeArr["module"] = true;
 $addByCodeArr["atable"] = true;
 $addByCodeArr["afield"] = true;
 $addByCodeArr["goal"] = true;
+$addByCodeArr["arole"] = true;
 
+$pag_dir_name = dirname(__FILE__);
 
 $what_to_add = $command_line_words[1];
 
@@ -39,6 +47,8 @@ if ($object_table == "module") {
 } elseif ($object_table == "atable") {
     $nb_parts_needed = 2;
 } elseif ($object_table == "afield") {
+    $nb_parts_needed = 3;
+} elseif ($object_table == "arole") {
     $nb_parts_needed = 3;
 }
 
@@ -81,7 +91,7 @@ $object_title_en = str_replace("-", " ", $object_title_en);
 $object_title_ar = str_replace("-", " ", $object_title_ar);
 
 
-$module_path = "$file_dir_name/../$object_module/models";
+$module_path = "$pag_dir_name/../$object_module/models";
 if (file_exists("$module_path/$object_table.php")) {
     AfwAutoLoader::addModule($object_module);
 

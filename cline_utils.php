@@ -142,7 +142,13 @@ class ClineUtils
         } elseif ($object_module_table == "g") {
             $object_table = "goal";
             $object_module = "bau";
-        } else {
+        } elseif ($object_module_table == "role") {
+            $object_table = "arole";
+            $object_module = "ums";
+        } elseif ($object_module_table == "r") {
+            $object_table = "arole";
+            $object_module = "ums";
+        }else {
             list($object_table, $object_module) = explode(".", $object_module_table);
         }
 

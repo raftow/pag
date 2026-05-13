@@ -3292,6 +3292,13 @@ class Afield extends PagObject
                 return $attribute;
         }
 
+        /**
+         * @param array $object_code_arr 
+         * @param string $object_name_en 
+         * @param string $object_name_ar 
+         * @param string $object_title_en 
+         * @param string $object_title_ar
+         */
         public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false, $command_code_option = '')
         {
                 if (count($object_code_arr) < 3)
