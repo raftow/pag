@@ -89,7 +89,7 @@ if ($objToShow and (!$objToShow->isEmpty())) {
 
         $name_att = $attribute . " - " . $objToShow->translate($attribute, $lang);
 
-        $command_line_result_arr[] = hzm_attribute_command_line("info", $odd_oven, $name_att, $val_att, $lang);
+        $command_line_result_arr[] = UfwUtils::hzm_attribute_command_line("info", $odd_oven, $name_att, $val_att, $lang);
         if ($odd_oven != "odd") $odd_oven = "odd";
         else $odd_oven = "oven";
     }
