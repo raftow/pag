@@ -1,5 +1,6 @@
 <?php
-
+// seems obsolete
+/*
 use Complex\Autoloader;
 
 $popup = $_GET["popup"];        
@@ -11,7 +12,7 @@ $mod_code = $_GET["mdc"];
 $sln = $_GET["sln"];
 $nogsh = $_GET["nogsh"];
 
-$MODE_SQL_PROCESS_LOURD = true;
+UfwQueryAnalyzer::startProcessLourdMode();
 $genere_sln = $sln;
 //$real_create = $_GET["rcr"];  dangereux
 if($real_create and (!$mod_code)) die("for real mode code generation, specify module code &mdc=xxxxx"); 
@@ -34,10 +35,6 @@ if((!$genere_sql) and (!$genere_php) and (!$genere_trad) and (!$genere_lookup) a
 {
         $genere_sql = true;
         $genere_php = true;
-        /*
-        $genere_trad = false;
-        $genere_lookup = false;
-        $genere_dbstruct_only = false;*/
 }        
 
 AfwAutoloader::addModule("pag");
