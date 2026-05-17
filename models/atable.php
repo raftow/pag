@@ -3718,7 +3718,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $fieldcount = intval($this->getVal('fieldcount'));
 
         if ($fieldcount < 3) {
-            if (!AfwSession::hasOption('CLINE-NO-DEFAULT-FIELDS')) {
+            if ((!AfwSession::hasOption('CLINE-NO-DEFAULT-FIELDS')) and (!$this->NO_DEFAULT_FIELDS)) {
                 $this_table_name = $this->getVal('atable_name');
                 $table_titre_u = $this->valTitre_u();
                 $table_titre_u_en = trim(trim(trim($this->valTitre_u_en(), '?'), '؟'));
