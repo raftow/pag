@@ -87,6 +87,10 @@ class ClineUtils
             if (($command_code == "+v") or ($command_code == "+++")) $command_code_option = "very-light";
         }
 
+        if (($command_code == "upd") or ($command_code == "update") or ($command_code == "*")) {
+            $command_code = "add-update";
+        }
+
         if (($command_code == "upgr") or ($command_code == "upg") or ($command_code == "up") or ($command_code == "u")) {
             $command_code = "upgrade";
         }
@@ -132,10 +136,10 @@ class ClineUtils
             $object_module = "pag";
         } elseif ($object_module_table == "domain") {
             $object_table = "domain";
-            $object_module = "pag";
+            $object_module = "cmn";
         } elseif ($object_module_table == "d") {
             $object_table = "domain";
-            $object_module = "pag";
+            $object_module = "cmn";
         } elseif ($object_module_table == "goal") {
             $object_table = "goal";
             $object_module = "bau";
@@ -148,7 +152,7 @@ class ClineUtils
         } elseif ($object_module_table == "r") {
             $object_table = "arole";
             $object_module = "ums";
-        }else {
+        } else {
             list($object_table, $object_module) = explode(".", $object_module_table);
         }
 

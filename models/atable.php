@@ -901,6 +901,9 @@ class Atable extends AFWObject
                 $module = $this->myModuleCode();
                 list($fileName, $className) = AfwStringHelper::getHisFactory($table, $module);
 
+                if (file_exists($fileName)) {
+                    require_once $fileName;
+                } else return -3;
                 /*
                  * if(file_exists($fileName)) {
                  *         require_once $fileName;
@@ -4916,8 +4919,25 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return [$objTable, $message];
     }
 
-    public static function addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $update_if_exists = false, $command_code_option = '')
-    {
+
+    /**
+     * @param array $object_code_arr 
+     * @param string $object_name_en 
+     * @param string $object_name_ar 
+     * @param string $object_title_en 
+     * @param string $object_title_ar
+     */
+    public static function addByCodes(
+        $object_code_arr,
+        $object_name_en,
+        $object_name_ar,
+        $object_title_en,
+        $object_title_ar,
+        $other_settings,
+        $update_if_exists = false,
+        $command_code_option = '',
+        $all_command = ''
+    ) {
         if (count($object_code_arr) != 2)
             throw new AfwRuntimeException('Atable::addByCodes : 2 params are needed module and table, given : ' . var_export($object_code_arr, true));
         $table_name = $object_code_arr[0];

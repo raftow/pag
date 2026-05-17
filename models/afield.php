@@ -3305,8 +3305,10 @@ class Afield extends PagObject
                 $object_name_ar,
                 $object_title_en,
                 $object_title_ar,
+                $other_settings,
                 $update_if_exists = false,
-                $command_code_option = ''
+                $command_code_option = '',
+                $all_command = ''
         ) {
                 if (count($object_code_arr) < 3)
                         throw new AfwRuntimeException('addByCodes : 3 params are needed module and table and field name, given : ' . var_export($object_code_arr, true));

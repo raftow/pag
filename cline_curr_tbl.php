@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * @var string $currmod
+ * @var array $command_line_words
+ */
+
+
 $command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code on " . $command_line_words[1]);
 AfwLoadHelper::noCacheManagement("Atable");
 AfwLoadHelper::noCacheManagement("Module");

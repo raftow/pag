@@ -2116,7 +2116,7 @@ $role_info = array(
             array(
               'id' => '103328',
               'menu_name' => 'إدارة قطاعات الأعمال',
-              'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Domain&currmod=pag&ids=all&newo=3',
+              'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Domain&currmod=cmn&ids=all&newo=3',
               'css' => 'bf',
               'icon' => 'edit',
             ),
@@ -2471,7 +2471,7 @@ $role_info = array(
         array(
           'id' => '103328',
           'menu_name' => 'إدارة قطاعات الأعمال',
-          'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Domain&currmod=pag&ids=all&newo=3',
+          'page' => 'main.php?Main_Page=afw_mode_qedit.php&cl=Domain&currmod=cmn&ids=all&newo=3',
           'css' => 'bf',
           'icon' => 'edit',
         ),

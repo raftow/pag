@@ -1,4 +1,22 @@
 <?php
+if (!isset($command_line_words)) {
+    $command_line_words = array();
+}
+if (!isset($currmod)) {
+    $currmod = "ums";
+}
+if (!isset($currfld)) {
+    $currfld = "";
+}
+if (!isset($restriction)) {
+    $restriction = "";
+}
+
+if (!isset($currtbl_code)) {
+    $currtbl_code = "";
+}
+
+
 
 $command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code with restriction = [$restriction]");
 

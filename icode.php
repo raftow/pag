@@ -5,7 +5,7 @@ api_endpoint_id\t2\t\t\t\t\tN\tinteger\tالخدمة الالكترونية\tApi
 run_date\t3\t\t\t\t\tN\tdate\tتاريخ  التنفيذ\tRun Date\t\t
 need_refresh\t4\t\t\t\t\tN\tCHAR(1)\tيحتاج تحديث\tneed refresh\t\t";
 
-// main.php?Main_Page=afw_mode_edit.php&cl=Domain&currmod=pag&id=25
+// main.php?Main_Page=afw_mode_edit.php&cl=Domain&currmod=cmn&id=25
 $module = null;
 if (isset($_GET['m']))
         $module = $_GET['m'];
@@ -16,8 +16,10 @@ $start_file = "$file_dir_name/../$module/$module" . '_start.php';
 if (!file_exists($start_file)) {
         die("please define your start file $start_file");
 }
-
-include ($start_file);
+/**
+ * @var array $TECH_FIELDS
+ */
+include($start_file);
 
 $actv_fld = $TECH_FIELDS[$MODULE]['ACTIVE_FIELD'];
 $cre_u_id = $TECH_FIELDS[$MODULE]['CREATION_USER_ID_FIELD'];
@@ -439,15 +441,16 @@ foreach ($struc_lines_arr as $struc_line) {
                 $uk_arr[] = $field_name;
 
         if (($field_name != 'id') and
-                        ($field_name != 'creation_user_id') and
-                        ($field_name != 'creation_date') and
-                        ($field_name != 'update_user_id') and
-                        ($field_name != 'update_date') and
-                        ($field_name != 'active') and
-                        ($field_name != 'version') and
-                        ($field_name != 'update_roles_mfk') and
-                        ($field_name != 'delete_roles_mfk') and
-                        ($field_name != 'display_roles_mfk')) {
+                ($field_name != 'creation_user_id') and
+                ($field_name != 'creation_date') and
+                ($field_name != 'update_user_id') and
+                ($field_name != 'update_date') and
+                ($field_name != 'active') and
+                ($field_name != 'version') and
+                ($field_name != 'update_roles_mfk') and
+                ($field_name != 'delete_roles_mfk') and
+                ($field_name != 'display_roles_mfk')
+        ) {
                 list($afwType, $asize, $tsize, $maxlength, $utf8, $fk_table, $pct, $lang) = oracleTypeToAfwType($field_name, $oracle_type);
 
                 $afwTypeFull = $afwType . $tsize;

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @var array $command_line_words
+ * @var int $currfld_id
+ * @var string $currmod 
+ */
+
+$pag_dir_name = dirname(__FILE__);
 $command_line_result_arr[] = UfwUtils::hzm_format_command_line("info", "doing $command_code with params " . var_export($command_line_words, true));
 // ex list index fields from table booking
 // ex list original fields from table travel 
@@ -126,7 +133,7 @@ $object_code = is_numeric($object_codeOrId) ? "" : $object_codeOrId;
 
 $object_id   = is_numeric($object_codeOrId) ? intval($object_codeOrId) : "";
 $objToShow = null;
-$module_path = "$file_dir_name/../$object_module/models";
+$module_path = "$pag_dir_name/../$object_module/models";
 if (file_exists("$module_path/$object_table.php")) {
     require_once("$module_path/$object_table.php");
     $object_class = AfwStringHelper::tableToClass($object_table);
