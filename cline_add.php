@@ -167,7 +167,10 @@ if (file_exists("$module_path/$object_table.php")) {
                 ]);
             // UfwUtils::dieWithVar("will call $object_class::addByCodes on object_code_arr : ", $object_code_arr);/**/
             $update_if_exists = (true or ($restriction == "update"));
-            [$objToShow, $message] = $object_class::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $other_settings, $update_if_exists, $command_code_option, $command_line . "[object_code=$object_code before=$object_code_before]");
+            list($objToShow, $message, $error, $warning) = $object_class::addByCodes($object_code_arr, $object_name_en, $object_name_ar, $object_title_en, $object_title_ar, $other_settings, $update_if_exists, $command_code_option, $command_line . "[object_code=$object_code before=$object_code_before]");
+            if ($warning) $message_arr[] = 'with warning : ' . $warning;
+            if ($error) $message_arr[] = 'with error : ' . $error;
+            
         } else {
             $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "add $object_class by code still not implemented in Momken framework comand line");
             $nb_errors++;
