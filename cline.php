@@ -129,7 +129,7 @@ if ($command_line) {
     list($command_code, $restriction) = explode("-", $command_code, 2);
   }
 
-  $modeSuperDeveloper = AfwSession::config("super-dev", true);
+  $modeSuperDeveloper = AfwSession::config("super-dev", true) and AfwSession::hasOption("SWITCH_ROOT");
   // die("modeSuperDeveloper=$modeSuperDeveloper");
 
   while (!$command_finished) {

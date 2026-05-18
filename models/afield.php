@@ -1669,10 +1669,12 @@ class Afield extends PagObject
 
                 if (($afield_att['afield_type_id'] == AfwUmsPagHelper::$afield_type_list) or ($afield_att['afield_type_id'] == AfwUmsPagHelper::$afield_type_mlst)) {
                         list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row['ANSMODULE'], $row['ANSWER'], false, $create_table_if_not_exists);
-                        if (!$mdl_id)
-                                throw new AfwRuntimeException("For attribute $attribute ANSMODULE=" . $row['ANSMODULE'] . ', doesnt have module id');
+                        $ansModule = $row['ANSMODULE'];
+                        $ansTable = $row['ANSWER'];
+                        if (!$mdl_id)                                
+                                throw new AfwRuntimeException("For attribute $attribute ANSMODULE=$ansModule, doesnt have module id");
                         if (!$tbl_id)
-                                throw new AfwRuntimeException("For attribute $attribute ANSMODULE=" . $row['ANSMODULE'] . ', ANSWER=' . $row['ANSWER'] . ' doesnt have table id (create_table_if_not_exists=' . $create_table_if_not_exists . ')');
+                                throw new AfwRuntimeException("For attribute $attribute ANSMODULE=$ansModule, ANSWER=$ansTable doesnt have table id (create_table_if_not_exists=' . $create_table_if_not_exists . '). You may need to do a reverse engineering for this table : reverse table $ansTable.$ansModule");
                         $afield_att['answer_module_id'] = $mdl_id;
                         $afield_att['answer_table_id'] = $tbl_id;
                         if (!$afield_att['entity_relation_type_id'])
