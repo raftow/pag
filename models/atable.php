@@ -5359,9 +5359,13 @@ $TDesc
         if (!$objModule)
             return 'Error : no valid module for this table ';
         $module_code = $objModule->getVal('module_code');
-        list($tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd) = UmsManager::genereTablePrevilegesFile($module_code, $this, true);
+        list($tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd) = UmsManager::genereTablePrevilegesFile($module_code, $this, false, true);
         // $php_code = "will do UmsManager::genereTablePrevilegesFile($module_code, $this, true)";
-
-        return "<textarea class='code php'>" . $php_code . "</textarea>";
+        $message = "<div class='help fleft ums'>Please create or erase or merge this file : /$module_code/previleges/role/$fileName <b>with below code</b></div>";
+        $message2 = "<div class='help fleft ums'>Also Please add at the end of this file : /$module_code/previleges.php the line below :<br>
+                        include('previleges/table/$fileName');<br>
+                        Finally deploy this change to see this new previleges or roles
+                        </div>";
+        return "$message<br>\n<textarea class='code php' cols='150' rows='30' style='direction: ltr;float: left;background-color: #c6e2fbc4;width: 100%;font-size: 18px;font-family: revert;'>" . $php_code . "</textarea><br>\n$message2";
     }
 }

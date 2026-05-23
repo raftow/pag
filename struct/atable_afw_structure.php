@@ -883,6 +883,7 @@ class PagAtableAfwStructure
 			'STEP' => 10,
 			'TYPE' => 'TEXT',
 			'CATEGORY' => 'FORMULA',
+			'NO-LABEL' => true,
 			'SHOW' => true,
 			'EDIT' => true,
 			'FORMAT' => 'PRE',
