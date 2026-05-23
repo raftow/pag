@@ -3812,8 +3812,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
         $objClass = new $className();
         $nbSteps = $objClass->editNbSteps;
-        if (!$nbSteps)
-            return;
+        if (!$nbSteps) $nbSteps = 1;
 
         $cum_steps = array();
 
@@ -5361,7 +5360,7 @@ $TDesc
         $module_code = $objModule->getVal('module_code');
         list($tbf_info_item, $tab_info_item, $fileName, $php_code, $mv_cmd) = UmsManager::genereTablePrevilegesFile($module_code, $this, false, true);
         // $php_code = "will do UmsManager::genereTablePrevilegesFile($module_code, $this, true)";
-        $message = "<div class='help fleft ums'>Please create or erase or merge this file : /$module_code/previleges/role/$fileName <b>with below code</b></div>";
+        $message = "<div class='help fleft ums'>Please create or erase or merge this file : /$module_code/previleges/table/$fileName <b>with below code</b></div>";
         $message2 = "<div class='help fleft ums'>Also Please add at the end of this file : /$module_code/previleges.php the line below :<br>
                         include('previleges/table/$fileName');<br>
                         Finally deploy this change to see this new previleges or roles
