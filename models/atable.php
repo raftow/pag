@@ -5365,6 +5365,6 @@ $TDesc
                         include('previleges/table/$fileName');<br>
                         Finally deploy this change to see this new previleges or roles
                         </div>";
-        return "$message<br>\n<textarea class='code php' cols='150' rows='30' style='direction: ltr;float: left;background-color: #c6e2fbc4;width: 100%;font-size: 18px;font-family: revert;'>" . $php_code . "</textarea><br>\n$message2";
+        return "$message<br>\n<textarea class='code php' cols='150' rows='30' style='direction: ltr;float: left;background-color: #c6e2fbc4;width: 100%;font-size: 18px;font-family: revert;'><?php\n" . $php_code . "</textarea><br>\n$message2";
     }
 }
