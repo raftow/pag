@@ -1297,6 +1297,11 @@ class Afield extends PagObject
                 return true;
         }
 
+        public function isImportant() {
+                // @todo : IMPORTANT PROPERTY is still not pagged (reversed)
+                return true;
+        }
+
         public function resetDefaultModes($commit = false, $my_tab = null)
         {
                 if (!$my_tab)

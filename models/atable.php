@@ -1224,7 +1224,7 @@ class Atable extends AFWObject
                                               and f1.avail='Y'
                                               and f1.reel='Y'
                                               and f1.atable_id > 0
-                                              and f1.afield_type_id in (5,12))");
+                                              and f1.afield_type_id in (5))");
                 return $at->loadMany();
                 break;
 
@@ -1434,6 +1434,13 @@ class Atable extends AFWObject
     public function getShortDisplay($lang = 'ar')
     {
         return $this->valTitre_short();
+    }
+
+    public function getDropDownDisplay($lang = 'ar')
+    {
+        $fn = $this->valAtable_name();
+        $fn = trim($fn . '-' . $this->valTitre_short());
+        return $fn;
     }
 
     public function getDisplay($lang = 'ar')
@@ -2519,6 +2526,59 @@ $replace_val_in_list_of_mfk
         // echo "$new_php_file $fileName generated under $dir $new_php_file_end<br>";*/
 
         return array($php_class_code, $phpErrors, $new_php_file . $new_php_file_end);
+    }
+
+    public function getTargetTables($important=true)
+    {
+        $tables = array();
+        $afieldList = $this->get('afieldList');
+        foreach ($afieldList as $afieldId => $afieldObj) {
+            /**
+             * @var Afield $afieldObj
+             */
+            if ($afieldObj->isFK() and $afieldObj->surIs('reel') and $afieldObj->sureIs('avail')) {
+                $tableObj = $afieldObj->get('answer_table_id');
+                if (!$important or $afieldObj->isImportant()) {
+                    $tables[] = $tableObj->id;
+                }
+            }
+        }
+        return $tables;
+    }
+
+    public function getAroundTables($only_important=true)
+    {
+        $af = new Afield();
+        $this_id = $this->getId();
+        $this_id_module = $this->getVal('id_module');
+        $af->select("answer_table_id", $this_id);
+        $af->select("avail", 'Y');
+        $af->select("reel", 'Y');
+        $af->select("afield_type_id", AfwUmsPagHelper::$afield_type_list);
+        $return_arr = $af->loadCol("atable_id", true);
+
+
+        if (!$only_important) {
+            return $return_arr;
+        } else {
+            $important_tables = array();
+            foreach ($return_arr as $atable_id) {
+                $atable = Atable::loadById($atable_id);
+                if ($atable and ($this_id_module == $atable->getVal('id_module'))) {
+                    $important_tables[] = $atable_id;
+                }
+            }
+            return $important_tables;
+        }
+    }
+
+    public function nbFKs() {
+            $af_new = new Afield();
+            $af_new->set('atable_id', $this->getId());
+            $af_new->set('reel', 'Y');
+            $af_new->set('avail', 'Y');
+            $af_new->set('afield_type_id', AfwUmsPagHelper::$afield_type_list);
+            return $af_new->count();
     }
 
     public function generateSQLStructure()
