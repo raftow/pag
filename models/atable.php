@@ -1629,6 +1629,35 @@ class Atable extends AFWObject
      * else return false;
      */
 
+    public function renderHtml() {
+        $code = "atable".$this->id;
+        $tbl = new HtmlyTableau($code, $code, "ltr");
+        $lang = AfwLanguageHelper::getGlobalLanguage();
+        $this_id = $this->getId();
+
+        $tbl->addElement(new HtmlyRowHeader("","","",['thetitle' => $this->getShortDisplay($lang)],));
+        $tbl->addElement(new HtmlyRowHeader("","","",['thename' => $this->getVal("atable_name")],));
+
+        $tbl->addClass("schema-table");
+
+        $af_reel = new Afield();
+
+        $af_reel->select('atable_id', $this_id);
+        $af_reel->select("reel", 'Y');
+        $af_reel->select('avail', 'Y');
+
+        $af_reel_list = $af_reel->loadMany($limit = '', $order_by = 'field_order asc, afield_type_id asc, field_name asc');
+        /** @var Afield $af_reel_obj */
+        foreach ($af_reel_list as $af_reel_id => $af_reel_obj) {
+            $thefieldClassCss = $af_reel_obj->schemaCssClass();
+            $thefieldDescr = $af_reel_obj->schemaDescription($lang);
+            $tbl->addElement(new HtmlyRowBody("","","",[$thefieldClassCss => $thefieldDescr],));
+        }
+
+        return $tbl->renderHtml();
+
+    }
+
     public function generatePhpClass($dbstruct_only = false, $dbstruct_outside = false)
     {
         $lang = AfwLanguageHelper::getGlobalLanguage();
@@ -2562,22 +2591,52 @@ $replace_val_in_list_of_mfk
             return $return_arr;
         } else {
             $important_tables = array();
+            $important_table_names = array();
             foreach ($return_arr as $atable_id) {
                 $atable = Atable::loadById($atable_id);
                 if ($atable and ($this_id_module == $atable->getVal('id_module'))) {
                     $important_tables[] = $atable_id;
+                    $important_table_names[] = $atable->getVal('atable_name');
                 }
             }
-            return $important_tables;
+            return [$important_tables, $important_table_names];
+        }
+    }
+
+    public function getNeededTables($only_important=true)
+    {
+        $af = new Afield();
+        $this_id = $this->getId();
+        $this_id_module = $this->getVal('id_module');
+        $af->select("atable_id", $this_id);
+        $af->select("avail", 'Y');
+        $af->select("reel", 'Y');
+        $af->select("afield_type_id", AfwUmsPagHelper::$afield_type_list);
+        $return_arr = $af->loadCol("answer_table_id", true);
+
+
+        if (!$only_important) {
+            return $return_arr;
+        } else {
+            $important_tables = array();
+            $important_table_names = array();
+            foreach ($return_arr as $atable_id) {
+                $atable = Atable::loadById($atable_id);
+                if ($atable and ($this_id_module == $atable->getVal('id_module'))) {
+                    $important_tables[] = $atable_id;
+                    $important_table_names[] = $atable->getVal('atable_name');
+                }
+            }
+            return [$important_tables, $important_table_names];
         }
     }
 
     public function nbFKs() {
             $af_new = new Afield();
-            $af_new->set('atable_id', $this->getId());
-            $af_new->set('reel', 'Y');
-            $af_new->set('avail', 'Y');
-            $af_new->set('afield_type_id', AfwUmsPagHelper::$afield_type_list);
+            $af_new->select('atable_id', $this->getId());
+            $af_new->select('reel', 'Y');
+            $af_new->select('avail', 'Y');
+            $af_new->select('afield_type_id', AfwUmsPagHelper::$afield_type_list);
             return $af_new->count();
     }
 

@@ -2122,11 +2122,14 @@ class Afield extends PagObject
                 return array($row, $php_errors);
         }
 
-        public function getNodeDisplay($lang = 'ar')
-        {
-                // return $this->translateOperator("FIELD",$lang)." ".$this->getShortDisplay($lang);
-                $return = $this->getVal('field_name') . ' ' . $this->getShortDisplay($lang);
+        public function schemaCssClass() {
+                return "field";
+        }
 
+        public function schemaDescription($lang = 'ar') {
+                $field_name = $this->getVal('field_name');
+                $field_title = $this->getShortDisplay($lang);
+                $return ="<span class='sql name'>$field_name</span>";
                 /*
                  * if ($this->getVal("atable_id") > 0) {
                  *         $return .= " " . $this->showAttribute("atable_id", null, true, $lang);
@@ -2135,6 +2138,23 @@ class Afield extends PagObject
                 if ($this->sureIs('distinct_for_list'))
                         $return .= " <span class='sql key'>U</span>";
 
+                if ($this->isFK()) {
+                        if ($this->isOneToMany()) {                        
+                                $return .= " <span class='sql om'>OM</span>";
+                        }        
+                        else $return .= " <span class='sql fk'>FK</span>";
+                }  
+
+                $return .= "<span class='sql title'>$field_title</span>";
+
+                return $return;
+        }
+
+        public function getNodeDisplay($lang = 'ar')
+        {
+                // return $this->translateOperator("FIELD",$lang)." ".$this->getShortDisplay($lang);
+                $return = $this->schemaDescription($lang);
+                        
                 $return .= " <span class='afw type'>" . $this->showAttribute('afield_type_id') . ' | ' . $this->showAttribute('afield_category_id') . '</span>';
 
                 return $return;
@@ -3419,5 +3439,9 @@ class Afield extends PagObject
         public function moveColumn()
         {
                 return 'field_order';
+        }
+
+        public function isOneToMany() {
+                return ($this->getVal('entity_relation_type_id')==self::$ENTITY_RELATION_TYPE_ONETOMANY);
         }
 }
