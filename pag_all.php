@@ -1,4 +1,5 @@
 <?php
+/* rafik 17/6/2026 : I think obsolete now 
 if($modtopag) $currmod = $modtopag;
 
 if(!$currmod) die("currmod param required !");
@@ -12,7 +13,4 @@ foreach($arr_all_files as $topag_table)
      $cl = AfwStringHelper::tableToClass($topag_table);
      include "pag_me.php";
 }
-
-
-
-?>
+*/
