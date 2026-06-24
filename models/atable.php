@@ -1629,14 +1629,15 @@ class Atable extends AFWObject
      * else return false;
      */
 
-    public function renderHtml() {
-        $code = "atable".$this->id;
+    public function renderHtml()
+    {
+        $code = "atable" . $this->id;
         $tbl = new HtmlyTableau($code, $code, "ltr");
         $lang = AfwLanguageHelper::getGlobalLanguage();
         $this_id = $this->getId();
 
-        $tbl->addElement(new HtmlyRowHeader("","","",['thetitle' => $this->getShortDisplay($lang)],));
-        $tbl->addElement(new HtmlyRowHeader("","","",['thename' => $this->getVal("atable_name")],));
+        $tbl->addElement(new HtmlyRowHeader("", "", "", ['thetitle' => $this->getShortDisplay($lang)],));
+        $tbl->addElement(new HtmlyRowHeader("", "", "", ['thename' => $this->getVal("atable_name")],));
 
         $tbl->addClass("schema-table");
 
@@ -1651,11 +1652,10 @@ class Atable extends AFWObject
         foreach ($af_reel_list as $af_reel_id => $af_reel_obj) {
             $thefieldClassCss = $af_reel_obj->schemaCssClass();
             $thefieldDescr = $af_reel_obj->schemaDescription($lang);
-            $tbl->addElement(new HtmlyRowBody("","","",[$thefieldClassCss => $thefieldDescr],));
+            $tbl->addElement(new HtmlyRowBody("", "", "", [$thefieldClassCss => $thefieldDescr],));
         }
 
         return $tbl->renderHtml();
-
     }
 
     public function generatePhpClass($dbstruct_only = false, $dbstruct_outside = false)
@@ -2557,7 +2557,7 @@ $replace_val_in_list_of_mfk
         return array($php_class_code, $phpErrors, $new_php_file . $new_php_file_end);
     }
 
-    public function getTargetTables($important=true)
+    public function getTargetTables($important = true)
     {
         $tables = array();
         $afieldList = $this->get('afieldList');
@@ -2575,7 +2575,7 @@ $replace_val_in_list_of_mfk
         return $tables;
     }
 
-    public function getAroundTables($only_important=true)
+    public function getAroundTables($only_important = true)
     {
         $af = new Afield();
         $this_id = $this->getId();
@@ -2603,7 +2603,7 @@ $replace_val_in_list_of_mfk
         }
     }
 
-    public function getNeededTables($only_important=true)
+    public function getNeededTables($only_important = true)
     {
         $af = new Afield();
         $this_id = $this->getId();
@@ -2631,13 +2631,14 @@ $replace_val_in_list_of_mfk
         }
     }
 
-    public function nbFKs() {
-            $af_new = new Afield();
-            $af_new->select('atable_id', $this->getId());
-            $af_new->select('reel', 'Y');
-            $af_new->select('avail', 'Y');
-            $af_new->select('afield_type_id', AfwUmsPagHelper::$afield_type_list);
-            return $af_new->count();
+    public function nbFKs()
+    {
+        $af_new = new Afield();
+        $af_new->select('atable_id', $this->getId());
+        $af_new->select('reel', 'Y');
+        $af_new->select('avail', 'Y');
+        $af_new->select('afield_type_id', AfwUmsPagHelper::$afield_type_list);
+        return $af_new->count();
     }
 
     public function generateSQLStructure()
@@ -4074,7 +4075,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return array('', "$nb_rbf rbf(s) disabled, $nb_bf bf(s) disabled");
     }
 
-    public function genereUserBFs($lang = 'ar', $hierarchy_level_enum = 1)
+    public function genereUserBFs($lang = 'ar', $hierarchy_level_enum = 0)
     {
         UfwQueryAnalyzer::startProcessLourdMode();
 
@@ -4186,7 +4187,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return $this->createFrameWorkScreens($framework_id, $resetAll = false, $resetUS = false);
     }
 
-    public function createFrameWorkScreens($framework_id = 0, $resetAll = true, $resetUS = true, $hierarchy_level_enum = 1)
+    public function createFrameWorkScreens($framework_id = 0, $resetAll = true, $resetUS = true, $hierarchy_level_enum = 0)
     {
         global $_sql_analysis_seuil_calls;
         $lang = AfwLanguageHelper::getGlobalLanguage();
@@ -4234,6 +4235,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
                 $bf_spec = $this->decodeTpl($framework_mode_item['bf_spec']);
                 $bf_code = $this->decodeTpl($framework_mode_item['bf_code']);
                 $id_module = $this->getVal('id_module');
+
                 /** @var Bfunction $bf */
                 list($bf, $bf_new) = Bfunction::getOrCreateBF(
                     $system_id,
