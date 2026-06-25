@@ -4088,7 +4088,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         if (($bf_arr_count == 1) and ($bf_arr[-1]))
             $error = "Error happened : some categories/modes are not defined in framework (ID:$framework_id) specification file " . var_export($bf_arr, true);
         else
-            $info = "Used framework (ID:$framework_id) $inf0<br>treated : $bf_arr_count bf(s)";
+            $info = "Used framework (ID:$framework_id) $inf0<br>treated : $bf_arr_count bf(s) <br>generated :" . var_export($bf_arr, true);
 
         UfwQueryAnalyzer::stopProcessLourdMode();
 
