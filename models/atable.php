@@ -5035,6 +5035,21 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return $attribute;
     }
 
+
+    public function getHierarchyLevelForMode($mode)
+    {
+        $moduleOfTable = $this->hetModule();
+        if (!$moduleOfTable) return 0;
+        $id_system = $moduleOfTable->getVal('id_system');
+        $curr_class_module_id = $moduleOfTable->id;
+        $curr_class_atable_id = $this->id;
+        $file_specification = $mode;
+        $bfObj = Bfunction::loadStandardBfunction($id_system, $curr_class_module_id, $curr_class_atable_id, $file_specification);
+        if (!$bfObj) return 0;
+
+        return $bfObj->getVal("hierarchy_level_enum");
+    }
+
     public static function levelByCodes($object_code_arr, $new_level, $filter, $lang = 'ar')
     {
         if (count($object_code_arr) != 2)
