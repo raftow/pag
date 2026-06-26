@@ -4,6 +4,16 @@
     // alter table tvtc_pag.domain rename to tvtc_cmn.domain;
 
     /*
+insert into  nauss_pag.afield_type me 
+SET id = '18',
+    id_aut = 1, 
+    date_aut = '2026-06-26 13:17:05', 
+    `version` = 1,  
+    titre = _utf8'مصفوفة', 
+    titre_short = _utf8'مصفوفة', 
+    is_numeric='N', 
+    sql_field_type='text', 
+    oracle_field_type='varchar2(5000)';    
 
 DROP TABLE IF EXISTS ttc_pag.synonyms_link;
 

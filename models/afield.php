@@ -507,6 +507,11 @@ class Afield extends PagObject
                                 $this->set('afield_type_id', AfwUmsPagHelper::$afield_type_mlst);
                 }
 
+                if (AfwStringHelper::stringEndsWith($field_name, '_matrix')) {
+                        if (!$this->getVal('afield_type_id'))
+                                $this->set('afield_type_id', AfwUmsPagHelper::$afield_type_matrix);
+                }
+
                 if (AfwStringHelper::stringEndsWith($field_name, '_fl')) {
                         if ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_UNKN)
                                 $this->set('entity_relation_type_id', 0);
@@ -559,7 +564,8 @@ class Afield extends PagObject
                         if (!$this->getVal('afield_type_id'))
                                 $this->set('afield_type_id', AfwUmsPagHelper::$afield_type_menum);
                 }
-                if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_mlst) or
+                if (($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_matrix) or
+                        ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_mlst) or
                         ($this->getVal('afield_type_id') == AfwUmsPagHelper::$afield_type_menum)
                 ) {
                         $this->set('mode_name', 'N');
@@ -1297,7 +1303,8 @@ class Afield extends PagObject
                 return true;
         }
 
-        public function isImportant() {
+        public function isImportant()
+        {
                 // @todo : IMPORTANT PROPERTY is still not pagged (reversed)
                 return true;
         }
@@ -1676,7 +1683,7 @@ class Afield extends PagObject
                         list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row['ANSMODULE'], $row['ANSWER'], false, $create_table_if_not_exists);
                         $ansModule = $row['ANSMODULE'];
                         $ansTable = $row['ANSWER'];
-                        if (!$mdl_id)                                
+                        if (!$mdl_id)
                                 throw new AfwRuntimeException("For attribute $attribute ANSMODULE=$ansModule, doesnt have module id");
                         if (!$tbl_id)
                                 throw new AfwRuntimeException("For attribute $attribute ANSMODULE=$ansModule, ANSWER=$ansTable doesnt have table id (create_table_if_not_exists=' . $create_table_if_not_exists . '). You may need to do a reverse engineering for this table : reverse table $ansTable.$ansModule");
@@ -1977,6 +1984,16 @@ class Afield extends PagObject
                                 $php_errors .= "no answer table defined for field $colname ";
                                 $row['ANSWER'] = '"????"';
                         }
+                } elseif ($afield_type_id == AfwUmsPagHelper::$afield_type_matrix) {
+                        $row['TYPE'] = "'MFK'";
+                        $row['MATRIX_X_LIST'] = '::xxx_list';
+                        $row['MATRIX_Y_LIST'] = '::yyyy_list';
+                        $row['MATRIX_CELL'] = "array(
+				'TYPE' => 'ENUM',
+				'ANSWER' => 'FUNCTION',
+				'FUNCTION_COL_NAME' => 'cccccccccccc_enum',
+				'DEFAULT' => 0,
+			)'";
                 } elseif ($afield_type_id == AfwUmsPagHelper::$afield_type_enum) {
                         $row['TYPE'] = "'ENUM'";
                         if ($this->getVal('answer_table_id')) {
@@ -2122,14 +2139,16 @@ class Afield extends PagObject
                 return array($row, $php_errors);
         }
 
-        public function schemaCssClass() {
+        public function schemaCssClass()
+        {
                 return "field";
         }
 
-        public function schemaDescription($lang = 'ar') {
+        public function schemaDescription($lang = 'ar')
+        {
                 $field_name = $this->getVal('field_name');
                 $field_title = $this->getShortDisplay($lang);
-                $return ="<span class='sql name'>$field_name</span>";
+                $return = "<span class='sql name'>$field_name</span>";
                 /*
                  * if ($this->getVal("atable_id") > 0) {
                  *         $return .= " " . $this->showAttribute("atable_id", null, true, $lang);
@@ -2139,11 +2158,10 @@ class Afield extends PagObject
                         $return .= " <span class='sql key'>U</span>";
 
                 if ($this->isFK()) {
-                        if ($this->isOneToMany()) {                        
+                        if ($this->isOneToMany()) {
                                 $return .= " <span class='sql om'>OM</span>";
-                        }        
-                        else $return .= " <span class='sql fk'>FK</span>";
-                }  
+                        } else $return .= " <span class='sql fk'>FK</span>";
+                }
 
                 $return .= "<span class='sql title'>$field_title</span>";
 
@@ -2154,7 +2172,7 @@ class Afield extends PagObject
         {
                 // return $this->translateOperator("FIELD",$lang)." ".$this->getShortDisplay($lang);
                 $return = $this->schemaDescription($lang);
-                        
+
                 $return .= " <span class='afw type'>" . $this->showAttribute('afield_type_id') . ' | ' . $this->showAttribute('afield_category_id') . '</span>';
 
                 return $return;
@@ -2263,7 +2281,10 @@ class Afield extends PagObject
                 $type = $this->getVal('afield_type_id');
 
                 switch ($type) {
-                        // 	6	اختيار متعدد من قائمة
+                        // 	18	مصفوفة
+                        case AfwUmsPagHelper::$afield_type_matrix:
+                                return "{}";
+                                // 	6	اختيار متعدد من قائمة
                         case AfwUmsPagHelper::$afield_type_mlst:
                                 return "','";
                                 // 	5	اختيار من قائمة
@@ -3441,7 +3462,8 @@ class Afield extends PagObject
                 return 'field_order';
         }
 
-        public function isOneToMany() {
-                return ($this->getVal('entity_relation_type_id')==self::$ENTITY_RELATION_TYPE_ONETOMANY);
+        public function isOneToMany()
+        {
+                return ($this->getVal('entity_relation_type_id') == self::$ENTITY_RELATION_TYPE_ONETOMANY);
         }
 }

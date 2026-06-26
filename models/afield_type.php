@@ -84,6 +84,8 @@ class AfieldType extends AFWObject
 
                 // contain many business rules and could be loaded one by one so not lookup
                 $this->IS_LOOKUP = false;  // @KEEP-PLEASE
+                $this->editByStep = true;
+                $this->editNbSteps = 2;
 
                 $this->ignore_insert_doublon = true;
                 $this->UNIQUE_KEY = array('afield_type_code');
@@ -319,7 +321,8 @@ class AfieldType extends AFWObject
         {
                 // to decode these types "MFK", "FK", "ANSWER","YN","ENUM","MENUM"
 
-                return (($this->getId() == AfwUmsPagHelper::$afield_type_mlst) or
+                return (($this->getId() == AfwUmsPagHelper::$afield_type_matrix) or
+                        ($this->getId() == AfwUmsPagHelper::$afield_type_mlst) or
                         ($this->getId() == AfwUmsPagHelper::$afield_type_list) or
                         ($this->getId() == AfwUmsPagHelper::$afield_type_enum) or
                         ($this->getId() == AfwUmsPagHelper::$afield_type_menum) or
@@ -344,4 +347,3 @@ class AfieldType extends AFWObject
                 return '--';
         }
 }
-?>
