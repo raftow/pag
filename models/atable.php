@@ -1433,13 +1433,14 @@ class Atable extends AFWObject
 
     public function getShortDisplay($lang = 'ar')
     {
-        return $this->valTitre_short();
+        if ($lang == 'ar') return $this->valTitre_short();
+        else return $this->valTitre_short_en();
     }
 
     public function getDropDownDisplay($lang = 'ar')
     {
         $fn = $this->valAtable_name();
-        $fn = trim($fn . '-' . $this->valTitre_short());
+        $fn = trim($fn . '-' . $this->getShortDisplay($lang));
         return $fn;
     }
 
