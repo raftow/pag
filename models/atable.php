@@ -4025,7 +4025,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         /** @var Bfunction $bfunctionItem */
         foreach ($bfunctionList as $bfunctionItem) {
             $bf_title = $bfunctionItem->getNodeDisplay($lang);
-            $bfunctionItem->set('hierarchy_level_enum', 999);
+            $bfunctionItem->set('hierarchy_level_enum', 1500); // @todo 1500 should be dynamic
             if ($bfunctionItem->commit()) {
                 $arrLeveled[] = $bf_title;
             }
