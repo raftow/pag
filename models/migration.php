@@ -340,6 +340,10 @@ class Migration extends AFWObject
             }    
 	}
 
+    /**
+     * @param AFWObject $objItem
+     * @return string
+     */
     public static function genereUpdateDataMigrationLines($objItem, $nameObj="obj")
     {
         $indexValues = $objItem->getMyIndexArray();
@@ -361,6 +365,10 @@ class Migration extends AFWObject
         return $php;
     }
 
+    /**
+     * @param array<AFWObject> $objList
+     * @return string
+     */
     public static function genereUpdateDataMigration($objList)
     {
         $codePhp = "";
