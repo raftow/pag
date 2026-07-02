@@ -348,10 +348,11 @@ class Migration extends AFWObject
     {
         $indexValues = $objItem->getMyIndexArray();
         $rowValues = $objItem->getAllfieldValues();
+        unset($rowValues["id"]);
         $php = "unset(\$$nameObj);\n";
         $php .= "\$$nameObj=".get_class($objItem)."::loadOrCreateWithUniqueKey(".var_export($indexValues,true).");\n";
         $php .= "\$$nameObj"."->multipleSet(".var_export($rowValues,true).", true);\n";
-        // $php .= "\$$nameObj"."->commit();\n";
+        $php .= "\$$nameObj"."->commit();\n";
 
         $pillarObjectList = AfwDataQualityHelper::getPillarObjects($objItem);
 
