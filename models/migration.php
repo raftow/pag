@@ -363,6 +363,7 @@ class Migration extends AFWObject
 
         
 
+
         return $php;
     }
 
