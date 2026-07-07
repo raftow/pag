@@ -1275,7 +1275,7 @@ class Atable extends AFWObject
                 $advise_html = '';
                 if ($this->isActive() and (!$this->_isEnum()))  //  1432 = BF_IF admin/qedit of atable
                 {
-                    if (($objme) and ($objme->iCanDoBF(1432))) {
+                    if (($objme) and ($objme->iCanDoBF(1432, "pag"))) {
                         $ext_anst_list = $this->get('ext_anst');
                         $anst_list = $this->get('anst');
                         $ext_tome_list = $this->get('ext_tome');
