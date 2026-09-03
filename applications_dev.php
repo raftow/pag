@@ -9,6 +9,7 @@ require_once("$file_dir_name/../config/global_config.php");
 $datatable_on=1;
 $cl = "Module";
 $currmod = "ums";
+$server_db_prefix = AfwSession::config("server_db_prefix", "hzm_");
 $currdb = $server_db_prefix.$currmod;
 $limite = 0;
 $genere_xls = 0;
@@ -27,7 +28,7 @@ else $result_page_title = "التطبيقات التي في طور الانجا�
 $actions_tpl_arr = array();
 
 $actions_tpl_arr["view"] = true;
-                          
+$criteria_is_static = true;                          
 if($datatable_on) {
 	include "$file_dir_name/../lib/afw/modes/afw_handle_default_search.php";
         $collapse_in = "";

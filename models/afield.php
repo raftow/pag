@@ -1587,9 +1587,9 @@ class Afield extends PagObject
         }
 
         // row below is structure of attribute and more ...  (atable, obj)
-        public static function to_afield_att($id_main_sh, $row, $attribute)
+        public static function to_afield_att($id_main_sh, $row, $attribute, $create_answer_table_if_not_exists=null)
         {
-                $create_table_if_not_exists = AfwSession::config("create_table_if_not_exists", false);
+                if($create_answer_table_if_not_exists===null) $create_answer_table_if_not_exists = AfwSession::config("create_answer_table_if_not_exists", false);
                 $file_dir_name = dirname(__FILE__);
                 $myTable = $row['atable'];
                 $myObj = $row['obj'];
@@ -1680,13 +1680,13 @@ class Afield extends PagObject
                         $afield_att['afield_type_id'] = AfwUmsPagHelper::fromAFWtoAfieldType($row['TYPE'], $row['CATEGORY'], $row);
 
                 if (($afield_att['afield_type_id'] == AfwUmsPagHelper::$afield_type_list) or ($afield_att['afield_type_id'] == AfwUmsPagHelper::$afield_type_mlst)) {
-                        list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row['ANSMODULE'], $row['ANSWER'], false, $create_table_if_not_exists);
+                        list($mdl, $tbl, $mdl_id, $tbl_id, $mdl_new, $tbl_new) = AfwUmsPagHelper::getMyModuleAndAtable($id_main_sh, $row['ANSMODULE'], $row['ANSWER'], false, $create_answer_table_if_not_exists);
                         $ansModule = $row['ANSMODULE'];
                         $ansTable = $row['ANSWER'];
                         if (!$mdl_id)
                                 throw new AfwRuntimeException("For attribute $attribute ANSMODULE=$ansModule, doesnt have module id");
                         if (!$tbl_id)
-                                throw new AfwRuntimeException("For attribute $attribute ANSMODULE=$ansModule, ANSWER=$ansTable doesnt have table id (create_table_if_not_exists=' . $create_table_if_not_exists . '). You may need to do a reverse engineering for this table : reverse table $ansTable.$ansModule");
+                                throw new AfwRuntimeException("For attribute $attribute ANSMODULE=$ansModule, ANSWER=$ansTable doesnt have table id (create_answer_table_if_not_exists=$create_answer_table_if_not_exists). You may need to do a reverse engineering for this table : reverse table $ansTable.$ansModule");
                         $afield_att['answer_module_id'] = $mdl_id;
                         $afield_att['answer_table_id'] = $tbl_id;
                         if (!$afield_att['entity_relation_type_id'])

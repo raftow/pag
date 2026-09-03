@@ -5179,7 +5179,9 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $message = '';
 
         if ($doReverse) {
-            $message .= self::reverseTable($module_code, $table_name);
+            if($restriction=="genall") $create_answer_tables_if_not_exists = true;
+            else $create_answer_tables_if_not_exists = false;
+            $message .= self::reverseTable($module_code, $table_name, $create_answer_tables_if_not_exists);
         }
         $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
         if (!$objTable)
@@ -5203,7 +5205,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         return [$objTable, $message];
     }
 
-    public static function reverseTable($module_code, $table_name)
+    public static function reverseTable($module_code, $table_name, $create_answer_tables_if_not_exists = false)
     {
         $tableClass = AfwStringHelper::tableToClass($table_name);
         AfwAutoLoader::addModule($module_code);
@@ -5218,7 +5220,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         /** @var AFWObject $objToPag */
         $objToPag = new $tableClass();
 
-        list($fld_i, $fld_u, $mdl_new, $tbl_new, $mdl, $tbl) = $objToPag->pagMe($sh = 3, $update_if_exists = true);
+        list($fld_i, $fld_u, $mdl_new, $tbl_new, $mdl, $tbl) = $objToPag->pagMe($sh = 3, $update_if_exists = true, '', $create_answer_tables_if_not_exists);
         $return = "$fld_i fields inserted, $fld_u fields updated";
         if ($mdl_new)
             $return .= ', new module created : ';
