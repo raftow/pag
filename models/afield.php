@@ -1945,8 +1945,10 @@ class Afield extends PagObject
                         $row['TYPE'] = "'FK'";
                         $row['CATEGORY'] = "'ITEMS'";
                         if ($this->getVal('answer_table_id')) {
-                                $row['ANSWER'] = "'" . $this->get('answer_table_id')->getVal('atable_name') . "'";
-                                $row['ANSMODULE'] = "'" . $this->get('answer_module_id')->getVal('module_code') . "'";
+                                $atObj = $this->het('answer_table_id');
+                                $amObj = $this->het('answer_module_id');
+                                $row['ANSWER'] = $atObj ? "'" . $atObj->getVal('atable_name') . "'" : "'????'";
+                                $row['ANSMODULE'] = $amObj ? "'" . $amObj->getVal('module_code') . "'" : "'????'";
                         }
                         if (!$row['ANSWER']) {
                                 $php_errors .= "no answer table defined for field $colname ";
