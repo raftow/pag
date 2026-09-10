@@ -1725,8 +1725,8 @@ class Afield extends PagObject
                         require_once("$file_dir_name/afield_group.php");
                         $agroupObj = AfieldGroup::loadByMainIndex($myTable->getId(), $row['AGROUP'], $create_obj_if_not_found = true);
                         if ($myObj) {
-                                $agroupObj->set('agroup_name_ar', $myObj->translate($row['AGROUP'], 'ar'));
-                                $agroupObj->set('agroup_name_en', $myObj->translate($row['AGROUP'], 'en'));
+                                $agroupObj->set('fgroup_name_ar', $myObj->translate($row['AGROUP'], 'ar'));
+                                $agroupObj->set('fgroup_name_en', $myObj->translate($row['AGROUP'], 'en'));
                                 $agroupObj->update();
                         }
                         $audit_group_id = $agroupObj->getId();
