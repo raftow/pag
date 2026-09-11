@@ -19,61 +19,7 @@ class AfieldType extends AFWObject
         public static $DATABASE = '';
         public static $MODULE = 'pag';
         public static $TABLE = '';
-        public static $DB_STRUCTURE = null;  /*
-                                              * = array(
-                                              *         id => array(SHOW => true, RETRIEVE => true, EDIT => true, TYPE => PK),
-                                              *
-                                              *
-                                              * 	'titre' => array(SEARCH => false,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,
-                                              * 			EDIT => true,  QEDIT => false,
-                                              * 			SIZE => 255,  "MIN-SIZE" => 3,  CHAR_TEMPLATE => "ARABIC-CHARS,SPACE",  MANDATORY => false,  UTF8 => true,
-                                              * 			TYPE => "TEXT",  READONLY => false, ),
-                                              *
-                                              * 	titre_short => array(SEARCH => false,  QSEARCH => false,  SHOW => true,  RETRIEVE => false,
-                                              * 			EDIT => true,  QEDIT => true,
-                                              * 			SIZE => 40,  "MIN-SIZE" => 5,  CHAR_TEMPLATE => "ARABIC-CHARS,SPACE",  MANDATORY => true,  UTF8 => true,  SHORTNAME => "title",
-                                              * 			TYPE => "TEXT",  READONLY => false, ),
-                                              *
-                                              * 	afield_type_code => array(SEARCH => false,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,
-                                              * 			EDIT => true,  QEDIT => true,
-                                              * 			SIZE => 16,  "MIN-SIZE" => 2,  CHAR_TEMPLATE => "ALPHABETIC,NUMERIC,UNDERSCORE",  MANDATORY => true,  UTF8 => false,
-                                              * 			TYPE => "TEXT",  READONLY => false, SHORTNAME=>lookup_code, ),
-                                              *
-                                              * 	sql_field_type => array(SEARCH => false,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,
-                                              * 			EDIT => true,  QEDIT => true,
-                                              * 			SIZE => 20,  MANDATORY => true,  UTF8 => false,
-                                              * 			TYPE => "TEXT",  READONLY => false, ),
-                                              *
-                                              * 	oracle_field_type => array(SEARCH => true,  QSEARCH => true,  SHOW => true,  RETRIEVE => true,
-                                              * 			EDIT => true,  QEDIT => true,
-                                              * 			SIZE => 32,  MANDATORY => false,  UTF8 => false,
-                                              * 			TYPE => "TEXT",  READONLY => false, ),
-                                              *
-                                              * 	is_numeric => array(SEARCH => false,  QSEARCH => false,  SHOW => true,  RETRIEVE => true,
-                                              * 			EDIT => true,  QEDIT => true,
-                                              * 			SIZE => 32,  MANDATORY => false,  UTF8 => false,
-                                              * 			TYPE => "YN",  READONLY => false, ),
-                                              *
-                                              *         mask => array(SHOW => true,  RETRIEVE => true, SIZE => 32,  UTF8 => false, TYPE => "TEXT", CATEGORY => FORMULA ),
-                                              *
-                                              *         foptionList => array(TYPE => FK, ANSWER => foption, ANSMODULE => pag, CATEGORY => ITEMS, ITEM => 'data_type_id', WHERE=>'',
-                                              *                                 SHOW => true, FORMAT=>retrieve, QEDIT => false, EDIT => false, READONLY=> true, ICONS=>true, 'DELETE-ICON'=>true, BUTTONS=>true, "NO-LABEL"=>false),
-                                              *
-                                              *         id_aut => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                                              *         date_aut => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                                              *         id_mod => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                                              *         date_mod => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                                              *         id_valid => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => auser, ANSMODULE => ums),
-                                              *         date_valid => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => DATETIME),
-                                              *         avail => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => true, QEDIT => true, "DEFAULT" => 'Y', TYPE => YN),
-                                              *         version => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => INT),
-                                              *         update_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                                              *         delete_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                                              *         display_groups_mfk => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, ANSWER => ugroup, ANSMODULE => ums, TYPE => MFK),
-                                              *         sci_id => array("SHOW-ADMIN" => true, RETRIEVE => false, EDIT => false, TYPE => FK, ANSWER => scenario_item, ANSMODULE => pag),
-                                              *         tech_notes 	    => array(TYPE => TEXT, CATEGORY => FORMULA, "SHOW-ADMIN" => true, 'STEP' =>"all", TOKEN_SEP=>"§", READONLY=>true, "NO-ERROR-CHECK"=>true),
-                                              * );
-                                              */
+        public static $DB_STRUCTURE = null;  
 
         public function __construct()
         {
