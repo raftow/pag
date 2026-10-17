@@ -34,7 +34,7 @@ class PagGenerator extends AFWRoot {
                         $database = $this->getDatabase();
 			
                         if (!@mysql_select_db($database, self::$link)) {
-				$this->_error("Impossible de se connecter à la base '$database'.");
+				throw new AfwRuntimeException("Impossible de se connecter à la base '$database'.");
 			}
                         */
 			self::$connect = true;

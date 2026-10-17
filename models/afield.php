@@ -2409,7 +2409,8 @@ class Afield extends PagObject
                                         $default_value = $this->getVal('default_value_utf8');
                                 if (!$default_value)
                                         $default_value = $this->getStandardDefaultValue();
-                                $field_null .= " DEFAULT $default_value";
+                                if(!is_numeric($default_value) and !AfwStringHelper::stringStartsWith($default_value,"'")) $field_null .= " DEFAULT '$default_value'";
+                                else $field_null .= " DEFAULT $default_value";
                         }
                         // else $field_null .= " distinct_for_list = ".$this->getVal("distinct_for_list");
                 }

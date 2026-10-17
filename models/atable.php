@@ -1402,7 +1402,7 @@ class Atable extends AFWObject
     {
         $obj = new GoalConcern();
         if (!$atable_id)
-            $obj->_error('getJobRoleGoalCountUsingTable : atable_id is mandatory field');
+            throw new AfwRuntimeException('getJobRoleGoalCountUsingTable : atable_id is mandatory field');
 
         if ($jobrole_id)
             $obj->select('jobrole_id', $jobrole_id);
@@ -1752,7 +1752,8 @@ class Atable extends AFWObject
         }
         $TDesc = '';
 
-        if ($this->isLookup() and ((!$this->hasManyData()) or ($this->hasOption(self::$TBOPTION_LOOKUPCODE)))) {
+        list($indx_cols, $indx_afield_list) = $this->getMainIndexFieldList();
+        if ($this->isLookup() and (count($indx_cols)==0) and ((!$this->hasManyData()) or ($this->hasOption(self::$TBOPTION_LOOKUPCODE)))) {
             $TDesc .= "\n\t\t" . '\'lookup_code\' => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "SIZE" => 64, "QEDIT" => true, "SHORTNAME"=>"code"),' . "\n";
             $UNIQUE_KEY = '$obj->UNIQUE_KEY = array("lookup_code");';
             $indx_cols = array('lookup_code');
@@ -1773,7 +1774,7 @@ class Atable extends AFWObject
             }
         } else {
             $loadAll_method = '';
-            list($indx_cols, $indx_afield_list) = $this->getMainIndexFieldList();
+            
             $mandatory_indx_cols = array();
             foreach ($indx_afield_list as $indx_afield_id => $indx_afield_obj) {
                 if ($indx_afield_obj->_isMandatory())
@@ -2789,7 +2790,9 @@ $replace_val_in_list_of_mfk
             $column_comment = str_replace('[COL1]', $af_field_name, $column_comment);
             $column_comment = str_replace('[COL1_DESC]', $af_field_desc, $column_comment);
             $column_comment_sentence_arr[] = $column_comment;
-
+            /**
+             * @var Afield $af_reel_obj
+             */
             $columns_sql .= $af_reel_obj->getGeneraltedSQL($dbms, $syntax_values, $fields_naming_uc);
             $alter_table_add_field_arr[] = $af_reel_obj->calc('sql');
         }
@@ -5180,7 +5183,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
         if ($doReverse) {
             if($restriction=="genall") $create_answer_tables_if_not_exists = true;
-            else $create_answer_tables_if_not_exists = false;
+            else $create_answer_tables_if_not_exists = AfwSession::config("create_answer_table_if_not_exists", false);
             $message .= self::reverseTable($module_code, $table_name, $create_answer_tables_if_not_exists);
         }
         $objTable = Atable::loadByMainIndex($objModule_id, $table_name);
