@@ -6,10 +6,10 @@
     {
 ?>
            <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?=$menu_item["menu_name"]?>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $menu_item["menu_name"]?>
                         <span class="caret" style="padding: 0px 0px 0px 0px !important;"></span></a>
                         <ul class='dropdown-menu'>
-                        <?   
+                        <?php   
                             foreach($menu_item["folders"] as $menu_item_folder_id => $folder_arr)
                             {
                                 $menu_item_folder_title = $folder_arr["title"];

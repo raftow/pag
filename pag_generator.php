@@ -284,7 +284,7 @@ class PagGenerator extends AFWRoot {
                        
                        foreach($at_list as $atb_id => $atb_obj)
                        {
-                             $php = "<?"."php\n";
+                             $php = "<"."?"."php\n";
                              $php .= "return [\n";
                              $table_name = $atb_obj->getVal("atable_name");
                              $atb_obj_desc = $table_name . " - " . $atb_obj->getVal("titre");
@@ -382,7 +382,7 @@ class PagGenerator extends AFWRoot {
                        
                        $at_list = $at->loadMany();
 
-                       $php = "<?"."php\n";
+                       $php = "<"."?"."php\n";
                        $php .= "return [\n";
 
                        
@@ -529,7 +529,7 @@ AFTER GENERATION :
                        foreach($at_list as $atb_id => $atb_obj)
                        {
                              $module_code = $atb_obj->myModuleCode();
-                             $php = "<?"."php\n";
+                             $php = "<"."?"."php\n";
                              $table_name = $atb_obj->getVal("atable_name");
                              $atb_obj_desc = $table_name . " - " . $atb_obj->getVal("titre");
                              list($php_code, $phpErrors_arr, $new_php_file) = $atb_obj->generatePhpClass($dbstruct_only, $dbstruct_outside);
@@ -1022,7 +1022,7 @@ $php_code\n";
                         $y_fk_file_name = "fk_$y_fileName";
                         
                         UfwFileSystem::write("$dir/$y_fk_file_name", 
-"<?"."php
+"<"."?"."php
 $YDesc
 ?".">"
 				);

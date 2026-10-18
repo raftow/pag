@@ -13,29 +13,29 @@
                 <div class="modal-header">
                         <span style="float: right;">
                                 <a href="index.php" title="الرئيسسة" style="float: right;">
-                                        <img src="../<?=$MODULE?>/pic/logo.png" alt="<?=$register_data_type?>" title="<?=$register_title?>"></a>
+                                        <img src="../<?php echo $MODULE?>/pic/logo.png" alt="<?php echo $register_data_type?>" title="<?php echo $register_title?>"></a>
                                 </a>
-                                <h1 style="float: right;margin-right: 30px;padding-top: 0px;vertical-align: middle;"><?=$register_title?></h1>
+                                <h1 style="float: right;margin-right: 30px;padding-top: 0px;vertical-align: middle;"><?php echo $register_title?></h1>
                         </span>
   
                 </div>
                 
-<? 
+<?php 
                        if($msgRegister)
                        {
                     ?>
                         <div class="darkbg quote">
                             <div class="quoteinn">
-                               <p><font color='red'><?=$msgRegister?></font></p>
+                               <p><font color='red'><?php echo $msgRegister?></font></p>
                             </div>
                         </div>
-                    <? 
+                    <?php 
                        }
                     ?>
                 <div class="modal-body">
-                        <h3><?=$activate_sentence?></h3>                        
+                        <h3><?php echo $activate_sentence?></h3>                        
                         <form id="formRegister" name="formRegister" method="post" action="register.php"  onSubmit="return checkRegisterForm();" dir="rtl" enctype="multipart/form-data">
-                            <input type="hidden" name="auser_id" value="<?=$auser->getId()?>">
+                            <input type="hidden" name="auser_id" value="<?php echo $auser->getId()?>">
                             <input type="hidden" name="next_step" value="2">
                             <div class="form-group">
                                     <label>رمز التفعيل</label> 

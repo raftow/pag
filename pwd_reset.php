@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var array $data
+ */
+    foreach($data as $vard => $vald) $$vard = $vald;
 $file_dir_name = dirname(__FILE__);
 set_time_limit(8400);
 ini_set('error_reporting', E_ERROR | E_PARSE | E_RECOVERABLE_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR);
@@ -126,26 +130,26 @@ if($desc_site)
                 <div class="modal-header">
                         <div>
                                 <a href="index.php" title="الرئيسسة">
-                                        <img src="../<?=$MODULE?>/pic/logo<?=$XMODULE?>.png" alt="<?=$login_by_sentence?>" title="<?=$login_by_sentence?>"></a>
+                                        <img src="../<?php echo $MODULE?>/pic/logo<?php echo $XMODULE?>.png" alt="<?php echo $login_by_sentence?>" title="<?php echo $login_by_sentence?>"></a>
                                         
                                 <h2 class='title_login'>تصفير كلمة المرور</h2>        
                         </div>
                 </div>
-                    <?
+                    <?php
                        if($result_message)
                        {
                     ?>
                         <div class="quote">
                             <div class="quoteinn">
-                               <p><font color='red'><?=$result_message?></font></p>
+                               <p><font color='red'><?php echo $result_message?></font></p>
                             </div>
                         </div>
-                    <? 
+                    <?php 
                        }
                                 
                     ?>
-                <div class="modal-body"><h1><?=$user_prefix?>قم بادخال البيانات التالية</h1>
-                        <form id="formlogin0" name="formlogin0" method="post" action="<?echo $action_page?>"  onSubmit="return checkForm();" dir="rtl" enctype="multipart/form-data">
+                <div class="modal-body"><h1><?php echo $user_prefix?>قم بادخال البيانات التالية</h1>
+                        <form id="formlogin0" name="formlogin0" method="post" action="<?php echo $action_page?>"  onSubmit="return checkForm();" dir="rtl" enctype="multipart/form-data">
                         <?php                                
                                 if(AfwSession::config("sms-captcha-register",true))
                                 {
@@ -186,7 +190,7 @@ if($desc_site)
                                 
                         </form>
                 </div>
-                <?
+                <?php
                 if($login_page_options["register_as"])
                 {
                 ?>
@@ -195,7 +199,7 @@ if($desc_site)
                             <a class="btnbregister btnbtsp btn_link" href="<?php echo $login_page_options["register_as"];?>_register.php">التسجيل لأول مرة</a>
                         </div>
                 </div>
-                <?
+                <?php
                 }
                 ?>
         </div>

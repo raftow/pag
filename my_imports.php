@@ -23,7 +23,7 @@
 <div class="innercontainer">
 <div class="uploader_header">
 <h1>تحميل الملفات من أجل استيراد البيانات </h1>
-<h2><b>الجهة المعنية بعملية الاستيراد</b> : <?=$my_orgunit?></h2>
+<h2><b>الجهة المعنية بعملية الاستيراد</b> : <?php echo $my_orgunit?></h2>
 </div>
                 <form id="upload" method="post" action="afw_upload_for_import.php" enctype="multipart/form-data">
 			<div id="drop" class='forimport'>
@@ -33,7 +33,7 @@
 				<input type="file" name="upl" multiple />     <br><br>
                                 يسمح فقط بالملفات من الأنواع التالية xls, xlsx
 			</div>
-                        <input type="hidden" name="my_orgunit_id" value="<?=$my_orgunit_id?>">
+                        <input type="hidden" name="my_orgunit_id" value="<?php echo $my_orgunit_id?>">
 			<ul>
 				<!-- The file uploads will be shown here -->
 			</ul>
@@ -68,5 +68,5 @@
         </tbody>
         </table>
         
-        <input type="hidden" name="sel_orgunit_id" value="<?=$my_orgunit_id?>">
+        <input type="hidden" name="sel_orgunit_id" value="<?php echo $my_orgunit_id?>">
 </form>

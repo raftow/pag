@@ -151,14 +151,14 @@ else
 ?>
 
 <div class="hzm_panel_link_bar">
-         <a class="fleft" href="main.php?Main_Page=afw_mode_display.php&amp;cl=Atable&amp;currmod=pag&amp;id=<?=$tbl_id?>&tbn=<?=$tbl_name?>">
-            <span class="yellowbtn submit-btn fleft">atable <?=$tbl_name?> display </span>
+         <a class="fleft" href="main.php?Main_Page=afw_mode_display.php&amp;cl=Atable&amp;currmod=pag&amp;id=<?php echo $tbl_id?>&tbn=<?php echo $tbl_name?>">
+            <span class="yellowbtn submit-btn fleft">atable <?php echo $tbl_name?> display </span>
          </a>
-         <a class="fleft" href="dbgen.php?sql=1&amp;show_sql=1&amp;mod=<?=$mod_id?>&amp;tbl=<?=$tbl_id?>&tbn=<?=$tbl_name?>">
-            <span class="greenbtn submit-btn fleft">SQL of <?=$tbl_name?></span>
+         <a class="fleft" href="dbgen.php?sql=1&amp;show_sql=1&amp;mod=<?php echo $mod_id?>&amp;tbl=<?php echo $tbl_id?>&tbn=<?php echo $tbl_name?>">
+            <span class="greenbtn submit-btn fleft">SQL of <?php echo $tbl_name?></span>
          </a>
-         <a class="fleft" href="dbgen.php?php=1&trad=1&amp;mod=<?=$mod_id?>&amp;tbl=<?=$tbl_id?>&tbn=<?=$tbl_name?>">
-            <span class="bluebtn submit-btn fleft">PHP of <?=$tbl_name?></span>
+         <a class="fleft" href="dbgen.php?php=1&trad=1&amp;mod=<?php echo $mod_id?>&amp;tbl=<?php echo $tbl_id?>&tbn=<?php echo $tbl_name?>">
+            <span class="bluebtn submit-btn fleft">PHP of <?php echo $tbl_name?></span>
          </a>
         
 </div>

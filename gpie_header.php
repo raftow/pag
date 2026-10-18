@@ -11,12 +11,12 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['<?=$data_pie_col_key?>', '<?=$data_pie_col_val?>'],
+          ['<?php echo $data_pie_col_key?>', '<?php echo $data_pie_col_val?>'],
 <?
      foreach($data_pie as $data_pie_key => $data_pie_val)
      {
 ?>
-          ['<?=$data_pie_key?>',     <?=$data_pie_val?>],
+          ['<?php echo $data_pie_key?>',     <?php echo $data_pie_val?>],
 <?
      }
 ?>          
@@ -24,9 +24,9 @@
 
         var options = {
           fontName: 'maghreb',
-          title: '<?=$data_pie_title?>',
-          width: <?=$widthChart?>,
-          height: <?=$heightChart?>,
+          title: '<?php echo $data_pie_title?>',
+          width: <?php echo $widthChart?>,
+          height: <?php echo $heightChart?>,
           is3D: true,
         };
 
@@ -46,12 +46,12 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['<?=$data_bar_col_key?>', '<?=$data_bar_col_val?>', { role: "style" }, { role: 'annotation' }],
+          ['<?php echo $data_bar_col_key?>', '<?php echo $data_bar_col_val?>', { role: "style" }, { role: 'annotation' }],
 <?
      foreach($data_bar as $data_bar_key => $data_bar_val)
      {
 ?>
-          ['<?=$data_bar_key?>',     <?=$data_bar_val?>, "<?=styleBar($data_bar_code,$data_bar_val)?>",'<?=$data_bar_key." ($data_bar_val)"?>'],
+          ['<?php echo $data_bar_key?>',     <?php echo $data_bar_val?>, "<?php echo styleBar($data_bar_code,$data_bar_val)?>",'<?php echo $data_bar_key." ($data_bar_val)"?>'],
 <?
      }
 ?>          
@@ -60,9 +60,9 @@
         var options = {
           fontName: 'maghreb',
           fontSize: 14,
-          title: '<?=$data_bar_title?>',
-          width: <?=$widthChart?>,
-          height: <?=$heightChart?>,
+          title: '<?php echo $data_bar_title?>',
+          width: <?php echo $widthChart?>,
+          height: <?php echo $heightChart?>,
           bar: {groupWidth: "70%"},
           legend: { position: "none" },
           annotations: {

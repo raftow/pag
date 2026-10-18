@@ -338,12 +338,12 @@ if(!$table_desc) $table_desc = "descr";
 <table border='0' width='60%' height='100%' dir="ltr">
 <tr>
 <td align='center' valign='top'>
-view <input type="checkbox" name="view" value="1" <? if($view) echo "checked"?>/>
-fields <input type="checkbox" name="fields" value="1" <? if($fields) echo "checked"?>/>
-audit <input type="checkbox" name="audit" value="1" <? if($audit) echo "checked"?>/>
-<input type="text" name="table_name" value="<?=$table_name?>"/> 
-<input type="text" name="table_desc" value="<?=$table_desc?>"/> 
-tabID=<?=$atable_id?>
+view <input type="checkbox" name="view" value="1" <?php if($view) echo "checked"?>/>
+fields <input type="checkbox" name="fields" value="1" <?php if($fields) echo "checked"?>/>
+audit <input type="checkbox" name="audit" value="1" <?php if($audit) echo "checked"?>/>
+<input type="text" name="table_name" value="<?php echo $table_name?>"/> 
+<input type="text" name="table_desc" value="<?php echo $table_desc?>"/> 
+tabID=<?php echo $atable_id?>
 </td>
 </tr>
 <tr>

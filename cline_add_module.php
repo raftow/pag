@@ -1,4 +1,12 @@
 <?php
+/**
+ * @var string $currmod
+ * @var string $currfld
+ * @var string $object_code
+ * @var string $command_code_option
+ * @var string $parent_project_path
+ * @var array $object_code_arr
+ */
 
 if (!$parent_project_path) {
     $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "Please add parent_project_path config variable in your system config");
@@ -9,8 +17,9 @@ if (!$parent_project_path) {
 
 $module_code = $object_code_arr[0];
 if ($module_code) {
+    $objModule = Module::loadByMainIndex($module_code);
     if ((!$restriction) or $restriction == "paths") {
-        $objModule = Module::loadByMainIndex($module_code);
+        
 
         $sys_commands_for_new_module_arr = include("cline_new_module_sys_cmd.php");
         $vars = [];
