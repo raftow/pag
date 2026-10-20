@@ -19,7 +19,7 @@
      }
      
 ?>
-<link href="../pag/assets/css/style.css" rel="stylesheet" />
+<link href="../lib/assets/css/style.css" rel="stylesheet" />
 <div class="innercontainer">
 <div class="uploader_header">
 <h1>تحميل الملفات من أجل استيراد البيانات </h1>
@@ -42,14 +42,14 @@
 
         
 		<!-- JavaScript Includes -->
-		<script src="../pag/assets/js/jquery.knob.js"></script>
+		<script src="../lib/assets/js/jquery.knob.js"></script>
 
 		<!-- jQuery File Upload Dependencies -->
-		<script src="../pag/assets/js/jquery.ui.widget.js"></script>
-		<script src="../pag/assets/js/jquery.iframe-transport.js"></script>
-		<script src="../pag/assets/js/jquery.fileupload.js"></script>
+		<script src="../lib/assets/js/jquery.ui.widget.js"></script>
+		<script src="../lib/assets/js/jquery.iframe-transport.js"></script>
+		<script src="../lib/assets/js/jquery.fileupload.js"></script>
 		<!-- Our main JS file -->
-		<script src="../pag/assets/js/script.js"></script>
+		<script src="../lib/assets/js/script.js"></script>
 
 
 </div>
