@@ -16,8 +16,8 @@ require_once("$file_dir_name/../lib/afw/core/afw_autoloader.php");
 AfwSession::startSession();
 
 $objme = AfwSession::getUserConnected();
-//if(!$objme) die("Not authenticated");
-//if(!$objme->isAdmin()) die("Not authorized");
+if(!$objme) die("Not authenticated");
+if(!$objme->isAdmin()) die("Not authorized");
 
 if ($_GET["action"]) {
         if ($_GET["action"] == "phpinfo") {
