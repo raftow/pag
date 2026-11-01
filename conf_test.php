@@ -1,4 +1,9 @@
 <?php
+/**
+ * @var array $config_arr
+ * @var array $_GET
+ * @var string $DEBUGG_SQL_DIR
+ */
 $file_dir_name = dirname(__FILE__);
 set_time_limit(8400);
 ini_set('error_reporting', E_ERROR | E_PARSE | E_RECOVERABLE_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR);
@@ -60,7 +65,7 @@ if ($_GET["action"]) {
         require_once("$file_dir_name/../config/global_config.php");
         // 
 
-        $afw_debugg_in_file = $GET_["dbgfile"];
+        $afw_debugg_in_file = $_GET["dbgfile"];
         $debugg_login = true;
         $debugg_login_die = true;
         $debugg_after_login = true;
@@ -193,7 +198,8 @@ if ($_GET["action"]) {
                                 }
 
                                 if ($user_connected) {
-                                        $user_infos = AfwDatabase::db_recup_row("select id, avail, firstname, email from ${server_db_prefix}ums.auser where avail = 'Y' and username='$username' limit 1");
+                                        $server_db_prefix = AfwSession::currentDBPrefix();
+                                        $user_infos = AfwDatabase::db_recup_row("select id, avail, firstname, email from $server_db_prefix"."ums.auser where avail = 'Y' and username='$username' limit 1");
 
                                         $after_login_dbg = "<b>------------------------------- AFTER LOGIN USER INFOS for $username ---------------------------</b>\n";
                                         $after_login_dbg .= var_export($user_infos, true);
