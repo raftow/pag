@@ -1753,7 +1753,7 @@ class Atable extends AFWObject
         $TDesc = '';
 
         list($indx_cols, $indx_afield_list) = $this->getMainIndexFieldList();
-        if ($this->isLookup() and (count($indx_cols)==0) and ((!$this->hasManyData()) or ($this->hasOption(self::$TBOPTION_LOOKUPCODE)))) {
+        if ($this->isLookup() and (count($indx_cols) == 0) and ((!$this->hasManyData()) or ($this->hasOption(self::$TBOPTION_LOOKUPCODE)))) {
             $TDesc .= "\n\t\t" . '\'lookup_code\' => array("TYPE" => "TEXT", "SHOW" => true, "RETRIEVE"=>true, "EDIT" => true, "SIZE" => 64, "QEDIT" => true, "SHORTNAME"=>"code"),' . "\n";
             $UNIQUE_KEY = '$obj->UNIQUE_KEY = array("lookup_code");';
             $indx_cols = array('lookup_code');
@@ -1774,7 +1774,7 @@ class Atable extends AFWObject
             }
         } else {
             $loadAll_method = '';
-            
+
             $mandatory_indx_cols = array();
             foreach ($indx_afield_list as $indx_afield_id => $indx_afield_obj) {
                 if ($indx_afield_obj->_isMandatory())
@@ -3632,7 +3632,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
 
     public function hasManyData()
     {
-        return ($this->getVal('exp_u_records') > 50);
+        return (($this->getVal('exp_u_records') > 50) or (!$this->getVal('exp_u_records')));
     }
 
     public function repareMe($lang = 'ar')
@@ -5182,7 +5182,7 @@ CREATE TABLE IF NOT EXISTS $prefixed_db_name.`$haudit_table_name` (
         $message = '';
 
         if ($doReverse) {
-            if($restriction=="genall") $create_answer_tables_if_not_exists = true;
+            if ($restriction == "genall") $create_answer_tables_if_not_exists = true;
             else $create_answer_tables_if_not_exists = AfwSession::config("create_answer_table_if_not_exists", false);
             $message .= self::reverseTable($module_code, $table_name, $create_answer_tables_if_not_exists);
         }
