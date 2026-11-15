@@ -101,8 +101,8 @@ class PagAfieldAfwStructure
 			'FGROUP' => 'general_props',
 			'WHERE' => "id_module_type in (4,7)",
 			'READONLY' => true,
-			'SEARCH' => true,
-			'QSEARCH' => true,
+			'SEARCH' => false,
+			'QSEARCH' => false,
 			'SEARCH-BY-ONE' => true,
 			'DISPLAY' => true,
 			'STEP' => 1,
@@ -1307,7 +1307,6 @@ class PagAfieldAfwStructure
 			'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
-			'DEFAUT' => 'Y',
 		),
 
 		'afieldRuleList' => array(
@@ -1467,7 +1466,6 @@ class PagAfieldAfwStructure
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
 			'ERROR-CHECK' => true,
-			'DEFAUT' => 1,
 		),
 
 		'char_group_men' => array(
@@ -1494,7 +1492,6 @@ class PagAfieldAfwStructure
 			'DISPLAY' => true,
 			'DISPLAY-UGROUPS' => '',
 			'EDIT-UGROUPS' => '',
-			'DEFAUT' => ',1,7,',
 		),
 
 		'mandatory' => array(
