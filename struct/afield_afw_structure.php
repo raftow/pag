@@ -1545,6 +1545,7 @@ class PagAfieldAfwStructure
 			'RETRIEVE_FGROUP' => true,
 			'EDIT' => true,
 			'QEDIT' => false,
+			'QSEARCH' => true,
 			'TYPE' => 'YN',
 			'DEFAUT' => 'N',
 			'MANDATORY' => true,
