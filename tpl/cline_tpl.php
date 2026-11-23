@@ -6,6 +6,8 @@
         <script src='../lib/js/jquery.validate.js'></script>
         <link rel='stylesheet' href='../lib/css/jquery-ui-1.11.4.css'>
         <script src='../lib/js/jquery-ui-1.11.4.js'></script>
+        <script src='../lib/bootstrap/bootstrap-v3.min.js'></script>
+	<link rel='stylesheet' href='../lib/bootstrap/bootstrap-v3.min.css'>
         <script src='./js/cline.js'></script>
 </head>        
 <body>
