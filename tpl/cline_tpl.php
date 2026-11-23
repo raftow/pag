@@ -58,6 +58,9 @@
                         </div>  
                         <div class='hzm_data cline-bloc result'>			
                                 [command_line_result]				
+                        </div> 
+                        <div class='hzm_data cline-bloc syslog hide'>			
+                                [syslog]				
                         </div>        
                 </div>
         </div>

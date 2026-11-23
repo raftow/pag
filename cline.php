@@ -246,10 +246,14 @@ $data_tokens["context"] = $context;
 
 $data_tokens["hist"] = $hist;
 
+$sysLog = "<div id='analysis_log'><div class=\"fleft\"><h1><b>System LOG activated :</b></h1></div><br><br>";
+$sysLog .= "_sql_picture=" . var_export($_sql_picture, true) . "<br>";
+$sysLog .= AfwSession::getLog();
+
+$sysLog .= "</div>";
+
+$data_tokens["syslog"] = $sysLog;
+
 echo UfwUtils::showUsingOldHzmTemplate($html_template_file, $data_tokens);
 
-echo "<div id='analysis_log'><div class=\"fleft\"><h1><b>System LOG activated :</b></h1></div><br><br>";
-echo "_sql_picture=" . var_export($_sql_picture, true) . "<br>";
-echo AfwSession::getLog();
 
-echo "</div>";
