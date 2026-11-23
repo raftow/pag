@@ -536,3 +536,21 @@ li.hzm-tab.generate-table.struct>a {
     border-bottom: 8px  rgb(38, 39, 40) solid;
     border-radius: 0;
 }
+
+li.hzm-tab.generate-table.previleges>a {
+    background-color: rgb(73, 17, 162);
+    color: white;
+    border-top: 8px rgb(231, 47, 255) solid;
+    border-bottom: 8px rgb(231, 47, 255) solid;
+    border-radius: 0;
+}
+
+
+li.hzm-tab.generate-table.struct>a {
+    background-color: rgb(28, 115, 96);
+    color: white;
+    border-top: 8px  rgb(10, 64, 52) solid;
+    border-bottom: 8px  rgb(10, 64, 52) solid;
+    border-radius: 0;
+}
+ 
