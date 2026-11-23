@@ -52,17 +52,17 @@
                         </div>
                 </div>
                 </form>
-                <div class="fleft row command_line_result col-xs-12">
-                        <div class='hzm_data cline-bloc history'>
+                <div class='hzm_data cline-bloc history'>
                                 [command_line_history]	
-                        </div>  
-                        <div class='hzm_data cline-bloc result'>			
+                </div>
+                <div class="fleft row command_line_result col-xs-12">  
+                        <div class='hzm_data cline-bloc-result'>			
                                 <div class='hzm_data generation'>
                                         [generation_html]	
                                 </div>
                                 [command_line_result]				
                         </div> 
-                        <div class='hzm_data cline-bloc syslog hide'>			
+                        <div class='hzm_data cline-bloc-result syslog hide'>			
                                 [syslog]				
                         </div>        
                 </div>
