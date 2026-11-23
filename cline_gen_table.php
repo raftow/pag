@@ -112,4 +112,4 @@ if ($module_code and $table_code) {
 }
 
 
-$command_line_result_arr[] = AfwHtmlHelper::genereHtmlTabs("generate-table", $html_display_arr, $group_label_arr);
+$generation_html = AfwHtmlHelper::genereHtmlTabs("generate-table", $html_display_arr, $group_label_arr);

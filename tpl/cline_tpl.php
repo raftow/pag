@@ -57,6 +57,9 @@
                                 [command_line_history]	
                         </div>  
                         <div class='hzm_data cline-bloc result'>			
+                                <div class='hzm_data generation'>
+                                        [generation_html]	
+                                </div>
                                 [command_line_result]				
                         </div> 
                         <div class='hzm_data cline-bloc syslog hide'>			

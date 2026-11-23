@@ -45,6 +45,8 @@ if (!$objme) {
   }*/
 $command_line_hist_arr = [];
 $data_token_new_suggested_command_line = "";
+$data_tokens = array();
+$data_tokens["generation_html"] = "";
 if ($command_line) {
 
   $hist = trim($hist);
@@ -143,7 +145,13 @@ if ($command_line) {
         $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", "the command $command_code not found");
         $nb_errors++;
         $command_finished = true;
-      } else include $cmd_file_path;
+      } else {
+        $generation_html = "";
+        include $cmd_file_path;
+        if($generation_html) {
+          $data_tokens["generation_html"] .= $generation_html;
+        }
+      }
     } catch (Exception $e) {
       if ($modeSuperDeveloper) throw $e;
       $command_line_result_arr[] = UfwUtils::hzm_format_command_line("error", $e->getMessage());
@@ -209,7 +217,7 @@ if ($command_line) {
   $hist = implode("\n", $hist_arr);
 }
 
-$data_tokens = array();
+
 
 $file_dir_name = dirname(__FILE__);
 $html_template_file = "$file_dir_name/tpl/cline_tpl.php";
