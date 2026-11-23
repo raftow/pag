@@ -3,6 +3,9 @@
         <title>CLINE</title>
         <link href='favicon.ico' rel='shortcut icon'>
         <script src='../lib/js/jquery-1.12.0.min.js'></script>
+        <script src='../lib/js/jquery.validate.js'></script>
+        <link rel='stylesheet' href='../lib/css/jquery-ui-1.11.4.css'>
+        <script src='../lib/js/jquery-ui-1.11.4.js'></script>
         <script src='./js/cline.js'></script>
 </head>        
 <body>
