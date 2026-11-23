@@ -65,7 +65,7 @@ class Foption extends AFWObject{
  
         }
         
-        public function list_of_foption_type() { 
+        public static function list_of_foption_type() { 
             $list_of_items = array(); 
             $list_of_items[2] = "خيارات الاستيراد";  //     code : EXP 
             $list_of_items[1] = "خيارات الكود لإطار العمل";  //     code : HZM 

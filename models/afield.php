@@ -3035,7 +3035,7 @@ class Afield extends PagObject
                 return $id;
         }
 
-        public function list_of_char_group_men()
+        public static function list_of_char_group_men()
         {
                 $list_of_items = array();
                 $list_of_items[1] = '   a..z alphabetic';  //     code : ALPHABETIC

@@ -2088,7 +2088,7 @@ $displayAttribute_list
             }
 
             $enumAtable_functions .= $lookupValueListPhpBefore;
-            $enumAtable_functions .= "        public function list_of_$enumFieldName() { \n";
+            $enumAtable_functions .= "        public static function list_of_$enumFieldName() { \n";
             $enumAtable_functions .= "            \$list_of_items = array(); \n";
 
             $enumAtable_functions .= $lookupValueListPhp;
