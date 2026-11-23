@@ -2,6 +2,7 @@
 /**
  * @var array $object_code_arr
  * @var array $generation_arr
+ * @var array $command_line_result_arr
  * @var string $object_code
  */
 $module_code = $object_code_arr[1];
@@ -10,7 +11,9 @@ $table_code = $object_code_arr[0];
 $html_display_arr = [];
 $group_label_arr = [];
 
-$html_display_arr['generation'] =  implode("<br>\n", $generation_arr);
+$html_display_arr['generation'] =  implode("<br>\n", $command_line_result_arr);
+$command_line_result_arr = [];
+$html_display_arr['generation'] .=  implode("<br>\n", $generation_arr);
 $group_label_arr['generation'] =  "Generation details";
 
 
