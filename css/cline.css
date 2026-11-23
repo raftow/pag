@@ -382,15 +382,16 @@ textarea.cline.struct.php {
 }
 
 .php.cline.tr.ar {
-    background-color: #063507;
-    color: wheat;
+    background-color: #0b850d;
+    color: white !important;
     font-size: 14px !important;
 }
 
 .php.cline.tr.en {
-    background-color: #060635;
-    color: wheat;
+    background-color: #0a0abb;
+    color: white;
     font-size: 14px !important;
+    border-top: 8px solid red;
 }
 
 .home_banner {
