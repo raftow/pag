@@ -53,9 +53,7 @@
                 </div>
                 </form>
                 <div class="fleft row command_line_result col-xs-12">
-                        <nav>
-                                [command_line_history]				
-                        </nav>
+                [command_line_history]				
                 [command_line_result]				
                 </div>
         </div>
