@@ -355,15 +355,16 @@ textarea.cline {
 }
 
 textarea.cmd.cline.cmd {
-    background-color: black;
-    color: wheat;
+    background-color: rgb(176, 176, 176);
+    color: rgb(25, 25, 25);
+    height: 850px;
     min-height: 90px;
 }
 
 textarea.cline.sql {
     border-color: #85852e;
     color: wheat;
-    height: 450px;
+    height: 850px;
     font-family: revert-layer;
 }
 
@@ -377,7 +378,7 @@ textarea.cline.php {
 textarea.cline.struct.php {
     border-color: #6ea0b1;
     color: #a5c8fc;
-    height: 450px;
+    height: 850px;
     font-family: revert-layer;
 }
 
