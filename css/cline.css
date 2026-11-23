@@ -546,11 +546,38 @@ li.hzm-tab.generate-table.previleges>a {
 }
 
 
-li.hzm-tab.generate-table.struct>a {
+li.hzm-tab.generate-table.sql>a {
     background-color: rgb(28, 115, 96);
     color: white;
     border-top: 8px  rgb(10, 64, 52) solid;
     border-bottom: 8px  rgb(10, 64, 52) solid;
     border-radius: 0;
 }
+
+li.hzm-tab.generate-table.commands>a {
+    background-color: rgb(30, 59, 53);
+    color: yellow;
+    border-top: 8px  rgb(202, 224, 35) solid;
+    border-bottom: 8px  rgb(202, 224, 35) solid;
+    border-radius: 0;
+}
+
+li.hzm-tab.generate-table.generation>a {
+    background-color: rgb(59, 59, 59);
+    color: rgb(219, 219, 52);
+    border-top: 8px  rgb(105, 115, 25) solid;
+    border-bottom: 8px  rgb(105, 115, 25) solid;
+    border-radius: 0;
+}
+
+
  
+ 
+ 
+.tab-pane.fade.generation {
+    min-height: 550px;
+}
+
+.hzm_data.generation {
+    border-bottom: 4px double silver;
+}
