@@ -53,8 +53,12 @@
                 </div>
                 </form>
                 <div class="fleft row command_line_result col-xs-12">
-                [command_line_history]				
-                [command_line_result]				
+                        <div class='hzm_data cline-bloc history'>
+                                [command_line_history]	
+                        </div>  
+                        <div class='hzm_data cline-bloc result'>			
+                                [command_line_result]				
+                        </div>        
                 </div>
         </div>
 </div>
